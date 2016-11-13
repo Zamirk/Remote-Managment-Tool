@@ -5,17 +5,7 @@ namespace RAT.ZTry
 {
     public class MainScreen : ContentPage
     {
-        private ContentView grayView;
-        private ContentView redView;
-        private ContentView yellowView;
 
-        private ContentView greenView;
-        private ContentView tealView;
-        private ContentView aquaView;
-
-        private ContentView blackView;
-        private ContentView blueView;
-        private ContentView maroonView;
 
         private bool colorOn = true;
 

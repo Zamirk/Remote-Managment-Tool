@@ -12,7 +12,7 @@ namespace RAT.ZTry
 {
     public class LoginViewModel: ViewModelBase
     {
-        AzureLoginService azureService;
+        //AzureLoginService azureService;
 
         //Login details
         private string userName = "";
@@ -23,7 +23,7 @@ namespace RAT.ZTry
 
         public LoginViewModel()
         {
-            azureService = DependencyService.Get<AzureLoginService>();
+            //azureService = DependencyService.Get<AzureLoginService>();
         }
 
         public string UserName
@@ -45,20 +45,19 @@ namespace RAT.ZTry
         //Checks Login, Changes screen if found
         async Task LoginValidate()
         {
-            List < Login> logins = await azureService.GetLogin(userName, password);
-            if (logins[0].Username.Equals(UserName) && logins[0].Password.Equals(Password))
-            {
+           // List < Login> logins = await azureService.GetLogin(userName, password);
+           // if (logins[0].Username.Equals(UserName) && logins[0].Password.Equals(Password))
+           // {
                 System.Diagnostics.Debug.WriteLine("\n-----Entering Main Menu");
                 //Screen Navigation
-                (Application.Current.MainPage).Navigation.InsertPageBefore(new LoginScreen(), (Application.Current.MainPage).Navigation.NavigationStack[0]);
+                (Application.Current.MainPage).Navigation.InsertPageBefore(new MainScreen(), (Application.Current.MainPage).Navigation.NavigationStack[0]);
                 await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
-
                 GC.Collect();
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 //Incorrect Credentials
-            }
+            //}
         }
     }
 }
