@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Datagrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\MainScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Test.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\OrderInfoRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\Tools\ViewModelBase.cs" />
