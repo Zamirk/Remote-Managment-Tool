@@ -1,4 +1,5 @@
 ﻿using System;
+using RAT._1View;
 using Xamarin.Forms;
 
 namespace RAT.ZTry
@@ -8,6 +9,7 @@ namespace RAT.ZTry
         //Debug visuals
         private ContentView maroonView, grayView, redView, yellowView, greenView, tealView, aquaView, blackView, blueView;
         private bool debugMode = true;
+        private Grid mainGrid;
 
         public LoginScreen()
         {
@@ -48,7 +50,7 @@ namespace RAT.ZTry
             myStack.Spacing = 20;
             myStack.Padding = 50;
 
-            var mainGrid = new Grid();
+            mainGrid = new Grid();
             mainGrid.RowDefinitions.Add(new RowDefinition {Height = 100});
             mainGrid.RowDefinitions.Add(new RowDefinition {Height = 10});
             mainGrid.RowDefinitions.Add(new RowDefinition {Height = GridLength.Star});

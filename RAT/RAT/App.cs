@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using RAT.zTest;
 using Xamarin.Forms;
 using RAT.ZTry;
 
@@ -14,7 +13,7 @@ namespace RAT
             //MainPage = new NavigationPage(new IOTest());
             //MainPage = new NavigationPage(new DataGrid());
             //MainPage = new NavigationPage(new LoginScreen());
-            MainPage = new NavigationPage(new Tabbed());
+            MainPage = new NavigationPage(new LoginScreen());
         }
         public string DisplayLabelText { set; get; }
 

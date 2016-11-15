@@ -9,12 +9,11 @@
     <Import_RootNamespace>RAT</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Datagrid.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\LoginScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\MainPageCS.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\MainScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\LoginScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\MainScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Mobile\MLoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\LoginViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\OrderInfoRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\MainScreenViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\Tools\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Login.cs" />
@@ -22,6 +21,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Database\AzureLoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IOTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\Tabbed.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zTest\CPU.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zTest\Datagrid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zTest\OrderInfoRepository.cs" />
   </ItemGroup>
 </Project>
