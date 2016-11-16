@@ -1,4 +1,5 @@
-﻿using RAT._1View;
+﻿using System;
+using RAT._1View;
 using RAT._2ViewModel;
 using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
@@ -7,12 +8,17 @@ namespace RAT.ZTry
 {
     public class MainScreen : ContentPage
     {
-
+        private StackLayout myStackLayout;
         private ContentView maroonView, grayView, redView, yellowView, greenView, tealView, aquaView, blackView, blueView;
         private Button signOutButton;
         private Button performanceButton;
         private Button button3;
         private Button button4;
+        private Button backButton;
+        private Button forwardButton;
+        private bool debugMode = true;
+        Label resultsLabel;
+        SearchBar searchBar;
 
         public MainScreen()
         {
@@ -21,27 +27,15 @@ namespace RAT.ZTry
 
             NavigationPage.SetHasNavigationBar(this, false);
 
-            redView = new ContentView() { BackgroundColor = Color.Red };
-            greenView = new ContentView { BackgroundColor = Color.Green };
-            grayView = new ContentView() { BackgroundColor = Color.Gray };
-            blueView = new ContentView {BackgroundColor = Color.Blue};
+            redView = new ContentView() { BackgroundColor = Color.White };
+            greenView = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235) };
+            grayView = new ContentView() { BackgroundColor = Color.FromRgb(17, 150, 205) };
+            blueView = new ContentView {BackgroundColor = Color.FromRgb(237, 237, 235)};
 
-            StackLayout myStackLayout = new StackLayout();
+            myStackLayout = new StackLayout();
             myStackLayout.VerticalOptions = LayoutOptions.FillAndExpand;
             myStackLayout.Orientation = StackOrientation.Vertical;
-            myStackLayout.BackgroundColor = Color.Maroon;
-
-            //Top Header
-            Grid topGrid = new Grid();
-            topGrid.RowDefinitions.Add(new RowDefinition { Height = 100});
-            topGrid.Children.Add(grayView, 0, 0);
-
-            signOutButton = new Button();
-            signOutButton.Text = "Sign Out";
-            signOutButton.VerticalOptions = LayoutOptions.End;
-            signOutButton.HorizontalOptions = LayoutOptions.End;
-            topGrid.Children.Add(signOutButton);
-            signOutButton.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
+            myStackLayout.BackgroundColor = Color.FromRgb(17, 150, 205);
 
             performanceButton = new Button();
             performanceButton.Text = "Performance";
@@ -70,6 +64,47 @@ namespace RAT.ZTry
             button4.HorizontalOptions = LayoutOptions.End;
             button4.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
 
+            //Top Header
+            Grid topGrid = new Grid();
+            topGrid.RowDefinitions.Add(new RowDefinition { Height = 100 });
+
+            backButton = new Button();
+            backButton.Text = "<";
+            backButton.FontSize = 35;
+            backButton.BorderColor = Color.Black;
+            backButton.BackgroundColor = Color.Gray;
+            backButton.VerticalOptions = LayoutOptions.End;
+            backButton.HorizontalOptions = LayoutOptions.Start;
+            backButton.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
+
+            forwardButton = new Button();
+            forwardButton.Text = ">";
+            forwardButton.FontSize = 35;
+            forwardButton.BorderColor = Color.Black;
+            forwardButton.BackgroundColor = Color.Gray;
+            forwardButton.VerticalOptions = LayoutOptions.End;
+            forwardButton.HorizontalOptions = LayoutOptions.Start;
+            forwardButton.Clicked += ForwardButtonOnClicked;
+            forwardButton.Margin = new Thickness(50,0,0,0);
+
+            signOutButton = new Button();
+            signOutButton.Text = "Sign Out";
+            signOutButton.VerticalOptions = LayoutOptions.End;
+            signOutButton.HorizontalOptions = LayoutOptions.End;
+            signOutButton.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
+
+            Label resultsLabel = new Label
+            {
+                Text = "Result will appear here.",
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                FontSize = 25
+
+            };
+            //topGrid.Children.Add(grayView);
+            topGrid.Children.Add(backButton);
+            topGrid.Children.Add(forwardButton);
+            topGrid.Children.Add(signOutButton);
+
             //Second Header
             Grid second = new Grid();
             StackLayout myStackLayout2 = new StackLayout();
@@ -87,12 +122,40 @@ namespace RAT.ZTry
             second.ColumnDefinitions.Add(new ColumnDefinition() { Width = 225 });
             second.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
             second.ColumnDefinitions.Add(new ColumnDefinition() { Width = 100 });
-
+            second.ColumnSpacing = 0;
+            second.RowSpacing = 0;
+            topGrid.RowSpacing = 0;
+            topGrid.ColumnSpacing = 0;
 
             myStackLayout.Children.Add(topGrid);
             myStackLayout.Children.Add(second);
 
             Content = myStackLayout;
+        }
+
+        private void ForwardButtonOnClicked(object sender, EventArgs eventArgs)
+        {
+            if (debugMode)
+            {
+                debugMode = false;
+                myStackLayout.BackgroundColor = Color.Transparent;
+            }
+            else
+            {
+                debugMode = true;
+                myStackLayout.BackgroundColor = Color.Gray;
+            }
+            grayView.IsVisible = debugMode;
+            redView.IsVisible = debugMode;
+            //yellowView.IsVisible = debugMode;
+
+            greenView.IsVisible = debugMode;
+            //tealView.IsVisible = debugMode;
+            //aquaView.IsVisible = debugMode;
+
+            //blackView.IsVisible = debugMode;
+            blueView.IsVisible = debugMode;
+            //maroonView.IsVisible = debugMode;
         }
     }
 }

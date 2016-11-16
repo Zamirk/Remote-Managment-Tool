@@ -51,6 +51,9 @@ namespace RAT.ZTry
             myStack.Padding = 50;
 
             mainGrid = new Grid();
+            mainGrid.ColumnSpacing = 0;
+            mainGrid.RowSpacing = 0;
+
             mainGrid.RowDefinitions.Add(new RowDefinition {Height = 100});
             mainGrid.RowDefinitions.Add(new RowDefinition {Height = 10});
             mainGrid.RowDefinitions.Add(new RowDefinition {Height = GridLength.Star});
@@ -60,7 +63,7 @@ namespace RAT.ZTry
             mainGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = 450});
             mainGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Star});
 
-            ContentView silverView = new ContentView() {BackgroundColor = Color.Silver};
+            ContentView silverView = new ContentView() {BackgroundColor = Color.FromRgb(17, 150, 205)};
 
             grayView = new ContentView() {BackgroundColor = Color.Gray};
             redView = new ContentView() {BackgroundColor = Color.Red};
@@ -106,6 +109,7 @@ namespace RAT.ZTry
             {
                 Content = myStack;
             }
+            Debug();
         }
 
         //Debug Mode
