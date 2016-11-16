@@ -1,5 +1,6 @@
 ﻿using System;
 using RAT._1View;
+using RAT._1View.Desktop.Tools;
 using RAT._2ViewModel;
 using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
@@ -8,154 +9,171 @@ namespace RAT.ZTry
 {
     public class MainScreen : ContentPage
     {
-        private StackLayout myStackLayout;
-        private ContentView maroonView, grayView, redView, yellowView, greenView, tealView, aquaView, blackView, blueView;
-        private Button signOutButton;
-        private Button performanceButton;
-        private Button button3;
-        private Button button4;
-        private Button backButton;
-        private Button forwardButton;
-        private bool debugMode = true;
-        Label resultsLabel;
-        SearchBar searchBar;
+        private StackLayout mainStack;
+        private Button signOutButton, performanceButton, manageButton, applicationButton, backButton, forwardButton;
+        private ContentView leftColour, rightColour;
 
         public MainScreen()
         {
-            MainScreenViewModel myModel = new MainScreenViewModel();
-            this.BindingContext = myModel;
+            //ViewModel
+            MainScreenViewModel myViewModel = new MainScreenViewModel();
+            this.BindingContext = myViewModel;
 
             NavigationPage.SetHasNavigationBar(this, false);
 
-            redView = new ContentView() { BackgroundColor = Color.White };
-            greenView = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235) };
-            grayView = new ContentView() { BackgroundColor = Color.FromRgb(17, 150, 205) };
-            blueView = new ContentView {BackgroundColor = Color.FromRgb(237, 237, 235)};
+            leftColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235) };
+            rightColour = new ContentView {BackgroundColor = Color.FromRgb(237, 237, 235)};
 
-            myStackLayout = new StackLayout();
-            myStackLayout.VerticalOptions = LayoutOptions.FillAndExpand;
-            myStackLayout.Orientation = StackOrientation.Vertical;
-            myStackLayout.BackgroundColor = Color.FromRgb(17, 150, 205);
+            manageButton = new Button();
+            manageButton.Text = "Manage";
+            manageButton.FontSize = 20;
+            manageButton.VerticalOptions = LayoutOptions.Center;
+            manageButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            manageButton.BorderColor = Color.Transparent;
+            manageButton.BorderWidth = .000001;
+            manageButton.WidthRequest = 500;
+            manageButton.HeightRequest = 50;
+            manageButton.Margin = new Thickness(0, 50, 0, 0);
+            manageButton.BackgroundColor = Color.Gray;
 
             performanceButton = new Button();
-            performanceButton.Text = "Performance";
+            performanceButton.Text = "System Performance";
             performanceButton.FontSize = 20;
-            performanceButton.BorderColor = Color.Black;
-            performanceButton.BackgroundColor = Color.Gray;
             performanceButton.VerticalOptions = LayoutOptions.Center;
-            performanceButton.HorizontalOptions = LayoutOptions.End;
-            performanceButton.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
+            performanceButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            performanceButton.BorderColor = Color.Transparent;
+            performanceButton.BackgroundColor = Color.Transparent;
+            performanceButton.BorderWidth = .000001;
+            performanceButton.WidthRequest = 500;
+            performanceButton.HeightRequest = 50;
 
-            button3 = new Button();
-            button3.Text = "Button 3";
-            button3.FontSize = 20;
-            button3.BorderColor = Color.Black;
-            button3.BackgroundColor = Color.Gray;
-            button3.VerticalOptions = LayoutOptions.Center;
-            button3.HorizontalOptions = LayoutOptions.End;
-            button3.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
-
-            button4 = new Button();
-            button4.Text = "Button 4";
-            button4.FontSize = 20;
-            button4.BorderColor = Color.Black;
-            button4.BackgroundColor = Color.Gray;
-            button4.VerticalOptions = LayoutOptions.Center;
-            button4.HorizontalOptions = LayoutOptions.End;
-            button4.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
-
-            //Top Header
-            Grid topGrid = new Grid();
-            topGrid.RowDefinitions.Add(new RowDefinition { Height = 100 });
+            applicationButton = new Button();
+            applicationButton.Text = "Applications";
+            applicationButton.FontSize = 20;
+            applicationButton.VerticalOptions = LayoutOptions.Center;
+            applicationButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            applicationButton.BorderColor = Color.Transparent;
+            applicationButton.BackgroundColor = Color.Transparent;
+            applicationButton.BorderWidth = .000001;
+            applicationButton.HeightRequest = 50;
+            applicationButton.WidthRequest = 500;
 
             backButton = new Button();
             backButton.Text = "<";
-            backButton.FontSize = 35;
-            backButton.BorderColor = Color.Black;
-            backButton.BackgroundColor = Color.Gray;
+            backButton.FontSize = 20;
             backButton.VerticalOptions = LayoutOptions.End;
             backButton.HorizontalOptions = LayoutOptions.Start;
-            backButton.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
+            backButton.BorderColor = Color.Transparent;
+            backButton.BackgroundColor = Color.Transparent;
+            backButton.BorderWidth = .000001;
 
             forwardButton = new Button();
             forwardButton.Text = ">";
-            forwardButton.FontSize = 35;
-            forwardButton.BorderColor = Color.Black;
-            forwardButton.BackgroundColor = Color.Gray;
+            forwardButton.FontSize = 20;
             forwardButton.VerticalOptions = LayoutOptions.End;
             forwardButton.HorizontalOptions = LayoutOptions.Start;
-            forwardButton.Clicked += ForwardButtonOnClicked;
+            forwardButton.BorderColor = Color.Transparent;
+            forwardButton.BackgroundColor = Color.Transparent;
+            forwardButton.BorderWidth = .000001;
             forwardButton.Margin = new Thickness(50,0,0,0);
 
             signOutButton = new Button();
             signOutButton.Text = "Sign Out";
             signOutButton.VerticalOptions = LayoutOptions.End;
             signOutButton.HorizontalOptions = LayoutOptions.End;
+
+            Button ovr = new Button();
+            manageButton.Text = "Manage";
+            manageButton.FontSize = 20;
+            manageButton.VerticalOptions = LayoutOptions.Center;
+            manageButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            manageButton.BorderColor = Color.Transparent;
+            manageButton.BackgroundColor = Color.Transparent;
+            manageButton.BorderWidth = .000001;
+            manageButton.WidthRequest = 500;
+            manageButton.HeightRequest = 50;
+            manageButton.Margin = new Thickness(0, 50, 0, 0);
+            manageButton.BackgroundColor = Color.Gray;
+
+            manageButton.Clicked += (sender, args) =>
+            {
+                manageButton.BackgroundColor = Color.Gray;
+                performanceButton.BackgroundColor = Color.Transparent;
+                applicationButton.BackgroundColor = Color.Transparent;
+            };
+
+            performanceButton.Clicked += (sender, args) =>
+            {
+                manageButton.BackgroundColor = Color.Transparent;
+                performanceButton.BackgroundColor = Color.Gray;
+                applicationButton.BackgroundColor = Color.Transparent;
+            };
+
+            applicationButton.Clicked += (sender, args) =>
+            {
+                manageButton.BackgroundColor = Color.Transparent;
+                performanceButton.BackgroundColor = Color.Transparent;
+                applicationButton.BackgroundColor = Color.Gray;
+            };
+
+            //Bindings
+            //applicationButton.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
+            //manageButton.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
+            //performanceButton.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
+            backButton.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
+            forwardButton.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
             signOutButton.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));
 
-            Label resultsLabel = new Label
-            {
-                Text = "Result will appear here.",
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                FontSize = 25
+            //Layouts
+            mainStack = new StackLayout();
+            Grid topGrid = new Grid();
+            Grid midGrid = new Grid();
+            StackLayout leftButtonStack = new StackLayout();
 
-            };
-            //topGrid.Children.Add(grayView);
+            //Main Stack
+            mainStack.VerticalOptions = LayoutOptions.FillAndExpand;
+            mainStack.Orientation = StackOrientation.Vertical;
+            mainStack.Spacing = 0;
+
+            //Top-grid
+            topGrid.Children.Add(new ContentView() { BackgroundColor = Color.FromRgb(17, 150, 205) });
+            topGrid.RowDefinitions.Add(new RowDefinition { Height = 100 });
+            topGrid.ColumnSpacing = 0;
+            topGrid.RowSpacing = 0;
+
+            //Mid-grid
+            midGrid.VerticalOptions = LayoutOptions.FillAndExpand;
+            midGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
+            midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 225 });
+            midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
+            midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 100 });
+            midGrid.ColumnSpacing = 0;
+            midGrid.RowSpacing = 0;
+
+            //Button stack
+            leftButtonStack.HorizontalOptions = LayoutOptions.Center;
+            leftButtonStack.VerticalOptions = LayoutOptions.FillAndExpand;
+            leftButtonStack.Spacing = 0;
+
+            //Adding to top-grid
             topGrid.Children.Add(backButton);
             topGrid.Children.Add(forwardButton);
             topGrid.Children.Add(signOutButton);
 
-            //Second Header
-            Grid second = new Grid();
-            StackLayout myStackLayout2 = new StackLayout();
-            myStackLayout2.HorizontalOptions = LayoutOptions.Center;
-            myStackLayout2.VerticalOptions = LayoutOptions.FillAndExpand;
-            second.VerticalOptions = LayoutOptions.FillAndExpand;
-            second.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
-            second.Children.Add(blueView, 0, 0);
-            second.Children.Add(redView, 1, 0);
-            second.Children.Add(greenView, 2, 0);
-            myStackLayout2.Children.Add(performanceButton);
-            myStackLayout2.Children.Add(button3);
-            myStackLayout2.Children.Add(button4);
-            second.Children.Add(myStackLayout2, 0, 0);
-            second.ColumnDefinitions.Add(new ColumnDefinition() { Width = 225 });
-            second.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
-            second.ColumnDefinitions.Add(new ColumnDefinition() { Width = 100 });
-            second.ColumnSpacing = 0;
-            second.RowSpacing = 0;
-            topGrid.RowSpacing = 0;
-            topGrid.ColumnSpacing = 0;
+            //Adding to mid-grid
+            midGrid.Children.Add(leftColour, 0, 0);
+            midGrid.Children.Add(leftButtonStack, 0, 0);
+            midGrid.Children.Add(rightColour, 2, 0);
 
-            myStackLayout.Children.Add(topGrid);
-            myStackLayout.Children.Add(second);
+            //Left button stack
+            leftButtonStack.Spacing = 0;
+            leftButtonStack.Children.Add(manageButton);
+            leftButtonStack.Children.Add(performanceButton);
+            leftButtonStack.Children.Add(applicationButton);
 
-            Content = myStackLayout;
-        }
-
-        private void ForwardButtonOnClicked(object sender, EventArgs eventArgs)
-        {
-            if (debugMode)
-            {
-                debugMode = false;
-                myStackLayout.BackgroundColor = Color.Transparent;
-            }
-            else
-            {
-                debugMode = true;
-                myStackLayout.BackgroundColor = Color.Gray;
-            }
-            grayView.IsVisible = debugMode;
-            redView.IsVisible = debugMode;
-            //yellowView.IsVisible = debugMode;
-
-            greenView.IsVisible = debugMode;
-            //tealView.IsVisible = debugMode;
-            //aquaView.IsVisible = debugMode;
-
-            //blackView.IsVisible = debugMode;
-            blueView.IsVisible = debugMode;
-            //maroonView.IsVisible = debugMode;
+            mainStack.Children.Add(topGrid);
+            mainStack.Children.Add(midGrid);
+            Content = mainStack;
         }
     }
 }

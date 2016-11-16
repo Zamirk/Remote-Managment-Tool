@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\MainScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Tools\Menu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Mobile\MLoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\MainScreenViewModel.cs" />
