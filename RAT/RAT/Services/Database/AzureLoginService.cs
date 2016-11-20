@@ -29,8 +29,8 @@ namespace RAT.ZTry
                 Where(r => r.Username == a).
                 Where(r => r.Password == b).
                 ToListAsync();
-
-            Client.Dispose();
+            loginObjects.Add(new Login() {Id = "Empty", Password = "Empty", Username = "Empty" });
+            //Client.Dispose();
             return loginObjects;
         }
     }

@@ -9,9 +9,15 @@
     <Import_RootNamespace>RAT</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\DiskScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\WIFIScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\RamScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\ScreenState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\MainScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Tools\Menu.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\Menu.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\CPUScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\OverviewScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Mobile\MLoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\MainScreenViewModel.cs" />
