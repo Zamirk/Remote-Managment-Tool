@@ -42,6 +42,7 @@ namespace RAT.ZTry
 
             int fontSize = 13;
 
+            #region
             manageButton = new Button();
             manageButton.Text = "Manage";
             manageButton.FontSize = 20;
@@ -155,6 +156,8 @@ namespace RAT.ZTry
             wifiButton.BorderWidth = .000001;
             wifiButton.WidthRequest = 100;
             wifiButton.HeightRequest = 50;
+
+            #endregion
 
             //Bindings
             //applicationButton.SetBinding(Button.CommandProperty, new Binding("SignOutCommand"));

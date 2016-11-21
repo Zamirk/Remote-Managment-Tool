@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Syncfusion.SfDataGrid.XForms;
+﻿using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
+using RAT._2ViewModel.Test;
 
 namespace RAT._1View.Desktop
 {
@@ -11,23 +8,26 @@ namespace RAT._1View.Desktop
     {
         public OverviewScreen()
         {
+            OverviewViewModel viewModel = new OverviewViewModel();
+            BindingContext = viewModel;
+
             VerticalOptions = LayoutOptions.FillAndExpand;
             RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Auto});
 
             SfDataGrid sDataGrid;
             sDataGrid = new SfDataGrid();
-            sDataGrid.ItemsSource = new OrderInfoRepository().OrderInfoCollection;
 
             //sfGrid.DefaultColumnWidth = 200;
             sDataGrid.AllowDraggingColumn = true;
             sDataGrid.AutoExpandGroups = true;
             sDataGrid.GridStyle = new DataGridStyle() { AlternatingRowColor = Color.Gray };
-
             sDataGrid.ColumnSizer = ColumnSizer.Star;
             //sfGrid.VerticalOverScrollMode = VerticalOverScrollMode.Bounce;
-            Children.Add(sDataGrid, 1, 1);
 
+            //Binding
+            sDataGrid.ItemsSource = viewModel.Stocks;
+            Children.Add(sDataGrid, 1, 1);
         }
     }
 }

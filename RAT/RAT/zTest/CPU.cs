@@ -50,7 +50,7 @@ namespace RAT._1View
 
             SfDataGrid sDataGrid;
             sDataGrid = new SfDataGrid();
-            sDataGrid.ItemsSource = new OrderInfoRepository().OrderInfoCollection;
+            //sDataGrid.ItemsSource = new OrderInfoRepository().OrderInfoCollection;
 
             //sfGrid.DefaultColumnWidth = 200;
             sDataGrid.AllowDraggingColumn = true;

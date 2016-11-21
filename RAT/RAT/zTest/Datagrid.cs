@@ -7,9 +7,7 @@ namespace RAT.Syncfusion
 	{
 		public Datagrid ()
 		{
-            SfDataGrid sDataGrid;
-            sDataGrid = new SfDataGrid();
-            sDataGrid.ItemsSource = new OrderInfoRepository().OrderInfoCollection;
+            SfDataGrid dataGrid = new SfDataGrid();
             
             //Layout
             StackLayout myLayout = new StackLayout();
@@ -17,11 +15,11 @@ namespace RAT.Syncfusion
             myLayout.VerticalOptions = LayoutOptions.CenterAndExpand;
 
             //sfGrid.DefaultColumnWidth = 200;
-            sDataGrid.AllowDraggingColumn = true;
-            sDataGrid.AutoExpandGroups = true;
-            sDataGrid.GridStyle = new DataGridStyle() { AlternatingRowColor = Color.Gray };
+            dataGrid.AllowDraggingColumn = true;
+            dataGrid.AutoExpandGroups = true;
+            dataGrid.GridStyle = new DataGridStyle() { AlternatingRowColor = Color.Gray };
 
-            sDataGrid.ColumnSizer = ColumnSizer.Auto;
+            dataGrid.ColumnSizer = ColumnSizer.Auto;
             //sfGrid.AllowPullToRefresh = true;              #No Change
             //sfGrid.VerticalOverScrollMode = VerticalOverScrollMode.Bounce;
             Button myButton = new Button();
@@ -35,7 +33,7 @@ namespace RAT.Syncfusion
 		    //myView.AnchorX = 100;
 		    //myView.Margin = 100;
 
-            Content = sDataGrid;
+            Content = dataGrid;
         }
 	}
 }

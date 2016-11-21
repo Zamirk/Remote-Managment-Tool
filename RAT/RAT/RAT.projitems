@@ -9,27 +9,30 @@
     <Import_RootNamespace>RAT</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\DiskScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\WIFIScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\RamScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\2Performance\CPUScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\2Performance\DiskScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\2Performance\OverviewScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\2Performance\RamScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\2Performance\WIFIScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\ScreenState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\MainScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\Menu.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\CPUScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\OverviewScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Mobile\MLoginScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CpuViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\DataGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\MainScreenViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\OverviewViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\Tools\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Login.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\OrderInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\DeviceInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Database\AzureLoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IOTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\CPU.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\Datagrid.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\OrderInfoRepository.cs" />
   </ItemGroup>
 </Project>
