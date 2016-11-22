@@ -48,7 +48,7 @@ namespace RAT._1View.Desktop
                 //column.YBindingPath = "Value";
                 myCharts[i].Series[0].EnableAnimation = true;
                 myCharts[i].Series[0].AnimationDuration = 2;
-                //myCharts[i].Series[0].
+                ////myCharts[i].Series[0].
             }
             Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>
             {
