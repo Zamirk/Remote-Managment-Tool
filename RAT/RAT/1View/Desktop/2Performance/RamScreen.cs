@@ -17,8 +17,6 @@ namespace RAT._1View.Desktop
         public RamScreen()
         {
 
-
-
             VerticalOptions = LayoutOptions.FillAndExpand;
             ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 

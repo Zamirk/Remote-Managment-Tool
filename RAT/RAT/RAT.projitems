@@ -23,8 +23,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\DataGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\MainScreenViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\Model.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\OverviewViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\Tools\ViewModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\ViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Login.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\OrderInfo.cs" />
