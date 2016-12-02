@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\2Performance\OverviewScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\2Performance\RamScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\2Performance\WIFIScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Manage\MainManagmentScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\ScreenState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\MainScreen.cs" />
