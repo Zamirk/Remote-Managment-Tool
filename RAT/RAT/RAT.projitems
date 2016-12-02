@@ -9,16 +9,19 @@
     <Import_RootNamespace>RAT</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\2Performance\CPUScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\2Performance\DiskScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\2Performance\OverviewScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\2Performance\RamScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\2Performance\WIFIScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Manage\MainManagmentScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\ScreenState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\LoginScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\MainScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\Menu.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\ScreenState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\LoginScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\MenuState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\MainScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\CPUScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\DiskScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\OverviewScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\RamScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\WIFIScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\ApplicationManagmentScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\SystemPerformanceScreenz.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\MainManagmentScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\SystemPerformanceScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Mobile\MLoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CpuViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\DataGenerator.cs" />
