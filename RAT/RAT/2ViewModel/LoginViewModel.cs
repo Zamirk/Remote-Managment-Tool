@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Tools;
@@ -41,7 +42,7 @@ namespace RAT.ZTry
         //Checks Login, Changes screen if found
         async Task LoginValidate()
         {
-            //List <Login> logins = await azureService.GetLogin(userName, password);
+            List <Login> logins = await azureService.GetLogin(userName, password);
             //if (logins[0].Username.Equals(UserName) && logins[0].Password.Equals(Password))
             //{
                 System.Diagnostics.Debug.WriteLine("\n-----Entering Main Menu");

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using RAT.ZTry;
+using RAT._2ViewModel.Test;
 using Xamarin.Forms;
 
 namespace RAT._1View.Desktop
@@ -206,11 +207,19 @@ namespace RAT._1View.Desktop
             {
                 overviewButton.BackgroundColor = Color.Transparent;
                 Children.Remove(overviewScreen);
+                //overviewScreen.test();
+                overviewScreen.BindingContext = null;
+                overviewScreen = null;
+                GC.Collect();
             }
             else if (myScreenState == ScreenState.CPU)
             {
                 cpuButton.BackgroundColor = Color.Transparent;
                 Children.Remove(cpuScreen);
+                //cpuScreen.test();
+                cpuScreen.BindingContext = null;
+                cpuScreen = null;
+                GC.Collect();
             }
             else if (myScreenState == ScreenState.RAM)
             {

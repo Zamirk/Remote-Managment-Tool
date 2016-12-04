@@ -13,15 +13,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\MenuState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\MainScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\0Options\MainManagmentScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\0Options\SystemPerformanceScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\1Manage\DeviceOverviewScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\CPUScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\DiskScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\OverviewScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\RamScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\WIFIScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\ApplicationManagmentScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\SystemPerformanceScreenz.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\MainManagmentScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\SystemPerformanceScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\3Application\ApplicationManagmentScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Mobile\MLoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CpuViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\DataGenerator.cs" />
@@ -29,6 +29,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\MainScreenViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\Model.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\OverviewViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\Temp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\Tools\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\ViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />

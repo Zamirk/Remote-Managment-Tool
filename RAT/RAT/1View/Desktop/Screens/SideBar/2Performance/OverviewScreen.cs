@@ -5,11 +5,12 @@ using RAT._2ViewModel.Test;
 namespace RAT._1View.Desktop
 {
 	public class OverviewScreen : Grid
-    {
+	{
+	    //private OverviewViewModel viewModel;
         public OverviewScreen()
         {
-            OverviewViewModel viewModel = new OverviewViewModel();
-            BindingContext = viewModel;
+            //viewModel = new OverviewViewModel();
+            //BindingContext = viewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;
             RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
@@ -26,8 +27,14 @@ namespace RAT._1View.Desktop
             //sfGrid.VerticalOverScrollMode = VerticalOverScrollMode.Bounce;
 
             //Binding
-            sDataGrid.ItemsSource = viewModel.Stocks;
+            //sDataGrid.ItemsSource = viewModel.Stocks;
             Children.Add(sDataGrid, 1, 1);
+        }
+
+        public void test()
+        {
+            //viewModel.collectGarbage = true;
+            System.Diagnostics.Debug.WriteLine("\n-----Fwfwwfwfwfwfwfwfwfwwfwfwwfwfwf");
         }
     }
 }
