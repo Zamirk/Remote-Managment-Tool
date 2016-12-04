@@ -11,7 +11,7 @@ namespace RAT._2ViewModel
 	public class Temp : ContentPage
 	{
 		public Temp ()
-		{
+		{ 
             /*
              * 
              * 
