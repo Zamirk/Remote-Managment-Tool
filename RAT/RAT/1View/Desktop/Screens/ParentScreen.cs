@@ -8,11 +8,13 @@ using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
 
 namespace RAT.ZTry
-{
-    public class MainScreen : ContentPage
+{   
+   /* TODO Maybe change ParentScreen to MainScreen: 06/12/16 */
+    public class ParentScreen : ContentPage
     {
         #region Member Variables
-        private MainManagmentScreen myMainManagmentScreen;
+        private MenuState myMenuState;
+        private AllDevices allDevices;
         private SystemPerformanceScreen mySystemPerformanceScreen;
         private ApplicationManagmentScreen myApplicationManagmentScreen;
         private DeviceOverview deviceOverview;
@@ -21,11 +23,10 @@ namespace RAT.ZTry
             applicationButton, backButton, forwardButton;
         ContentView leftColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235), HorizontalOptions = LayoutOptions.Fill };
         ContentView rightColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235) };
-        private MenuState myMenuState;
         private Grid midGrid;
         #endregion
 
-        public MainScreen()
+        public ParentScreen()
         {
             //ViewModel
             MainScreenViewModel myViewModel = new MainScreenViewModel();
@@ -149,7 +150,7 @@ namespace RAT.ZTry
             midGrid.Children.Add(rightColour, 2, 0);
 
             //Initial Screen
-            myMainManagmentScreen = new MainManagmentScreen();
+            myMainManagmentScreen = new AllDevices();
             myMainManagmentScreen.pcOne.Clicked += PcOne_Clicked;
             midGrid.Children.Add(myMainManagmentScreen, 1, 0);
 
@@ -182,26 +183,27 @@ namespace RAT.ZTry
                 manageButton.BackgroundColor = Color.Gray;
                 RemoveScreen();
 
-                //TODO
+                //TODO: Maybe this shouldnt be initialised instantly: 06/12/16
                 //Adding Overview Screen
-                myMainManagmentScreen = new MainManagmentScreen();
-                myMainManagmentScreen.pcOne.Clicked += PcOne_Clicked;
-                midGrid.Children.Add(myMainManagmentScreen, 1, 0);
+                allDevices = new AllDevices();
+                //TODO: Remove Clickhandler and replace with ParentScreen Subscreen managment
+                //myMainManagmentScreen.pcOne.Clicked += PcOne_Clicked;
+                //midGrid.Children.Add(myMainManagmentScreen, 1, 0);
 
                 myMenuState = MenuState.MANAGE;
                 singleDeviceScreen = true;
                 GC.Collect();
             }
 
-            if (singleDeviceScreen)
-            {
-                singleDeviceScreen = false;
+            //if (singleDeviceScreen)
+            //{
+            //    singleDeviceScreen = false;
                 //midGrid.Children.Remove(deviceOverview);
                 //Initial Screen
-                myMainManagmentScreen = new MainManagmentScreen();
-                myMainManagmentScreen.pcOne.Clicked += PcOne_Clicked;
-                midGrid.Children.Add(myMainManagmentScreen, 1, 0);
-            }
+                //allDevices = new AllDevices();
+                //myMainManagmentScreen.pcOne.Clicked += PcOne_Clicked;
+                //midGrid.Children.Add(myMainManagmentScreen, 1, 0);
+            //}
 
         }
 
@@ -244,7 +246,7 @@ namespace RAT.ZTry
             {
                 //TODO
                 manageButton.BackgroundColor = Color.Transparent;
-                midGrid.Children.Remove(myMainManagmentScreen);
+                midGrid.Children.Remove(allDevices);
             }
             else if (myMenuState == MenuState.PERFORMANCE)
             {
@@ -255,6 +257,11 @@ namespace RAT.ZTry
             {
                 applicationButton.BackgroundColor = Color.Transparent;
                 midGrid.Children.Remove(myApplicationManagmentScreen);
+            }
+            else if (myMenuState == MenuState.SINGLEDEVICE)
+            {
+                manageButton.BackgroundColor = Color.Transparent;
+                midGrid.Children.Remove(allDevices);
             }
             GC.Collect();
         }

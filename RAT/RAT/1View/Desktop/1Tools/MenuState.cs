@@ -2,6 +2,6 @@
 {
     public enum MenuState
     {
-        MANAGE, PERFORMANCE, APPLICATIONS
+        MANAGE, PERFORMANCE, APPLICATIONS, SINGLEDEVICE
     }
 }

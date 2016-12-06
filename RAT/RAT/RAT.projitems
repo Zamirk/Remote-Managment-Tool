@@ -12,8 +12,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\ScreenState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\MenuState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\MainScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\0Options\MainManagmentScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\ParentScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\0Options\AllDevicesScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\0Options\SystemPerformanceScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\1Manage\DeviceOverviewScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\CPUScreen.cs" />
