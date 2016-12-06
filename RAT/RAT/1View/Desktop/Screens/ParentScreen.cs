@@ -14,10 +14,10 @@ namespace RAT.ZTry
     {
         #region Member Variables
         private MenuState myMenuState;
-        private AllDevices allDevices;
-        private SystemPerformanceScreen mySystemPerformanceScreen;
-        private ApplicationManagmentScreen myApplicationManagmentScreen;
-        private DeviceOverview deviceOverview;
+        private AllDevices allDevicesScreen;
+        private SingleDeviceScreen singleDeviceScreen;
+        private SystemPerformanceScreen systemPerformanceScreen;
+        private ApplicationManagmentScreen applicationManagmentScreen;
 
         private Button signOutButton,performanceButton, manageButton,
             applicationButton, backButton, forwardButton;
@@ -33,7 +33,7 @@ namespace RAT.ZTry
             this.BindingContext = myViewModel;
 
             NavigationPage.SetHasNavigationBar(this, false);
-            myMenuState = MenuState.MANAGE;
+            myMenuState = MenuState.MANAGE_ALLDEVICES;
 
             #region Buttons
             manageButton = new Button();
@@ -150,9 +150,9 @@ namespace RAT.ZTry
             midGrid.Children.Add(rightColour, 2, 0);
 
             //Initial Screen
-            myMainManagmentScreen = new AllDevices();
-            myMainManagmentScreen.pcOne.Clicked += PcOne_Clicked;
-            midGrid.Children.Add(myMainManagmentScreen, 1, 0);
+            allDevicesScreen = new AllDevices();
+            //allDevices.pcOne.Clicked += PcOne_Clicked;
+            midGrid.Children.Add(allDevicesScreen, 1, 0);
 
             //Left Buttons
             manageButton.Clicked += ManageButton_Clicked;
@@ -169,42 +169,35 @@ namespace RAT.ZTry
 
         private void PcOne_Clicked(object sender, EventArgs e)
         {
-            midGrid.Children.Remove(myMainManagmentScreen);
-            deviceOverview = new DeviceOverview();
-            midGrid.Children.Add(deviceOverview,1,0);
-            singleDeviceScreen = true;
+            manageButton.BackgroundColor = Color.Gray;
+            RemoveScreen();
+
+            //TODO NOW
+            singleDeviceScreen = new SingleDeviceScreen();
+            midGrid.Children.Add(singleDeviceScreen, 1,0);
+
+            myMenuState = MenuState.MANAGE_SINGLEDEVICE;
+            GC.Collect();
         }
+
         #region SideBar Click Handlers
 
         private void ManageButton_Clicked(object sender, EventArgs e)
         {
-            if (myMenuState != MenuState.MANAGE)
+            if (myMenuState != MenuState.MANAGE_ALLDEVICES)
             {
                 manageButton.BackgroundColor = Color.Gray;
                 RemoveScreen();
 
-                //TODO: Maybe this shouldnt be initialised instantly: 06/12/16
-                //Adding Overview Screen
-                allDevices = new AllDevices();
                 //TODO: Remove Clickhandler and replace with ParentScreen Subscreen managment
-                //myMainManagmentScreen.pcOne.Clicked += PcOne_Clicked;
-                //midGrid.Children.Add(myMainManagmentScreen, 1, 0);
+                //TODO: Maybe this shouldnt be initialised instantly: 06/12/16
+                allDevicesScreen = new AllDevices();
+                allDevicesScreen.pcOne.Clicked += PcOne_Clicked;
+                midGrid.Children.Add(allDevicesScreen, 1, 0);
 
-                myMenuState = MenuState.MANAGE;
-                singleDeviceScreen = true;
+                myMenuState = MenuState.MANAGE_ALLDEVICES;
                 GC.Collect();
             }
-
-            //if (singleDeviceScreen)
-            //{
-            //    singleDeviceScreen = false;
-                //midGrid.Children.Remove(deviceOverview);
-                //Initial Screen
-                //allDevices = new AllDevices();
-                //myMainManagmentScreen.pcOne.Clicked += PcOne_Clicked;
-                //midGrid.Children.Add(myMainManagmentScreen, 1, 0);
-            //}
-
         }
 
         private void PerformanceButton_Clicked(object sender, EventArgs e)
@@ -215,8 +208,8 @@ namespace RAT.ZTry
                 RemoveScreen();
 
                 //Adding Overview Screen
-                mySystemPerformanceScreen = new SystemPerformanceScreen();
-                midGrid.Children.Add(mySystemPerformanceScreen, 1, 0);
+                systemPerformanceScreen = new SystemPerformanceScreen();
+                midGrid.Children.Add(systemPerformanceScreen, 1, 0);
 
                 myMenuState = MenuState.PERFORMANCE;
                 GC.Collect();
@@ -231,8 +224,8 @@ namespace RAT.ZTry
                 RemoveScreen();
 
                 //Adding Overview Screen
-                myApplicationManagmentScreen = new ApplicationManagmentScreen();
-                midGrid.Children.Add(myApplicationManagmentScreen, 1, 0);
+                applicationManagmentScreen = new ApplicationManagmentScreen();
+                midGrid.Children.Add(applicationManagmentScreen, 1, 0);
 
                 myMenuState = MenuState.APPLICATIONS;
                 GC.Collect();
@@ -242,32 +235,35 @@ namespace RAT.ZTry
         public void RemoveScreen()
         {
             //Removes screen, sets button off
-            if (myMenuState == MenuState.MANAGE)
+            //NOTE
+            //ObjectS should be collected by Garbage Collector!
+            //If Not, Check the async/Device.Timers/Extra Threads
+
+            if (myMenuState == MenuState.MANAGE_ALLDEVICES)
             {
-                //TODO
                 manageButton.BackgroundColor = Color.Transparent;
-                midGrid.Children.Remove(allDevices);
+                midGrid.Children.Remove(allDevicesScreen);
             }
             else if (myMenuState == MenuState.PERFORMANCE)
             {
                 performanceButton.BackgroundColor = Color.Transparent;
-                midGrid.Children.Remove(mySystemPerformanceScreen);
+                midGrid.Children.Remove(systemPerformanceScreen);
             }
             else if (myMenuState == MenuState.APPLICATIONS)
             {
                 applicationButton.BackgroundColor = Color.Transparent;
-                midGrid.Children.Remove(myApplicationManagmentScreen);
+                midGrid.Children.Remove(applicationManagmentScreen);
             }
-            else if (myMenuState == MenuState.SINGLEDEVICE)
+            else if (myMenuState == MenuState.MANAGE_SINGLEDEVICE)
             {
                 manageButton.BackgroundColor = Color.Transparent;
-                midGrid.Children.Remove(allDevices);
+                midGrid.Children.Remove(singleDeviceScreen);
             }
+            //TODO GC.Collect(); Really should be removed, Looking for memory leaks 06/12/16
             GC.Collect();
         }
         #endregion
 
-        private bool singleDeviceScreen = false;
 
     }
 }

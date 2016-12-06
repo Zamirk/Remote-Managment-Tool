@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace RAT._1View.Desktop
 {
-    public class DeviceOverview : Grid
+    public class SingleDeviceScreen : Grid
     {
         private Button overviewButton, memoryButton, wifiButton, diskButton, cpuButton;
         int fontSize = 13;
@@ -16,7 +16,7 @@ namespace RAT._1View.Desktop
         //Current screen on display
         private ScreenState myScreenState;
 
-        public DeviceOverview()
+        public SingleDeviceScreen()
         {
             myScreenState = ScreenState.OVERVIEW;
 

@@ -15,7 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\ParentScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\0Options\AllDevicesScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\0Options\SystemPerformanceScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\1Manage\DeviceOverviewScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\1Manage\SingleDeviceScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\CPUScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\DiskScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\OverviewScreen.cs" />
