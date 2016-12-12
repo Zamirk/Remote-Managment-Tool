@@ -15,9 +15,9 @@ using SfChart = Syncfusion.SfChart.XForms.SfChart;
 
 namespace RAT._1View.Desktop
 {
-	public class CPUScreen : Grid
+	public class AllCPUScreen : Grid
 	{
-        public CPUScreen()
+        public AllCPUScreen()
         {
             VerticalOptions = LayoutOptions.FillAndExpand;
             ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });

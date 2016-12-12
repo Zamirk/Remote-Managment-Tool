@@ -10,9 +10,9 @@ using Label = Xamarin.Forms.Label;
 
 namespace RAT._1View.Desktop.Manage
 {
-	public class ApplicationManagmentScreen : Grid
+	public class AppsScreen : Grid
     {
-        public ApplicationManagmentScreen()
+        public AppsScreen()
         {
             VerticalOptions = LayoutOptions.FillAndExpand;
             ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });

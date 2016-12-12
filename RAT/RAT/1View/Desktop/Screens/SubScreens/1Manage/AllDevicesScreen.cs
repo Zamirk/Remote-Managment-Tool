@@ -68,7 +68,7 @@ namespace RAT._1View.Desktop.Manage
 
             Label myLabel;
             myLabel = new Label();
-            myLabel.Text = "MainManagmentScreen";
+            myLabel.Text = "All Devices Screen";
             Children.Add(myLabel, 1, 1);
             Children.Add(pcOne, 1, 0);
             Children.Add(pcTwo, 2, 0);

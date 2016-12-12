@@ -9,19 +9,30 @@
     <Import_RootNamespace>RAT</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\ODScreenState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\ScreenState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\BetaScreens\AllCPUScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\BetaScreens\zDiskScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\BetaScreens\OverviewScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\BetaScreens\zRamScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\BetaScreens\WIFIScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\MenuState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\ParentScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\0Options\AllDevicesScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\0Options\SystemPerformanceScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\1Manage\SingleDeviceScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\CPUScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\DiskScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\OverviewScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\RamScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\2Performance\WIFIScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SideBar\3Application\ApplicationManagmentScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\1Manage\AllDevicesScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\1Manage\DeviceScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\1Manage\DeviceSubScreens\RamScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\1Manage\DeviceSubScreens\WifiScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\1Manage\DeviceSubScreens\OverviewScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\1Manage\DeviceSubScreens\DiskScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\1Manage\DeviceSubScreens\CPUScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\2Performance\PerformanceScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\2Performance\PerformanceSubScreens\CPUAllScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\2Performance\PerformanceSubScreens\DiskAllScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\2Performance\PerformanceSubScreens\OverviewAllScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\2Performance\PerformanceSubScreens\RamScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\2Performance\PerformanceSubScreens\WifiAllScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\3Apps\AppsScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Mobile\MLoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CpuViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\DataGenerator.cs" />

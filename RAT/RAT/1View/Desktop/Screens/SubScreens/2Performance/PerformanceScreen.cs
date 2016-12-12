@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Text;
 using RAT.ZTry;
 using RAT._2ViewModel.Test;
@@ -9,7 +8,7 @@ using Xamarin.Forms;
 
 namespace RAT._1View.Desktop
 {
-    public class SystemPerformanceScreen : Grid
+    public class PerformanceScreen : Grid
     {
         private Button overviewButton, memoryButton, wifiButton, diskButton, cpuButton;
         int fontSize = 13;
@@ -18,13 +17,13 @@ namespace RAT._1View.Desktop
         private ScreenState myScreenState;
 
         //SubScreen
-        private OverviewScreen overviewScreen;
-        private CPUScreen cpuScreen;
-        private RamScreen ramScreen;
-        private WIFIScreen wifiScreen;
-        private DiskScreen diskScreen;
-
-        public SystemPerformanceScreen()
+        private OverviewAllScreen overviewScreen;
+        private CPUAllScreen cpuScreen;
+        private RamAllScreen ramScreen;
+        private WifiAllScreen wifiScreen;
+        private DiskAllScreen diskScreen;
+        
+        public PerformanceScreen()
         {
             myScreenState = ScreenState.OVERVIEW;
             #region Buttons
@@ -99,9 +98,10 @@ namespace RAT._1View.Desktop
 
             //Adding to mid-grid
             Children.Add(midGrid2, 0, 0);
+            Children.Add(new Label() { Text = "Individual Device Screen" });
 
             //Initialising Overview Screen
-            overviewScreen = new OverviewScreen();
+            overviewScreen = new OverviewAllScreen();
             overviewScreen.Margin = new Thickness(50, 50, 50, 0);
             Children.Add(overviewScreen, 0, 0);
 
@@ -123,7 +123,7 @@ namespace RAT._1View.Desktop
                 RemoveScreen();
 
                 //Adding Ram Screen
-                wifiScreen = new WIFIScreen();
+                wifiScreen = new WifiAllScreen();
                 wifiScreen.Margin = new Thickness(50, 50, 50, 0);
                 Children.Add(wifiScreen, 0, 0);
 
@@ -140,7 +140,7 @@ namespace RAT._1View.Desktop
                 RemoveScreen();
 
                 //Adding Ram Screen
-                diskScreen = new DiskScreen();
+                diskScreen = new DiskAllScreen();
                 diskScreen.Margin = new Thickness(50, 50, 50, 0);
                 Children.Add(diskScreen, 0, 0);
 
@@ -157,7 +157,7 @@ namespace RAT._1View.Desktop
                 RemoveScreen();
 
                 //Adding Ram Screen
-                ramScreen = new RamScreen();
+                ramScreen = new RamAllScreen();
                 ramScreen.Margin = new Thickness(50, 50, 50, 0);
                 Children.Add(ramScreen, 0, 0);
 
@@ -174,7 +174,7 @@ namespace RAT._1View.Desktop
                 RemoveScreen();
 
                 //Adding Cpu Screen
-                cpuScreen = new CPUScreen();
+                cpuScreen = new CPUAllScreen();
                 cpuScreen.Margin = new Thickness(50, 50, 50, 0);
                 Children.Add(cpuScreen, 0, 0);
 
@@ -191,7 +191,7 @@ namespace RAT._1View.Desktop
                 RemoveScreen();
 
                 //Adding Overview Screen
-                overviewScreen = new OverviewScreen();
+                overviewScreen = new OverviewAllScreen();
                 overviewScreen.Margin = new Thickness(50, 50, 50, 0);
                 Children.Add(overviewScreen, 0, 0);
 
@@ -207,34 +207,48 @@ namespace RAT._1View.Desktop
             {
                 overviewButton.BackgroundColor = Color.Transparent;
                 Children.Remove(overviewScreen);
-                //overviewScreen.test();
                 overviewScreen.BindingContext = null;
                 overviewScreen = null;
+
                 GC.Collect();
             }
             else if (myScreenState == ScreenState.CPU)
             {
                 cpuButton.BackgroundColor = Color.Transparent;
                 Children.Remove(cpuScreen);
+                //TODO This kill the thread which stops garbage collection
                 //cpuScreen.test();
                 cpuScreen.BindingContext = null;
                 cpuScreen = null;
+
                 GC.Collect();
             }
             else if (myScreenState == ScreenState.RAM)
             {
                 memoryButton.BackgroundColor = Color.Transparent;
                 Children.Remove(ramScreen);
+                ramScreen.BindingContext = null;
+                ramScreen = null;
+
+                GC.Collect();
             }
             else if (myScreenState == ScreenState.WIFI)
             {
                 wifiButton.BackgroundColor = Color.Transparent;
                 Children.Remove(wifiScreen);
+                wifiScreen.BindingContext = null;
+                wifiScreen = null;
+
+                GC.Collect();
             }
             else if (myScreenState == ScreenState.DISK)
             {
                 diskButton.BackgroundColor = Color.Transparent;
                 Children.Remove(diskScreen);
+                diskScreen.BindingContext = null;
+                diskScreen = null;
+
+                GC.Collect();
             }
         }
 

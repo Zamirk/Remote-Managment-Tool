@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace RAT._1View.Desktop
 {
-    public class DiskScreen : Grid
+    public class zDiskScreen : Grid
     {
-        public DiskScreen()
+        public zDiskScreen()
         {
             //Chart 1
             //VerticalOptions = LayoutOptions.FillAndExpand;

@@ -9,12 +9,12 @@ using Xamarin.Forms;
 
 namespace RAT._1View.Desktop
 {
-	public class RamScreen : Grid
+	public class zRamScreen : Grid
     {
         private int i = 40;
         private SfChart chart;
         private List<SfChart> myCharts;
-        public RamScreen()
+        public zRamScreen()
         {
 
             VerticalOptions = LayoutOptions.FillAndExpand;
