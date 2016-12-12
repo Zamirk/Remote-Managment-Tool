@@ -10,10 +10,10 @@ using Label = Xamarin.Forms.Label;
 
 namespace RAT._1View.Desktop.Manage
 {
-	public class AllDevices : Grid
+	public class ViewDevicesScreen : Grid
 	{
 	    public Button pcOne;
-        public AllDevices()
+        public ViewDevicesScreen()
         {
             VerticalOptions = LayoutOptions.FillAndExpand;
             ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });

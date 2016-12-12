@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RAT.ZTry;
+using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
 using RAT._2ViewModel.Test;
 using Xamarin.Forms;
 
@@ -21,7 +22,7 @@ namespace RAT._1View.Desktop
         private CPUScreen cpuScreen;
         private RamScreen ramScreen;
         private DiskScreen diskScreen;
-        private WIFIScreen wifiScreen;
+        private WifiScreen wifiScreen;
 
         public DeviceScreen()
         {
@@ -124,7 +125,7 @@ namespace RAT._1View.Desktop
                 RemoveScreen();
 
                 //Adding Wifi Screen
-                wifiScreen = new WIFIScreen();
+                wifiScreen = new WifiScreen();
                 wifiScreen.Margin = new Thickness(50, 50, 50, 0);
                 Children.Add(wifiScreen, 0, 0);
 

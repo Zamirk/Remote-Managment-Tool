@@ -14,7 +14,7 @@ namespace RAT.ZTry
     {
         #region Member Variables
         private MenuState myMenuState;
-        private AllDevices allDevicesScreen;
+        private ViewDevicesScreen viewDevicesScreen;
         private DeviceScreen singleDeviceScreen;
         private PerformanceScreen systemPerformanceScreen;
         private AppsScreen applicationManagmentScreen;
@@ -150,9 +150,9 @@ namespace RAT.ZTry
             midGrid.Children.Add(rightColour, 2, 0);
 
             //Initial Screen
-            allDevicesScreen = new AllDevices();
-            midGrid.Children.Add(allDevicesScreen, 1, 0);
-            allDevicesScreen.pcOne.Clicked += PcOne_Clicked;
+            viewDevicesScreen = new ViewDevicesScreen();
+            midGrid.Children.Add(viewDevicesScreen, 1, 0);
+            viewDevicesScreen.pcOne.Clicked += PcOne_Clicked;
 
             //Left Buttons
             manageButton.Clicked += ManageButton_Clicked;
@@ -192,9 +192,9 @@ namespace RAT.ZTry
 
                 //TODO: Remove Clickhandler and replace with ParentScreen Subscreen managment
                 //TODO: Maybe this shouldnt be initialised instantly: 06/12/16
-                allDevicesScreen = new AllDevices();
-                allDevicesScreen.pcOne.Clicked += PcOne_Clicked;
-                midGrid.Children.Add(allDevicesScreen, 1, 0);
+                viewDevicesScreen = new ViewDevicesScreen();
+                viewDevicesScreen.pcOne.Clicked += PcOne_Clicked;
+                midGrid.Children.Add(viewDevicesScreen, 1, 0);
 
                 myMenuState = MenuState.MANAGE_ALLDEVICES;
                 GC.Collect();
@@ -243,7 +243,7 @@ namespace RAT.ZTry
             if (myMenuState == MenuState.MANAGE_ALLDEVICES)
             {
                 manageButton.BackgroundColor = Color.Transparent;
-                midGrid.Children.Remove(allDevicesScreen);
+                midGrid.Children.Remove(viewDevicesScreen);
             }
             else if (myMenuState == MenuState.PERFORMANCE)
             {

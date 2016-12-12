@@ -98,7 +98,7 @@ namespace RAT._1View.Desktop
 
             //Adding to mid-grid
             Children.Add(midGrid2, 0, 0);
-            Children.Add(new Label() { Text = "Individual Device Screen" });
+            Children.Add(new Label() { Text = "System Performance Screen" });
 
             //Initialising Overview Screen
             overviewScreen = new OverviewAllScreen();
