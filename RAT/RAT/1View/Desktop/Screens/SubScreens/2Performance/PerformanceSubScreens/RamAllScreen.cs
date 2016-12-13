@@ -15,16 +15,16 @@ using SfChart = Syncfusion.SfChart.XForms.SfChart;
 
 namespace RAT._1View.Desktop
 {
-	public class RamScreen : Grid
+	public class RamAllScreen : Grid
 	{
-        public RamScreen()
+        public RamAllScreen()
         {
             VerticalOptions = LayoutOptions.FillAndExpand;
             ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
             Label myLabel;
             myLabel = new Label();
-            myLabel.Text = "Single Device: Ram Screen";
+            myLabel.Text = "All Devices: Ram Screen";
             Children.Add(myLabel, 1, 1);
 
         }
