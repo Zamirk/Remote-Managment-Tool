@@ -100,7 +100,6 @@ namespace RAT._1View.Desktop
 
             //Adding to mid-grid
             Children.Add(midGrid2, 0, 0);
-            Children.Add(new Label() { Text = "Individual Device Screen"});
 
             //Initialising Overview Screen
             overviewScreen = new OverviewScreen();

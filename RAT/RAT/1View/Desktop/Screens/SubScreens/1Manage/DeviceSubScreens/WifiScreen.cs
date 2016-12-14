@@ -21,7 +21,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
         {
             VerticalOptions = LayoutOptions.FillAndExpand;
             ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            ColumnDefinitions.Add(new ColumnDefinition { Width = 50 });
+            ColumnDefinitions.Add(new ColumnDefinition { Width = 85 });
 
             RowDefinitions.Add(new RowDefinition { Height = 100 });
             RowDefinitions.Add(new RowDefinition { Height = 100 });
@@ -29,7 +29,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
 
             //Chart One
             SfChart myChart = new SfChart();
-            myChart.Series.Add(new ColumnSeries());
+            myChart.Series.Add(new SplineAreaSeries());
 
             myChart.VerticalOptions = LayoutOptions.Start;
             myChart.HorizontalOptions = LayoutOptions.Start;
@@ -41,6 +41,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
 
             (myChart.SecondaryAxis as NumericalAxis).Maximum = 100;
             (myChart.SecondaryAxis as NumericalAxis).Minimum = 0;
+            myChart.Series[0].Color = Color.Black;
 
             //Chart Two
             SfChart myChart2 = new SfChart();
@@ -56,17 +57,39 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
 
             (myChart2.SecondaryAxis as NumericalAxis).Maximum = 100;
             (myChart2.SecondaryAxis as NumericalAxis).Minimum = 0;
+            myChart2.Series[0].Color = Color.Black;
 
             Children.Add(myChart, 0, 0);
             Children.Add(myChart2, 0, 1);
 
-            //Label myLabel;
-            //myLabel = new Label();
-            //myLabel.Text = "Single Device: CPU Screen";
-            //Children.Add(myLabel, 1, 1);
+            Label myLabel;
+            myLabel = new Label();
+            myLabel.FontSize = 20;
+            myLabel.VerticalOptions = LayoutOptions.CenterAndExpand;
+            myLabel.HorizontalOptions = LayoutOptions.CenterAndExpand;
+
+            FormattedString fs = new FormattedString();
+            fs.Spans.Add(new Span { Text = "11.4", FontSize = 20 });
+            fs.Spans.Add(new Span { Text = " mb/s", FontSize = 16, FontAttributes = FontAttributes.Italic });
+            myLabel.FormattedText = fs;
+
+            Label myLabel2;
+            myLabel2 = new Label();
+            myLabel2.FontSize = 20;
+            myLabel2.VerticalOptions = LayoutOptions.CenterAndExpand;
+            myLabel2.HorizontalOptions = LayoutOptions.CenterAndExpand;
+
+            FormattedString fs2 = new FormattedString();
+            fs2.Spans.Add(new Span { Text = "8.4", FontSize = 20 });
+            fs2.Spans.Add(new Span { Text = " mb/s", FontSize = 16, FontAttributes = FontAttributes.Italic });
+            myLabel2.FormattedText = fs2;
+
+            Children.Add(myLabel, 1, 0);
+            Children.Add(myLabel2, 1, 1);
 
         }
 
+        //TODO Should be databound instead in ViewModel 13/12/16
         private ObservableCollection<ChartDataPoint> getData2()
         {
             ObservableCollection<ChartDataPoint> datas = new ObservableCollection<ChartDataPoint>();
