@@ -35,11 +35,6 @@ namespace RAT._2ViewModel.Test
                 data.Add(myStock);
             }
 
-            for (int z = 0; z < 100000000; z++)
-            {
-                myList.Add(123456789);
-            }
-
             Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>
             {
                 if (collectGarbage)

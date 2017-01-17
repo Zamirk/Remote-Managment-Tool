@@ -17,6 +17,10 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
 {
 	public class WifiScreen : Grid
 	{
+	    private SfChart myChart;
+	    private SfChart myChart2;
+        Label myLabel;
+        Label myLabel2;
         public WifiScreen()
         {
             VerticalOptions = LayoutOptions.FillAndExpand;
@@ -28,7 +32,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
             //Chart One
-            SfChart myChart = new SfChart();
+            myChart = new SfChart();
             myChart.Series.Add(new SplineAreaSeries());
 
             myChart.VerticalOptions = LayoutOptions.Start;
@@ -44,7 +48,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             myChart.Series[0].Color = Color.Black;
 
             //Chart Two
-            SfChart myChart2 = new SfChart();
+            myChart2 = new SfChart();
             myChart2.Series.Add(new ColumnSeries());
 
             myChart2.VerticalOptions = LayoutOptions.Start;
@@ -62,7 +66,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             Children.Add(myChart, 0, 0);
             Children.Add(myChart2, 0, 1);
 
-            Label myLabel;
             myLabel = new Label();
             myLabel.FontSize = 20;
             myLabel.VerticalOptions = LayoutOptions.CenterAndExpand;
@@ -73,7 +76,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             fs.Spans.Add(new Span { Text = " mb/s", FontSize = 16, FontAttributes = FontAttributes.Italic });
             myLabel.FormattedText = fs;
 
-            Label myLabel2;
             myLabel2 = new Label();
             myLabel2.FontSize = 20;
             myLabel2.VerticalOptions = LayoutOptions.CenterAndExpand;
@@ -87,52 +89,80 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             Children.Add(myLabel, 1, 0);
             Children.Add(myLabel2, 1, 1);
 
+            //TODO This should go in a viewModel/Connected to IoT
+            SimulateLiveData();
+        }
+
+	    public void SimulateLiveData()
+	    {
+            Random r = new Random();
+            int i = 40;
+            Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>
+            {
+                i += 1;
+                int a = r.Next(10, 90);
+                if (a < 10)
+                {
+                    a = 1;
+                }
+
+                (myChart.Series[0].ItemsSource as ObservableCollection<ChartDataPoint>).RemoveAt(0);
+                (myChart.Series[0].ItemsSource as ObservableCollection<ChartDataPoint>).Add(new ChartDataPoint(i, a));
+
+                (myChart2.Series[0].ItemsSource as ObservableCollection<ChartDataPoint>).RemoveAt(0);
+                (myChart2.Series[0].ItemsSource as ObservableCollection<ChartDataPoint>).Add(new ChartDataPoint(i, a/2));
+
+                return true;
+            });
         }
 
         //TODO Should be databound instead in ViewModel 13/12/16
         private ObservableCollection<ChartDataPoint> getData2()
         {
             ObservableCollection<ChartDataPoint> datas = new ObservableCollection<ChartDataPoint>();
-            datas.Add(new ChartDataPoint(1, 3));
-            datas.Add(new ChartDataPoint(2, 4));
-            datas.Add(new ChartDataPoint(3, 92));
-            datas.Add(new ChartDataPoint(4, 13));
-            datas.Add(new ChartDataPoint(5, 5));
-            datas.Add(new ChartDataPoint(6, 55));
-            datas.Add(new ChartDataPoint(7, 4));
-            datas.Add(new ChartDataPoint(8, 24));
-            datas.Add(new ChartDataPoint(9, 15));
-            datas.Add(new ChartDataPoint(10, 31));
-            datas.Add(new ChartDataPoint(11, 75));
-            datas.Add(new ChartDataPoint(12, 36));
-            datas.Add(new ChartDataPoint(13, 64));
-            datas.Add(new ChartDataPoint(14, 74));
-            datas.Add(new ChartDataPoint(15, 69));
-            datas.Add(new ChartDataPoint(16, 21));
-            datas.Add(new ChartDataPoint(17, 45));
-            datas.Add(new ChartDataPoint(18, 52));
-            datas.Add(new ChartDataPoint(19, 65));
-            datas.Add(new ChartDataPoint(20, 22));
-            datas.Add(new ChartDataPoint(21, 45));
-            datas.Add(new ChartDataPoint(22, 35));
-            datas.Add(new ChartDataPoint(23, 32));
-            datas.Add(new ChartDataPoint(24, 21));
-            datas.Add(new ChartDataPoint(25, 9));
-            datas.Add(new ChartDataPoint(26, 1));
-            datas.Add(new ChartDataPoint(27, 35));
-            datas.Add(new ChartDataPoint(28, 12));
-            datas.Add(new ChartDataPoint(29, 45));
-            datas.Add(new ChartDataPoint(30, 82));
-            datas.Add(new ChartDataPoint(31, 24));
-            datas.Add(new ChartDataPoint(32, 42));
-            datas.Add(new ChartDataPoint(33, 32));
-            datas.Add(new ChartDataPoint(34, 24));
-            datas.Add(new ChartDataPoint(35, 15));
-            datas.Add(new ChartDataPoint(36, 26));
-            datas.Add(new ChartDataPoint(37, 27));
-            datas.Add(new ChartDataPoint(38, 38));
-            datas.Add(new ChartDataPoint(39, 95));
-            datas.Add(new ChartDataPoint(40, 92));
+            for(int i = 0; i< 4; i++) 
+            {
+                datas.Add(new ChartDataPoint(1, 3));
+                datas.Add(new ChartDataPoint(2, 4));
+                datas.Add(new ChartDataPoint(3, 92));
+                datas.Add(new ChartDataPoint(4, 13));
+                datas.Add(new ChartDataPoint(5, 5));
+                datas.Add(new ChartDataPoint(6, 55));
+                datas.Add(new ChartDataPoint(7, 4));
+                datas.Add(new ChartDataPoint(8, 24));
+                datas.Add(new ChartDataPoint(9, 15));
+                datas.Add(new ChartDataPoint(10, 31));
+                datas.Add(new ChartDataPoint(11, 75));
+                datas.Add(new ChartDataPoint(12, 36));
+                datas.Add(new ChartDataPoint(13, 64));
+                datas.Add(new ChartDataPoint(14, 74));
+                datas.Add(new ChartDataPoint(15, 69));
+                datas.Add(new ChartDataPoint(16, 21));
+                datas.Add(new ChartDataPoint(17, 45));
+                datas.Add(new ChartDataPoint(18, 52));
+                datas.Add(new ChartDataPoint(19, 65));
+                datas.Add(new ChartDataPoint(20, 22));
+                datas.Add(new ChartDataPoint(21, 45));
+                datas.Add(new ChartDataPoint(22, 35));
+                datas.Add(new ChartDataPoint(23, 32));
+                datas.Add(new ChartDataPoint(24, 21));
+                datas.Add(new ChartDataPoint(25, 9));
+                datas.Add(new ChartDataPoint(26, 1));
+                datas.Add(new ChartDataPoint(27, 35));
+                datas.Add(new ChartDataPoint(28, 12));
+                datas.Add(new ChartDataPoint(29, 45));
+                datas.Add(new ChartDataPoint(30, 82));
+                datas.Add(new ChartDataPoint(31, 24));
+                datas.Add(new ChartDataPoint(32, 42));
+                datas.Add(new ChartDataPoint(33, 32));
+                datas.Add(new ChartDataPoint(34, 24));
+                datas.Add(new ChartDataPoint(35, 15));
+                datas.Add(new ChartDataPoint(36, 26));
+                datas.Add(new ChartDataPoint(37, 27));
+                datas.Add(new ChartDataPoint(38, 38));
+                datas.Add(new ChartDataPoint(39, 95));
+                datas.Add(new ChartDataPoint(40, 92));
+            }
             return datas;
         }
 

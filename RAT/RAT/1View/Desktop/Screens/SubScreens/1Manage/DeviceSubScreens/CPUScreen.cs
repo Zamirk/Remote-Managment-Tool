@@ -25,6 +25,7 @@ namespace RAT._1View.Desktop
             RowDefinitions.Add(new RowDefinition { Height = 200 });
             RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
+            //Chart
             SfChart myChart = new SfChart();
 
             myChart.Series.Add(new FastLineSeries());
@@ -42,10 +43,107 @@ namespace RAT._1View.Desktop
 
             Children.Add(myChart, 0, 0);
 
-            //Label myLabel;
-            //myLabel = new Label();
-            //myLabel.Text = "Single Device: CPU Screen";
-            //Children.Add(myLabel, 1, 1);
+            Label utilizationLabel;
+            utilizationLabel = new Label();
+            utilizationLabel.Text = "Utilization";
+            Children.Add(utilizationLabel, 0, 1);
+            utilizationLabel.Margin = new Thickness(25, 0, 0, 0);
+
+            Label uLive;
+            uLive = new Label();
+            uLive.Text = "38%";
+            uLive.FontSize = 28;
+            Children.Add(uLive, 0, 1);
+            uLive.Margin = new Thickness(25, 15, 0, 0);
+
+            Label speedLabel;
+            speedLabel = new Label();
+            speedLabel.Text = "Speed:";
+            Children.Add(speedLabel, 0, 1);
+            speedLabel.Margin = new Thickness(25,65,0,0);
+
+            Label sLive;
+            sLive = new Label();
+            sLive.Text = "2.5Ghz";
+            sLive.FontSize = 28;
+            Children.Add(sLive, 0, 1);
+            sLive.Margin = new Thickness(25, 80, 0, 0);
+
+            Label processesLabel;
+            processesLabel = new Label();
+            processesLabel.Text = "Processes:";
+            Children.Add(processesLabel, 0, 1);
+            processesLabel.Margin = new Thickness(25, 130, 0, 0);
+
+            Label pLive;
+            pLive = new Label();
+            pLive.Text = "120";
+            pLive.FontSize = 28;
+            Children.Add(pLive, 0, 1);
+            pLive.Margin = new Thickness(25, 145, 0, 0);
+
+            Label threadsLabel;
+            threadsLabel = new Label();
+            threadsLabel.Text = "Threads";
+            Children.Add(threadsLabel, 0, 1);
+            threadsLabel.Margin = new Thickness(25, 195, 0, 0);
+
+            Label tLabel;
+            tLabel = new Label();
+            tLabel.Text = "2400";
+            tLabel.FontSize = 28;
+            Children.Add(tLabel, 0, 1);
+            tLabel.Margin = new Thickness(25, 210, 0, 0);
+
+            //Second Column
+            Label maxSpeedLabel;
+            maxSpeedLabel = new Label();
+            maxSpeedLabel.Text = "Maximum Speed:";
+            Children.Add(maxSpeedLabel, 0, 1);
+            maxSpeedLabel.Margin = new Thickness(200, 20, 0, 0);
+
+            Label socketsLabel;
+            socketsLabel = new Label();
+            socketsLabel.Text = "Sockets:";
+            Children.Add(socketsLabel, 0, 1);
+            socketsLabel.Margin = new Thickness(200, 40, 0, 0);
+
+            Label coresLabel;
+            coresLabel = new Label();
+            coresLabel.Text = "Cores:";
+            Children.Add(coresLabel, 0, 1);
+            coresLabel.Margin = new Thickness(200, 60, 0, 0);
+
+            Label logicalCoresLabel;
+            logicalCoresLabel = new Label();
+            logicalCoresLabel.Text = "Logical Cores:";
+            Children.Add(logicalCoresLabel, 0, 1);
+            logicalCoresLabel.Margin = new Thickness(200, 80, 0, 0);
+
+            Label l1;
+            l1 = new Label();
+            l1.Text = "L1 Cache:\t\t100:";
+            Children.Add(l1, 0, 1);
+            l1.Margin = new Thickness(200, 100, 0, 0);
+
+            Label l2;
+            l2 = new Label();
+            l2.Text = "L2 Cache:\t\t100:";
+            Children.Add(l2, 0, 1);
+            l2.Margin = new Thickness(200, 120, 0, 0);
+
+            Label l3;
+            l3 = new Label();
+            l3.Text = "L3 Cache:\t\t100:";
+            Children.Add(l3, 0, 1);
+            l3.Margin = new Thickness(200, 140, 0, 0);
+
+            //CPU Type
+            Label cpuLabel;
+            cpuLabel = new Label();
+            cpuLabel.Text = "intel(r) core(tm) i5-2400 cpu @ 1.70ghz";
+            Children.Add(cpuLabel, 0, 1);
+            cpuLabel.HorizontalOptions = LayoutOptions.End;
 
         }
 
