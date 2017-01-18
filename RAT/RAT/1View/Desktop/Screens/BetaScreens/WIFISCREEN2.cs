@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,10 +15,10 @@ using SfChart = Syncfusion.SfChart.XForms.SfChart;
 
 namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
 {
-	public class WifiScreen : Grid
-	{
-	    private SfChart myChart;
-	    private SfChart myChart2;
+    public class WifiScreen : Grid
+    {
+        private SfChart myChart;
+        private SfChart myChart2;
         Label myLabel;
         Label myLabel2;
         public WifiScreen()
@@ -89,78 +89,12 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             Children.Add(myLabel, 1, 0);
             Children.Add(myLabel2, 1, 1);
 
-            int col1 = 25;
-            int col2 = 145;
-            int col3 = 285;
-
-            //Column One
-            //Part 1
-            Label downloadRate;
-            downloadRate = new Label();
-            downloadRate.Text = "Download Rate";
-            downloadRate.Margin = new Thickness(col1, 20, 0, 0);
-
-            Label dLive;
-            dLive = new Label();
-            dLive.Text = "0 KB/s";
-            dLive.FontSize = 22;
-            dLive.Margin = new Thickness(col1, 35, 0, 0);
-
-            //Part 2
-            Label uploadRate;
-            uploadRate = new Label();
-            uploadRate.Text = "Upload Rate";
-            uploadRate.Margin = new Thickness(col1, 75, 0, 0);
-
-            Label uLive;
-            uLive = new Label();
-            uLive.Text = "0KB/s";
-            uLive.FontSize = 22;
-            uLive.Margin = new Thickness(col1, 90, 0, 0);
-
-            //Column 2
-            Label adapterName;
-            adapterName = new Label();
-            adapterName.Text = "Adapter name:";
-            adapterName.Margin = new Thickness(col2, 20, 0, 0);
-
-            Label ssid;
-            ssid = new Label();
-            ssid.Text = "SSID:";
-            ssid.Margin = new Thickness(col2, 40, 0, 0);
-
-            Label connectionType;
-            connectionType = new Label();
-            connectionType.Text = "SSID:";
-            connectionType.Margin = new Thickness(col2, 60, 0, 0);
-
-            Label ipv4;
-            ipv4 = new Label();
-            ipv4.Text = "IPv4 address:";
-            ipv4.Margin = new Thickness(col2, 80, 0, 0);
-
-            Label ipv6;
-            ipv6 = new Label();
-            ipv6.Text = "IPv6 address:";
-            ipv6.Margin = new Thickness(col2, 100, 0, 0);
-
-            Label signalStrenght;
-            signalStrenght = new Label();
-            signalStrenght.Text = "IPv6 address:";
-            signalStrenght.Margin = new Thickness(col2, 120, 0, 0);
-
-            Children.Add(downloadRate, 0, 2);
-            Children.Add(dLive, 0, 2);
-            Children.Add(uploadRate, 0, 2);
-            Children.Add(uLive, 0, 2);
-            Children.Add(adapterName, 0, 2);
-
             //TODO This should go in a viewModel/Connected to IoT
             SimulateLiveData();
         }
 
-	    public void SimulateLiveData()
-	    {
+        public void SimulateLiveData()
+        {
             Random r = new Random();
             int i = 40;
             Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>
@@ -176,7 +110,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
                 (myChart.Series[0].ItemsSource as ObservableCollection<ChartDataPoint>).Add(new ChartDataPoint(i, a));
 
                 (myChart2.Series[0].ItemsSource as ObservableCollection<ChartDataPoint>).RemoveAt(0);
-                (myChart2.Series[0].ItemsSource as ObservableCollection<ChartDataPoint>).Add(new ChartDataPoint(i, a/2));
+                (myChart2.Series[0].ItemsSource as ObservableCollection<ChartDataPoint>).Add(new ChartDataPoint(i, a / 2));
 
                 return true;
             });
@@ -186,7 +120,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
         private ObservableCollection<ChartDataPoint> getData2()
         {
             ObservableCollection<ChartDataPoint> datas = new ObservableCollection<ChartDataPoint>();
-            for(int i = 0; i< 4; i++) 
+            for (int i = 0; i < 4; i++)
             {
                 datas.Add(new ChartDataPoint(1, 3));
                 datas.Add(new ChartDataPoint(2, 4));
@@ -279,3 +213,4 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
         }
     }
 }
+*/

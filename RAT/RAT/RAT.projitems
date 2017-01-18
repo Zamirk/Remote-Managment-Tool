@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\ODScreenState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\ScreenState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\BetaScreens\AllCPUScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\BetaScreens\WIFISCREEN2.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\BetaScreens\zDiskScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\BetaScreens\OverviewScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\BetaScreens\zRamScreen.cs" />
