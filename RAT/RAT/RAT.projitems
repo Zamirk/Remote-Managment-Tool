@@ -45,6 +45,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\Tools\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\ViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)KanbanViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Login.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\OrderInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\DeviceInfo.cs" />

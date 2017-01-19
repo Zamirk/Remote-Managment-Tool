@@ -90,7 +90,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             Children.Add(myLabel2, 1, 1);
 
             int col1 = 25;
-            int col2 = 145;
+            int col2 = 180;
             int col3 = 285;
 
             //Column One
@@ -154,6 +154,11 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             Children.Add(uploadRate, 0, 2);
             Children.Add(uLive, 0, 2);
             Children.Add(adapterName, 0, 2);
+            Children.Add(ssid, 0, 2);
+            Children.Add(connectionType, 0, 2);
+            Children.Add(ipv4, 0, 2);
+            Children.Add(ipv6, 0, 2);
+            Children.Add(signalStrenght, 0, 2);
 
             //TODO This should go in a viewModel/Connected to IoT
             SimulateLiveData();

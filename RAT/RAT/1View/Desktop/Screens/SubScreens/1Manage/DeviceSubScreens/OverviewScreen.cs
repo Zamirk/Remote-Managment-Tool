@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using RAT._1View.Desktop.Screens.SubScreens._1Manage;
 using SampleBrowser;
 using ServerMonitor;
 using Syncfusion.SfChart.XForms;
 using Syncfusion.SfDataGrid.XForms;
+using Syncfusion.SfKanban.XForms;
 using Xamarin.Forms;
 using ChartDataPoint = Syncfusion.SfChart.XForms.ChartDataPoint;
 using FastLineSeries = Syncfusion.SfChart.XForms.FastLineSeries;
@@ -26,6 +28,24 @@ namespace RAT._1View.Desktop
             myLabel = new Label();
             myLabel.Text = "Single Device: Overview Screen";
             Children.Add(myLabel, 1, 1);
+
+            //SfKanban kanban = new SfKanban();
+            //KanbanViewModel aaa = new KanbanViewModel();
+            // kanban.ItemsSource = aaa.Cards;
+            // Children.Add(kanban);
+            Image beachImage = new Image { Aspect = Aspect.AspectFit };
+            beachImage.Source = "Assets/PC.png";
+            Children.Add(beachImage);
+
+           // Button buttonTest = new Button();
+            //buttonTest.Text = "Test Button";
+           // buttonTest.BorderRadius = 10;
+            //buttonTest.BackgroundColor = Color.Green;
+            //buttonTest.BorderColor = Color.Red;
+            //buttonTest.Image = new FileImageSource() {File = "Assets/PC.png"};
+            
+            //Children.Add(buttonTest);
+            //buttonTest.Image.File = "Assets/PC.png";
 
         }
         }
