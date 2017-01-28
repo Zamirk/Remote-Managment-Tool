@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Hardcodet.Wpf.TaskbarNotification;
 
 namespace Agent
 {
@@ -13,5 +14,12 @@ namespace Agent
     /// </summary>
     public partial class App : Application
     {
+        private TaskbarIcon tb;
+
+        private void InitApplication()
+        {
+            //initialize NotifyIcon
+            tb = (TaskbarIcon)FindResource("MyNotifyIcon");
+        }
     }
 }

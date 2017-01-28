@@ -24,8 +24,8 @@ namespace RAT.ZTry
                 Where(r => r.Username == a).
                 Where(r => r.Password == b).
                 ToListAsync();
-            System.Diagnostics.Debug.WriteLine("\n-----6Accessing Database." +loginObjects[0].Password);
             loginObjects.Add(new Login() {Id = "Empty", Password = "Empty", Username = "Empty" });
+            System.Diagnostics.Debug.WriteLine("\n-----6Accessing Database." +loginObjects[0].Password);
             //Client.Dispose();
             return loginObjects;
         }

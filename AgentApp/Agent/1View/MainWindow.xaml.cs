@@ -30,6 +30,7 @@ namespace Agent
         {
             InitializeComponent();
             base.DataContext = _viewModel;
+
         }
 
     }
