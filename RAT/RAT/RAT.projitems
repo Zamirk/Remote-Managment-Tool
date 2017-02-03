@@ -33,6 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\2Performance\PerformanceSubScreens\OverviewAllScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\2Performance\PerformanceSubScreens\RamAllScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\2Performance\PerformanceSubScreens\WifiAllScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\4DashboardScreen\AppsScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\3Apps\AppsScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Mobile\MLoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CpuViewModel.cs" />

@@ -18,8 +18,9 @@ namespace RAT.ZTry
         private DeviceScreen singleDeviceScreen;
         private PerformanceScreen systemPerformanceScreen;
         private AppsScreen applicationManagmentScreen;
+        private DashboardScreen dashboardScreen;
 
-        private Button signOutButton,performanceButton, manageButton,
+        private Button signOutButton,performanceButton, manageButton, dashboardButton,
             applicationButton, backButton, forwardButton;
         ContentView leftColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235), HorizontalOptions = LayoutOptions.Fill };
         ContentView rightColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235) };
@@ -47,6 +48,17 @@ namespace RAT.ZTry
             manageButton.HeightRequest = 50;
             manageButton.Margin = new Thickness(0, 50, 0, 0);
             manageButton.BackgroundColor = Color.Gray;
+
+            dashboardButton = new Button();
+            dashboardButton.Text = "Dashboards";
+            dashboardButton.FontSize = 20;
+            dashboardButton.VerticalOptions = LayoutOptions.Center;
+            dashboardButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            dashboardButton.BorderColor = Color.Transparent;
+            dashboardButton.BackgroundColor = Color.Transparent;
+            dashboardButton.BorderWidth = .000001;
+            dashboardButton.WidthRequest = 500;
+            dashboardButton.HeightRequest = 50;
 
             performanceButton = new Button();
             performanceButton.Text = "System Performance";
@@ -127,6 +139,7 @@ namespace RAT.ZTry
             leftButtonStack.VerticalOptions = LayoutOptions.FillAndExpand;
             leftButtonStack.Spacing = 0;
             leftButtonStack.Children.Add(manageButton);
+            leftButtonStack.Children.Add(dashboardButton);
             leftButtonStack.Children.Add(performanceButton);
             leftButtonStack.Children.Add(applicationButton);
             #endregion
@@ -156,6 +169,7 @@ namespace RAT.ZTry
 
             //Left Buttons
             manageButton.Clicked += ManageButton_Clicked;
+            dashboardButton.Clicked += DashboardButton_Clicked;
             performanceButton.Clicked += PerformanceButton_Clicked;
             applicationButton.Clicked += ApplicationButton_Clicked;
 
@@ -180,6 +194,18 @@ namespace RAT.ZTry
             midGrid.Children.Add(singleDeviceScreen, 1, 0);
 
             myMenuState = MenuState.MANAGE_SINGLEDEVICE;
+            GC.Collect();
+        }
+
+        private void DashboardButton_Clicked(object sender, EventArgs e)
+        {
+            RemoveScreen();
+            dashboardButton.BackgroundColor = Color.Gray;
+
+            dashboardScreen = new DashboardScreen();
+            midGrid.Children.Add(dashboardScreen, 1, 0);
+
+            myMenuState = MenuState.DASHBOARDS;
             GC.Collect();
         }
 
@@ -244,6 +270,11 @@ namespace RAT.ZTry
             {
                 manageButton.BackgroundColor = Color.Transparent;
                 midGrid.Children.Remove(viewDevicesScreen);
+            }
+            else if (myMenuState == MenuState.DASHBOARDS)
+            {
+                dashboardButton.BackgroundColor = Color.Transparent;
+                midGrid.Children.Remove(dashboardScreen);
             }
             else if (myMenuState == MenuState.PERFORMANCE)
             {
