@@ -52,7 +52,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Database\AzureLoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IOTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\RecieveMessages.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\GetTelemetry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Model\TelemetryDatapoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\HttpUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\SHA.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\TimeSpanExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Singleton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\SingletonContainer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\CPU.cs" />
