@@ -26,6 +26,8 @@ namespace ARAT.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::PCLCrypto.Resource.String.ApplicationName = global::ARAT.Droid.Resource.String.ApplicationName;
+			global::PCLCrypto.Resource.String.Hello = global::ARAT.Droid.Resource.String.Hello;
 			global::Syncfusion.Data.Resource.String.library_name = global::ARAT.Droid.Resource.String.library_name;
 			global::Syncfusion.SfDataGrid.Android.Resource.Drawable.Ascending = global::ARAT.Droid.Resource.Drawable.Ascending;
 			global::Syncfusion.SfDataGrid.Android.Resource.Drawable.Descending = global::ARAT.Droid.Resource.Drawable.Descending;
@@ -4991,6 +4993,12 @@ namespace ARAT.Droid
 		
 		public partial class String
 		{
+			
+			// aapt resource value: 0x7f08002c
+			public const int ApplicationName = 2131230764;
+			
+			// aapt resource value: 0x7f08002b
+			public const int Hello = 2131230763;
 			
 			// aapt resource value: 0x7f08000f
 			public const int abc_action_bar_home_description = 2131230735;

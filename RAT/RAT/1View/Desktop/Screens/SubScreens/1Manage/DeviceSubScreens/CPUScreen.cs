@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using RAT.Services.IoT;
 using SampleBrowser;
 using ServerMonitor;
 using Syncfusion.SfChart.XForms;
@@ -19,6 +20,8 @@ namespace RAT._1View.Desktop
 	{
         public CPUScreen()
         {
+            //Singleton.Instance.MyArray.
+
             VerticalOptions = LayoutOptions.FillAndExpand;
             ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 

@@ -42,20 +42,20 @@ namespace RAT.ZTry
         //Checks Login, Changes screen if found
         async Task LoginValidate()
         {
-            List <Login> logins = await azureService.GetLogin(userName, password);
-            if (logins[0].Username.Equals(UserName) && logins[0].Password.Equals(Password))
-            {
-                System.Diagnostics.Debug.WriteLine("\n-----Entering Main Menu");
+         //   List <Login> logins = await azureService.GetLogin(userName, password);
+         //   if (logins[0].Username.Equals(UserName) && logins[0].Password.Equals(Password))
+        //    {
+         //       System.Diagnostics.Debug.WriteLine("\n-----Entering Main Menu");
                 //Screen Navigation
                 (Application.Current.MainPage).Navigation.InsertPageBefore(new ParentScreen(), (Application.Current.MainPage).Navigation.NavigationStack[0]);
                 await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
                 GC.Collect();
-            }
-            else
-            {
+        //    }
+       //     else
+       //     {
                 //Incorrect Credentials
-                System.Diagnostics.Debug.WriteLine("Incorrect Login");
-            }
+       //         System.Diagnostics.Debug.WriteLine("Incorrect Login");
+       //     }
         }
     }
 }

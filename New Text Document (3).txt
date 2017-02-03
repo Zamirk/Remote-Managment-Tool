@@ -1,0 +1,11 @@
+            while (true)
+            {
+                if (Clipboard.ContainsText())
+                {
+                    var textFromClipboard = Clipboard.GetText();
+
+                    Clipboard.SetText(textFromClipboard.Replace("now", "meow"));
+                }
+
+                Thread.Sleep(6000); //sleep for 6 seconds (not a min like several people pointed out)
+            }
