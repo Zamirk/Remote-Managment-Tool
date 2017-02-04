@@ -17,6 +17,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\BetaScreens\OverviewScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\BetaScreens\zRamScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\BetaScreens\WIFIScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\EasterEgg\GameButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\EasterEgg\TheGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\EasterEgg\MySecretGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\MenuState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\ParentScreen.cs" />
@@ -36,7 +39,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\4DashboardScreen\DashboardScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\3Apps\AppsScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\4DashboardScreen\IPopupAnimation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\4DashboardScreen\MainPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\4DashboardScreen\MyPopupPag.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Mobile\MLoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CpuViewModel.cs" />

@@ -2,8 +2,11 @@
 using RAT._1View;
 using RAT._1View.Desktop;
 using RAT._1View.Desktop.Manage;
+using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
 using RAT._1View.Desktop.Tools;
 using RAT._2ViewModel;
+using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Services;
 using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
 
@@ -21,7 +24,7 @@ namespace RAT.ZTry
         private DashboardScreen dashboardScreen;
 
         private Button signOutButton,performanceButton, manageButton, dashboardButton,
-            applicationButton, backButton, forwardButton;
+            applicationButton, backButton, forwardButton, secretGameButton;
         ContentView leftColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235), HorizontalOptions = LayoutOptions.Fill };
         ContentView rightColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235) };
         private Grid midGrid;
@@ -37,6 +40,18 @@ namespace RAT.ZTry
             myMenuState = MenuState.MANAGE_ALLDEVICES;
 
             #region Buttons
+            secretGameButton = new Button();
+            secretGameButton.Text = "Play";
+            secretGameButton.FontSize = 20;
+            secretGameButton.VerticalOptions = LayoutOptions.End;
+            secretGameButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            secretGameButton.BorderColor = Color.Transparent;
+            secretGameButton.BorderWidth = .000001;
+            secretGameButton.WidthRequest = 500;
+            secretGameButton.HeightRequest = 50;
+            secretGameButton.Margin = new Thickness(0, 50, 0, 0);
+            secretGameButton.BackgroundColor = Color.Gray;
+
             manageButton = new Button();
             manageButton.Text = "Manage";
             manageButton.FontSize = 20;
@@ -142,6 +157,7 @@ namespace RAT.ZTry
             leftButtonStack.Children.Add(dashboardButton);
             leftButtonStack.Children.Add(performanceButton);
             leftButtonStack.Children.Add(applicationButton);
+            leftButtonStack.Children.Add(secretGameButton);
             #endregion
 
             //Mid-grid
@@ -172,6 +188,7 @@ namespace RAT.ZTry
             dashboardButton.Clicked += DashboardButton_Clicked;
             performanceButton.Clicked += PerformanceButton_Clicked;
             applicationButton.Clicked += ApplicationButton_Clicked;
+            secretGameButton.Clicked += Secret_Game;
 
             //TODO Temp, Should be removed and added when needed
             //deviceOverview = new DeviceOverview();
@@ -185,6 +202,16 @@ namespace RAT.ZTry
 
         #region Screen Changing Click Handlers
 
+        // Button Click
+        private async void Secret_Game(object sender, EventArgs e)
+        {
+            //var page = new MyPopupPage();
+            MySecretGame page = new MySecretGame();
+
+            await Navigation.PushPopupAsync(page);
+            // or
+            //await PopupNavigation.PushAsync(page);
+        }
         private void PcOne_Clicked(object sender, EventArgs e)
         {
             RemoveScreen();

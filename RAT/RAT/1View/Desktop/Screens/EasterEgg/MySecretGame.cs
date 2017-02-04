@@ -10,11 +10,11 @@ using Xamarin.Forms;
 
 namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 {
-    public partial class MyPopupPage : PopupPage
+    public partial class MySecretGame : PopupPage
     {
-        public MyPopupPage()
+        public MySecretGame()
         {
-            DashboardScreen aaa = new DashboardScreen();
+            TheGame aaa = new TheGame();
             Content = aaa;
         }
 

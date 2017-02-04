@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
+using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
+using Rg.Plugins.Popup.Extensions;
 using Syncfusion.SfChart.XForms;
 using Xamarin.Forms;
 using Label = Xamarin.Forms.Label;
@@ -24,8 +26,6 @@ namespace RAT._1View.Desktop.Manage
         {
             VerticalOptions = LayoutOptions.FillAndExpand;
             HorizontalOptions = LayoutOptions.FillAndExpand;
-
-            //ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
             Grid mainGrid = new Grid();
             mainGrid.ColumnSpacing = 5;
@@ -87,7 +87,19 @@ namespace RAT._1View.Desktop.Manage
             myButton.WidthRequest = 200;
             myButton.HeightRequest = 200;
             myButton.BackgroundColor = Color.Transparent;
+            myButton.Clicked += OnOpenPupup;
+
             return myButton;
+        }
+        // Button Click
+        private async void OnOpenPupup(object sender, EventArgs e)
+        {
+            //var page = new MyPopupPage();
+            MyPopupPage page = new MyPopupPage();
+
+            await Navigation.PushPopupAsync(page);
+            // or
+            //await PopupNavigation.PushAsync(page);
         }
     }
 }
