@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -46,6 +47,14 @@ namespace RAT.UWP
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+
+            // Initialization is required due to an error when compiling in release mode.
+            // Details: https://developer.xamarin.com/guides/xamarin-forms/platform-features/windows/installation/universal/#Troubleshooting
+            //TODO Popup
+            Xamarin.Forms.Forms.Init(e, Rg.Plugins.Popup.Windows.Popup.GetExtraAssemblies());
+
+
+
 
             Frame rootFrame = Window.Current.Content as Frame;
 
