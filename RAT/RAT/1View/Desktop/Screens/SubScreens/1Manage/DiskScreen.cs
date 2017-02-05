@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using RAT._2ViewModel;
 using SampleBrowser;
 using ServerMonitor;
 using Syncfusion.SfChart.XForms;
@@ -17,36 +18,31 @@ namespace RAT._1View.Desktop
 {
 	public class DiskScreen : Grid
 	{
-        Random rand = new Random();
         public DiskScreen()
         {
+            DiskViewModel myViewModel = new DiskViewModel();
+            BindingContext = myViewModel;
+
             VerticalOptions = LayoutOptions.FillAndExpand;
             ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            ColumnDefinitions.Add(new ColumnDefinition { Width = 150});
+            ColumnDefinitions.Add(new ColumnDefinition { Width = 150 });
 
             RowDefinitions.Add(new RowDefinition { Height = 200 });
             RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
-            //PieChart
-            SfChart pieChart = new SfChart();
-            pieChart.VerticalOptions = LayoutOptions.CenterAndExpand;
-            pieChart.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            PieSeries pieSeries = new PieSeries();
-
-            pieSeries.ItemsSource = PieSeriesData;
-            pieChart.Series.Add(pieSeries);
-
-            Children.Add(pieChart, 1, 0);
-
             //LineChart
             SfChart myChart = new SfChart();
-
-            myChart.Series.Add(new FastLineSeries());
+            myChart.Series.Add(new LineSeries());
 
             myChart.VerticalOptions = LayoutOptions.Start;
             myChart.HorizontalOptions = LayoutOptions.Start;
 
-            myChart.Series[0].ItemsSource = getData();
+            myChart.Series[0].ItemsSource = myViewModel.Data;
+            myChart.Series[0].AnimationDuration = .5;
+            myChart.Series[0].EnableAnimation = true;
+            myChart.Series[0].EnableTooltip = true;
+            myChart.Series[0].EnableDataPointSelection = true;
+            myChart.Series[0].Label = "Time";
 
             myChart.PrimaryAxis = new NumericalAxis();
             myChart.SecondaryAxis = new NumericalAxis();
@@ -54,6 +50,23 @@ namespace RAT._1View.Desktop
             (myChart.SecondaryAxis as NumericalAxis).Maximum = 100;
             (myChart.SecondaryAxis as NumericalAxis).Minimum = 0;
 
+            myChart.Series[0].Color = Color.Black;
+            myChart.Series[0].ItemsSource = myViewModel.Data;
+
+            //PieChart
+            SfChart pieChart = new SfChart();
+            pieChart.VerticalOptions = LayoutOptions.CenterAndExpand;
+            pieChart.HorizontalOptions = LayoutOptions.CenterAndExpand;
+
+            //pieSeries.ItemsSource = PieSeriesData;
+            pieChart.Series.Add(new PieSeries());
+            pieChart.Series[0].ItemsSource = myViewModel.PieData;
+            pieChart.Series[0].EnableAnimation = true;
+            pieChart.Series[0].AnimationDuration = 1;
+            pieChart.Series[0].ListenPropertyChange = true;
+            pieChart.Series[0].ColorModel.Palette = ChartColorPalette.TomatoSpectrum;
+
+            Children.Add(pieChart, 1, 0);
             Children.Add(myChart, 0, 0);
 
             int col1 = 25;
@@ -156,68 +169,6 @@ namespace RAT._1View.Desktop
             Children.Add(formatted, 0, 1);
             Children.Add(capacity, 0, 1);
             Children.Add(diskHardware, 0, 1);
-
-        }
-
-        //TODO Should be replaced with ViewModel/DataBinding 13/12/16
-        private ObservableCollection<ChartDataPoint> getData()
-        {
-            ObservableCollection<ChartDataPoint> datas = new ObservableCollection<ChartDataPoint>();
-            datas.Add(new ChartDataPoint(1, 34));
-            datas.Add(new ChartDataPoint(2, 24));
-            datas.Add(new ChartDataPoint(3, 19));
-            datas.Add(new ChartDataPoint(4, 21));
-            datas.Add(new ChartDataPoint(5, 25));
-            datas.Add(new ChartDataPoint(6, 15));
-            datas.Add(new ChartDataPoint(7, 34));
-            datas.Add(new ChartDataPoint(8, 24));
-            datas.Add(new ChartDataPoint(9, 19));
-            datas.Add(new ChartDataPoint(10, 21));
-            datas.Add(new ChartDataPoint(11, 25));
-            datas.Add(new ChartDataPoint(12, 76));
-            datas.Add(new ChartDataPoint(13, 34));
-            datas.Add(new ChartDataPoint(14, 24));
-            datas.Add(new ChartDataPoint(15, 19));
-            datas.Add(new ChartDataPoint(16, 21));
-            datas.Add(new ChartDataPoint(17, 25));
-            datas.Add(new ChartDataPoint(18, 32));
-            datas.Add(new ChartDataPoint(19, 15));
-            datas.Add(new ChartDataPoint(20, 32));
-            datas.Add(new ChartDataPoint(21, 25));
-            datas.Add(new ChartDataPoint(22, 32));
-            datas.Add(new ChartDataPoint(23, 34));
-            datas.Add(new ChartDataPoint(24, 24));
-            datas.Add(new ChartDataPoint(25, 19));
-            datas.Add(new ChartDataPoint(26, 21));
-            datas.Add(new ChartDataPoint(27, 25));
-            datas.Add(new ChartDataPoint(28, 32));
-            datas.Add(new ChartDataPoint(29, 25));
-            datas.Add(new ChartDataPoint(30, 32));
-            datas.Add(new ChartDataPoint(31, 74));
-            datas.Add(new ChartDataPoint(32, 32));
-            datas.Add(new ChartDataPoint(33, 34));
-            datas.Add(new ChartDataPoint(34, 24));
-            datas.Add(new ChartDataPoint(35, 19));
-            datas.Add(new ChartDataPoint(36, 21));
-            datas.Add(new ChartDataPoint(37, 25));
-            datas.Add(new ChartDataPoint(38, 32));
-            datas.Add(new ChartDataPoint(39, 25));
-            datas.Add(new ChartDataPoint(40, 32));
-            return datas;
-        }
-
-        //TODO Should be replaced with ViewModel/DataBinding 13/12/16
-        public ObservableCollection<ChartDataPoint> PieSeriesData
-        {
-            get
-            {
-                //Data temp
-                ObservableCollection<ChartDataPoint> pieDatas = new ObservableCollection<ChartDataPoint>();
-                pieDatas.Add(new ChartDataPoint("54% Used", rand.Next(1, 100)));
-                pieDatas.Add(new ChartDataPoint("46% Free", rand.Next(1, 100)));
-
-                return pieDatas;
-            }
         }
     }
 }

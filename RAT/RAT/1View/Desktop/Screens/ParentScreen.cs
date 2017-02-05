@@ -206,7 +206,7 @@ namespace RAT.ZTry
         private async void Secret_Game(object sender, EventArgs e)
         {
             //var page = new MyPopupPage();
-            MySecretGame page = new MySecretGame();
+            GameParent page = new GameParent();
 
             await Navigation.PushPopupAsync(page);
             // or

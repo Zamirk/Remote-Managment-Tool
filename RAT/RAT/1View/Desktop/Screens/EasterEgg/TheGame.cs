@@ -7,7 +7,6 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using RAT._1View.Desktop.Screens.EasterEgg;
-using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
 using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
 using Rg.Plugins.Popup.Extensions;
 using Syncfusion.SfChart.XForms;

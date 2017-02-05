@@ -29,8 +29,6 @@ namespace RAT._1View.Desktop.Screens.EasterEgg
         // Holds the background colour when it is replaced by the hidden colour
         public Color BackgroundColourHolder { get; set; }
 
-
-
         // Button Click
         public async void FlipButton(object sender, EventArgs e)
         {

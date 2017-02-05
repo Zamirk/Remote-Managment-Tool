@@ -10,9 +10,9 @@ using Xamarin.Forms;
 
 namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 {
-    public partial class MySecretGame : PopupPage
+    public partial class GameParent : PopupPage
     {
-        public MySecretGame()
+        public GameParent()
         {
             TheGame aaa = new TheGame();
             Content = aaa;

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text;
 using System.Threading.Tasks;
 using Syncfusion.SfChart.XForms;
 using Tools;
@@ -7,9 +9,9 @@ using Xamarin.Forms;
 
 namespace RAT._2ViewModel
 {
-    public class CpuViewModel : ViewModelBase
+    class WifiViewModel: ViewModelBase
     {
-        public CpuViewModel()
+        public WifiViewModel()
         {
             Data = new ObservableCollection<ChartDataPoint>();
             LoadData();
@@ -35,7 +37,7 @@ namespace RAT._2ViewModel
         //TODO Replace with real data 05/02/17
         public async void LoadData()
         {
-        bool a = true;
+            bool a = true;
             for (var i = 0; i < 120; i++)
             {
                 z++;
@@ -67,7 +69,6 @@ namespace RAT._2ViewModel
                     Data.Add(new ChartDataPoint(z, value--));
                     a = true;
                 }
-
                 return true;
             });
         }
