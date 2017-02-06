@@ -17,7 +17,12 @@ namespace RAT._2ViewModel
             PieData = new ObservableCollection<ChartDataPoint>();
             LoadData();
         }
+        private bool killThread = false;
 
+        public void StopUpdate()
+        {
+            killThread = true;
+        }
         private double value = 50;
         Random rand = new Random();
         private ObservableCollection<ChartDataPoint> data;
@@ -76,6 +81,10 @@ namespace RAT._2ViewModel
 
             Device.StartTimer(new TimeSpan(0, 0, 0, 0, 500), () =>
             {
+                if (killThread)
+                {
+                    return false;
+                }
                 z++;
                 piedata.RemoveAt(0);
                 Data.RemoveAt(0);

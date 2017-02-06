@@ -18,9 +18,11 @@ namespace RAT._1View.Desktop
 {
 	public class DiskScreen : Grid
 	{
+	    private DiskViewModel myViewModel;
+	    private SfChart myChart;
         public DiskScreen()
         {
-            DiskViewModel myViewModel = new DiskViewModel();
+            myViewModel = new DiskViewModel();
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;
@@ -31,18 +33,14 @@ namespace RAT._1View.Desktop
             RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
             //LineChart
-            SfChart myChart = new SfChart();
+            myChart = new SfChart();
             myChart.Series.Add(new LineSeries());
 
             myChart.VerticalOptions = LayoutOptions.Start;
             myChart.HorizontalOptions = LayoutOptions.Start;
 
             myChart.Series[0].ItemsSource = myViewModel.Data;
-            myChart.Series[0].AnimationDuration = .5;
-            myChart.Series[0].EnableAnimation = true;
-            myChart.Series[0].EnableTooltip = true;
-            myChart.Series[0].EnableDataPointSelection = true;
-            myChart.Series[0].Label = "Time";
+
 
             myChart.PrimaryAxis = new NumericalAxis();
             myChart.SecondaryAxis = new NumericalAxis();
@@ -61,11 +59,13 @@ namespace RAT._1View.Desktop
             //pieSeries.ItemsSource = PieSeriesData;
             pieChart.Series.Add(new PieSeries());
             pieChart.Series[0].ItemsSource = myViewModel.PieData;
-            pieChart.Series[0].EnableAnimation = true;
-            pieChart.Series[0].AnimationDuration = 1;
             pieChart.Series[0].ListenPropertyChange = true;
             pieChart.Series[0].ColorModel.Palette = ChartColorPalette.TomatoSpectrum;
 
+            //pieChart.Series[0].EnableAnimation = true;
+            //pieChart.Series[0].AnimationDuration = 1;
+            //myChart.Series[0].AnimationDuration = .5;
+            //myChart.Series[0].EnableAnimation = true;
             Children.Add(pieChart, 1, 0);
             Children.Add(myChart, 0, 0);
 
@@ -169,6 +169,11 @@ namespace RAT._1View.Desktop
             Children.Add(formatted, 0, 1);
             Children.Add(capacity, 0, 1);
             Children.Add(diskHardware, 0, 1);
+        }
+        public void GC()
+        {
+            myChart.Series[0].ItemsSource = null;
+            myViewModel.StopUpdate();
         }
     }
 }

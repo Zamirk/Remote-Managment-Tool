@@ -18,9 +18,11 @@ namespace RAT._1View.Desktop
 {
 	public class RamScreen : Grid
 	{
+	    private RamViewModel myViewModel;
+	    private SfChart myChart;
         public RamScreen()
         {
-            RamViewModel myViewModel = new RamViewModel();
+            myViewModel = new RamViewModel();
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;
@@ -30,7 +32,7 @@ namespace RAT._1View.Desktop
             RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
             //Chart
-            SfChart myChart = new SfChart();
+            myChart = new SfChart();
 
             myChart.Series.Add(new StepAreaSeries());
 
@@ -38,11 +40,7 @@ namespace RAT._1View.Desktop
             myChart.HorizontalOptions = LayoutOptions.Start;
 
             myChart.Series[0].ItemsSource = myViewModel.Data;
-            //myChart.Series[0].AnimationDuration = .5;
-            //myChart.Series[0].EnableAnimation = true;
             myChart.Series[0].EnableTooltip = true;
-            myChart.Series[0].EnableDataPointSelection = true;
-            myChart.Series[0].Label = "Time";
 
             myChart.PrimaryAxis = new NumericalAxis();
             myChart.SecondaryAxis = new NumericalAxis();
@@ -51,6 +49,9 @@ namespace RAT._1View.Desktop
             (myChart.SecondaryAxis as NumericalAxis).Minimum = 0;
             (myChart.PrimaryAxis as NumericalAxis).AutoScrollingDelta = 120;
             Children.Add(myChart, 0, 0);
+
+            myChart.Series[0].AnimationDuration = .5;
+            myChart.Series[0].EnableAnimation = true;
 
             int col1 = 25;
             int col2 = 145;
@@ -180,6 +181,11 @@ namespace RAT._1View.Desktop
             Children.Add(availableLabel, 0, 1);
             Children.Add(pagedLabel, 0, 1);
             Children.Add(paLive, 0, 1);
+        }
+        public void GC()
+        {
+            myViewModel.StopUpdate();
+            myChart.Series[0].ItemsSource = null;
         }
     }
 }

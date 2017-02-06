@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using RAT._2ViewModel;
 using SampleBrowser;
 using ServerMonitor;
 using Syncfusion.SfChart.XForms;
@@ -17,6 +18,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
 {
     public class WifiScreen : Grid
     {
+        private WifiViewModel myViewModel;
         private SfChart myChart;
         private SfChart myChart2;
         Label myLabel;
@@ -24,6 +26,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
 
         public WifiScreen()
         {
+            myViewModel = new WifiViewModel();
+            BindingContext = myViewModel;
+
             VerticalOptions = LayoutOptions.FillAndExpand;
             ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Auto});
             ColumnDefinitions.Add(new ColumnDefinition {Width = 85});
@@ -38,7 +43,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
 
             myChart.VerticalOptions = LayoutOptions.Start;
             myChart.HorizontalOptions = LayoutOptions.Start;
-
 
             myChart.PrimaryAxis = new NumericalAxis();
             myChart.SecondaryAxis = new NumericalAxis();
@@ -83,6 +87,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             fs2.Spans.Add(new Span {Text = "8.4", FontSize = 20});
             fs2.Spans.Add(new Span {Text = " mb/s", FontSize = 16, FontAttributes = FontAttributes.Italic});
             myLabel2.FormattedText = fs2;
+
+            //myChart.Series[0].AnimationDuration = .5;
+            //myChart.Series[0].EnableAnimation = true;
 
             Children.Add(myLabel, 1, 0);
             Children.Add(myLabel2, 1, 1);
@@ -158,8 +165,13 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             Children.Add(ipv6, 0, 2);
             Children.Add(signalStrenght, 0, 2);
 
-            //myChart2.Series[0].ItemsSource = getData();
-            //myChart.Series[0].ItemsSource = getData();
+            myChart.Series[0].ItemsSource = myViewModel.DownloadData;
+            myChart2.Series[0].ItemsSource = myViewModel.UploadData;
+        }
+        public void GC()
+        {
+            myViewModel.StopUpdate();
+            myChart.Series[0].ItemsSource = null;
         }
     }
 }

@@ -221,7 +221,6 @@ namespace RAT.ZTry
             midGrid.Children.Add(singleDeviceScreen, 1, 0);
 
             myMenuState = MenuState.MANAGE_SINGLEDEVICE;
-            GC.Collect();
         }
 
         private void DashboardButton_Clicked(object sender, EventArgs e)
@@ -233,7 +232,6 @@ namespace RAT.ZTry
             midGrid.Children.Add(dashboardScreen, 1, 0);
 
             myMenuState = MenuState.DASHBOARDS;
-            GC.Collect();
         }
 
         private void ManageButton_Clicked(object sender, EventArgs e)
@@ -250,7 +248,6 @@ namespace RAT.ZTry
                 midGrid.Children.Add(viewDevicesScreen, 1, 0);
 
                 myMenuState = MenuState.MANAGE_ALLDEVICES;
-                GC.Collect();
             }
         }
 
@@ -266,7 +263,6 @@ namespace RAT.ZTry
                 midGrid.Children.Add(systemPerformanceScreen, 1, 0);
 
                 myMenuState = MenuState.PERFORMANCE;
-                GC.Collect();
             }
         }
 
@@ -282,7 +278,6 @@ namespace RAT.ZTry
                 midGrid.Children.Add(applicationManagmentScreen, 1, 0);
 
                 myMenuState = MenuState.APPLICATIONS;
-                GC.Collect();
             }
         }
 
@@ -318,8 +313,6 @@ namespace RAT.ZTry
                 manageButton.BackgroundColor = Color.Transparent;
                 midGrid.Children.Remove(singleDeviceScreen);
             }
-            //TODO GC.Collect(); Really should be removed, Looking for memory leaks 06/12/16
-            GC.Collect();
         }
         #endregion
 

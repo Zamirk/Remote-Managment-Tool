@@ -128,7 +128,6 @@ namespace RAT._1View.Desktop
                 wifiScreen.Margin = new Thickness(50, 50, 50, 0);
                 Children.Add(wifiScreen, 0, 0);
 
-                GC.Collect();
                 myScreenState = ODScreenState.WIFI;
             }
         }
@@ -145,7 +144,6 @@ namespace RAT._1View.Desktop
                 diskScreen.Margin = new Thickness(50, 50, 50, 0);
                 Children.Add(diskScreen, 0, 0);
 
-                GC.Collect();
                 myScreenState = ODScreenState.DISK;
             }
         }
@@ -162,7 +160,6 @@ namespace RAT._1View.Desktop
                 ramScreen.Margin = new Thickness(50, 50, 50, 0);
                 Children.Add(ramScreen, 0, 0);
 
-                GC.Collect();
                 myScreenState = ODScreenState.RAM;
             }
         }
@@ -179,7 +176,6 @@ namespace RAT._1View.Desktop
                 cpuScreen.Margin = new Thickness(50, 50, 50, 0);
                 Children.Add(cpuScreen, 0, 0);
 
-                GC.Collect();
                 myScreenState = ODScreenState.CPU;
             }
         }
@@ -196,7 +192,6 @@ namespace RAT._1View.Desktop
                 overviewScreen.Margin = new Thickness(50, 50, 50, 0);
                 Children.Add(overviewScreen, 0, 0);
 
-                GC.Collect();
                 myScreenState = ODScreenState.OVERVIEW;
             }
         }
@@ -211,45 +206,42 @@ namespace RAT._1View.Desktop
                 overviewScreen.BindingContext = null;
                 overviewScreen = null;
 
-                GC.Collect();
             }
             else if (myScreenState == ODScreenState.CPU)
             {
                 cpuButton.BackgroundColor = Color.Transparent;
                 Children.Remove(cpuScreen);
-                //TODO This kill the thread which stops garbage collection
-                //cpuScreen.test();
+                cpuScreen.GC();
                 cpuScreen.BindingContext = null;
                 cpuScreen = null;
 
-                GC.Collect();
             }
             else if (myScreenState == ODScreenState.RAM)
             {
                 memoryButton.BackgroundColor = Color.Transparent;
                 Children.Remove(ramScreen);
+                ramScreen.GC();
                 ramScreen.BindingContext = null;
                 ramScreen = null;
 
-                GC.Collect();
             }
             else if (myScreenState == ODScreenState.WIFI)
             {
                 wifiButton.BackgroundColor = Color.Transparent;
                 Children.Remove(wifiScreen);
+                wifiScreen.GC();
                 wifiScreen.BindingContext = null;
                 wifiScreen = null;
 
-                GC.Collect();
             }
             else if (myScreenState == ODScreenState.DISK)
             {
                 diskButton.BackgroundColor = Color.Transparent;
                 Children.Remove(diskScreen);
+                diskScreen.GC();
                 diskScreen.BindingContext = null;
                 diskScreen = null;
 
-                GC.Collect();
             }
         }
 

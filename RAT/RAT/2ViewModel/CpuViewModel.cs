@@ -17,7 +17,12 @@ namespace RAT._2ViewModel
 
         private ObservableCollection<ChartDataPoint> data;
         private double value = 50;
+        private bool killThread = false;
 
+        public void StopUpdate()
+        {
+            killThread = true;
+        }
         //Data binding
         public ObservableCollection<ChartDataPoint> Data
         {
@@ -55,6 +60,10 @@ namespace RAT._2ViewModel
 
             Device.StartTimer(new TimeSpan(0, 0, 0, 0, 500), () =>
             {
+                if (killThread)
+                {
+                    return false;
+                }
                 z++;
                 Data.RemoveAt(0);
                 if (a)

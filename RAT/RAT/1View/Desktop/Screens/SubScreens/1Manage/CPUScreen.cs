@@ -19,9 +19,11 @@ namespace RAT._1View.Desktop
 {
 	public class CPUScreen : Grid
 	{
+	    private CpuViewModel myViewModel;
+	    private SfChart myChart;
         public CPUScreen()
         {
-            CpuViewModel myViewModel = new CpuViewModel();
+            myViewModel = new CpuViewModel();
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;
@@ -31,25 +33,22 @@ namespace RAT._1View.Desktop
             RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
             //Chart
-            SfChart myChart = new SfChart();
+            myChart = new SfChart();
 
             myChart.Series.Add(new SplineSeries());
 
             myChart.VerticalOptions = LayoutOptions.Start;
             myChart.HorizontalOptions = LayoutOptions.Start;
-
             myChart.Series[0].ItemsSource = myViewModel.Data;
-            //myChart.Series[0].AnimationDuration = .5;
-            //myChart.Series[0].EnableAnimation = true;
-            myChart.Series[0].EnableTooltip = true;
-            myChart.Series[0].EnableDataPointSelection = true;
-            myChart.Series[0].Label = "Time";
 
             myChart.PrimaryAxis = new NumericalAxis();
             myChart.SecondaryAxis = new NumericalAxis();
 
             (myChart.SecondaryAxis as NumericalAxis).Maximum = 100;
             (myChart.SecondaryAxis as NumericalAxis).Minimum = 0;
+
+            //myChart.Series[0].AnimationDuration = .5;
+            //myChart.Series[0].EnableAnimation = true;
             Children.Add(myChart, 0, 0);
 
             int col2 = 145;
@@ -162,5 +161,11 @@ namespace RAT._1View.Desktop
             Children.Add(uLive, 0, 1);
             Children.Add(speedLabel, 0, 1);
         }
+	    public void GC()
+	    {
+	        myViewModel.StopUpdate();
+	        myChart.Series[0].ItemsSource = null;
+
+	    }
     }
 }
