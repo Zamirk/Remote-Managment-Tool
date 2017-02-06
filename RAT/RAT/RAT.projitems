@@ -30,10 +30,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\2Performance\PerformanceScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\2Performance\RamAllScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\2Performance\WifiAllScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\4DashboardScreen\Dashboard Backup\DashboardScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\4DashboardScreen\Dashboard Backup\MyPopupPag.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\4DashboardScreen\DashboardCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\4DashboardScreen\DashboardScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\3Apps\AppsScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\4DashboardScreen\IPopupAnimation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\4DashboardScreen\MyPopupPag.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\4DashboardScreen\SelectItemPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\4DashboardScreen\SelectItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Mobile\MLoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CpuViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\DiskViewModel.cs" />

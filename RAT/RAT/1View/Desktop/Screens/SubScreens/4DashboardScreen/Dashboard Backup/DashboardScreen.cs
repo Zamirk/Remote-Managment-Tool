@@ -13,7 +13,7 @@ using Label = Xamarin.Forms.Label;
 
 namespace RAT._1View.Desktop.Manage
 {
-	public class DashboardScreen : Grid
+	public class DashboardScreen1 : Grid
     {
         //Debug visuals
         private ContentView aqua,
@@ -21,14 +21,13 @@ namespace RAT._1View.Desktop.Manage
             olive,pink,purple,red,silver,teal,white,yellow;
 
         private bool debugMode = true;
-        private Grid mainGrid;
 
-        public DashboardScreen()
+        public DashboardScreen1()
         {
             VerticalOptions = LayoutOptions.FillAndExpand;
             HorizontalOptions = LayoutOptions.FillAndExpand;
 
-            mainGrid = new Grid();
+            Grid mainGrid = new Grid();
             mainGrid.ColumnSpacing = 5;
             mainGrid.RowSpacing = 5;
 
@@ -46,16 +45,15 @@ namespace RAT._1View.Desktop.Manage
             mainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             mainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
 
+            ContentView silverView = new ContentView() { BackgroundColor = Color.FromRgb(17, 150, 205) };
+
             List<ContentView> myContentViews = new List<ContentView>();
             Random rand = new Random();
 
             //Generating differnt colours
             for (int i = 0; i < 42; i++)
             {
-                myContentViews.Add(new ContentView()
-                {
-                    //BackgroundColor = Color.FromRgb(rand.Next(255), rand.Next(255), rand.Next(255))
-                });
+                myContentViews.Add(new ContentView() {BackgroundColor = Color.FromRgb(rand.Next(255), rand.Next(255), rand.Next(255)) });
             }
 
             int pos = 0;
@@ -96,65 +94,12 @@ namespace RAT._1View.Desktop.Manage
         // Button Click
         private async void OnOpenPupup(object sender, EventArgs e)
         {
-            SelectItemPopup aaa = new SelectItemPopup();
-            aaa.aaaa().Clicked += MyButtonOnClicked;
-            await Navigation.PushPopupAsync(aaa);
+            //var page = new MyPopupPage();
+            //MyPopupPage page = new MyPopupPage();
+            //await Navigation.PushPopupAsync(page);
+            // or
+            //await PopupNavigation.PushAsync(page);
+
         }
-
-        private void MyButtonOnClicked(object sender, EventArgs eventArgs)
-        {
-            //Button aaaaaaaa = sender as Button;
-            mainGrid.Children.Add(GenerateLineChart(), 0, 1);
-        }
-
-        public SfChart GenerateLineChart()
-        {
-            //Chart
-            SfChart myChart = new SfChart();
-
-            myChart.Series.Add(new StepAreaSeries());
-
-            myChart.VerticalOptions = LayoutOptions.Start;
-            myChart.HorizontalOptions = LayoutOptions.Start;
-
-            //myChart.Series[0].ItemsSource = myViewModel.Data;
-            myChart.Series[0].EnableTooltip = true;
-
-            myChart.PrimaryAxis = new NumericalAxis();
-            myChart.SecondaryAxis = new NumericalAxis();
-
-            (myChart.SecondaryAxis as NumericalAxis).Maximum = 100;
-            (myChart.SecondaryAxis as NumericalAxis).Minimum = 0;
-            (myChart.PrimaryAxis as NumericalAxis).AutoScrollingDelta = 120;
-            Children.Add(myChart, 0, 0);
-
-            myChart.Series[0].AnimationDuration = .5;
-            myChart.Series[0].EnableAnimation = true;
-
-            //TODO ONLY USE AS TESTING
-                    ObservableCollection<ChartDataPoint> data = new ObservableCollection<ChartDataPoint>();
-            int z = 0;
-        bool a = true;
-                   double value = 50;
-            for (var i = 0; i < 25; i++)
-            {
-                z++;
-                if (a)
-                {
-                    data.Add(new ChartDataPoint(z, value+20));
-                    a = false;
-                }
-                else
-                {
-                    data.Add(new ChartDataPoint(z, value-20));
-                    a = true;
-                }
-                myChart.Series[0].ItemsSource = data;
-                myChart.PrimaryAxis.IsVisible = false;
-                myChart.SecondaryAxis.IsVisible = false;
-            }
-            return myChart;
-        }
-
     }
 }
