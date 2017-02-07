@@ -13,16 +13,66 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 {
     public partial class SelectItemPopup : PopupPage
     {
-        private SelectItem aaa;
+        private Button area, bar, column, line, bubble, candle, doughnut, fastline, funnel, hiLo,
+            pieseries, polar, pyramid, radar, rangeArea, rangeColumn, scatterPlot, splineArea, spline,
+            stackingArea100, stackingArea, stackingBar, stackingColumn100, stackingColumn, stepArea, stepLine;
+
+
+        private string[] names = new string[]
+        {
+            "Area", "Bar", "Column", "Line", "Bubble", "Candle", "Doughnut", "Fastline", "Funnel", "Hilo,"
+            ,"","","","","","","","","","","","","","","","","","","","","",
+            "","","","","","","","","","","","","","","","","","",
+            "","","","","","","","","","","","","","","","","",""
+        };
+
+        private List<Button> myButtons = new List<Button>();
+
         public SelectItemPopup()
         {
-            aaa = new SelectItem();
-            Content = aaa;
+            Grid grid = new Grid();
+            grid.VerticalOptions = LayoutOptions.FillAndExpand;
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
+
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+
+            int z = 0;
+            int x = 0;
+            for (int i = 0; i < 24; i++)
+            {
+                myButtons.Add(new Button());
+                myButtons[i].Text = names[i];
+                myButtons[i].WidthRequest = 150;
+                myButtons[i].HeightRequest = 85;
+                myButtons[i].HorizontalOptions = LayoutOptions.Center;
+                myButtons[i].VerticalOptions = LayoutOptions.Center;
+                myButtons[i].BackgroundColor = Color.Black;
+                myButtons[i].TextColor = Color.White;
+
+
+                if (i < 8)
+                {
+                    grid.Children.Add(myButtons[i], 0, i);
+                }
+                else if (i < 16)
+                {
+                    grid.Children.Add(myButtons[i], 1, z);
+                    z++;
+                }
+                else
+                {
+                    grid.Children.Add(myButtons[i], 2, x);
+                    x++;
+                }
+            }
+            Content = grid;
         }
 
-        public Button aaaa()
+        public Button AreaChart()
         {
-            return aaa.aaa();
+            return myButtons[0];
         }
 
         protected override void OnAppearing()
