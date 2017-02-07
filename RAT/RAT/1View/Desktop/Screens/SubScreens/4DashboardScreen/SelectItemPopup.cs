@@ -20,10 +20,10 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
         private string[] names = new string[]
         {
-            "Area", "Bar", "Column", "Line", "Bubble", "Candle", "Doughnut", "Fastline", "Funnel", "Hilo,"
-            ,"","","","","","","","","","","","","","","","","","","","","",
-            "","","","","","","","","","","","","","","","","","",
-            "","","","","","","","","","","","","","","","","",""
+            "Area", "Bar", "Column", "Line", "Doughnut", "Fastline", "Pie", "Pyramid,"
+            ,"Scatter plot","Spline","Spline area","Stacking area","Stacking area 100",
+            "Step Line","Step Area","Stacking column","Stacking column 100","Stacking bar","Stacking bar 100","","","","","","","","","","",
+            "","","",""
         };
 
         private List<Button> myButtons = new List<Button>();
@@ -75,6 +75,95 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             return myButtons[0];
         }
 
+        public Button BarChart()
+        {
+            return myButtons[1];
+        }
+
+        public Button ColumnChart()
+        {
+            return myButtons[2];
+        }
+
+        public Button LineChart()
+        {
+            return myButtons[3];
+        }
+
+        public Button DoughnutChart()
+        {
+            return myButtons[4];
+        }
+
+        public Button FastlineChart()
+        {
+            return myButtons[5];
+        }
+
+        public Button PieChart()
+        {
+            return myButtons[6];
+        }
+
+        public Button PyramidChart()
+        {
+            return myButtons[7];
+        }
+
+        public Button ScatterplotChart()
+        {
+            return myButtons[8];
+        }
+
+        public Button SplineChart()
+        {
+            return myButtons[9];
+        }
+
+        public Button SplineAreaChart()
+        {
+            return myButtons[10];
+        }
+
+        public Button StackingAreaChart()
+        {
+            return myButtons[11];
+        }
+
+        public Button StrackingArea100Chart()
+        {
+            return myButtons[12];
+        }
+
+        public Button StepLineChart()
+        {
+            return myButtons[13];
+        }
+
+        public Button StepAreaChart()
+        {
+            return myButtons[14];
+        }
+
+        public Button StackingColumnChart()
+        {
+            return myButtons[15];
+        }
+
+        public Button StackingColumn10Chart()
+        {
+            return myButtons[16];
+        }
+
+        public Button StackingBarChart()
+        {
+            return myButtons[17];
+        }
+
+        public Button StackingBar100Chart()
+        {
+            return myButtons[18];
+        }
         protected override void OnAppearing()
         {
             base.OnAppearing();
