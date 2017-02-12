@@ -157,7 +157,7 @@ namespace RAT.ZTry
             leftButtonStack.Children.Add(dashboardButton);
             leftButtonStack.Children.Add(performanceButton);
             leftButtonStack.Children.Add(applicationButton);
-            leftButtonStack.Children.Add(secretGameButton);
+            //leftButtonStack.Children.Add(secretGameButton);
             #endregion
 
             //Mid-grid

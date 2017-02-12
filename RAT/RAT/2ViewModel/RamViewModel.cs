@@ -44,17 +44,18 @@ namespace RAT._2ViewModel
         public async void LoadData()
         {
             bool a = true;
-            for (var i = 0; i < 120; i++)
+            Random rand = new Random();
+            for (var i = 0; i < 60; i++)
             {
                 z++;
                 if (a)
                 {
-                    Data.Add(new ChartDataPoint(z, value));
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
                     a = false;
                 }
                 else
                 {
-                    Data.Add(new ChartDataPoint(z, value));
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
                     a = true;
                 }
             }

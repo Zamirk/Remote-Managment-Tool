@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConsoleApplication1.Folder;
 using RAT.Services;
 using RAT._1View.Desktop.Screens.SubScreens._1Manage;
 using SampleBrowser;
@@ -23,10 +24,29 @@ namespace RAT._1View.Desktop
 {
     public class OverviewScreen : Grid
     {
+        private Editor myEditor;
         public OverviewScreen()
         {
+            string myString = "";
+            myEditor = new Editor();
+            Children.Add(myEditor);
+            myEditor.Text = "Receiving Data!";
+            myEditor.Text = GetTelemetry.aaaaa;
 
 
+            WaitForItToWork();
+
+        }
+        async Task<bool> WaitForItToWork()
+        {
+            bool succeeded = false;
+            while (!succeeded)
+            {
+                myEditor.Text += GetTelemetry.aaaaa;
+                GetTelemetry.aaaaa = "";
+                await Task.Delay(1000); // arbitrary delay
+            }
+            return succeeded;
         }
     }
 }

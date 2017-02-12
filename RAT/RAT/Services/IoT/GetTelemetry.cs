@@ -33,7 +33,8 @@ namespace ConsoleApplication1.Folder
                 System.Diagnostics.Debug.WriteLine("etstsetsetest");
             }
         }
-
+        public static string aaaaa = "";
+        public static List<Stack<TelemetryDatapoint>> listOfDevices;
         public static void ReceiveTelemetry()
         {
 
@@ -51,13 +52,13 @@ namespace ConsoleApplication1.Folder
 
             Console.WriteLine("Receiving Data");
 
-            List<Stack<TelemetryDatapoint>> listOfDevices = new List<Stack<TelemetryDatapoint>>();
+            listOfDevices = new List<Stack<TelemetryDatapoint>>();
 
             Stack<TelemetryDatapoint> myDevice = new Stack<TelemetryDatapoint>();
-            for (int i = 0; i < 100; i++)
-            {
+           // for (int i = 0; i < 100; i++)
+           // {
                 myDevice.Push(new TelemetryDatapoint("Device_1",0,0,0));
-            }
+           // }
 
             listOfDevices.Add(myDevice);
 
@@ -79,27 +80,24 @@ namespace ConsoleApplication1.Folder
                 EventData data = receiver.Receive();
                 System.Diagnostics.Debug.WriteLine("Level 2: Data received");
 
-                string JsonString = Encoding.UTF8.GetString(data.GetBytes());
+                string JsonString = ":"+Encoding.UTF8.GetString(data.GetBytes());
 
-                TelemetryDatapoint telemetry = JsonConvert.DeserializeObject<TelemetryDatapoint>(JsonString);
-                if (telemetry.device_id.Equals("Device_1"))
-                    {
+                //TelemetryDatapoint telemetry = JsonConvert.DeserializeObject<TelemetryDatapoint>(JsonString);
+                //if (telemetry.device_id.Equals("Device_1"))
+                //    {
                     Console.WriteLine(JsonString);
 
-                    listOfDevices[0].Pop();
-                        listOfDevices[0].Push(telemetry);
-                    }
-                System.Diagnostics.Debug.WriteLine("Level 3");
-
-                System.Diagnostics.Debug.WriteLine(listOfDevices[0].ElementAt(0).device_id);
+                //    listOfDevices[0].Pop();
+                 //       listOfDevices[0].Push(telemetry);
+                //    }
+                System.Diagnostics.Debug.WriteLine("Level 3"+ JsonString);
+                aaaaa = JsonString;
+                System.Diagnostics.Debug.WriteLine("eeee"+listOfDevices[0].ElementAt(0).device_id);
                 System.Diagnostics.Debug.WriteLine(listOfDevices[0].ElementAt(0).value_1);
                 System.Diagnostics.Debug.WriteLine(listOfDevices[0].ElementAt(0).value_2);
                 // myStack.
             }
             
-            
-
-
             receiver.Close();
             client.Close();
             factory.Close();

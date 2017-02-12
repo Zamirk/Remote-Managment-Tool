@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace ConsoleApplication1
 {
     [JsonObject(MemberSerialization.OptIn)]
-    class TelemetryDatapoint
+    public class TelemetryDatapoint
     {
         public TelemetryDatapoint(string device_id, int a, int b, int c)
         {

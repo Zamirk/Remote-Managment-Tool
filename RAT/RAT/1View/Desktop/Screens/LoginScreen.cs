@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using ConsoleApplication1.Folder;
+using RAT.zTest;
 using RAT._1View;
 using Xamarin.Forms;
 
@@ -18,10 +19,10 @@ namespace RAT.ZTry
         {
             NavigationPage.SetHasNavigationBar(this, false);
             //Gets the data IoT
-            //Task t = Task.Factory.StartNew(() => {
-            //        GetTelemetry.ReceiveTelemetry();
+            Task t = Task.Factory.StartNew(() => {
+                    GetTelemetry.ReceiveTelemetry();
 
-            //});
+            });
 
             //Binding to model
             LoginViewModel myModel = new LoginViewModel();

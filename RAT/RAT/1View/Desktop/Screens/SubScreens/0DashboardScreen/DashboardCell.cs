@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using RAT.zTest;
 using Rg.Plugins.Popup.Extensions;
 using Syncfusion.SfChart.XForms;
 using Xamarin.Forms;
@@ -10,12 +11,23 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 {
     class DashboardCell: Grid
     {
-        private Button myButton;
+        public Button myButton = new Button();
         private SfChart myChart;
         ObservableCollection<ChartDataPoint> data = new ObservableCollection<ChartDataPoint>();
 
+        public Button north = new Button();
+        public Button west = new Button();
+        public Button east = new Button();
+        public Button south = new Button();
+
+        public Button northwest;
+        public Button northeast;
+        public Button southeast;
+        public Button southwest;
+
         public DashboardCell()
         {
+            this.BackgroundColor = Color.White;
             //TODO ONLY USE AS TESTING
             int z = 0;
             bool a = true;
@@ -38,11 +50,12 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             }
 
             Button();
+
         }
 
         private void Button()
         {
-            Button myButton = new Button();
+            myButton = new Button();
             myButton.Text = "+";
             myButton.FontSize = 25;
             myButton.VerticalOptions = LayoutOptions.Center;
@@ -54,6 +67,143 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myButton.HeightRequest = 500;
             myButton.Clicked += OnOpenPupup;
             Children.Add(myButton);
+        }
+
+        public int XLocation { get; set; }
+        public int YLocation { get; set; }
+        public int PosInLayout { get; set; }
+
+        public void other()
+        {
+            northwest.Text = "";
+            northwest.FontSize = 25;
+            northwest.VerticalOptions = LayoutOptions.Start;
+            northwest.HorizontalOptions = LayoutOptions.Start;
+            northwest.BorderColor = Color.Transparent;
+            northwest.BackgroundColor = Color.Black;
+            northwest.BorderWidth = .000001;
+            northwest.WidthRequest = 10f;
+            northwest.HeightRequest = 10f;
+
+            northeast.Text = "";
+            northeast.FontSize = 25;
+            northeast.VerticalOptions = LayoutOptions.Start;
+            northeast.HorizontalOptions = LayoutOptions.End;
+            northeast.BorderColor = Color.Transparent;
+            northeast.BackgroundColor = Color.Black;
+            northeast.BorderWidth = .000001;
+            northeast.WidthRequest = 10f;
+            northeast.HeightRequest = 10f;
+
+            southwest.Text = "";
+            southwest.FontSize = 25;
+            southwest.VerticalOptions = LayoutOptions.End;
+            southwest.HorizontalOptions = LayoutOptions.Start;
+            southwest.BorderColor = Color.Transparent;
+            southwest.BackgroundColor = Color.Black;
+            southwest.BorderWidth = .000001;
+            southwest.WidthRequest = 10f;
+            southwest.HeightRequest = 10f;
+
+            southeast.Text = "";
+            southeast.FontSize = 25;
+            southeast.VerticalOptions = LayoutOptions.End;
+            southeast.HorizontalOptions = LayoutOptions.End;
+            southeast.BorderColor = Color.Transparent;
+            southeast.BackgroundColor = Color.Black;
+            southeast.BorderWidth = .000001;
+            southeast.WidthRequest = 10f;
+            southeast.HeightRequest = 10f;
+        }
+
+        public void DisableButton()
+        {
+            myButton.IsVisible = false;
+            myButton.InputTransparent = true;
+        }
+        public void EnableButton()
+        {
+            myButton.IsVisible = true;
+            myButton.InputTransparent = false;
+        }
+
+        public void RemoveMovementButtons()
+        {
+            north.IsVisible = false;
+            south.IsVisible = false;
+            east.IsVisible = false;
+            west.IsVisible = false;
+        }
+
+        private bool AlreadyGenerated = false;
+        public void PositionalButtons()
+        {
+            if (!AlreadyGenerated)
+            {
+                north.Text = "";
+                north.FontSize = 25;
+                north.VerticalOptions = LayoutOptions.Start;
+                north.HorizontalOptions = LayoutOptions.Center;
+                north.BorderColor = Color.Transparent;
+                north.BackgroundColor = Color.Black;
+                north.BorderWidth = .000001;
+                north.WidthRequest = 10f;
+                north.HeightRequest = 10f;
+
+                east.Text = "";
+                east.FontSize = 25;
+                east.VerticalOptions = LayoutOptions.Center;
+                east.HorizontalOptions = LayoutOptions.End;
+                east.BorderColor = Color.Transparent;
+                east.BackgroundColor = Color.Black;
+                east.BorderWidth = .000001;
+                east.WidthRequest = 10f;
+                east.HeightRequest = 10f;
+
+                west.Text = "";
+                west.FontSize = 25;
+                west.VerticalOptions = LayoutOptions.Center;
+                west.HorizontalOptions = LayoutOptions.Start;
+                west.BorderColor = Color.Transparent;
+                west.BackgroundColor = Color.Black;
+                west.BorderWidth = .000001;
+                west.WidthRequest = 10f;
+                west.HeightRequest = 10f;
+
+
+                south.Text = "";
+                south.FontSize = 25;
+                south.VerticalOptions = LayoutOptions.End;
+                south.HorizontalOptions = LayoutOptions.Center;
+                south.BorderColor = Color.Transparent;
+                south.BackgroundColor = Color.Black;
+                south.BorderWidth = .000001;
+                south.WidthRequest = 10f;
+                south.HeightRequest = 10f;
+
+                Children.Add(south);
+                Children.Add(west);
+                Children.Add(east);
+                Children.Add(north);
+                AlreadyGenerated = true;
+            }
+            else
+            {
+                south.IsVisible = true;
+                west.IsVisible = true;
+                east.IsVisible = true;
+                north.IsVisible = true;
+            }
+            //Children.Add(northwest);
+            //Children.Add(northeast);
+            //Children.Add(southeast);
+            //Children.Add(southwest);
+        }
+
+        public void SetLocation(int x, int y)
+        {
+            XLocation = x;
+            YLocation = y;
         }
 
         public void AreaChart()
@@ -80,13 +230,15 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
             myChart.SecondaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
+
             Children.Add(myChart);
         }
 
         public void BarChart()
         {
-            //Chart
-            myChart = new SfChart();
+               //Chart
+               myChart = new SfChart();
 
             myChart.Series.Add(new BarSeries());
 
@@ -106,6 +258,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -133,6 +286,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -160,6 +314,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -187,6 +342,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -214,6 +370,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -241,6 +398,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -249,7 +407,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         {
             //Chart
             myChart = new SfChart();
-
             myChart.Series.Add(new PieSeries());
 
             myChart.VerticalOptions = LayoutOptions.Start;
@@ -268,6 +425,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -295,6 +453,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -322,6 +481,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -349,6 +509,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -376,6 +537,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -403,6 +565,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -430,6 +593,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -457,6 +621,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -484,6 +649,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -511,6 +677,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -538,6 +705,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -565,6 +733,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -592,6 +761,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
@@ -619,6 +789,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
+            myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }

@@ -35,27 +35,27 @@ namespace RAT._2ViewModel
             }
             get { return data; }
         }
-
+  
         private int z = 0;
         //TODO Replace with real data 05/02/17
         public async void LoadData()
         {
         bool a = true;
-            for (var i = 0; i < 120; i++)
+            Random rand = new Random();
+            for (var i = 0; i < 60; i++)
             {
                 z++;
                 if (a)
                 {
-                    Data.Add(new ChartDataPoint(z, value));
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
                     a = false;
                 }
                 else
                 {
-                    Data.Add(new ChartDataPoint(z, value));
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
                     a = true;
                 }
             }
-
             await Task.Delay(1000);
 
             Device.StartTimer(new TimeSpan(0, 0, 0, 0, 500), () =>
