@@ -18,11 +18,6 @@ namespace RAT.ZTry
         public LoginScreen()
         {
             NavigationPage.SetHasNavigationBar(this, false);
-            //Gets the data IoT
-            Task t = Task.Factory.StartNew(() => {
-                    GetTelemetry.ReceiveTelemetry();
-
-            });
 
             //Binding to model
             LoginViewModel myModel = new LoginViewModel();

@@ -34,7 +34,7 @@ namespace RAT._1View.Desktop
             myEditor.Text = GetTelemetry.aaaaa;
 
 
-            WaitForItToWork();
+            //WaitForItToWork();
 
         }
         async Task<bool> WaitForItToWork()
@@ -42,7 +42,7 @@ namespace RAT._1View.Desktop
             bool succeeded = false;
             while (!succeeded)
             {
-                myEditor.Text += GetTelemetry.aaaaa;
+                myEditor.Text = GetTelemetry.aaaaa;
                 GetTelemetry.aaaaa = "";
                 await Task.Delay(1000); // arbitrary delay
             }

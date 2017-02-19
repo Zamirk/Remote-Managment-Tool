@@ -7,26 +7,42 @@ using Newtonsoft.Json;
 
 namespace ConsoleApplication1
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class TelemetryDatapoint
     {
-        public TelemetryDatapoint(string device_id, int a, int b, int c)
+        public TelemetryDatapoint(string device_id)
         {
-            this.device_id = device_id;
-            value_1 = a;
-            value_2 = b;
-            value_3 = c;
+            Device_id = device_id;
+            Cpu = "50";
+            RamInUse = "50";
         }
-        [Newtonsoft.Json.JsonProperty("device_id")]
-        public string device_id { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("value_1")]
-        public int value_1 { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("value_2")]
-        public int value_2 { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("value_3")]
-        public int value_3 { get; set; }
+            public string Device_id { get; set; }
+        //CPU
+            public string Cpu { get; set; }
+            public string Cpu2 { get; set; }
+            public string Thread { get; set; }
+            public string CpuTem { get; set; }
+            public string Processes { get; set; }
+            public string Percent { get; set; }
+        //Ram
+            public string Ram { get; set; }
+            public string RamInUse { get; set; }
+            public string RamCache { get; set; }
+            public string RamCommitted { get; set; }
+            public string PagedPool { get; set; }
+            public string NonPagedPool { get; set; }
+            public string DiskReadTime { get; set; }
+            public string DiskWriteTime { get; set; }
+            public string DiskReadBytes { get; set; }
+            public string DiskWriteBytes { get; set; }
+            public string FreeMB { get; set; }
+            public string FreeSpace { get; set; }
+            public string IdleTime { get; set; }
+            public string DiskTime { get; set; }
+            public string DownloadRate { get; set; }
+            public string UploadRate { get; set; }
+            public string Bandwidth { get; set; }
+            public string PacketsReceived { get; set; }
+            public string PacketsSent { get; set; }
+            public string Packets { get; set; }
+        }
     }
-}

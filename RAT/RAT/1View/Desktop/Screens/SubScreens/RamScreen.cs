@@ -34,7 +34,7 @@ namespace RAT._1View.Desktop
             //Chart
             myChart = new SfChart();
 
-            myChart.Series.Add(new StepAreaSeries());
+            myChart.Series.Add(new StepLineSeries());
 
             myChart.VerticalOptions = LayoutOptions.Start;
             myChart.HorizontalOptions = LayoutOptions.Start;
@@ -47,7 +47,9 @@ namespace RAT._1View.Desktop
 
             (myChart.SecondaryAxis as NumericalAxis).Maximum = 100;
             (myChart.SecondaryAxis as NumericalAxis).Minimum = 0;
-            (myChart.PrimaryAxis as NumericalAxis).AutoScrollingDelta = 120;
+
+            myChart.Series[0].AnimationDuration = .5;
+            myChart.Series[0].EnableAnimation = true;
             Children.Add(myChart, 0, 0);
 
             myChart.Series[0].AnimationDuration = .5;
@@ -69,6 +71,7 @@ namespace RAT._1View.Desktop
             inUseLive.Text = "4.4GB";
             inUseLive.FontSize = 22;
             inUseLive.Margin = new Thickness(col1, 35, 0, 0);
+            inUseLive.SetBinding(Label.TextProperty, "InUse");
 
             //Part 2
             Label committedLabel;
@@ -81,6 +84,7 @@ namespace RAT._1View.Desktop
             cLive.Text = "3.5/5.8GB";
             cLive.FontSize = 22;
             cLive.Margin = new Thickness(col1, 90, 0, 0);
+            cLive.SetBinding(Label.TextProperty, "Committed");
 
             //Part 3
             Label pagedLabel;
@@ -93,6 +97,7 @@ namespace RAT._1View.Desktop
             paLive.Text = "100mb";
             paLive.FontSize = 22;
             paLive.Margin = new Thickness(col1, 145, 0, 0);
+            paLive.SetBinding(Label.TextProperty, "PagedPool");
 
             //Second Column
             //Part 1
@@ -106,6 +111,7 @@ namespace RAT._1View.Desktop
             pLive.Text = "120";
             pLive.FontSize = 22;
             pLive.Margin = new Thickness(col2, 35, 0, 0);
+            pLive.SetBinding(Label.TextProperty, "NotInUse");
 
             //Part 2
             Label cachedLabel;
@@ -120,6 +126,7 @@ namespace RAT._1View.Desktop
             caLive.FontSize = 22;
             Children.Add(caLive, 0, 1);
             caLive.Margin = new Thickness(col2, 90, 0, 0);
+            caLive.SetBinding(Label.TextProperty, "Cached");
 
             //Part 3
             Label nonPagedLabel;
@@ -134,6 +141,7 @@ namespace RAT._1View.Desktop
             npLive.FontSize = 22;
             Children.Add(npLive, 0, 1);
             npLive.Margin = new Thickness(col2, 145, 0, 0);
+            npLive.SetBinding(Label.TextProperty, "NonPagedPool");
 
             //Third Column
             Label maxSpeedLabel;

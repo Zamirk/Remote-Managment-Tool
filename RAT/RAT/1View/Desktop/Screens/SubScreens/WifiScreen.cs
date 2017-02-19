@@ -39,7 +39,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
 
             //Chart One
             myChart = new SfChart();
-            myChart.Series.Add(new SplineAreaSeries());
+            myChart.Series.Add(new ColumnSeries());
 
             myChart.VerticalOptions = LayoutOptions.Start;
             myChart.HorizontalOptions = LayoutOptions.Start;
@@ -47,9 +47,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             myChart.PrimaryAxis = new NumericalAxis();
             myChart.SecondaryAxis = new NumericalAxis();
 
-            (myChart.SecondaryAxis as NumericalAxis).Maximum = 100;
+            //(myChart.SecondaryAxis as NumericalAxis).Maximum = 100;
             (myChart.SecondaryAxis as NumericalAxis).Minimum = 0;
-            myChart.Series[0].Color = Color.Black;
+            //myChart.Series[0].Color = Color.Black;
 
             //Chart Two
             myChart2 = new SfChart();
@@ -61,9 +61,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             myChart2.PrimaryAxis = new NumericalAxis();
             myChart2.SecondaryAxis = new NumericalAxis();
 
-            (myChart2.SecondaryAxis as NumericalAxis).Maximum = 100;
+            //(myChart2.SecondaryAxis as NumericalAxis).Maximum = 100;
             (myChart2.SecondaryAxis as NumericalAxis).Minimum = 0;
-            myChart2.Series[0].Color = Color.Black;
+            //myChart2.Series[0].Color = Color.Black;
 
             Children.Add(myChart, 0, 0);
             Children.Add(myChart2, 0, 1);
@@ -88,15 +88,55 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             fs2.Spans.Add(new Span { Text = " mb/s", FontSize = 16, FontAttributes = FontAttributes.Italic });
             myLabel2.FormattedText = fs2;
 
-            //myChart.Series[0].AnimationDuration = .5;
-            //myChart.Series[0].EnableAnimation = true;
+            myChart.Series[0].AnimationDuration = .5;
+            myChart.Series[0].EnableAnimation = true;
+
+            myChart2.Series[0].AnimationDuration = .5;
+            myChart2.Series[0].EnableAnimation = true;
 
             Children.Add(myLabel, 1, 0);
             Children.Add(myLabel2, 1, 1);
 
             int col1 = 25;
-            int col2 = 180;
-            int col3 = 285;
+            int col3 = 180;
+            int col4 = 325;
+            int col2 = 435;
+
+            Label packetsReceived;
+            packetsReceived = new Label();
+            packetsReceived.Text = "Packets received";
+            packetsReceived.Margin = new Thickness(col3, 20, 0, 0);
+
+            Label prLive;
+            prLive = new Label();
+            prLive.Text = "";
+            prLive.FontSize = 22;
+            prLive.Margin = new Thickness(col3, 35, 0, 0);
+            prLive.SetBinding(Label.TextProperty, "PacketsReceived");
+
+            Label packetsSent;
+            packetsSent = new Label();
+            packetsSent.Text = "Packets sent";
+            packetsSent.Margin = new Thickness(col3, 75, 0, 0);
+
+            Label psLive;
+            psLive = new Label();
+            psLive.Text = "";
+            psLive.FontSize = 22;
+            psLive.Margin = new Thickness(col3, 90, 0, 0);
+            psLive.SetBinding(Label.TextProperty, "PacketsSent");
+
+            Label packets;
+            packets = new Label();
+            packets.Text = "Packets /s";
+            packets.Margin = new Thickness(col3, 130, 0, 0);
+
+            Label pLive;
+            pLive = new Label();
+            pLive.Text = "0KB/s";
+            pLive.FontSize = 22;
+            pLive.Margin = new Thickness(col3, 145, 0, 0);
+            pLive.SetBinding(Label.TextProperty, "Packets");
 
             //Column One
             //Part 1
@@ -110,6 +150,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             dLive.Text = "0 KB/s";
             dLive.FontSize = 22;
             dLive.Margin = new Thickness(col1, 35, 0, 0);
+            dLive.SetBinding(Label.TextProperty, "DownloadRate");
 
             //Part 2
             Label uploadRate;
@@ -122,6 +163,21 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             uLive.Text = "0KB/s";
             uLive.FontSize = 22;
             uLive.Margin = new Thickness(col1, 90, 0, 0);
+            uLive.SetBinding(Label.TextProperty, "UploadRate");
+
+            //Column One
+            //Part 1
+            Label bandwidth;
+            bandwidth = new Label();
+            bandwidth.Text = "Bandwidth";
+            bandwidth.Margin = new Thickness(col4, 20, 0, 0);
+
+            Label bLive;
+            bLive = new Label();
+            bLive.Text = "";
+            bLive.FontSize = 22;
+            bLive.Margin = new Thickness(col4, 35, 0, 0);
+            bLive.SetBinding(Label.TextProperty, "Bandwidth");
 
             //Column 2
             Label adapterName;
@@ -154,6 +210,14 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             signalStrenght.Text = "IPv6 address:";
             signalStrenght.Margin = new Thickness(col2, 120, 0, 0);
 
+            Children.Add(bandwidth, 0, 2);
+            Children.Add(bLive, 0, 2);
+            Children.Add(packetsReceived, 0, 2);
+            Children.Add(prLive, 0, 2);
+            Children.Add(packetsSent, 0, 2);
+            Children.Add(psLive, 0, 2);
+            Children.Add(packets, 0, 2);
+            Children.Add(pLive, 0, 2);
             Children.Add(downloadRate, 0, 2);
             Children.Add(dLive, 0, 2);
             Children.Add(uploadRate, 0, 2);

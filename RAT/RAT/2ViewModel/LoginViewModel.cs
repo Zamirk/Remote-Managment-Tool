@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ConsoleApplication1.Folder;
 using Tools;
 using Xamarin.Forms;
 
@@ -50,12 +51,17 @@ namespace RAT.ZTry
                 (Application.Current.MainPage).Navigation.InsertPageBefore(new ParentScreen(), (Application.Current.MainPage).Navigation.NavigationStack[0]);
                 await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
                 GC.Collect();
-        //    }
-       //     else
-       //     {
-                //Incorrect Credentials
-       //         System.Diagnostics.Debug.WriteLine("Incorrect Login");
-       //     }
+            //Gets the data IoT
+            Task t = Task.Factory.StartNew(() => {
+                GetTelemetry.ReceiveTelemetry();
+
+            });
+            //    }
+            //     else
+            //     {
+            //Incorrect Credentials
+            //         System.Diagnostics.Debug.WriteLine("Incorrect Login");
+            //     }
         }
     }
 }

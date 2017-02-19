@@ -24,20 +24,14 @@ namespace ConsoleApplication1.Folder
 
         static DateTime startingDateTimeUtc;
 
-        static void test()
-        {
-            System.Diagnostics.Debug.WriteLine("Text");
-
-            while (true)
-            {
-                System.Diagnostics.Debug.WriteLine("etstsetsetest");
-            }
-        }
+        List<string> devices = new List<string>(){"Device_1","Device_2"};
+        public static bool go = true;
         public static string aaaaa = "";
-        public static List<Stack<TelemetryDatapoint>> listOfDevices;
+        public static List<Queue<TelemetryDatapoint>> listOfDevices;
+        public static TelemetryDatapoint lastReceivedValue;
         public static void ReceiveTelemetry()
         {
-
+            lastReceivedValue = new TelemetryDatapoint("");
             ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(ConnectionString);
             builder.TransportType = TransportType.Amqp;
 
@@ -52,50 +46,42 @@ namespace ConsoleApplication1.Folder
 
             Console.WriteLine("Receiving Data");
 
-            listOfDevices = new List<Stack<TelemetryDatapoint>>();
+            listOfDevices = new List<Queue<TelemetryDatapoint>>();
 
-            Stack<TelemetryDatapoint> myDevice = new Stack<TelemetryDatapoint>();
-           // for (int i = 0; i < 100; i++)
-           // {
-                myDevice.Push(new TelemetryDatapoint("Device_1",0,0,0));
-           // }
-
-            listOfDevices.Add(myDevice);
-
-            Console.WriteLine(listOfDevices[0].ElementAt(0).device_id);
-            Console.WriteLine("");
-
-            //List<Stack<> myStacks = new List<Stack>();
-            // myStacks.Add(new Stack<TelemetryDatapoint>());
-
-            List<string> devices = new List<string>()
+            Queue<TelemetryDatapoint> myDevice = new Queue<TelemetryDatapoint>();
+            for (int i = 0; i < 60; i++)
             {
-                "Device_1",
-                "Device_2"
-            };
-
-            while (true)
+                myDevice.Enqueue(new TelemetryDatapoint(""));
+            }
+            listOfDevices.Add(myDevice);
+            EventData data;
+            while (go)
             {
                 System.Diagnostics.Debug.WriteLine("Level 1: Looping");
-                EventData data = receiver.Receive();
+                data = receiver.Receive();
                 System.Diagnostics.Debug.WriteLine("Level 2: Data received");
+               // if (data.GetBytes() != null)
+               // {
+                    string JsonString = Encoding.UTF8.GetString(data.GetBytes());
+                    System.Diagnostics.Debug.WriteLine("Level 3: JSon");
 
-                string JsonString = ":"+Encoding.UTF8.GetString(data.GetBytes());
+                    TelemetryDatapoint telemetry = JsonConvert.DeserializeObject<TelemetryDatapoint>(JsonString);
+                    if (telemetry.Device_id.Equals("Device_1"))
+                    {
+                        System.Diagnostics.Debug.WriteLine(JsonString);
 
-                //TelemetryDatapoint telemetry = JsonConvert.DeserializeObject<TelemetryDatapoint>(JsonString);
-                //if (telemetry.device_id.Equals("Device_1"))
-                //    {
-                    Console.WriteLine(JsonString);
-
-                //    listOfDevices[0].Pop();
-                 //       listOfDevices[0].Push(telemetry);
-                //    }
-                System.Diagnostics.Debug.WriteLine("Level 3"+ JsonString);
-                aaaaa = JsonString;
-                System.Diagnostics.Debug.WriteLine("eeee"+listOfDevices[0].ElementAt(0).device_id);
-                System.Diagnostics.Debug.WriteLine(listOfDevices[0].ElementAt(0).value_1);
-                System.Diagnostics.Debug.WriteLine(listOfDevices[0].ElementAt(0).value_2);
-                // myStack.
+                        listOfDevices[0].Dequeue();
+                        listOfDevices[0].Enqueue(telemetry);
+                        lastReceivedValue = telemetry;
+                        aaaaa = JsonString;
+                        System.Diagnostics.Debug.WriteLine("Level 4: Device ID" +
+                                                           listOfDevices[0].ElementAt(0).Device_id);
+                    }
+               // }
+               // else
+                //{
+                //    System.Diagnostics.Debug.WriteLine("----------------------------Avoided Error"+DateTime.Now);
+                //}
             }
             
             receiver.Close();
@@ -103,5 +89,9 @@ namespace ConsoleApplication1.Folder
             factory.Close();
         }
 
+        public static void StopReceive()
+        {
+            go = false;
+        }
     }
 }

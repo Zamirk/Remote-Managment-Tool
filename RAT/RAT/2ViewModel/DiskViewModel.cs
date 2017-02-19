@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using ConsoleApplication1.Folder;
 using Syncfusion.SfChart.XForms;
 using Tools;
 using Xamarin.Forms;
@@ -11,98 +12,133 @@ namespace RAT._2ViewModel
 {
     class DiskViewModel : ViewModelBase
     {
+        private ObservableCollection<ChartDataPoint> data;
+        private ObservableCollection<ChartDataPoint> piedata;
+        private int y;
+        private bool killThread = false;
+
         public DiskViewModel()
         {
+            y = 0;
             Data = new ObservableCollection<ChartDataPoint>();
             PieData = new ObservableCollection<ChartDataPoint>();
             LoadData();
         }
-        private bool killThread = false;
 
-        public void StopUpdate()
+        private string diskReadTime = GetTelemetry.lastReceivedValue.DiskReadTime;
+        private string diskWriteTime = GetTelemetry.lastReceivedValue.DiskWriteTime;
+        private string diskRead = GetTelemetry.lastReceivedValue.DiskReadBytes;
+        private string diskWrite = GetTelemetry.lastReceivedValue.DiskWriteBytes;
+        private string freeMb = GetTelemetry.lastReceivedValue.FreeMB;
+        private string freeSpace = GetTelemetry.lastReceivedValue.FreeSpace;
+        private string idleTime = GetTelemetry.lastReceivedValue.IdleTime;
+        private string activeTime = GetTelemetry.lastReceivedValue.DiskTime;
+
+        public string ActiveTime
         {
-            killThread = true;
+            set { SetProperty(ref activeTime, value + " %"); }
+            get { return activeTime; }
         }
-        private double value = 50;
-        Random rand = new Random();
-        private ObservableCollection<ChartDataPoint> data;
-        private ObservableCollection<ChartDataPoint> piedata;
 
-        //Data binding
+        public string IdleTime
+        {
+            set { SetProperty(ref idleTime, value + " %"); }
+            get { return idleTime; }
+        }
+
+        public string FreeSpace
+        {
+            set { SetProperty(ref freeSpace, value + " %"); }
+            get { return freeSpace; }
+        }
+
+        public string FreeMb
+        {
+            set { SetProperty(ref freeMb, value + " GB"); }
+            get { return freeMb; }
+        }
+
+        public string DiskWrite
+        {
+            set { SetProperty(ref diskWrite, value + " MB"); }
+            get { return diskWrite; }
+        }
+
+        public string DiskRead
+        {
+            set { SetProperty(ref diskRead, value + " MB"); }
+            get { return diskRead; }
+        }
+
+        public string DiskWriteTime
+        {
+            set { SetProperty(ref diskWriteTime, value + " %"); }
+            get { return diskWriteTime; }
+        }
+
+        public string DiskReadTime
+        {
+            set { SetProperty(ref diskReadTime, value + " %"); }
+            get { return diskReadTime; }
+        }
+
         public ObservableCollection<ChartDataPoint> PieData
         {
-            set
-            {
-                if (SetProperty(ref piedata, value))
-                {
-                    //UpdateProduct();
-                }
-            }
+            set { SetProperty(ref piedata, value); }
             get { return piedata; }
         }
 
-        //Data binding
         public ObservableCollection<ChartDataPoint> Data
         {
-            set
-            {
-                if (SetProperty(ref data, value))
-                {
-                    //UpdateProduct();
-                }
-            }
+            set { SetProperty(ref data, value); }
             get { return data; }
         }
 
-        private int z = 0;
-        //TODO Replace with real data 05/02/17
-        public async void LoadData()
+        private async void LoadData()
         {
-            PieData.Add(new ChartDataPoint("54% Used", rand.Next(1, 100)));
-            PieData.Add(new ChartDataPoint("46% Free", rand.Next(1, 100)));
+            y = 0;
 
-            bool a = true;
-            for (var i = 0; i < 60; i++)
+            //Adding data to piechart
+            double freeSpacePieChart = Convert.ToDouble(GetTelemetry.lastReceivedValue.FreeSpace);
+            double aaa = 100 - freeSpacePieChart;
+            PieData.Add(new ChartDataPoint("Free Space", freeSpacePieChart));
+            PieData.Add(new ChartDataPoint("Free Space", aaa));
+
+            //Iterating over the queue of telemetry obects, adding to the chart databound collection
+            foreach (var telemetry in GetTelemetry.listOfDevices[0])
             {
-                z++;
-                if (a)
-                {
-                    data.Add(new ChartDataPoint(z, rand.Next(100)));
-                    a = false;
-                }
-                else
-                {
-                    data.Add(new ChartDataPoint(z, rand.Next(100)));
-                    a = true;
-                }
+                data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.DiskTime)));
+                y++;
             }
+            await Task.Delay(1000);
 
-            await Task.Delay(3000);
-
-            Device.StartTimer(new TimeSpan(0, 0, 0, 0, 500), () =>
+            System.Diagnostics.Debug.WriteLine("Le" + Convert.ToDouble(GetTelemetry.lastReceivedValue.FreeSpace));
+            //Updates the information onece a second
+            Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
             {
+                y++;
+                double diskTime = Convert.ToDouble(GetTelemetry.lastReceivedValue.DiskTime);
+                ActiveTime = GetTelemetry.lastReceivedValue.DiskTime;
+                IdleTime = GetTelemetry.lastReceivedValue.IdleTime;
+                FreeSpace = GetTelemetry.lastReceivedValue.FreeSpace;
+                FreeMb = GetTelemetry.lastReceivedValue.FreeMB;
+                DiskWrite = GetTelemetry.lastReceivedValue.DiskWriteBytes;
+                DiskRead = GetTelemetry.lastReceivedValue.DiskReadBytes;
+                DiskReadTime = GetTelemetry.lastReceivedValue.DiskReadTime;
+                DiskWriteTime = GetTelemetry.lastReceivedValue.DiskWriteTime;
+                Data.RemoveAt(0);
+                Data.Add(new ChartDataPoint(y, diskTime));
                 if (killThread)
                 {
                     return false;
                 }
-                z++;
-                piedata.RemoveAt(0);
-                Data.RemoveAt(0);
-                if (a)
-                {
-                    Data.Add(new ChartDataPoint(z, value+30));
-                    a = false;
-                    piedata.Add(new ChartDataPoint(""+ (value+30) + " Used", value + 30));
-                }
-                else
-                {
-                    Data.Add(new ChartDataPoint(z, value-20));
-                    a = true;
-                    piedata.Add(new ChartDataPoint("" + (value + 20) + " Used", value - 20));
-                }
-
                 return true;
             });
+        }
+
+        public void StopUpdate()
+        {
+            killThread = true;
         }
     }
 }

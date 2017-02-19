@@ -47,48 +47,53 @@ namespace RAT._1View.Desktop
             (myChart.SecondaryAxis as NumericalAxis).Maximum = 100;
             (myChart.SecondaryAxis as NumericalAxis).Minimum = 0;
 
-            //myChart.Series[0].AnimationDuration = .5;
-            //myChart.Series[0].EnableAnimation = true;
+            myChart.Series[0].AnimationDuration = .5;
+            myChart.Series[0].EnableAnimation = true;
             Children.Add(myChart, 0, 0);
 
+            int col1 = 25;
             int col2 = 145;
-            int col3 = 285;
+            int col22 = 255;
+            int col3 = 400;
 
             //Part 1
             Label utilizationLabel;
             utilizationLabel = new Label();
             utilizationLabel.Text = "Utilization";
-            utilizationLabel.Margin = new Thickness(25, 20, 0, 0);
+            utilizationLabel.Margin = new Thickness(col1, 20, 0, 0);
 
             Label uLive;
             uLive = new Label();
             uLive.Text = "38%";
             uLive.FontSize = 22;
-            uLive.Margin = new Thickness(25, 35, 0, 0);
+            uLive.Margin = new Thickness(col1, 35, 0, 0);
+            uLive.SetBinding(Label.TextProperty, "Percent");
 
             //Part 2
             Label speedLabel;
             speedLabel = new Label();
             speedLabel.Text = "Speed";
-            speedLabel.Margin = new Thickness(25, 75, 0, 0);
+            speedLabel.Margin = new Thickness(col2, 20, 0, 0);
 
             Label sLive;
             sLive = new Label();
             sLive.Text = "2.5Ghz";
             sLive.FontSize = 22;
-            sLive.Margin = new Thickness(25, 90, 0, 0);
+            sLive.Margin = new Thickness(col2, 35, 0, 0);
+            sLive.SetBinding(Label.TextProperty, "Speed");
 
             //Second Column
             Label processesLabel;
             processesLabel = new Label();
             processesLabel.Text = "Processes";
-            processesLabel.Margin = new Thickness(col2, 20, 0, 0);
+            processesLabel.Margin = new Thickness(col1, 75, 0, 0);
 
             Label pLive;
             pLive = new Label();
             pLive.Text = "120";
             pLive.FontSize = 22;
-            pLive.Margin = new Thickness(col2, 35, 0, 0);
+            pLive.Margin = new Thickness(col1, 90, 0, 0);
+            pLive.SetBinding(Label.TextProperty, "Processes");
 
             //Part 4
             Label threadsLabel;
@@ -97,12 +102,42 @@ namespace RAT._1View.Desktop
             Children.Add(threadsLabel, 0, 1);
             threadsLabel.Margin = new Thickness(col2, 75, 0, 0);
 
-            Label tLabel;
-            tLabel = new Label();
-            tLabel.Text = "2400";
-            tLabel.FontSize = 22;
-            Children.Add(tLabel, 0, 1);
-            tLabel.Margin = new Thickness(col2, 90, 0, 0);
+            Label tlive;
+            tlive = new Label();
+            tlive.Text = "2400";
+            tlive.FontSize = 22;
+            Children.Add(tlive, 0, 1);
+            tlive.Margin = new Thickness(col2, 90, 0, 0);
+            tlive.SetBinding(Label.TextProperty, "Threads");
+
+            //Part 5
+            Label temperatureLabel;
+            temperatureLabel = new Label();
+            temperatureLabel.Text = "Temperature";
+            Children.Add(temperatureLabel, 0, 1);
+            temperatureLabel.Margin = new Thickness(col1, 130, 0, 0);
+
+            Label tmplive;
+            tmplive = new Label();
+            tmplive.Text = "0";
+            tmplive.FontSize = 22;
+            Children.Add(tmplive, 0, 1);
+            tmplive.Margin = new Thickness(col1, 145, 0, 0);
+            tmplive.SetBinding(Label.TextProperty, "Temperature");
+
+            Label percentOfMaxLabel;
+            percentOfMaxLabel = new Label();
+            percentOfMaxLabel.Text = "Percent of Max";
+            Children.Add(percentOfMaxLabel, 0, 1);
+            percentOfMaxLabel.Margin = new Thickness(col22, 20, 0, 0);
+
+            Label pomlive;
+            pomlive = new Label();
+            pomlive.Text = "0";
+            pomlive.FontSize = 22;
+            Children.Add(pomlive, 0, 1);
+            pomlive.Margin = new Thickness(col22, 35, 0, 0);
+            pomlive.SetBinding(Label.TextProperty, "PoM");
 
             //Third Column
             Label maxSpeedLabel;
@@ -165,7 +200,6 @@ namespace RAT._1View.Desktop
 	    {
 	        myViewModel.StopUpdate();
 	        myChart.Series[0].ItemsSource = null;
-
 	    }
     }
 }
