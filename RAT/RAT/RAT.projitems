@@ -20,7 +20,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\0DashboardScreen\DashboardScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\0DashboardScreen\IPopupAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\0DashboardScreen\SelectItemPopup.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\AppsScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\CPUScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\DeviceScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\DiskScreen.cs" />
@@ -30,12 +29,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\OverviewScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\PerformanceScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\RamScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\Restructuring\AppsScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\Restructuring\CPUAllScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\Restructuring\DiskAllScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\Restructuring\OverviewAllScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\Restructuring\RamAllScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\Restructuring\WifiAllScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\ViewDevicesScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\ViewDevicesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\WifiScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Mobile\MLoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CpuViewModel.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Login.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\OrderInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\DeviceInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\TestModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Database\AzureLoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IOTest.cs" />

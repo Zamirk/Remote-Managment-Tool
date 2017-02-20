@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace RAT.Syncfusion
 {
-	public class Datagrid : ContentPage
+	public class Datagridd : ContentPage
 	{
-		public Datagrid ()
+		public Datagridd ()
 		{
             SfDataGrid dataGrid = new SfDataGrid();
             

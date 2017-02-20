@@ -12,7 +12,6 @@ using Xamarin.Forms;
 
 namespace RAT.ZTry
 {   
-   /* TODO Maybe change ParentScreen to MainScreen: 06/12/16 */
     public class ParentScreen : ContentPage
     {
         #region Member Variables
