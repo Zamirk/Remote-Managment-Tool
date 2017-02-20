@@ -22,7 +22,7 @@ using SfChart = Syncfusion.SfChart.XForms.SfChart;
 
 namespace RAT._1View.Desktop
 {
-    public class OverviewScreen : Grid
+    public partial class OverviewScreen : Grid
     {
         private Editor myEditor;
         public OverviewScreen()
