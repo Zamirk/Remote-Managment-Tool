@@ -1,6 +1,6 @@
 ﻿namespace RAT.ZTry
 {
-    public enum ODScreenState
+    public enum ScreenState
     {
         OVERVIEW, CPU, RAM, WIFI, DISK
     }

@@ -4,7 +4,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
+using RAT.Syncfusion;
+using RAT._1View.Desktop.Screens.SubScreens;
+using RAT._2ViewModel.Test;
 using Syncfusion.SfChart.XForms;
+using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
 using Label = Xamarin.Forms.Label;
 
@@ -15,8 +19,54 @@ namespace RAT._1View.Desktop.Manage
 	    public Button pcOne;
         public ViewDevicesScreen()
         {
+            ViewDevicesViewModel viewModel = new ViewDevicesViewModel();
+            BindingContext = viewModel;
+
             VerticalOptions = LayoutOptions.FillAndExpand;
+            RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+            SfDataGrid sDataGrid = new SfDataGrid();
+            
+            sDataGrid.AutoGenerateColumns = false;
+            sDataGrid.ColumnSizer = ColumnSizer.Star;
+            //sDataGrid.SelectionMode = SelectionMode.Single;
+
+            sDataGrid.HeaderRowHeight = 55;
+            sDataGrid.AllowDraggingColumn = true;
+            sDataGrid.AutoExpandGroups = true;
+            sDataGrid.VerticalOverScrollMode = VerticalOverScrollMode.Bounce;
+            sDataGrid.GridStyle = new DataGridStyle() { AlternatingRowColor = Color.Gray };
+
+            GridTextColumn column_1 = new GridTextColumn() { MappingName = "A", HeaderText = "Device Id"};
+            GridTextColumn column_2 = new GridTextColumn() { MappingName = "A", HeaderText = "CPU" };
+            GridTextColumn column_3 = new GridTextColumn() { MappingName = "A", HeaderText = "Ram" };
+            GridTextColumn column_4 = new GridTextColumn() { MappingName = "A", HeaderText = "Disk" };
+            GridTextColumn column_5 = new GridTextColumn() { MappingName = "A", HeaderText = "Network" };
+            GridTextColumn testColumn = new GridTextColumn() { MappingName = "A", HeaderText = "" };
+            GridTemplateColumn custColumn = new GridTemplateColumn() { MappingName = "A", HeaderText = "B"};
+
+            custColumn.CellTemplate = new DataTemplate(() =>
+            {
+                Grid myGrid = new Grid();
+                Button aaaa = new Button();
+                aaaa.BackgroundColor = Color.Black;
+                aaaa.TextColor = Color.White;
+                aaaa.Text = "View";
+                myGrid.Children.Add(aaaa);
+                
+                return myGrid;
+            });
+
+            sDataGrid.Columns.Add(column_1);
+            sDataGrid.Columns.Add(column_2);
+            sDataGrid.Columns.Add(column_3);
+            sDataGrid.Columns.Add(column_4);
+            sDataGrid.Columns.Add(column_5);
+            sDataGrid.Columns.Add(custColumn);
+            sDataGrid.ItemsSource = viewModel.data;
+
+            Children.Add(sDataGrid, 1, 1);
 
             pcOne = new Button();
             pcOne.Text = "Computer 1";
@@ -30,50 +80,7 @@ namespace RAT._1View.Desktop.Manage
             pcOne.Margin = new Thickness(50, 50, 0, 0);
             pcOne.BackgroundColor = Color.Gray;
 
-            Button pcTwo = new Button();
-            pcTwo.Text = "Computer 2";
-            pcTwo.FontSize = 20;
-            pcTwo.VerticalOptions = LayoutOptions.Center;
-            pcTwo.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            pcTwo.BorderColor = Color.Transparent;
-            pcTwo.BorderWidth = .000001;
-            pcTwo.WidthRequest = 200;
-            pcTwo.HeightRequest = 200;
-            pcTwo.Margin = new Thickness(50, 50, 0, 0);
-            pcTwo.BackgroundColor = Color.Gray;
-
-            Button pcThree = new Button();
-            pcThree.Text = "Computer 3";
-            pcThree.FontSize = 20;
-            pcThree.VerticalOptions = LayoutOptions.Center;
-            pcThree.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            pcThree.BorderColor = Color.Transparent;
-            pcThree.BorderWidth = .000001;
-            pcThree.WidthRequest = 200;
-            pcThree.HeightRequest = 200;
-            pcThree.Margin = new Thickness(50, 50, 0, 0);
-            pcThree.BackgroundColor = Color.Gray;
-
-            Button pcFour = new Button();
-            pcFour.Text = "Computer 4";
-            pcFour.FontSize = 20;
-            pcFour.VerticalOptions = LayoutOptions.Center;
-            pcFour.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            pcFour.BorderColor = Color.Transparent;
-            pcFour.BorderWidth = .000001;
-            pcFour.WidthRequest = 200;
-            pcFour.HeightRequest = 200;
-            pcFour.Margin = new Thickness(50, 50, 50, 0);
-            pcFour.BackgroundColor = Color.Gray;
-
-            Label myLabel;
-            myLabel = new Label();
-            myLabel.Text = "All Devices Screen";
-            Children.Add(myLabel, 1, 1);
             Children.Add(pcOne, 1, 0);
-            Children.Add(pcTwo, 2, 0);
-            Children.Add(pcThree, 3, 0);
-            Children.Add(pcFour, 4, 0);
         }
     }
 }

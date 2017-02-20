@@ -3,5 +3,6 @@
     public enum MenuState
     {
         MANAGE_ALLDEVICES, DASHBOARDS, PERFORMANCE, APPLICATIONS, MANAGE_SINGLEDEVICE
+            , OVERVIEW, CPU, RAM, WIFI, DISK
     }
 }

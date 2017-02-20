@@ -2,6 +2,7 @@
 using RAT._1View;
 using RAT._1View.Desktop;
 using RAT._1View.Desktop.Manage;
+using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
 using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
 using RAT._1View.Desktop.Tools;
 using RAT._2ViewModel;
@@ -12,16 +13,25 @@ using Xamarin.Forms;
 
 namespace RAT.ZTry
 {   
-   /* TODO Maybe change ParentScreen to MainScreen: 06/12/16 */
     public class ParentScreen : ContentPage
     {
         #region Member Variables
         private MenuState myMenuState;
+        int fontSize = 13;
+
         private ViewDevicesScreen viewDevicesScreen;
-        private DeviceScreen singleDeviceScreen;
+        private Grid singleDeviceScreen;
         private PerformanceScreen systemPerformanceScreen;
         private AppsScreen applicationManagmentScreen;
         private DashboardScreen dashboardScreen;
+
+        private OverviewScreen overviewScreen;
+        private CPUScreen cpuScreen;
+        private RamScreen ramScreen;
+        private DiskScreen diskScreen;
+        private WifiScreen wifiScreen;
+        private Button overviewButton, memoryButton, wifiButton, diskButton, cpuButton;
+
 
         private Button signOutButton,performanceButton, manageButton, dashboardButton,
             applicationButton, backButton, forwardButton, secretGameButton;
@@ -190,17 +200,90 @@ namespace RAT.ZTry
             applicationButton.Clicked += ApplicationButton_Clicked;
             secretGameButton.Clicked += Secret_Game;
 
-            //TODO Temp, Should be removed and added when needed
-            //deviceOverview = new DeviceOverview();
-            //midGrid.Children.Add(deviceOverview, 1, 0);
-            //deviceOverview.IsVisible = false;
-
             Content = mainStack;
         }
 
-
-
         #region Screen Changing Click Handlers
+
+        private void WifiButtonOnClicked(object sender, EventArgs eventArgs)
+        {
+            if (myMenuState != MenuState.WIFI)
+            {
+                wifiButton.BackgroundColor = Color.Gray;
+                RemoveScreen();
+
+                //Adding Wifi Screen
+                wifiScreen = new WifiScreen();
+                wifiScreen.Margin = new Thickness(50, 50, 50, 0);
+                midGrid.Children.Add(wifiScreen, 0, 0);
+
+                myMenuState = MenuState.WIFI;
+            }
+        }
+
+        private void DiskButtonOnClicked(object sender, EventArgs eventArgs)
+        {
+            if (myMenuState != MenuState.DISK)
+            {
+                diskButton.BackgroundColor = Color.Gray;
+                RemoveScreen();
+
+                //Adding Dsik Screen
+                diskScreen = new DiskScreen();
+                diskScreen.Margin = new Thickness(50, 50, 50, 0);
+                midGrid.Children.Add(diskScreen, 0, 0);
+
+                myMenuState = MenuState.DISK;
+            }
+        }
+
+        private void MemoryButtonOnClicked(object sender, EventArgs eventArgs)
+        {
+            if (myMenuState != MenuState.RAM)
+            {
+                memoryButton.BackgroundColor = Color.Gray;
+                RemoveScreen();
+
+                //Adding Ram Screen
+                ramScreen = new RamScreen();
+                ramScreen.Margin = new Thickness(50, 50, 50, 0);
+                midGrid.Children.Add(ramScreen, 0, 0);
+
+                myMenuState = MenuState.RAM;
+            }
+        }
+
+        private void CpuButtonOnClicked(object sender, EventArgs eventArgs)
+        {
+            if (myMenuState != MenuState.CPU)
+            {
+                cpuButton.BackgroundColor = Color.Gray;
+                RemoveScreen();
+
+                //Adding Cpu Screen
+                cpuScreen = new CPUScreen();
+                cpuScreen.Margin = new Thickness(50, 50, 50, 0);
+                midGrid.Children.Add(cpuScreen, 0, 0);
+
+                myMenuState = MenuState.CPU;
+            }
+        }
+
+        private void OverviewButtonOnClicked(object sender, EventArgs eventArgs)
+        {
+            if (myMenuState != MenuState.OVERVIEW)
+            {
+                overviewButton.BackgroundColor = Color.Gray;
+                RemoveScreen();
+
+                //Adding Overview Screen
+                overviewScreen = new OverviewScreen();
+                overviewScreen.Margin = new Thickness(50, 50, 50, 0);
+                midGrid.Children.Add(overviewScreen, 0, 0);
+
+                myMenuState = MenuState.OVERVIEW;
+            }
+        }
 
         // Button Click
         private async void Secret_Game(object sender, EventArgs e)
@@ -212,15 +295,16 @@ namespace RAT.ZTry
             // or
             //await PopupNavigation.PushAsync(page);
         }
+
         private void PcOne_Clicked(object sender, EventArgs e)
         {
             RemoveScreen();
             manageButton.BackgroundColor = Color.Gray;
 
-            singleDeviceScreen = new DeviceScreen();
+            singleDeviceScreen = GetIt();
             midGrid.Children.Add(singleDeviceScreen, 1, 0);
 
-            myMenuState = MenuState.MANAGE_SINGLEDEVICE;
+            myMenuState = MenuState.OVERVIEW;
         }
 
         private void DashboardButton_Clicked(object sender, EventArgs e)
@@ -288,7 +372,46 @@ namespace RAT.ZTry
             //ObjectS should be collected by Garbage Collector!
             //If Not, Check the async/Device.Timers/Extra Threads
 
-            if (myMenuState == MenuState.MANAGE_ALLDEVICES)
+            //Removes screen, sets button off
+            if (myMenuState == MenuState.OVERVIEW)
+            {
+                overviewButton.BackgroundColor = Color.Transparent;
+                midGrid.Children.Remove(overviewScreen);
+                overviewScreen.BindingContext = null;
+                overviewScreen = null;
+            }
+            else if (myMenuState == MenuState.CPU)
+            {
+                cpuButton.BackgroundColor = Color.Transparent;
+                midGrid.Children.Remove(cpuScreen);
+                cpuScreen.GC();
+                cpuScreen.BindingContext = null;
+                cpuScreen = null;
+            }
+            else if (myMenuState == MenuState.RAM)
+            {
+                memoryButton.BackgroundColor = Color.Transparent;
+                midGrid.Children.Remove(ramScreen);
+                ramScreen.GC();
+                ramScreen.BindingContext = null;
+                ramScreen = null;
+            }
+            else if (myMenuState == MenuState.WIFI)
+            {
+                wifiButton.BackgroundColor = Color.Transparent;
+                midGrid.Children.Remove(wifiScreen);
+                wifiScreen.GC();
+                wifiScreen.BindingContext = null;
+                wifiScreen = null;
+            }
+            else if (myMenuState == MenuState.DISK)
+            {
+                diskButton.BackgroundColor = Color.Transparent;
+                midGrid.Children.Remove(diskScreen);
+                diskScreen.GC();
+                diskScreen.BindingContext = null;
+                diskScreen = null;
+            } else if (myMenuState == MenuState.MANAGE_ALLDEVICES)
             {
                 manageButton.BackgroundColor = Color.Transparent;
                 midGrid.Children.Remove(viewDevicesScreen);
@@ -316,6 +439,97 @@ namespace RAT.ZTry
         }
         #endregion
 
+        public Grid GetIt()
+        {
+            Grid gridd = new Grid();
+
+            #region Buttons
+            overviewButton = new Button();
+            overviewButton.Text = "Overview";
+            overviewButton.FontSize = fontSize;
+            overviewButton.VerticalOptions = LayoutOptions.Center;
+            overviewButton.HorizontalOptions = LayoutOptions.Center;
+            overviewButton.BorderColor = Color.Transparent;
+            overviewButton.BackgroundColor = Color.Transparent;
+            overviewButton.BorderWidth = .000001;
+            overviewButton.WidthRequest = 100;
+            overviewButton.HeightRequest = 50;
+            overviewButton.BackgroundColor = Color.Gray;
+
+            cpuButton = new Button();
+            cpuButton.Text = "CPU";
+            cpuButton.FontSize = fontSize;
+            cpuButton.VerticalOptions = LayoutOptions.Center;
+            cpuButton.HorizontalOptions = LayoutOptions.Center;
+            cpuButton.BorderColor = Color.Transparent;
+            cpuButton.BackgroundColor = Color.Transparent;
+            cpuButton.BorderWidth = .000001;
+            cpuButton.WidthRequest = 100;
+            cpuButton.HeightRequest = 50;
+
+            memoryButton = new Button();
+            memoryButton.Text = "Ram";
+            memoryButton.FontSize = fontSize;
+            memoryButton.VerticalOptions = LayoutOptions.Center;
+            memoryButton.HorizontalOptions = LayoutOptions.Center;
+            memoryButton.BorderColor = Color.Transparent;
+            memoryButton.BackgroundColor = Color.Transparent;
+            memoryButton.BorderWidth = .000001;
+            memoryButton.WidthRequest = 100;
+            memoryButton.HeightRequest = 50;
+
+            diskButton = new Button();
+            diskButton.Text = "Disk";
+            diskButton.FontSize = fontSize;
+            diskButton.VerticalOptions = LayoutOptions.Center;
+            diskButton.HorizontalOptions = LayoutOptions.Center;
+            diskButton.BorderColor = Color.Transparent;
+            diskButton.BackgroundColor = Color.Transparent;
+            diskButton.BorderWidth = .000001;
+            diskButton.WidthRequest = 100;
+            diskButton.HeightRequest = 50;
+
+            wifiButton = new Button();
+            wifiButton.Text = "WIFI";
+            wifiButton.FontSize = fontSize;
+            wifiButton.VerticalOptions = LayoutOptions.Center;
+            wifiButton.HorizontalOptions = LayoutOptions.Center;
+            wifiButton.BorderColor = Color.Transparent;
+            wifiButton.BackgroundColor = Color.Transparent;
+            wifiButton.BorderWidth = .000001;
+            wifiButton.WidthRequest = 100;
+            wifiButton.HeightRequest = 50;
+            #endregion
+
+            //Mid button grid
+            Grid midGrid2 = new Grid();
+            midGrid2.RowDefinitions.Add(new RowDefinition { Height = 50 });
+            midGrid2.ColumnSpacing = 0;
+            midGrid2.RowSpacing = 0;
+            midGrid2.HorizontalOptions = LayoutOptions.Center;
+            midGrid2.Children.Add(overviewButton, 0, 0);
+            midGrid2.Children.Add(cpuButton, 1, 0);
+            midGrid2.Children.Add(memoryButton, 2, 0);
+            midGrid2.Children.Add(diskButton, 3, 0);
+            midGrid2.Children.Add(wifiButton, 4, 0);
+
+            //Adding to mid-grid
+            gridd.Children.Add(midGrid2, 0, 0);
+
+            //Initialising Overview Screen
+            overviewScreen = new OverviewScreen();
+            overviewScreen.Margin = new Thickness(50, 50, 50, 0);
+            gridd.Children.Add(overviewScreen, 0, 0);
+
+            //Centre Buttons
+            overviewButton.Clicked += OverviewButtonOnClicked;
+            cpuButton.Clicked += CpuButtonOnClicked;
+            memoryButton.Clicked += MemoryButtonOnClicked;
+            diskButton.Clicked += DiskButtonOnClicked;
+            wifiButton.Clicked += WifiButtonOnClicked;
+
+            return gridd;
+        }
 
     }
 }
