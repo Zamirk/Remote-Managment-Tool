@@ -24,6 +24,7 @@ namespace RAT._1View.Desktop
 {
     public partial class OverviewScreen : Grid
     {
+        bool succeeded = false;
         private Editor myEditor;
         public OverviewScreen()
         {
@@ -34,16 +35,19 @@ namespace RAT._1View.Desktop
             myEditor.Text = GetTelemetry.aaaaa;
 
 
-            //WaitForItToWork();
+            WaitForItToWork();
 
         }
+        public void GC()
+        {
+            succeeded = true;
+        }
+
         async Task<bool> WaitForItToWork()
         {
-            bool succeeded = false;
             while (!succeeded)
             {
                 myEditor.Text = GetTelemetry.aaaaa;
-                GetTelemetry.aaaaa = "";
                 await Task.Delay(1000); // arbitrary delay
             }
             return succeeded;

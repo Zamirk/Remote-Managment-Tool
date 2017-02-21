@@ -26,11 +26,11 @@ namespace RAT._1View.Desktop
 
         public DeviceScreen()
         {
-            myScreenState = ODScreenState.OVERVIEW;
+            myScreenState = ODScreenState.CPU;
 
             #region Buttons
             overviewButton = new Button();
-            overviewButton.Text = "Overview";
+            overviewButton.Text = "Debug-JSon";
             overviewButton.FontSize = fontSize;
             overviewButton.VerticalOptions = LayoutOptions.Center;
             overviewButton.HorizontalOptions = LayoutOptions.Center;
@@ -39,7 +39,6 @@ namespace RAT._1View.Desktop
             overviewButton.BorderWidth = .000001;
             overviewButton.WidthRequest = 100;
             overviewButton.HeightRequest = 50;
-            overviewButton.BackgroundColor = Color.Gray;
 
             cpuButton = new Button();
             cpuButton.Text = "CPU";
@@ -47,7 +46,7 @@ namespace RAT._1View.Desktop
             cpuButton.VerticalOptions = LayoutOptions.Center;
             cpuButton.HorizontalOptions = LayoutOptions.Center;
             cpuButton.BorderColor = Color.Transparent;
-            cpuButton.BackgroundColor = Color.Transparent;
+            cpuButton.BackgroundColor = Color.Gray;
             cpuButton.BorderWidth = .000001;
             cpuButton.WidthRequest = 100;
             cpuButton.HeightRequest = 50;
@@ -92,19 +91,20 @@ namespace RAT._1View.Desktop
             midGrid2.ColumnSpacing = 0;
             midGrid2.RowSpacing = 0;
             midGrid2.HorizontalOptions = LayoutOptions.Center;
-            midGrid2.Children.Add(overviewButton, 0, 0);
-            midGrid2.Children.Add(cpuButton, 1, 0);
-            midGrid2.Children.Add(memoryButton, 2, 0);
-            midGrid2.Children.Add(diskButton, 3, 0);
-            midGrid2.Children.Add(wifiButton, 4, 0);
+            midGrid2.Children.Add(cpuButton, 0, 0);
+            midGrid2.Children.Add(memoryButton, 1, 0);
+            midGrid2.Children.Add(diskButton, 2, 0);
+            midGrid2.Children.Add(wifiButton, 3, 0);
+            midGrid2.Children.Add(overviewButton, 4, 0);
 
             //Adding to mid-grid
             Children.Add(midGrid2, 0, 0);
 
             //Initialising Overview Screen
-            overviewScreen = new OverviewScreen();
-            overviewScreen.Margin = new Thickness(50, 50, 50, 0);
-            Children.Add(overviewScreen, 0, 0);
+            //Adding Cpu Screen
+            cpuScreen = new CPUScreen();
+            cpuScreen.Margin = new Thickness(50, 50, 50, 0);
+            Children.Add(cpuScreen, 0, 0);
 
             //Centre Buttons
             overviewButton.Clicked += OverviewButtonOnClicked;
@@ -203,9 +203,9 @@ namespace RAT._1View.Desktop
             {
                 overviewButton.BackgroundColor = Color.Transparent;
                 Children.Remove(overviewScreen);
+                overviewScreen.GC();
                 overviewScreen.BindingContext = null;
                 overviewScreen = null;
-
             }
             else if (myScreenState == ODScreenState.CPU)
             {

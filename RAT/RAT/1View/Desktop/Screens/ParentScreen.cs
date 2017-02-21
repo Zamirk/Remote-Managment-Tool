@@ -180,7 +180,7 @@ namespace RAT.ZTry
             //Initial Screen
             viewDevicesScreen = new ViewDevicesScreen();
             midGrid.Children.Add(viewDevicesScreen, 1, 0);
-            viewDevicesScreen.pcOne.Clicked += PcOne_Clicked;
+            viewDevicesScreen.aaaa.Clicked += PcOne_Clicked;
 
             //Left Buttons
             manageButton.Clicked += ManageButton_Clicked;
@@ -243,7 +243,7 @@ namespace RAT.ZTry
                 //TODO: Remove Clickhandler and replace with ParentScreen Subscreen managment
                 //TODO: Maybe this shouldnt be initialised instantly: 06/12/16
                 viewDevicesScreen = new ViewDevicesScreen();
-                viewDevicesScreen.pcOne.Clicked += PcOne_Clicked;
+                viewDevicesScreen.aaaa.Clicked += PcOne_Clicked;
                 midGrid.Children.Add(viewDevicesScreen, 1, 0);
 
                 myMenuState = MenuState.MANAGE_ALLDEVICES;

@@ -16,7 +16,7 @@ namespace RAT._1View.Desktop.Manage
 {
 	public class ViewDevicesScreen : Grid
 	{
-	    public Button pcOne;
+	    public Button aaaa = new Button();
         public ViewDevicesScreen()
         {
             ViewDevicesViewModel viewModel = new ViewDevicesViewModel();
@@ -36,8 +36,10 @@ namespace RAT._1View.Desktop.Manage
             sDataGrid.AllowDraggingColumn = true;
             sDataGrid.AutoExpandGroups = true;
             sDataGrid.VerticalOverScrollMode = VerticalOverScrollMode.Bounce;
-            sDataGrid.GridStyle = new DataGridStyle() { AlternatingRowColor = Color.Gray };
-
+            sDataGrid.BackgroundColor = Color.Transparent;
+            //sDataGrid.GridStyle = new DataGridStyle() { AlternatingRowColor = Color.Gray };
+            sDataGrid.HeaderRowHeight = 15;
+            sDataGrid.RowHeight = 45;
             GridTextColumn column_1 = new GridTextColumn() { MappingName = "A", HeaderText = "Device Id"};
             GridTextColumn column_2 = new GridTextColumn() { MappingName = "A", HeaderText = "CPU" };
             GridTextColumn column_3 = new GridTextColumn() { MappingName = "A", HeaderText = "Ram" };
@@ -49,7 +51,13 @@ namespace RAT._1View.Desktop.Manage
             custColumn.CellTemplate = new DataTemplate(() =>
             {
                 Grid myGrid = new Grid();
-                Button aaaa = new Button();
+                aaaa.FontSize = 20;
+                aaaa.VerticalOptions = LayoutOptions.Center;
+                aaaa.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                aaaa.BorderColor = Color.Transparent;
+                aaaa.BorderWidth = .000001;
+                aaaa.WidthRequest = 200;
+                aaaa.HeightRequest = 200;
                 aaaa.BackgroundColor = Color.Black;
                 aaaa.TextColor = Color.White;
                 aaaa.Text = "View";
@@ -65,22 +73,8 @@ namespace RAT._1View.Desktop.Manage
             sDataGrid.Columns.Add(column_5);
             sDataGrid.Columns.Add(custColumn);
             sDataGrid.ItemsSource = viewModel.data;
-
+            sDataGrid.Margin = new Thickness(20,20,20,20);
             Children.Add(sDataGrid, 1, 1);
-
-            pcOne = new Button();
-            pcOne.Text = "Computer 1";
-            pcOne.FontSize = 20;
-            pcOne.VerticalOptions = LayoutOptions.Center;
-            pcOne.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            pcOne.BorderColor = Color.Transparent;
-            pcOne.BorderWidth = .000001;
-            pcOne.WidthRequest = 200;
-            pcOne.HeightRequest = 200;
-            pcOne.Margin = new Thickness(50, 50, 0, 0);
-            pcOne.BackgroundColor = Color.Gray;
-
-            //Children.Add(pcOne, 1, 0);
         }
     }
 }

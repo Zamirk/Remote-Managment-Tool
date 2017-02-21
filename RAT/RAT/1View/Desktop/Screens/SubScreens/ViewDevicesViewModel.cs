@@ -14,7 +14,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens
         {
             data.Add(new TestModel());
             data.Add(new TestModel());
-            data.Add(new TestModel());
         }
     }
 }

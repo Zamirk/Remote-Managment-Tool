@@ -46,7 +46,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
 
             myChart.PrimaryAxis = new NumericalAxis();
             myChart.SecondaryAxis = new NumericalAxis();
-
+            //myChart.BackgroundColor = Color.Black;
             //(myChart.SecondaryAxis as NumericalAxis).Maximum = 100;
             (myChart.SecondaryAxis as NumericalAxis).Minimum = 0;
             //myChart.Series[0].Color = Color.Black;
@@ -100,7 +100,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             int col1 = 25;
             int col3 = 180;
             int col4 = 325;
-            int col2 = 435;
+            int col2 = 450;
 
             Label packetsReceived;
             packetsReceived = new Label();
