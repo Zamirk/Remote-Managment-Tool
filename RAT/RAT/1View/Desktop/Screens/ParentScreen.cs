@@ -2,8 +2,9 @@
 using RAT._1View;
 using RAT._1View.Desktop;
 using RAT._1View.Desktop.Manage;
+using RAT._1View.Desktop.Screens.SubScreens.RAT._1View.Desktop;
 using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
-using RAT._1View.Desktop.Tools;
+using RAT._1View.Desktop._1Tools;
 using RAT._2ViewModel;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Services;
@@ -11,7 +12,7 @@ using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
 
 namespace RAT.ZTry
-{   
+{
     public class ParentScreen : ContentPage
     {
         #region Member Variables
@@ -22,7 +23,7 @@ namespace RAT.ZTry
         private AppsScreen applicationManagmentScreen;
         private DashboardScreen dashboardScreen;
 
-        private Button signOutButton,performanceButton, manageButton, dashboardButton,
+        private Button signOutButton, performanceButton, manageButton, dashboardButton,
             applicationButton, backButton, forwardButton, secretGameButton;
         ContentView leftColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235), HorizontalOptions = LayoutOptions.Fill };
         ContentView rightColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235) };

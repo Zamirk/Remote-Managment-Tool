@@ -15,9 +15,9 @@ namespace ConsoleApplication1.Folder
 {
     public class GetTelemetry
     {
-        static string ConnectionString = "Endpoint=sb://iothub-ns-manageiot-107893-aab55f8a1a.servicebus.windows.net/;" +
+        static string ConnectionString = "Endpoint=sb://iothub-ns-manageiot-119210-43e7bcdbe5.servicebus.windows.net/;" +
                              "SharedAccessKeyName=iothubowner;" +
-                             "SharedAccessKey=1QnPUGMCx86KJRaOsIg5BvhJtww13EU6kzprCPSr/qs=";
+                             "SharedAccessKey=XnRSB9kO1Knhq6sL7QMhWhxqshHsGV34NBw+HnDj5oU=";
 
         static string eventHubEntity = "ManageIoT";
         static string partitionId = "1";

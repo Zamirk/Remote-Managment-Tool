@@ -90,7 +90,8 @@ namespace RAT._2ViewModel
             //Updates the information onece a second
             Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
             {
-                y++;
+                System.Diagnostics.Debug.WriteLine("RAM" + y);
+                   y++;
                 double ramUsage = Convert.ToDouble(GetTelemetry.lastReceivedValue.RamInUse);
                 PagedPool = GetTelemetry.lastReceivedValue.PagedPool;
                 NonPagedPool = GetTelemetry.lastReceivedValue.NonPagedPool;

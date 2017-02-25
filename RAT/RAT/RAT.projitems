@@ -9,10 +9,9 @@
     <Import_RootNamespace>RAT</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\ODScreenState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\MenuState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\ScreenState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\LoginScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\1Tools\MenuState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\ParentScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\0DashboardScreen\Dashboard Backup\DashboardScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\0DashboardScreen\Dashboard Backup\MyPopupPag.cs" />
@@ -21,7 +20,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\0DashboardScreen\IPopupAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\0DashboardScreen\SelectItemPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\CPUScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\DeviceScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\DiskScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\EasterEgg\GameButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\EasterEgg\GameParent.cs" />
@@ -35,14 +33,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\Restructuring\OverviewAllScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\Restructuring\RamAllScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\Restructuring\WifiAllScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\SingleDeviceScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\ViewDevicesScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\ViewDevicesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Desktop\Screens\SubScreens\WifiScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Mobile\MLoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CpuViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\DiskViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\RamViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\ViewDevicesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\WifiViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />

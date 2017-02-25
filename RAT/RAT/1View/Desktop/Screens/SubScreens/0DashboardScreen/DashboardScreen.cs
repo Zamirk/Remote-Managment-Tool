@@ -14,22 +14,25 @@ using Label = Xamarin.Forms.Label;
 
 namespace RAT._1View.Desktop.Manage
 {
-	public class DashboardScreen : Grid
-    {
+	public class DashboardScreen : ScrollView
+	{
+	    private Grid superGrid;
         private Grid mainGrid;
         //private List<DashboardCell> myCellList = new List<DashboardCell>();
         private DashboardCell[][] myCells = new DashboardCell[8][];
         private bool singleSquares = true;
         public DashboardScreen()
         {
-            RowDefinitions.Add(new RowDefinition { Height = 35 });
-            RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
-            ColumnSpacing = 0;
-            RowSpacing = 0;
+            Orientation = ScrollOrientation.Both;
+            superGrid = new Grid();
+            superGrid.RowDefinitions.Add(new RowDefinition { Height = 35 });
+            superGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
+            superGrid.ColumnSpacing = 0;
+            superGrid.RowSpacing = 0;
 
             Grid buttonGrid = new Grid();
-            buttonGrid.VerticalOptions = LayoutOptions.FillAndExpand;
-            buttonGrid.HorizontalOptions = LayoutOptions.FillAndExpand;
+            //buttonGrid.VerticalOptions = LayoutOptions.FillAndExpand;
+            //buttonGrid.HorizontalOptions = LayoutOptions.Start;
 
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
@@ -73,7 +76,7 @@ namespace RAT._1View.Desktop.Manage
             sizeButton.TextColor = Color.White;
             buttonGrid.Children.Add(sizeButton, 1, 0);
 
-            Children.Add(buttonGrid,0,0);
+            superGrid.Children.Add(buttonGrid,0,0);
 
             myCells[0] = new DashboardCell[5];
             myCells[1] = new DashboardCell[5];
@@ -137,29 +140,34 @@ namespace RAT._1View.Desktop.Manage
                         Button s = sender as Button;
                         int x = myCell.XLocation;
                         int y = myCell.YLocation;
-                        if ((x!=7)&&(x!=14)&&(x!=21)&&(x!=28))
+
+                        int x2 = myCell.XLocation + 1;
+                        int y2 = myCell.YLocation;
+
+                        if ((x != 7) && (x != 14) && (x != 21) && (x != 28))
                         {
-                            myCells[x][y].TranslateTo(120, 0, 500, Easing.CubicInOut);
-                            await myCells[x + 1][y].TranslateTo(-120, 0, 500, Easing.CubicInOut);
+                            myCells[x][y].TranslateTo((myCells[x2][y2].Width + 3), 0, 500, Easing.CubicInOut);
+                            await myCells[x2][y2].TranslateTo(-(myCells[x][y].Width + 3), 0, 500, Easing.CubicInOut);
+
 
                             //Remove cell 1
                             mainGrid.Children.Remove(myCells[x][y]);
                             //Remove cell 2
-                            mainGrid.Children.Remove(myCells[x + 1][y]);
+                            mainGrid.Children.Remove(myCells[x2][y2]);
 
                             //Swapping
-                            swap(ref myCells[x][y], ref myCells[x + 1][y]);
+                            swap(ref myCells[x][y], ref myCells[x2][y2]);
 
                             //Swapping location value
                             myCells[x][y].SetLocation(x, y);
-                            myCells[x + 1][y].SetLocation(x + 1, y);
+                            myCells[x2][y2].SetLocation(x2, y2);
 
                             myCells[x][y].TranslateTo(0, 0, UInt32.MinValue);
-                            myCells[x + 1][y].TranslateTo(0, 0, UInt32.MinValue);
+                            myCells[x2][y2].TranslateTo(0, 0, UInt32.MinValue);
 
                             //Readding
                             mainGrid.Children.Add(myCells[x][y], x, y);
-                            mainGrid.Children.Add(myCells[x + 1][y], x + 1, y);
+                            mainGrid.Children.Add(myCells[x2][y2], x2, y2);
                         }
                         //System.Diagnostics.Debug.WriteLine("Position"+ myCell.PosInLayout);
                     };
@@ -170,8 +178,8 @@ namespace RAT._1View.Desktop.Manage
                         int y = myCell.YLocation;
                         if ((x != 0) && (x != 14) && (x != 21) && (x != 28))
                         {
-                            myCells[x][y].TranslateTo(-120, 0, 500, Easing.CubicInOut);
-                            await myCells[x - 1][y].TranslateTo(120, 0, 500, Easing.CubicInOut);
+                            myCells[x][y].TranslateTo(-(myCells[x - 1][y].Width + 3), 0, 500, Easing.CubicInOut);
+                            await myCells[x - 1][y].TranslateTo(myCells[x][y].Width + 3, 0, 500, Easing.CubicInOut);
 
                             //Remove cell 1
                             mainGrid.Children.Remove(myCells[x][y]);
@@ -203,8 +211,8 @@ namespace RAT._1View.Desktop.Manage
                         {
                             s.BackgroundColor = Color.Green;
 
-                            myCells[x][y].TranslateTo(0, -110, 500, Easing.CubicInOut);
-                            await myCells[x][y - 1].TranslateTo(0, 105, 500, Easing.CubicInOut);
+                            myCells[x][y].TranslateTo(0, -(myCells[x][y - 1].Height + 3), 500, Easing.CubicInOut);
+                            await myCells[x][y - 1].TranslateTo(0, myCells[x][y].Height + 3, 500, Easing.CubicInOut);
 
                             //Remove cell 1
                             mainGrid.Children.Remove(myCells[x][y]);
@@ -236,8 +244,8 @@ namespace RAT._1View.Desktop.Manage
                         {
                             s.BackgroundColor = Color.Green;
 
-                            myCells[x][y].TranslateTo(0, +110, 500, Easing.CubicInOut);
-                            await myCells[x][y + 1].TranslateTo(0, -105, 500, Easing.CubicInOut);
+                            myCells[x][y].TranslateTo(0, myCells[x][y + 1].Height + 3, 500, Easing.CubicInOut);
+                            await myCells[x][y + 1].TranslateTo(0, -(myCells[x][y].Height + 3), 500, Easing.CubicInOut);
 
                             //Remove cell 1
                             mainGrid.Children.Remove(myCells[x][y]);
@@ -258,7 +266,6 @@ namespace RAT._1View.Desktop.Manage
                             mainGrid.Children.Add(myCells[x][y], x, y);
                             mainGrid.Children.Add(myCells[x][y + 1], x, y + 1);
                         }
-                        //System.Diagnostics.Debug.WriteLine("Position"+ myCell.PosInLayout);
                     };
 
                     //Multi d, array, referencing matrix of buttons
@@ -274,8 +281,15 @@ namespace RAT._1View.Desktop.Manage
                     pos++;
                 }
             }
-            Children.Add(mainGrid,0,1);
-       }
+            //TODO CURRENTLY DOING
+            superGrid.Children.Add(mainGrid,0,1);
+            superGrid.WidthRequest = 500;
+            superGrid.HeightRequest = 500;
+            superGrid.MinimumWidthRequest = 500;
+            superGrid.HorizontalOptions = LayoutOptions.Start;
+            superGrid.VerticalOptions = LayoutOptions.Start;
+            Content = superGrid;
+        }
 
         private bool editing = false;
         private void EditButton_Clicked(object sender, EventArgs e)

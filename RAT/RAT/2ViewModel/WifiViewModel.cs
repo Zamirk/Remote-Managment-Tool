@@ -95,6 +95,8 @@ namespace RAT._2ViewModel
             //Updates the information onece a second
             Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
             {
+                System.Diagnostics.Debug.WriteLine("WIFI" + y);
+
                 y++;
                 double downloadRate = Convert.ToDouble(GetTelemetry.lastReceivedValue.DownloadRate);
                 double uploadRate = Convert.ToDouble(GetTelemetry.lastReceivedValue.UploadRate);

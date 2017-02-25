@@ -88,7 +88,8 @@ namespace RAT._2ViewModel
             //Updates the information onece a second
             Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
             {
-                y++;
+                y++; System.Diagnostics.Debug.WriteLine("cpu" + y);
+
                 double cpuValue = Convert.ToDouble(GetTelemetry.lastReceivedValue.Cpu);
                 Processes = GetTelemetry.lastReceivedValue.Processes;
                 Threads = GetTelemetry.lastReceivedValue.Thread;

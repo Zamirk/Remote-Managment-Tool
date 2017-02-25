@@ -96,7 +96,8 @@ namespace RAT._2ViewModel
 
         private async void LoadData()
         {
-            y = 0;
+            y = 0; System.Diagnostics.Debug.WriteLine("DISK" + y);
+
 
             //Adding data to piechart
             double freeSpacePieChart = Convert.ToDouble(GetTelemetry.lastReceivedValue.FreeSpace);
