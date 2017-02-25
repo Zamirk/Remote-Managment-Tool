@@ -55,7 +55,8 @@ namespace ConsoleApplication1.Folder
             }
             listOfDevices.Add(myDevice);
             EventData data;
-            while (go)
+            //TODO I turn it off
+            while (!go)
             {
                 System.Diagnostics.Debug.WriteLine("Level 1: Looping");
                 data = receiver.Receive();

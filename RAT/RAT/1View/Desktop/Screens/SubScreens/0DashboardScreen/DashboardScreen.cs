@@ -16,7 +16,9 @@ namespace RAT._1View.Desktop.Manage
 {
 	public class DashboardScreen : ScrollView
 	{
-	    private Grid superGrid;
+        private bool editing = false;
+
+        private Grid superGrid;
         private Grid mainGrid;
         //private List<DashboardCell> myCellList = new List<DashboardCell>();
         private DashboardCell[][] myCells = new DashboardCell[8][];
@@ -121,177 +123,32 @@ namespace RAT._1View.Desktop.Manage
                     //myCells[xAxis][yAxis].BackgroundColor = Color.FromRgb(rand.Next(255), rand.Next(255), rand.Next(255));
                     //Position in the grid/layout
                     myCells[xAxis][yAxis].XLocation = xAxis;
-                    myCells[xAxis][yAxis].YLocation = (yAxis);
+                    myCells[xAxis][yAxis].YLocation = yAxis;
                     myCells[xAxis][yAxis].PosInLayout = pos;
+
+                    //Movements
+                    myCells[xAxis][yAxis].east.Clicked += EastOnClicked;
+                    myCells[xAxis][yAxis].west.Clicked += WestOnClicked;
+                    myCells[xAxis][yAxis].north.Clicked += NorthOnClicked;
+                    myCells[xAxis][yAxis].south.Clicked += SouthOnClicked;
 
                     System.Diagnostics.Debug.WriteLine(":::"+(yAxis)+":"+ xAxis);
                     mainGrid.Children.Add(myCell, xAxis, yAxis);
 
-                    myCell.myButton.Clicked += (sender, args) =>
-                    {
-                        Button s = sender as Button;
-                        myCell.BackgroundColor = Color.Aqua;
-                        //myCell.TranslateTo(0, 100, 1000);     // Move image left
-                    };
-                    //myCellList.Add(myCell);
-
-                    myCell.east.Clicked += async (sender, args) =>
-                    {
-                        Button s = sender as Button;
-                        int x = myCell.XLocation;
-                        int y = myCell.YLocation;
-
-                        int x2 = myCell.XLocation + 1;
-                        int y2 = myCell.YLocation;
-
-                        if ((x != 7) && (x != 14) && (x != 21) && (x != 28))
-                        {
-                            myCells[x][y].TranslateTo((myCells[x2][y2].Width + 3), 0, 500, Easing.CubicInOut);
-                            await myCells[x2][y2].TranslateTo(-(myCells[x][y].Width + 3), 0, 500, Easing.CubicInOut);
-
-
-                            //Remove cell 1
-                            mainGrid.Children.Remove(myCells[x][y]);
-                            //Remove cell 2
-                            mainGrid.Children.Remove(myCells[x2][y2]);
-
-                            //Swapping
-                            swap(ref myCells[x][y], ref myCells[x2][y2]);
-
-                            //Swapping location value
-                            myCells[x][y].SetLocation(x, y);
-                            myCells[x2][y2].SetLocation(x2, y2);
-
-                            myCells[x][y].TranslateTo(0, 0, UInt32.MinValue);
-                            myCells[x2][y2].TranslateTo(0, 0, UInt32.MinValue);
-
-                            //Readding
-                            mainGrid.Children.Add(myCells[x][y], x, y);
-                            mainGrid.Children.Add(myCells[x2][y2], x2, y2);
-                        }
-                        //System.Diagnostics.Debug.WriteLine("Position"+ myCell.PosInLayout);
-                    };
-                    myCell.west.Clicked += async (sender, args) =>
-                    {
-                        Button s = sender as Button;
-                        int x = myCell.XLocation;
-                        int y = myCell.YLocation;
-                        if ((x != 0) && (x != 14) && (x != 21) && (x != 28))
-                        {
-                            myCells[x][y].TranslateTo(-(myCells[x - 1][y].Width + 3), 0, 500, Easing.CubicInOut);
-                            await myCells[x - 1][y].TranslateTo(myCells[x][y].Width + 3, 0, 500, Easing.CubicInOut);
-
-                            //Remove cell 1
-                            mainGrid.Children.Remove(myCells[x][y]);
-                            //Remove cell 2
-                            mainGrid.Children.Remove(myCells[x - 1][y]);
-
-                            //Swapping
-                            swap(ref myCells[x][y], ref myCells[x - 1][y]);
-
-                            //Swapping location value
-                            myCells[x][y].SetLocation(x, y);
-                            myCells[x - 1][y].SetLocation(x - 1, y);
-
-                            myCells[x][y].TranslateTo(0, 0, UInt32.MinValue);
-                            myCells[x - 1][y].TranslateTo(0, 0, UInt32.MinValue);
-
-                            //Readding
-                            mainGrid.Children.Add(myCells[x][y], x, y);
-                            mainGrid.Children.Add(myCells[x - 1][y], x - 1, y);
-                        }
-                        //System.Diagnostics.Debug.WriteLine("Position"+ myCell.PosInLayout);
-                    };
-                    myCell.north.Clicked += async (sender, args) =>
-                    {
-                        Button s = sender as Button;
-                        int x = myCell.XLocation;
-                        int y = myCell.YLocation;
-                        if (y > 0)
-                        {
-                            s.BackgroundColor = Color.Green;
-
-                            myCells[x][y].TranslateTo(0, -(myCells[x][y - 1].Height + 3), 500, Easing.CubicInOut);
-                            await myCells[x][y - 1].TranslateTo(0, myCells[x][y].Height + 3, 500, Easing.CubicInOut);
-
-                            //Remove cell 1
-                            mainGrid.Children.Remove(myCells[x][y]);
-                            //Remove cell 2
-                            mainGrid.Children.Remove(myCells[x][y - 1]);
-
-                            //Swapping
-                            swap(ref myCells[x][y], ref myCells[x][y - 1]);
-
-                            //Swapping location value
-                            myCells[x][y].SetLocation(x, y);
-                            myCells[x][y - 1].SetLocation(x, y - 1);
-
-                            myCells[x][y].TranslateTo(0, 0, UInt32.MinValue);
-                            myCells[x][y - 1].TranslateTo(0, 0, UInt32.MinValue);
-
-                            //Readding
-                            mainGrid.Children.Add(myCells[x][y], x, y);
-                            mainGrid.Children.Add(myCells[x][y - 1], x, y - 1);
-                        }
-                        //System.Diagnostics.Debug.WriteLine("Position"+ myCell.PosInLayout);
-                    };
-                    myCell.south.Clicked += async (sender, args) =>
-                    {
-                        Button s = sender as Button;
-                        int x = myCell.XLocation;
-                        int y = myCell.YLocation;
-                        if (y < 4)
-                        {
-                            s.BackgroundColor = Color.Green;
-
-                            myCells[x][y].TranslateTo(0, myCells[x][y + 1].Height + 3, 500, Easing.CubicInOut);
-                            await myCells[x][y + 1].TranslateTo(0, -(myCells[x][y].Height + 3), 500, Easing.CubicInOut);
-
-                            //Remove cell 1
-                            mainGrid.Children.Remove(myCells[x][y]);
-                            //Remove cell 2
-                            mainGrid.Children.Remove(myCells[x][y + 1]);
-
-                            //Swapping
-                            swap(ref myCells[x][y], ref myCells[x][y + 1]);
-
-                            //Swapping location value
-                            myCells[x][y].SetLocation(x, y);
-                            myCells[x][y + 1].SetLocation(x, y + 1);
-
-                            myCells[x][y].TranslateTo(0, 0, UInt32.MinValue);
-                            myCells[x][y + 1].TranslateTo(0, 0, UInt32.MinValue);
-
-                            //Readding
-                            mainGrid.Children.Add(myCells[x][y], x, y);
-                            mainGrid.Children.Add(myCells[x][y + 1], x, y + 1);
-                        }
-                    };
-
                     //Multi d, array, referencing matrix of buttons
-
-                    if (yAxis == 5 & xAxis == 3)
-                    {
-                        Grid.SetColumnSpan(myCell, 2);
-                    }
-                    if (yAxis == 6 & xAxis == 3)
-                    {
-                        mainGrid.Children.Remove(myCell);
-                    }
                     pos++;
                 }
             }
             //TODO CURRENTLY DOING
             superGrid.Children.Add(mainGrid,0,1);
-            superGrid.WidthRequest = 500;
-            superGrid.HeightRequest = 500;
+            superGrid.WidthRequest = 850;
+            superGrid.HeightRequest = 550;
             superGrid.MinimumWidthRequest = 500;
             superGrid.HorizontalOptions = LayoutOptions.Start;
             superGrid.VerticalOptions = LayoutOptions.Start;
             Content = superGrid;
         }
 
-        private bool editing = false;
         private void EditButton_Clicked(object sender, EventArgs e)
         {
             //mainGrid.ColumnSpacing = 5;
@@ -323,8 +180,138 @@ namespace RAT._1View.Desktop.Manage
             }
         }
 
+        private void NorthOnClicked(object sender, EventArgs e)
+        {
+            Button s = sender as Button;
+            s.BackgroundColor = Color.Green;
+            DashboardCell d = (DashboardCell)s.Parent;
+
+            int x = d.XLocation;
+            int y = d.YLocation;
+
+            int x2 = d.XLocation;
+            int y2 = d.YLocation - 1;
+
+            if (y > 0)
+            {
+                //Animation
+                //Displacement: Relative distance from its original position + the the cell width its switching with
+                double displacement = (myCells[x][y].TranslationY - (myCells[x2][y2].Height + 3));
+                double displacement2 = (myCells[x2][y2].TranslationY + (myCells[x][y].Height + 3));
+
+                myCells[x][y].TranslateTo(myCells[x][y].TranslationX, displacement, 500, Easing.CubicInOut);
+                myCells[x][y2].TranslateTo(myCells[x2][y2].TranslationX, displacement2, 500, Easing.CubicInOut);
+
+                //Swapping
+                swap(ref myCells[x][y], ref myCells[x2][y2]);
+
+                //Swapping location value
+                myCells[x][y].SetLocation(x, y);
+                myCells[x2][y2].SetLocation(x2, y2);
+            }
+        }
+
+        private void SouthOnClicked(object sender, EventArgs e)
+        {
+            Button s = sender as Button;
+            s.BackgroundColor = Color.Green;
+            DashboardCell d = (DashboardCell)s.Parent;
+            d.BackgroundColor = Color.Aqua;
+
+            int x = d.XLocation;
+            int y = d.YLocation;
+
+            int x2 = d.XLocation;
+            int y2 = d.YLocation + 1;
+
+            if (y < 4)
+            {
+                //Animation
+                //Displacement: Relative distance from its original position + the the cell width its switching with
+                double displacement = (myCells[x][y].TranslationY + (myCells[x2][y2].Height + 3));
+                double displacement2 = (myCells[x2][y2].TranslationY - (myCells[x][y].Height + 3));
+
+                myCells[x][y].TranslateTo(myCells[x][y].TranslationX, displacement, 500, Easing.CubicInOut);
+                myCells[x2][y2].TranslateTo(myCells[x2][y2].TranslationX, displacement2, 500, Easing.CubicInOut);
+
+                //Swapping
+                swap(ref myCells[x][y], ref myCells[x2][y2]);
+
+                //Swapping location value
+                myCells[x][y].SetLocation(x, y);
+                myCells[x2][y2].SetLocation(x2, y2);
+            }
+        }
+
+
+
+        private void WestOnClicked(object sender, EventArgs e)
+	    {
+	        Button s = sender as Button;
+	        s.BackgroundColor = Color.Green;
+	        DashboardCell d = (DashboardCell) s.Parent;
+
+	        int x = d.XLocation;
+	        int y = d.YLocation;
+
+	        int x2 = d.XLocation - 1;
+	        int y2 = d.YLocation;
+
+	        if (x > 0)
+	        {
+                //Animation
+                //Displacement: Relative distance from its original position + the the cell width its switching with
+                double displacement = (myCells[x][y].TranslationX - (myCells[x2][y2].Width + 3));
+                double displacement2 = (myCells[x2][y2].TranslationX + (myCells[x][y].Width + 3));
+
+                myCells[x][y].TranslateTo(displacement, myCells[x][y].TranslationY, 500, Easing.CubicInOut);
+                myCells[x2][y2].TranslateTo(displacement2, myCells[x2][y2].TranslationY, 500, Easing.CubicInOut);
+
+                //Swapping
+                swap(ref myCells[x][y], ref myCells[x2][y2]);
+
+                //Swapping location value
+                myCells[x][y].SetLocation(x, y);
+                myCells[x2][y2].SetLocation(x2, y2);
+            }
+	    }
+
+	    private void EastOnClicked(object sender, EventArgs eventArgs)
+	    {
+	        Button s = sender as Button;
+            s.BackgroundColor = Color.Green;
+	        DashboardCell d = (DashboardCell)s.Parent;
+
+            int x = d.XLocation;
+            int y = d.YLocation;
+
+            int x2 = d.XLocation + 1;
+            int y2 = d.YLocation;
+
+            if ((x != 7) && (x != 14) && (x != 21) && (x != 28))
+            {
+            //Animation
+            //Displacement: Relative distance from its original position + the the cell width its switching with
+	        double displacement = (myCells[x][y].TranslationX + (myCells[x2][y2].Width + 3));
+            double displacement2 = (myCells[x2][y2].TranslationX - (myCells[x][y].Width + 3));
+
+            myCells[x][y].TranslateTo(displacement, myCells[x][y].TranslationY, 500, Easing.CubicInOut);
+            myCells[x2][y2].TranslateTo(displacement2, myCells[x2][y2].TranslationY, 500, Easing.CubicInOut);
+
+            //Swapping array reference locations
+            swap(ref myCells[x][y], ref myCells[x2][y2]);
+
+            //Swapping location value#
+            myCells[x][y].SetLocation(x, y);
+            myCells[x2][y2].SetLocation(x2, y2);
+
+            System.Diagnostics.Debug.WriteLine("Translation X"+myCells[x][y].TranslationX);
+            System.Diagnostics.Debug.WriteLine("Distance X" + displacement2);
+            }
+        }
+
         //Swapping values on Dashboard
-            static void swap(ref DashboardCell a, ref DashboardCell b)
+        static void swap(ref DashboardCell a, ref DashboardCell b)
         {
             DashboardCell temp = a;
             a = b;
