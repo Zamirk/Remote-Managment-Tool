@@ -11,6 +11,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 {
     class DashboardCell: Grid
     {
+        public bool hasGraph = false;
         public Button myButton = new Button();
         private SfChart myChart;
         ObservableCollection<ChartDataPoint> data = new ObservableCollection<ChartDataPoint>();
@@ -28,6 +29,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         public DashboardCell()
         {
             this.BackgroundColor = Color.White;
+            Opacity = 1.1;
             //TODO ONLY USE AS TESTING
             int z = 0;
             bool a = true;
@@ -190,6 +192,13 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 Children.Add(west);
                 Children.Add(east);
                 Children.Add(north);
+
+                //Pushing buttons above graph
+                RaiseChild(south);
+                RaiseChild(west);
+                RaiseChild(east);
+                RaiseChild(north);
+                LowerChild(myChart);
                 AlreadyGenerated = true;
             }
             else
@@ -198,11 +207,14 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 west.IsVisible = true;
                 east.IsVisible = true;
                 north.IsVisible = true;
+                RaiseChild(south);
+
             }
-            //Children.Add(northwest);
-            //Children.Add(northeast);
-            //Children.Add(southeast);
-            //Children.Add(southwest);
+            RaiseChild(south);
+            RaiseChild(west);
+            RaiseChild(east);
+            RaiseChild(north);
+            LowerChild(myChart);
         }
 
         public void SetLocation(int x, int y)
@@ -236,10 +248,15 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.PrimaryAxis.IsVisible = false;
             myChart.SecondaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
-
+            Common();
             Children.Add(myChart);
         }
 
+        public void Common()
+        {
+            hasGraph = true;
+            Opacity = 1;
+        }
         public void BarChart()
         {
                //Chart
@@ -260,6 +277,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -288,6 +306,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -316,6 +335,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -344,6 +364,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -372,6 +393,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -400,6 +422,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -427,6 +450,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -455,6 +479,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -483,6 +508,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -511,6 +537,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -539,6 +566,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -567,6 +595,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -574,6 +603,8 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
+        public int MaxSpanColumn { get; set; }
+        public int MaxSpanRow { get; set; }
 
         public void StackingArea100()
         {
@@ -595,6 +626,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -623,6 +655,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -651,6 +684,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -679,6 +713,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -707,6 +742,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -735,6 +771,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -763,6 +800,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;
@@ -791,6 +829,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
+            Common();
 
             myChart.Series[0].ItemsSource = data;
             myChart.PrimaryAxis.IsVisible = false;

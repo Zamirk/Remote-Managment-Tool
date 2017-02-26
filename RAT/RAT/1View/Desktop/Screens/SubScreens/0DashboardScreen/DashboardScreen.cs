@@ -16,7 +16,11 @@ namespace RAT._1View.Desktop.Manage
 {
 	public class DashboardScreen : ScrollView
 	{
-        private bool editing = false;
+        private bool moving = false;
+        private bool resizing = false;
+
+        double width = 109.25;
+        double height = 99.6;
 
         private Grid superGrid;
         private Grid mainGrid;
@@ -44,17 +48,29 @@ namespace RAT._1View.Desktop.Manage
             buttonGrid.ColumnSpacing = 0;
             buttonGrid.RowSpacing = 0;
 
-            Button editButton = new Button();
-            editButton.Text = "Move";
-            editButton.FontSize = 15;
-            editButton.WidthRequest = 150;
-            editButton.HeightRequest = 150;
-            editButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            editButton.VerticalOptions = LayoutOptions.CenterAndExpand;
-            editButton.BackgroundColor = Color.Black;
-            editButton.TextColor = Color.White;
-            editButton.Clicked += EditButton_Clicked;
-            buttonGrid.Children.Add(editButton, 2, 0);
+            Button resizing = new Button();
+            resizing.Text = "Resize";
+            resizing.FontSize = 15;
+            resizing.WidthRequest = 150;
+            resizing.HeightRequest = 150;
+            resizing.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            resizing.VerticalOptions = LayoutOptions.CenterAndExpand;
+            resizing.BackgroundColor = Color.Black;
+            resizing.TextColor = Color.White;
+            resizing.Clicked += ResizingOnClicked;
+            buttonGrid.Children.Add(resizing, 2, 0);
+
+            Button movingButton = new Button();
+            movingButton.Text = "Move";
+            movingButton.FontSize = 15;
+            movingButton.WidthRequest = 150;
+            movingButton.HeightRequest = 150;
+            movingButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            movingButton.VerticalOptions = LayoutOptions.CenterAndExpand;
+            movingButton.BackgroundColor = Color.Black;
+            movingButton.TextColor = Color.White;
+            movingButton.Clicked += MovingButton;
+            buttonGrid.Children.Add(movingButton, 3, 0);
 
             Button deleteButton = new Button();
             deleteButton.Text = "Delete";
@@ -65,18 +81,7 @@ namespace RAT._1View.Desktop.Manage
             deleteButton.VerticalOptions = LayoutOptions.CenterAndExpand;
             deleteButton.BackgroundColor = Color.Black;
             deleteButton.TextColor = Color.White;
-            buttonGrid.Children.Add(deleteButton, 3, 0);
-
-            Button sizeButton = new Button();
-            sizeButton.Text = "Resize";
-            sizeButton.FontSize = 15;
-            sizeButton.WidthRequest = 150;
-            sizeButton.HeightRequest = 150;
-            sizeButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            sizeButton.VerticalOptions = LayoutOptions.CenterAndExpand;
-            sizeButton.BackgroundColor = Color.Black;
-            sizeButton.TextColor = Color.White;
-            buttonGrid.Children.Add(sizeButton, 1, 0);
+            buttonGrid.Children.Add(deleteButton, 4, 0);
 
             superGrid.Children.Add(buttonGrid,0,0);
 
@@ -96,7 +101,6 @@ namespace RAT._1View.Desktop.Manage
             mainGrid.ColumnSpacing = 3;
             mainGrid.RowSpacing = 3;
             mainGrid.BackgroundColor = Color.FromRgb(237, 237, 235);
-            int pos = 0;
 
             mainGrid.Padding = new Thickness(5,5,0,0);
             mainGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
@@ -112,7 +116,6 @@ namespace RAT._1View.Desktop.Manage
             mainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             mainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
 
-            Random rand = new Random();
             //Addings cells, X and Y grid
             for (int yAxis = 0; yAxis < 5; yAxis++)
             {
@@ -125,6 +128,10 @@ namespace RAT._1View.Desktop.Manage
                     myCells[xAxis][yAxis].XLocation = xAxis;
                     myCells[xAxis][yAxis].YLocation = yAxis;
 
+                    //Max Spans in grid
+                    myCells[xAxis][yAxis].MaxSpanColumn = 8 - xAxis;
+                    myCells[xAxis][yAxis].MaxSpanRow = 5 - yAxis;
+
                     //Movements
                     myCells[xAxis][yAxis].east.Clicked += EastOnClicked;
                     myCells[xAxis][yAxis].west.Clicked += WestOnClicked;
@@ -133,45 +140,88 @@ namespace RAT._1View.Desktop.Manage
 
                     System.Diagnostics.Debug.WriteLine(":::"+(yAxis)+":"+ xAxis);
                     mainGrid.Children.Add(myCell, xAxis, yAxis);
-
                 }
             }
             //TODO CURRENTLY DOING
             superGrid.Children.Add(mainGrid,0,1);
-            superGrid.WidthRequest = 880;
+            superGrid.WidthRequest = 900;
             superGrid.HeightRequest = 550;
             superGrid.MinimumWidthRequest = 500;
             superGrid.HorizontalOptions = LayoutOptions.Start;
             superGrid.VerticalOptions = LayoutOptions.Start;
+
             Content = superGrid;
+            //Point of reference for animation movment
+
+
         }
 
-        private void EditButton_Clicked(object sender, EventArgs e)
+	    private void MovingButton(object sender, EventArgs eventArgs)
+	    {
+            //When moving button clicked, show buttons or hide dashboard cell buttons, resizing is turned off
+	        if (moving)
+	        {
+	            moving = false;
+	            HideButtons();
+	        }
+	        else
+	        {
+                ShowButtons();
+                moving = true;
+                resizing = false;
+            }
+        }
+
+	    private void ResizingOnClicked(object sender, EventArgs e)
+        {
+            //When resizing button clicked, show buttons or hide dashboard cell buttons, moving is turned off
+            if (resizing)
+            {
+                resizing = false;
+                HideButtons();
+            }
+            else
+            {
+                ShowButtons();
+                resizing = true;
+                moving = false;
+            }
+        }
+
+        private void HideButtons()
         {
             //mainGrid.ColumnSpacing = 5;
             //mainGrid.RowSpacing = 5;
             //mainGrid.ForceLayout();
-            if (!editing)
+            //Hide all of the dashboard cell buttons
+            for (int yAxis = 0; yAxis < 5; yAxis++)
             {
-                for (int yAxis = 0; yAxis < 5; yAxis++)
+                for (int xAxis = 0; xAxis < 8; xAxis++)
                 {
-                    for (int xAxis = 0; xAxis < 8; xAxis++)
+                    myCells[xAxis][yAxis].RemoveMovementButtons();
+                    myCells[xAxis][yAxis].EnableButton();
+                        myCells[xAxis][yAxis].InputTransparent = false;
+                    if (myCells[xAxis][yAxis].Opacity == 0)
                     {
-                        myCells[xAxis][yAxis].PositionalButtons();
-                        myCells[xAxis][yAxis].DisableButton();
+                        myCells[xAxis][yAxis].Opacity = 1.1;
                     }
                 }
-                editing = true;
             }
-            else
+        }
+
+        private void ShowButtons()
+	    {
+            //Show all of the dashboard cell buttons
+            for (int yAxis = 0; yAxis < 5; yAxis++)
             {
-                editing = false;
-                for (int yAxis = 0; yAxis < 5; yAxis++)
+                for (int xAxis = 0; xAxis < 8; xAxis++)
                 {
-                    for (int xAxis = 0; xAxis < 8; xAxis++)
+                    myCells[xAxis][yAxis].PositionalButtons();
+                    myCells[xAxis][yAxis].DisableButton();
+                    if (!myCells[xAxis][yAxis].hasGraph)
                     {
-                        myCells[xAxis][yAxis].RemoveMovementButtons();
-                        myCells[xAxis][yAxis].EnableButton();
+                        myCells[xAxis][yAxis].InputTransparent = true;
+                        myCells[xAxis][yAxis].Opacity = 0;
                     }
                 }
             }
@@ -188,22 +238,31 @@ namespace RAT._1View.Desktop.Manage
             int x2 = d.XLocation;
             int y2 = d.YLocation - 1;
 
-            if (y > 0)
+            if (moving)
             {
-                //Animation
-                //Displacement: Relative distance from its original position + the the cell width its switching with
-                double displacement = (myCells[x][y].TranslationY - (myCells[x2][y2].Height + 3));
-                double displacement2 = (myCells[x2][y2].TranslationY + (myCells[x][y].Height + 3));
+                if (y > 0)
+                {
+                    //Animation
+                    //Displacement: Relative distance from its original position + the the cell width its switching with
+                    double displacement = (myCells[x][y].TranslationY - (height + 3));
+                    double displacement2 = (myCells[x2][y2].TranslationY + (height + 3));
 
-                myCells[x][y].TranslateTo(myCells[x][y].TranslationX, displacement, 500, Easing.CubicInOut);
-                myCells[x][y2].TranslateTo(myCells[x2][y2].TranslationX, displacement2, 500, Easing.CubicInOut);
+                    myCells[x][y].TranslateTo(myCells[x][y].TranslationX, displacement, 500, Easing.CubicInOut);
+                    myCells[x][y2].TranslateTo(myCells[x2][y2].TranslationX, displacement2, 500, Easing.CubicInOut);
 
-                //Swapping
-                swap(ref myCells[x][y], ref myCells[x2][y2]);
+                    //Swapping
+                    swap(ref myCells[x][y], ref myCells[x2][y2]);
 
-                //Swapping location value
-                myCells[x][y].SetLocation(x, y);
-                myCells[x2][y2].SetLocation(x2, y2);
+                    //Swapping location value
+                    myCells[x][y].SetLocation(x, y);
+                    myCells[x2][y2].SetLocation(x2, y2);
+                }
+            } else if (resizing)
+            {
+                if (Grid.GetRowSpan(myCells[x][y]) != 1)
+                {
+                    Grid.SetRowSpan(myCells[x][y], Grid.GetRowSpan(myCells[x][y]) - 1);
+                }
             }
         }
 
@@ -218,22 +277,34 @@ namespace RAT._1View.Desktop.Manage
             int x2 = d.XLocation;
             int y2 = d.YLocation + 1;
 
-            if (y < 4)
+            if (moving)
             {
-                //Animation
-                //Displacement: Relative distance from its original position + the the cell width its switching with
-                double displacement = (myCells[x][y].TranslationY + (myCells[x2][y2].Height + 3));
-                double displacement2 = (myCells[x2][y2].TranslationY - (myCells[x][y].Height + 3));
+                if (y < 4)
+                {
+                    //Animation
+                    //Displacement: Relative distance from its original position + the the cell width its switching with
+                    double displacement = (myCells[x][y].TranslationY + (height + 3));
+                    double displacement2 = (myCells[x2][y2].TranslationY - (height + 3));
 
-                myCells[x][y].TranslateTo(myCells[x][y].TranslationX, displacement, 500, Easing.CubicInOut);
-                myCells[x2][y2].TranslateTo(myCells[x2][y2].TranslationX, displacement2, 500, Easing.CubicInOut);
+                    myCells[x][y].TranslateTo(myCells[x][y].TranslationX, displacement, 500, Easing.CubicInOut);
+                    myCells[x2][y2].TranslateTo(myCells[x2][y2].TranslationX, displacement2, 500, Easing.CubicInOut);
 
-                //Swapping
-                swap(ref myCells[x][y], ref myCells[x2][y2]);
+                    //Swapping
+                    swap(ref myCells[x][y], ref myCells[x2][y2]);
 
-                //Swapping location value
-                myCells[x][y].SetLocation(x, y);
-                myCells[x2][y2].SetLocation(x2, y2);
+                    //Swapping location value
+                    myCells[x][y].SetLocation(x, y);
+                    myCells[x2][y2].SetLocation(x2, y2);
+                }
+            } else if (resizing)
+            {
+                //Checking max row span
+                if ((Grid.GetRowSpan(myCells[x][y]) + 1 <= myCells[x][y].MaxSpanRow)
+                    && Grid.GetRowSpan(myCells[x][y]) + y < 5)
+                {
+                    Grid.SetRowSpan(myCells[x][y], Grid.GetRowSpan(myCells[x][y]) + 1);
+                }
+                //myCells[x2][y2].IsVisible = false;
             }
         }
 
@@ -241,7 +312,7 @@ namespace RAT._1View.Desktop.Manage
 
         private void WestOnClicked(object sender, EventArgs e)
 	    {
-	        Button s = sender as Button;
+            Button s = sender as Button;
 	        DashboardCell d = (DashboardCell) s.Parent;
 
 	        int x = d.XLocation;
@@ -250,12 +321,14 @@ namespace RAT._1View.Desktop.Manage
 	        int x2 = d.XLocation - 1;
 	        int y2 = d.YLocation;
 
+	        if (moving)
+	        {
 	        if (x > 0)
 	        {
                 //Animation
                 //Displacement: Relative distance from its original position + the the cell width its switching with
-                double displacement = (myCells[x][y].TranslationX - (myCells[x2][y2].Width + 3));
-                double displacement2 = (myCells[x2][y2].TranslationX + (myCells[x][y].Width + 3));
+                double displacement = (myCells[x][y].TranslationX - (width + 3));
+                double displacement2 = (myCells[x2][y2].TranslationX + (width + 3));
 
                 myCells[x][y].TranslateTo(displacement, myCells[x][y].TranslationY, 500, Easing.CubicInOut);
                 myCells[x2][y2].TranslateTo(displacement2, myCells[x2][y2].TranslationY, 500, Easing.CubicInOut);
@@ -267,11 +340,20 @@ namespace RAT._1View.Desktop.Manage
                 myCells[x][y].SetLocation(x, y);
                 myCells[x2][y2].SetLocation(x2, y2);
             }
-	    }
+            } else if (resizing)
+	        {
+	            if (Grid.GetColumnSpan(myCells[x][y]) != 1)
+	            {
+	                Grid.SetColumnSpan(myCells[x][y], Grid.GetColumnSpan(myCells[x][y]) - 1);
+	            }
+	        }
 
-	    private void EastOnClicked(object sender, EventArgs eventArgs)
+        }
+
+
+        private void EastOnClicked(object sender, EventArgs eventArgs)
 	    {
-	        Button s = sender as Button;
+            Button s = sender as Button;
             s.BackgroundColor = Color.Green;
 	        DashboardCell d = (DashboardCell)s.Parent;
 
@@ -281,12 +363,14 @@ namespace RAT._1View.Desktop.Manage
             int x2 = d.XLocation + 1;
             int y2 = d.YLocation;
 
+	        if (moving)
+	        {
             if (x < 7)
             {
             //Animation
             //Displacement: Relative distance from its original position + the the cell width its switching with
-	        double displacement = (myCells[x][y].TranslationX + (myCells[x2][y2].Width + 3));
-            double displacement2 = (myCells[x2][y2].TranslationX - (myCells[x][y].Width + 3));
+	        double displacement = (myCells[x][y].TranslationX + (width + 3));
+            double displacement2 = (myCells[x2][y2].TranslationX - (width + 3));
 
             myCells[x][y].TranslateTo(displacement, myCells[x][y].TranslationY, 500, Easing.CubicInOut);
             myCells[x2][y2].TranslateTo(displacement2, myCells[x2][y2].TranslationY, 500, Easing.CubicInOut);
@@ -300,6 +384,15 @@ namespace RAT._1View.Desktop.Manage
 
             System.Diagnostics.Debug.WriteLine("Translation X"+myCells[x][y].TranslationX);
             System.Diagnostics.Debug.WriteLine("Distance X" + displacement2);
+            }
+            } else if (resizing)
+	        {
+                //Checking max collumn span
+	            if ((Grid.GetColumnSpan(myCells[x][y]) + 1 <= myCells[x][y].MaxSpanColumn)
+                    && Grid.GetColumnSpan(myCells[x][y]) + x < 8 )
+	            {
+                Grid.SetColumnSpan(myCells[x][y], Grid.GetColumnSpan(myCells[x][y]) + 1);
+                }
             }
         }
 
