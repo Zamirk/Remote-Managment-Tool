@@ -124,7 +124,6 @@ namespace RAT._1View.Desktop.Manage
                     //Position in the grid/layout
                     myCells[xAxis][yAxis].XLocation = xAxis;
                     myCells[xAxis][yAxis].YLocation = yAxis;
-                    myCells[xAxis][yAxis].PosInLayout = pos;
 
                     //Movements
                     myCells[xAxis][yAxis].east.Clicked += EastOnClicked;
@@ -135,13 +134,11 @@ namespace RAT._1View.Desktop.Manage
                     System.Diagnostics.Debug.WriteLine(":::"+(yAxis)+":"+ xAxis);
                     mainGrid.Children.Add(myCell, xAxis, yAxis);
 
-                    //Multi d, array, referencing matrix of buttons
-                    pos++;
                 }
             }
             //TODO CURRENTLY DOING
             superGrid.Children.Add(mainGrid,0,1);
-            superGrid.WidthRequest = 850;
+            superGrid.WidthRequest = 880;
             superGrid.HeightRequest = 550;
             superGrid.MinimumWidthRequest = 500;
             superGrid.HorizontalOptions = LayoutOptions.Start;
@@ -183,7 +180,6 @@ namespace RAT._1View.Desktop.Manage
         private void NorthOnClicked(object sender, EventArgs e)
         {
             Button s = sender as Button;
-            s.BackgroundColor = Color.Green;
             DashboardCell d = (DashboardCell)s.Parent;
 
             int x = d.XLocation;
@@ -214,9 +210,7 @@ namespace RAT._1View.Desktop.Manage
         private void SouthOnClicked(object sender, EventArgs e)
         {
             Button s = sender as Button;
-            s.BackgroundColor = Color.Green;
             DashboardCell d = (DashboardCell)s.Parent;
-            d.BackgroundColor = Color.Aqua;
 
             int x = d.XLocation;
             int y = d.YLocation;
@@ -248,7 +242,6 @@ namespace RAT._1View.Desktop.Manage
         private void WestOnClicked(object sender, EventArgs e)
 	    {
 	        Button s = sender as Button;
-	        s.BackgroundColor = Color.Green;
 	        DashboardCell d = (DashboardCell) s.Parent;
 
 	        int x = d.XLocation;
@@ -288,7 +281,7 @@ namespace RAT._1View.Desktop.Manage
             int x2 = d.XLocation + 1;
             int y2 = d.YLocation;
 
-            if ((x != 7) && (x != 14) && (x != 21) && (x != 28))
+            if (x < 7)
             {
             //Animation
             //Displacement: Relative distance from its original position + the the cell width its switching with

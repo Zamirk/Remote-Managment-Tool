@@ -19,8 +19,8 @@ namespace RAT.ZTry
         private MenuState myMenuState;
         private ViewDevicesScreen viewDevicesScreen;
         private DeviceScreen singleDeviceScreen;
-        private PerformanceScreen systemPerformanceScreen;
-        private AppsScreen applicationManagmentScreen;
+        private AppScreen appScreen;
+        //private AppsScreen applicationManagmentScreen;
         private DashboardScreen dashboardScreen;
 
         private Button signOutButton, performanceButton, manageButton, dashboardButton,
@@ -259,8 +259,8 @@ namespace RAT.ZTry
                 RemoveScreen();
 
                 //Adding Overview Screen
-                systemPerformanceScreen = new PerformanceScreen();
-                midGrid.Children.Add(systemPerformanceScreen, 1, 0);
+                appScreen = new AppScreen();
+                midGrid.Children.Add(appScreen, 1, 0);
 
                 myMenuState = MenuState.PERFORMANCE;
             }
@@ -274,8 +274,8 @@ namespace RAT.ZTry
                 RemoveScreen();
 
                 //Adding Overview Screen
-                applicationManagmentScreen = new AppsScreen();
-                midGrid.Children.Add(applicationManagmentScreen, 1, 0);
+                //applicationManagmentScreen = new AppsScreen();
+                //midGrid.Children.Add(applicationManagmentScreen, 1, 0);
 
                 myMenuState = MenuState.APPLICATIONS;
             }
@@ -301,12 +301,12 @@ namespace RAT.ZTry
             else if (myMenuState == MenuState.PERFORMANCE)
             {
                 performanceButton.BackgroundColor = Color.Transparent;
-                midGrid.Children.Remove(systemPerformanceScreen);
+                midGrid.Children.Remove(appScreen);
             }
             else if (myMenuState == MenuState.APPLICATIONS)
             {
                 applicationButton.BackgroundColor = Color.Transparent;
-                midGrid.Children.Remove(applicationManagmentScreen);
+                //midGrid.Children.Remove(applicationManagmentScreen);
             }
             else if (myMenuState == MenuState.MANAGE_SINGLEDEVICE)
             {

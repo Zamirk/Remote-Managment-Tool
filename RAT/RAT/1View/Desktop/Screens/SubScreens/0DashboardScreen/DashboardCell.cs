@@ -56,7 +56,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         private void Button()
         {
             myButton = new Button();
-            myButton.Text = "+";
+            myButton.Text = "";
             myButton.FontSize = 25;
             myButton.VerticalOptions = LayoutOptions.Center;
             myButton.HorizontalOptions = LayoutOptions.Center;
@@ -135,6 +135,8 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             west.IsVisible = false;
         }
 
+        private float buttonSize = 15f;
+        private int radius = 25;
         private bool AlreadyGenerated = false;
         public void PositionalButtons()
         {
@@ -147,8 +149,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 north.BorderColor = Color.Transparent;
                 north.BackgroundColor = Color.Black;
                 north.BorderWidth = .000001;
-                north.WidthRequest = 10f;
-                north.HeightRequest = 10f;
+                north.WidthRequest = buttonSize;
+                north.HeightRequest = buttonSize;
+                north.BorderRadius = radius;
 
                 east.Text = "";
                 east.FontSize = 25;
@@ -157,8 +160,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 east.BorderColor = Color.Transparent;
                 east.BackgroundColor = Color.Black;
                 east.BorderWidth = .000001;
-                east.WidthRequest = 10f;
-                east.HeightRequest = 10f;
+                east.WidthRequest = buttonSize;
+                east.HeightRequest = buttonSize;
+                east.BorderRadius = radius;
 
                 west.Text = "";
                 west.FontSize = 25;
@@ -167,9 +171,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 west.BorderColor = Color.Transparent;
                 west.BackgroundColor = Color.Black;
                 west.BorderWidth = .000001;
-                west.WidthRequest = 10f;
-                west.HeightRequest = 10f;
-
+                west.WidthRequest = buttonSize;
+                west.HeightRequest = buttonSize;
+                west.BorderRadius = radius;
 
                 south.Text = "";
                 south.FontSize = 25;
@@ -178,8 +182,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 south.BorderColor = Color.Transparent;
                 south.BackgroundColor = Color.Black;
                 south.BorderWidth = .000001;
-                south.WidthRequest = 10f;
-                south.HeightRequest = 10f;
+                south.WidthRequest = buttonSize;
+                south.HeightRequest = buttonSize;
+                south.BorderRadius = radius;
 
                 Children.Add(south);
                 Children.Add(west);
