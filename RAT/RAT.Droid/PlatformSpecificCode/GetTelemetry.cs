@@ -27,7 +27,7 @@ namespace ConsoleApplication1.Folder
         public static TelemetryDatapoint lastReceivedValue;
         public static void ReceiveTelemetry()
         {
-
+            lastReceivedValue = new TelemetryDatapoint("Device_1");
             Console.WriteLine("Receiving Data");
 
             listOfDevices = new List<Queue<TelemetryDatapoint>>();

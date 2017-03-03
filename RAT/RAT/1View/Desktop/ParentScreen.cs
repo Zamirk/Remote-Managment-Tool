@@ -140,7 +140,15 @@ namespace RAT.ZTry
             #region TopGrid
             //Top-grid
             topGrid.Children.Add(new ContentView() { BackgroundColor = Color.FromRgb(17, 150, 205) });
+            //TODO REMOVE AND REPLACE WITH MOBILE AND DESTOP SECTIONS 03/03/017
+            if (Device.Idiom == TargetIdiom.Phone)
+            {
+                topGrid.RowDefinitions.Add(new RowDefinition {Height = 5});
+            }
+            else
+            {
             topGrid.RowDefinitions.Add(new RowDefinition { Height = 100 });
+            }
             topGrid.ColumnSpacing = 0;
             topGrid.RowSpacing = 0;
             topGrid.Children.Add(backButton);
@@ -172,7 +180,15 @@ namespace RAT.ZTry
                 midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 225 });
             }
             midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
-            midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 100 });
+            //TODO REMOVE AND REPLACE WITH MOBILE AND DESTOP SECTIONS 03/03/017C
+            if (Device.Idiom == TargetIdiom.Phone)
+            {
+                midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 5 });
+            }
+            else
+            {
+                midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 100 });
+            }
             midGrid.ColumnSpacing = 0;
             midGrid.RowSpacing = 0;
 
