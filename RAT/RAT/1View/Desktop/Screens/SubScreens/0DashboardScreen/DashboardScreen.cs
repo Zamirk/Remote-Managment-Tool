@@ -325,6 +325,8 @@ namespace RAT._1View.Desktop.Manage
 	        {
 	        if (x > 0)
 	        {
+                    //TODO
+                    //Prevents moving off the screen, when spanning is > 1
                 //Animation
                 //Displacement: Relative distance from its original position + the the cell width its switching with
                 double displacement = (myCells[x][y].TranslationX - (width + 3));

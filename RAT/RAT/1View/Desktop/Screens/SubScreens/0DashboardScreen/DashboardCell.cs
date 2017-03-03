@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+//using System.ServiceModel.Channels;
 using System.Text;
 using RAT.zTest;
+using RAT._2ViewModel;
 using Rg.Plugins.Popup.Extensions;
 using Syncfusion.SfChart.XForms;
 using Xamarin.Forms;
@@ -28,6 +30,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
         public DashboardCell()
         {
+
             this.BackgroundColor = Color.White;
             Opacity = 1.1;
             //TODO ONLY USE AS TESTING
@@ -244,7 +247,10 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
 
-            myChart.Series[0].ItemsSource = data;
+            DashboardViewModel aa = new DashboardViewModel();
+            BindingContext = aa;
+            myChart.Series[0].ItemsSource = aa.Data;
+
             myChart.PrimaryAxis.IsVisible = false;
             myChart.SecondaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
@@ -256,6 +262,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         {
             hasGraph = true;
             Opacity = 1;
+
         }
         public void BarChart()
         {

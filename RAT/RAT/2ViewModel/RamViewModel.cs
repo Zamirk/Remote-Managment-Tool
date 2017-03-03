@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
-using Amqp.Framing;
 using ConsoleApplication1.Folder;
 using Syncfusion.SfChart.XForms;
 using Tools;

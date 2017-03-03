@@ -106,6 +106,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlatformSpecificCode\FileHelper.cs" />
+    <Compile Include="PlatformSpecificCode\GetTelemetry.cs" />
     <Compile Include="PlatformSpecificCode\PlatformInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -113,14 +114,10 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="RAT.UWP_StoreKey.pfx" />
-    <None Include="RAT.UWP_TemporaryKey.pfx" />
-    <None Include="Test.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\image.png" />
     <Content Include="Assets\PC.png" />
-    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -197,7 +194,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Test.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="..\RAT\RAT.projitems" Label="Shared" Condition="Exists('..\RAT\RAT.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />

@@ -17,7 +17,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
@@ -25,6 +25,7 @@
     <JavaOptions />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+	<JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -85,6 +86,15 @@
     <Reference Include="PCLCrypto, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\PCLCrypto.1.0.86\lib\monoandroid\PCLCrypto.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Rg.Plugins.Popup.1.0.4\lib\MonoAndroid\Rg.Plugins.Popup.dll</HintPath>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup.Droid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Rg.Plugins.Popup.1.0.4\lib\MonoAndroid\Rg.Plugins.Popup.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Rg.Plugins.Popup.1.0.4\lib\MonoAndroid\Rg.Plugins.Popup.Platform.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.batteries_green, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.0.0\lib\MonoAndroid\SQLitePCLRaw.batteries_green.dll</HintPath>
@@ -232,6 +242,7 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="PlatformSpecificCode\FileHelper.cs" />
+    <Compile Include="PlatformSpecificCode\GetTelemetry.cs" />
     <Compile Include="PlatformSpecificCode\PlatformInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

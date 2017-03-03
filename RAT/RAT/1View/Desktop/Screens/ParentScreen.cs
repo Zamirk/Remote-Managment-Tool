@@ -163,7 +163,14 @@ namespace RAT.ZTry
             //Mid-grid
             midGrid.VerticalOptions = LayoutOptions.FillAndExpand;
             midGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
-            midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 225 });
+            if (Device.Idiom == TargetIdiom.Phone)
+            {
+                midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 50 });
+            }
+            else
+            {
+                midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 225 });
+            }
             midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
             midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 100 });
             midGrid.ColumnSpacing = 0;
