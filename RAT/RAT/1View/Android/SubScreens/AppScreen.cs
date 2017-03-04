@@ -6,16 +6,16 @@ using RAT.ZTry;
 using RAT._2ViewModel.Test;
 using Xamarin.Forms;
 
-namespace RAT._1View.Desktop
+namespace Mobile
 {
-    public class MAppScreen : Grid
+    public class AppScreen : Grid
     {
         int fontSize = 13;
 
         //SubScreen
         private OverviewAllScreen overviewScreen;
-
-        public MAppScreen()
+        
+        public AppScreen()
         {
             Children.Add(new Label() { Text = "System Performance Screen" });
 

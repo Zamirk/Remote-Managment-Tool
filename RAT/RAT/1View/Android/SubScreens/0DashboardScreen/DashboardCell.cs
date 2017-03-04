@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 //using System.ServiceModel.Channels;
 using System.Text;
-using RAT.zTest;
 using RAT._2ViewModel;
 using Rg.Plugins.Popup.Extensions;
 using Syncfusion.SfChart.XForms;
 using Xamarin.Forms;
 
-namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
+namespace Mobile
 {
     class DashboardCell: Grid
     {

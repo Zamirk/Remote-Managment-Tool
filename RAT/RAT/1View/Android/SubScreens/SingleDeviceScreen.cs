@@ -10,27 +10,24 @@ using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
 using RAT._2ViewModel.Test;
 using Xamarin.Forms;
 
-namespace RAT._1View.Desktop.Screens.SubScreens
+namespace Mobile
 {
-
-    namespace RAT._1View.Desktop
-    {
-        public class MDeviceScreen : Grid
+        public class DeviceScreen : Grid
         {
             private Button overviewButton, memoryButton, wifiButton, diskButton, cpuButton;
             int fontSize = 13;
 
             //Current screen on display
             private ScreenState myScreenState;
-
+            private ScrollView myScrollView;
             //SubScreen
-            private MOverviewScreen overviewScreen;
-            private MCPUScreen cpuScreen;
-            private MRamScreen ramScreen;
-            private MDiskScreen diskScreen;
-            private MWifiScreen wifiScreen;
+            private OverviewScreen overviewScreen;
+            private CPUScreen cpuScreen;
+            private RamScreen ramScreen;
+            private DiskScreen diskScreen;
+            private WifiScreen wifiScreen;
 
-            public MDeviceScreen()
+            public DeviceScreen()
             {
                 myScreenState = ScreenState.CPU;
 
@@ -41,61 +38,60 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                 overviewButton.FontSize = fontSize;
                 overviewButton.VerticalOptions = LayoutOptions.Center;
                 overviewButton.HorizontalOptions = LayoutOptions.Center;
-                overviewButton.BorderColor = Color.Transparent;
-                overviewButton.BackgroundColor = Color.Transparent;
                 overviewButton.BorderWidth = .000001;
                 overviewButton.WidthRequest = 100;
-                overviewButton.HeightRequest = 50;
+                overviewButton.HeightRequest = 35;
+            overviewButton.BackgroundColor = Color.Transparent;
 
-                cpuButton = new Button();
+            cpuButton = new Button();
                 cpuButton.Text = "CPU";
-                cpuButton.FontSize = fontSize;
                 cpuButton.VerticalOptions = LayoutOptions.Center;
                 cpuButton.HorizontalOptions = LayoutOptions.Center;
                 cpuButton.BorderColor = Color.Transparent;
-                cpuButton.BackgroundColor = Color.Gray;
+                cpuButton.TextColor = Color.Maroon;
+            cpuButton.FontAttributes = FontAttributes.Bold;
                 cpuButton.BorderWidth = .000001;
                 cpuButton.WidthRequest = 100;
-                cpuButton.HeightRequest = 50;
+                cpuButton.HeightRequest = 35;
+            cpuButton.BackgroundColor = Color.Transparent;
 
-                memoryButton = new Button();
+            memoryButton = new Button();
                 memoryButton.Text = "Ram";
                 memoryButton.FontSize = fontSize;
                 memoryButton.VerticalOptions = LayoutOptions.Center;
                 memoryButton.HorizontalOptions = LayoutOptions.Center;
                 memoryButton.BorderColor = Color.Transparent;
-                memoryButton.BackgroundColor = Color.Transparent;
                 memoryButton.BorderWidth = .000001;
                 memoryButton.WidthRequest = 100;
-                memoryButton.HeightRequest = 50;
+                memoryButton.HeightRequest = 35;
+            memoryButton.BackgroundColor = Color.Transparent;
 
-                diskButton = new Button();
+            diskButton = new Button();
                 diskButton.Text = "Disk";
                 diskButton.FontSize = fontSize;
                 diskButton.VerticalOptions = LayoutOptions.Center;
                 diskButton.HorizontalOptions = LayoutOptions.Center;
                 diskButton.BorderColor = Color.Transparent;
-                diskButton.BackgroundColor = Color.Transparent;
                 diskButton.BorderWidth = .000001;
                 diskButton.WidthRequest = 100;
-                diskButton.HeightRequest = 50;
+                diskButton.HeightRequest = 35;
+            diskButton.BackgroundColor = Color.Transparent;
 
-                wifiButton = new Button();
+            wifiButton = new Button();
                 wifiButton.Text = "WIFI";
                 wifiButton.FontSize = fontSize;
                 wifiButton.VerticalOptions = LayoutOptions.Center;
                 wifiButton.HorizontalOptions = LayoutOptions.Center;
                 wifiButton.BorderColor = Color.Transparent;
-                wifiButton.BackgroundColor = Color.Transparent;
                 wifiButton.BorderWidth = .000001;
                 wifiButton.WidthRequest = 100;
-                wifiButton.HeightRequest = 50;
+                wifiButton.HeightRequest = 35;
+            wifiButton.BackgroundColor = Color.Transparent;
+            #endregion
 
-                #endregion
-
-                //Mid button grid
-                Grid midGrid2 = new Grid();
-                midGrid2.RowDefinitions.Add(new RowDefinition {Height = 50});
+            //Mid button grid
+            Grid midGrid2 = new Grid();
+                midGrid2.RowDefinitions.Add(new RowDefinition {Height = 35});
                 midGrid2.ColumnSpacing = 0;
                 midGrid2.RowSpacing = 0;
                 midGrid2.HorizontalOptions = LayoutOptions.Center;
@@ -108,11 +104,16 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                 //Adding to mid-grid
                 Children.Add(midGrid2, 0, 0);
 
-                //Initialising Overview Screen
-                //Adding Cpu Screen
-                cpuScreen = new CPUScreen();
-                cpuScreen.Margin = new Thickness(50, 50, 50, 0);
-                Children.Add(cpuScreen, 0, 0);
+                myScrollView = new ScrollView();
+            RowDefinitions.Add(new RowDefinition() { Height = 35 });
+
+
+            //Initialising Overview Screen
+            //Adding Cpu Screen
+            cpuScreen = new CPUScreen();
+                //cpuScreen.Margin = new Thickness(0, 50, 0, 0);
+                myScrollView.Content = cpuScreen;
+                Children.Add(myScrollView, 0, 1);
 
                 //Centre Buttons
                 overviewButton.Clicked += OverviewButtonOnClicked;
@@ -128,13 +129,15 @@ namespace RAT._1View.Desktop.Screens.SubScreens
             {
                 if (myScreenState != ScreenState.WIFI)
                 {
-                    wifiButton.BackgroundColor = Color.Gray;
-                    RemoveScreen();
+                    wifiButton.TextColor = Color.Maroon;
+                wifiButton.FontAttributes = FontAttributes.Bold;
+
+                RemoveScreen();
 
                     //Adding Wifi Screen
                     wifiScreen = new WifiScreen();
-                    wifiScreen.Margin = new Thickness(50, 50, 50, 0);
-                    Children.Add(wifiScreen, 0, 0);
+                    //wifiScreen.Margin = new Thickness(0, 50, 0, 0);
+                    myScrollView.Content = wifiScreen;
 
                     myScreenState = ScreenState.WIFI;
                 }
@@ -144,13 +147,14 @@ namespace RAT._1View.Desktop.Screens.SubScreens
             {
                 if (myScreenState != ScreenState.DISK)
                 {
-                    diskButton.BackgroundColor = Color.Gray;
-                    RemoveScreen();
+                    diskButton.TextColor = Color.Maroon;
+                diskButton.FontAttributes = FontAttributes.Bold;
+                RemoveScreen();
 
                     //Adding Dsik Screen
                     diskScreen = new DiskScreen();
-                    diskScreen.Margin = new Thickness(50, 50, 50, 0);
-                    Children.Add(diskScreen, 0, 0);
+                    //diskScreen.Margin = new Thickness(0, 50, 0, 0);
+                    myScrollView.Content = diskScreen;
 
                     myScreenState = ScreenState.DISK;
                 }
@@ -160,13 +164,14 @@ namespace RAT._1View.Desktop.Screens.SubScreens
             {
                 if (myScreenState != ScreenState.RAM)
                 {
-                    memoryButton.BackgroundColor = Color.Gray;
-                    RemoveScreen();
+                    memoryButton.TextColor = Color.Maroon;
+                memoryButton.FontAttributes = FontAttributes.Bold;
+                RemoveScreen();
 
                     //Adding Ram Screen
                     ramScreen = new RamScreen();
-                    ramScreen.Margin = new Thickness(50, 50, 50, 0);
-                    Children.Add(ramScreen, 0, 0);
+                    //ramScreen.Margin = new Thickness(0, 50, 0, 0);
+                    myScrollView.Content = ramScreen;
 
                     myScreenState = ScreenState.RAM;
                 }
@@ -176,13 +181,14 @@ namespace RAT._1View.Desktop.Screens.SubScreens
             {
                 if (myScreenState != ScreenState.CPU)
                 {
-                    cpuButton.BackgroundColor = Color.Gray;
-                    RemoveScreen();
+                    cpuButton.TextColor = Color.Maroon;
+                cpuButton.FontAttributes = FontAttributes.Bold;
+                RemoveScreen();
 
                     //Adding Cpu Screen
                     cpuScreen = new CPUScreen();
-                    cpuScreen.Margin = new Thickness(50, 50, 50, 0);
-                    Children.Add(cpuScreen, 0, 0);
+                    //cpuScreen.Margin = new Thickness(0, 50, 0, 0);
+                    myScrollView.Content = cpuScreen;
 
                     myScreenState = ScreenState.CPU;
                 }
@@ -192,13 +198,14 @@ namespace RAT._1View.Desktop.Screens.SubScreens
             {
                 if (myScreenState != ScreenState.OVERVIEW)
                 {
-                    overviewButton.BackgroundColor = Color.Gray;
-                    RemoveScreen();
+                    overviewButton.TextColor = Color.Maroon;
+                overviewButton.FontAttributes = FontAttributes.Bold;
+                RemoveScreen();
 
                     //Adding Overview Screen
                     overviewScreen = new OverviewScreen();
-                    overviewScreen.Margin = new Thickness(50, 50, 50, 0);
-                    Children.Add(overviewScreen, 0, 0);
+                    //overviewScreen.Margin = new Thickness(0, 50, 0, 0);
+                    myScrollView.Content = overviewScreen;
 
                     myScreenState = ScreenState.OVERVIEW;
                 }
@@ -209,16 +216,18 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                 //Removes screen, sets button off
                 if (myScreenState == ScreenState.OVERVIEW)
                 {
-                    overviewButton.BackgroundColor = Color.Transparent;
-                    Children.Remove(overviewScreen);
+                    overviewButton.TextColor = Color.Black;
+                overviewButton.FontAttributes = FontAttributes.None;
+                Children.Remove(overviewScreen);
                     overviewScreen.GC();
                     overviewScreen.BindingContext = null;
                     overviewScreen = null;
                 }
                 else if (myScreenState == ScreenState.CPU)
                 {
-                    cpuButton.BackgroundColor = Color.Transparent;
-                    Children.Remove(cpuScreen);
+                    cpuButton.TextColor = Color.Black;
+                cpuButton.FontAttributes = FontAttributes.None;
+                Children.Remove(cpuScreen);
                     cpuScreen.GC();
                     cpuScreen.BindingContext = null;
                     cpuScreen = null;
@@ -226,8 +235,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                 }
                 else if (myScreenState == ScreenState.RAM)
                 {
-                    memoryButton.BackgroundColor = Color.Transparent;
-                    Children.Remove(ramScreen);
+                    memoryButton.TextColor = Color.Black;
+                memoryButton.FontAttributes = FontAttributes.None;
+                Children.Remove(ramScreen);
                     ramScreen.GC();
                     ramScreen.BindingContext = null;
                     ramScreen = null;
@@ -235,8 +245,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                 }
                 else if (myScreenState == ScreenState.WIFI)
                 {
-                    wifiButton.BackgroundColor = Color.Transparent;
-                    Children.Remove(wifiScreen);
+                    wifiButton.TextColor = Color.Black;
+                wifiButton.FontAttributes = FontAttributes.None;
+                Children.Remove(wifiScreen);
                     wifiScreen.GC();
                     wifiScreen.BindingContext = null;
                     wifiScreen = null;
@@ -244,8 +255,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                 }
                 else if (myScreenState == ScreenState.DISK)
                 {
-                    diskButton.BackgroundColor = Color.Transparent;
-                    Children.Remove(diskScreen);
+                    diskButton.TextColor = Color.Black;
+                diskButton.FontAttributes = FontAttributes.None;
+                Children.Remove(diskScreen);
                     diskScreen.GC();
                     diskScreen.BindingContext = null;
                     diskScreen = null;
@@ -255,5 +267,4 @@ namespace RAT._1View.Desktop.Screens.SubScreens
 
             #endregion
         }
-    }
 }

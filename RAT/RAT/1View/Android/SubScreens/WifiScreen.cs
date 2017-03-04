@@ -14,9 +14,9 @@ using FastLineSeries = Syncfusion.SfChart.XForms.FastLineSeries;
 using NumericalAxis = Syncfusion.SfChart.XForms.NumericalAxis;
 using SfChart = Syncfusion.SfChart.XForms.SfChart;
 
-namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
+namespace Mobile
 {
-    public class MWifiScreen : Grid
+    public class WifiScreen : Grid
     {
         private WifiViewModel myViewModel;
         private SfChart myChart;
@@ -24,7 +24,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
         Label myLabel;
         Label myLabel2;
 
-        public MWifiScreen()
+        public WifiScreen()
         {
             myViewModel = new WifiViewModel();
             BindingContext = myViewModel;

@@ -43,14 +43,24 @@ namespace RAT.ZTry
         //Checks Login, Changes screen if found
         async Task LoginValidate()
         {
-         //   List <Login> logins = await azureService.GetLogin(userName, password);
-         //   if (logins[0].Username.Equals(UserName) && logins[0].Password.Equals(Password))
-        //    {
-         //       System.Diagnostics.Debug.WriteLine("\n-----Entering Main Menu");
-                //Screen Navigation
+            //   List <Login> logins = await azureService.GetLogin(userName, password);
+            //   if (logins[0].Username.Equals(UserName) && logins[0].Password.Equals(Password))
+            //    {
+            //       System.Diagnostics.Debug.WriteLine("\n-----Entering Main Menu");
+            //Screen Navigation
+            if (Device.OS == TargetPlatform.Android)
+            {
+                (Application.Current.MainPage).Navigation.InsertPageBefore(new Mobile.ParentScreen(), (Application.Current.MainPage).Navigation.NavigationStack[0]);
+                await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
+                GC.Collect();
+            }
+            else
+            {
                 (Application.Current.MainPage).Navigation.InsertPageBefore(new ParentScreen(), (Application.Current.MainPage).Navigation.NavigationStack[0]);
                 await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
                 GC.Collect();
+            }
+
             //Gets the data IoT
             Task t = Task.Factory.StartNew(() => {
                 GetTelemetry.ReceiveTelemetry();

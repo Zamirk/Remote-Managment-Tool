@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace RAT._1View.Desktop.Screens.EasterEgg
+namespace Mobile
 {
     class GameButton: Button
     {

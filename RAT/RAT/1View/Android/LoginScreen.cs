@@ -2,20 +2,19 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using ConsoleApplication1.Folder;
-using RAT.zTest;
-using RAT._1View;
+using RAT.ZTry;
 using Xamarin.Forms;
 
-namespace RAT.ZTry
+namespace Mobile
 {
-    public class MLoginScreen : ContentPage
+    public class LoginScreen : ContentPage
     {
         //Debug visuals
         private ContentView maroonView, grayView, redView, yellowView, greenView, tealView, aquaView, blackView, blueView;
         private bool debugMode = true;
         private Grid mainGrid;
 
-        public MLoginScreen()
+        public LoginScreen()
         {
             NavigationPage.SetHasNavigationBar(this, false);
 

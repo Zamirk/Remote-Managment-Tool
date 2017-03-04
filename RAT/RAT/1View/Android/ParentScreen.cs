@@ -1,19 +1,12 @@
 ﻿using System;
-using RAT._1View;
-using RAT._1View.Desktop;
-using RAT._1View.Desktop.Manage;
-using RAT._1View.Desktop.Screens.SubScreens.RAT._1View.Desktop;
-using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
 using RAT._1View.Desktop._1Tools;
 using RAT._2ViewModel;
 using Rg.Plugins.Popup.Extensions;
-using Rg.Plugins.Popup.Services;
-using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
 
-namespace RAT.ZTry
+namespace Mobile
 {
-    public class MParentScreen : ContentPage
+    public class ParentScreen : ContentPage
     {
         #region Member Variables
         private MenuState myMenuState;
@@ -30,7 +23,7 @@ namespace RAT.ZTry
         private Grid midGrid;
         #endregion
 
-        public MParentScreen()
+        public ParentScreen()
         {
             //ViewModel
             MainScreenViewModel myViewModel = new MainScreenViewModel();
@@ -171,24 +164,10 @@ namespace RAT.ZTry
             //Mid-grid
             midGrid.VerticalOptions = LayoutOptions.FillAndExpand;
             midGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
-            if (Device.Idiom == TargetIdiom.Phone)
-            {
-                midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 50 });
-            }
-            else
-            {
-                midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 225 });
-            }
+            midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 50 });
+
             midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
-            //TODO REMOVE AND REPLACE WITH MOBILE AND DESTOP SECTIONS 03/03/017C
-            if (Device.Idiom == TargetIdiom.Phone)
-            {
-                midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 5 });
-            }
-            else
-            {
-                midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 100 });
-            }
+            midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 0 });
             midGrid.ColumnSpacing = 0;
             midGrid.RowSpacing = 0;
 

@@ -13,7 +13,7 @@ using Syncfusion.SfChart.XForms;
 using Xamarin.Forms;
 using Label = Xamarin.Forms.Label;
 
-namespace RAT._1View.Desktop.Manage
+namespace Mobile
 {
 	public class TheGame : Grid
     {

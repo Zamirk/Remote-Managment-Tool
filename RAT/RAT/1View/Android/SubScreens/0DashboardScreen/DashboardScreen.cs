@@ -5,14 +5,12 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
-using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
-using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
 using Rg.Plugins.Popup.Extensions;
 using Syncfusion.SfChart.XForms;
 using Xamarin.Forms;
 using Label = Xamarin.Forms.Label;
 
-namespace RAT._1View.Desktop.Manage
+namespace Mobile
 {
 	public class DashboardScreen : ScrollView
 	{

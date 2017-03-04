@@ -6,7 +6,7 @@ using Rg.Plugins.Popup.Interfaces.Animations;
 using Rg.Plugins.Popup.Pages;
 using Xamarin.Forms;
 
-namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
+namespace Mobile
 {
     // User animation
     class UserAnimation : IPopupAnimation

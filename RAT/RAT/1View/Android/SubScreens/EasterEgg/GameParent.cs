@@ -8,13 +8,13 @@ using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 
-namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
+namespace Mobile
 {
-    public partial class MyPopupPage1 : PopupPage
+    public partial class GameParent : PopupPage
     {
-        public MyPopupPage1()
+        public GameParent()
         {
-            DashboardScreen1 aaa = new DashboardScreen1();
+            TheGame aaa = new TheGame();
             Content = aaa;
         }
 

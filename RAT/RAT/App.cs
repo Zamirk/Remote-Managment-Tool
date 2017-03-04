@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 using RAT.ZTry;
-using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
-using RAT._1View.Mobile;
+using Mobile;
 
 namespace RAT
 {
@@ -16,11 +15,11 @@ namespace RAT
             //MainPage = new NavigationPage(new DataGrid());c
             if (Device.OS == TargetPlatform.Windows)
             {
-                MainPage = new NavigationPage(new LoginScreen());
+                MainPage = new NavigationPage(new ZTry.LoginScreen());
             }
             else if (Device.OS == TargetPlatform.Android)
             {
-                MainPage = new NavigationPage(new MLoginScreen());
+                MainPage = new NavigationPage(new Mobile.LoginScreen());
             }
             //MainPage = new NavigationPage(new MainPage());
         }

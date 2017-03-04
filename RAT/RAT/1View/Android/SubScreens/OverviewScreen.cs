@@ -20,13 +20,13 @@ using FastLineSeries = Syncfusion.SfChart.XForms.FastLineSeries;
 using NumericalAxis = Syncfusion.SfChart.XForms.NumericalAxis;
 using SfChart = Syncfusion.SfChart.XForms.SfChart;
 
-namespace RAT._1View.Desktop
+namespace Mobile
 {
-    public partial class MOverviewScreen : Grid
+    public partial class OverviewScreen : Grid
     {
         bool succeeded = false;
         private Editor myEditor;
-        public MOverviewScreen()
+        public OverviewScreen()
         {
             string myString = "";
             myEditor = new Editor();

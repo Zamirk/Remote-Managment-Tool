@@ -14,13 +14,13 @@ using FastLineSeries = Syncfusion.SfChart.XForms.FastLineSeries;
 using NumericalAxis = Syncfusion.SfChart.XForms.NumericalAxis;
 using SfChart = Syncfusion.SfChart.XForms.SfChart;
 
-namespace RAT._1View.Desktop
+namespace Mobile
 {
-	public class MDiskScreen : Grid
+	public class DiskScreen : Grid
 	{
 	    private DiskViewModel myViewModel;
 	    private SfChart myChart;
-        public MDiskScreen()
+        public DiskScreen()
         {
             myViewModel = new DiskViewModel();
             BindingContext = myViewModel;

@@ -9,7 +9,7 @@ using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 
-namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
+namespace Mobile
 {
     public partial class SelectItemPopup : PopupPage
     {

@@ -15,13 +15,13 @@ using FastLineSeries = Syncfusion.SfChart.XForms.FastLineSeries;
 using NumericalAxis = Syncfusion.SfChart.XForms.NumericalAxis;
 using SfChart = Syncfusion.SfChart.XForms.SfChart;
 
-namespace RAT._1View.Desktop
+namespace Mobile
 {
-	public class MCPUScreen : Grid
+	public class CPUScreen : Grid
 	{
-	    private MCpuViewModel myViewModel;
+	    private CpuViewModel myViewModel;
 	    private SfChart myChart;
-        public MCPUScreen()
+        public CPUScreen()
         {
             myViewModel = new CpuViewModel();
             BindingContext = myViewModel;

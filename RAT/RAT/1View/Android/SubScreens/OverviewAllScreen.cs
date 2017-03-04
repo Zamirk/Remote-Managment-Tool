@@ -14,11 +14,11 @@ using FastLineSeries = Syncfusion.SfChart.XForms.FastLineSeries;
 using NumericalAxis = Syncfusion.SfChart.XForms.NumericalAxis;
 using SfChart = Syncfusion.SfChart.XForms.SfChart;
 
-namespace RAT._1View.Desktop
+namespace Mobile
 {
-	public class MOverviewAllScreen : Grid
+	public class OverviewAllScreen : Grid
 	{
-        public MOverviewAllScreen()
+        public OverviewAllScreen()
         {
             OverviewViewModel viewModel = new OverviewViewModel();
             BindingContext = viewModel;

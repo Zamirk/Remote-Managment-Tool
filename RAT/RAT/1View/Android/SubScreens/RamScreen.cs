@@ -14,13 +14,13 @@ using FastLineSeries = Syncfusion.SfChart.XForms.FastLineSeries;
 using NumericalAxis = Syncfusion.SfChart.XForms.NumericalAxis;
 using SfChart = Syncfusion.SfChart.XForms.SfChart;
 
-namespace RAT._1View.Desktop
+namespace Mobile
 {
-	public class MRamScreen : Grid
+	public class RamScreen : Grid
 	{
 	    private RamViewModel myViewModel;
 	    private SfChart myChart;
-        public MRamScreen()
+        public RamScreen()
         {
             myViewModel = new RamViewModel();
             BindingContext = myViewModel;

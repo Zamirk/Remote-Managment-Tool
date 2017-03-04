@@ -12,12 +12,12 @@ using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
 using Label = Xamarin.Forms.Label;
 
-namespace RAT._1View.Desktop.Manage
+namespace Mobile
 {
-	public class MViewDevicesScreen : Grid
+	public class ViewDevicesScreen : Grid
 	{
 	    public Button aaaa = new Button();
-        public MViewDevicesScreen()
+        public ViewDevicesScreen()
         {
             ViewDevicesViewModel viewModel = new ViewDevicesViewModel();
             BindingContext = viewModel;
