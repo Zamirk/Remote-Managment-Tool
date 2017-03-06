@@ -5,6 +5,7 @@ using RAT._1View.Desktop.Manage;
 using RAT._1View.Desktop.Screens.SubScreens.RAT._1View.Desktop;
 using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
 using RAT._1View.Desktop._1Tools;
+using RAT._1View.UWP.SubScreens;
 using RAT._2ViewModel;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Services;
@@ -18,13 +19,13 @@ namespace RAT.ZTry
         #region Member Variables
         private MenuState myMenuState;
         private ViewDevicesScreen viewDevicesScreen;
-        private DeviceScreen singleDeviceScreen;
+        private ToolBar singleDeviceScreen;
         private AppScreen appScreen;
         //private AppsScreen applicationManagmentScreen;
         private DashboardScreen dashboardScreen;
 
         private Button signOutButton, performanceButton, manageButton, dashboardButton,
-            applicationButton, backButton, forwardButton, secretGameButton;
+            applicationButton, backButton, forwardButton, secretGameButton, apphistory;
         ContentView leftColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235), HorizontalOptions = LayoutOptions.Fill };
         ContentView rightColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235) };
         private Grid midGrid;
@@ -139,7 +140,7 @@ namespace RAT.ZTry
 
             #region TopGrid
             //Top-grid
-            topGrid.Children.Add(new ContentView() { BackgroundColor = Color.FromRgb(17, 150, 205) });
+            //topGrid.Children.Add(new ContentView() { BackgroundColor = Color.FromRgb(17, 150, 205) });
             //TODO REMOVE AND REPLACE WITH MOBILE AND DESTOP SECTIONS 03/03/017
             if (Device.Idiom == TargetIdiom.Phone)
             {
@@ -147,13 +148,16 @@ namespace RAT.ZTry
             }
             else
             {
-            topGrid.RowDefinitions.Add(new RowDefinition { Height = 100 });
+            topGrid.RowDefinitions.Add(new RowDefinition { Height = 60 });
             }
             topGrid.ColumnSpacing = 0;
             topGrid.RowSpacing = 0;
-            topGrid.Children.Add(backButton);
-            topGrid.Children.Add(forwardButton);
-            topGrid.Children.Add(signOutButton);
+            topGrid.Children.Add(backButton, 0, 0);
+            topGrid.Children.Add(forwardButton, 0, 0);
+            ContentView aaaa = new ContentView() { BackgroundColor = Color.Gray };
+            topGrid.Children.Add(aaaa, 0, 0);
+            topGrid.Children.Add(signOutButton, 0, 0);
+
             #endregion
 
             #region SideBar Buttons
@@ -240,7 +244,7 @@ namespace RAT.ZTry
             RemoveScreen();
             manageButton.BackgroundColor = Color.Gray;
 
-            singleDeviceScreen = new DeviceScreen();
+            singleDeviceScreen = new ToolBar();
             midGrid.Children.Add(singleDeviceScreen, 1, 0);
 
             myMenuState = MenuState.MANAGE_SINGLEDEVICE;

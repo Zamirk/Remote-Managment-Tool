@@ -15,7 +15,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens
 
     namespace RAT._1View.Desktop
     {
-        public class DeviceScreen : Grid
+        public class SystemResources : Grid
         {
             private Button overviewButton, memoryButton, wifiButton, diskButton, cpuButton;
             int fontSize = 13;
@@ -30,7 +30,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens
             private DiskScreen diskScreen;
             private WifiScreen wifiScreen;
 
-            public DeviceScreen()
+            public SystemResources()
             {
                 myScreenState = ScreenState.CPU;
 
@@ -254,6 +254,11 @@ namespace RAT._1View.Desktop.Screens.SubScreens
             }
 
             #endregion
+
+            public void GC()
+            {
+                RemoveScreen();
+            }
         }
     }
 }

@@ -32,6 +32,7 @@ namespace RAT._1View.Desktop
             myEditor = new Editor();
             Children.Add(myEditor);
             myEditor.Text = "Receiving Data!";
+            myEditor.FontSize = 8;
             myEditor.Text = GetTelemetry.aaaaa;
 
 

@@ -44,5 +44,6 @@ namespace ConsoleApplication1
             public string PacketsReceived { get; set; }
             public string PacketsSent { get; set; }
             public string Packets { get; set; }
-        }
+        public List<ProcessData> ListTest { get; set; }
+    }
     }

@@ -9,6 +9,7 @@
     <Import_RootNamespace>RAT</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\ToolBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\MenuState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\ScreenState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\LoginScreen.cs" />
@@ -19,18 +20,22 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0DashboardScreen\DashboardScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0DashboardScreen\IPopupAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0DashboardScreen\SelectItemPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\AppHistory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\Temp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\Processes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\AppScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\CPUScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\DiskScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources\CPUScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources\DiskScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\EasterEgg\GameButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\EasterEgg\GameParent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\EasterEgg\TheGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\OverviewAllScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\OverviewScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\RamScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\SingleDeviceScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources\OverviewScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources\RamScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ViewDevicesScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\WifiScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources\WifiScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Android\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Android\ParentScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Android\SubScreens\0DashboardScreen\DashboardCell.cs" />
@@ -65,6 +70,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Database\AzureLoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IOTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Model\ProcessData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Model\TelemetryDatapoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\HttpUtility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\SHA.cs" />
@@ -83,5 +89,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)zTest\Datagrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\KanbanViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\PanContainer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources\" />
   </ItemGroup>
 </Project>
