@@ -14,6 +14,7 @@ namespace ConsoleApplication1
             Device_id = device_id;
             Cpu = "50";
             RamInUse = "50";
+            ListTest = new List<ProcessData>();
         }
             public string Device_id { get; set; }
         //CPU

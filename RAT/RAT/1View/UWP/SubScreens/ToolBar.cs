@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using IoTHubAmqpService;
 using RAT.ZTry;
 using RAT._1View.Desktop;
 using RAT._1View.Desktop.Screens.SubScreens.RAT._1View.Desktop;
@@ -26,6 +27,12 @@ namespace RAT._1View.UWP.SubScreens
         public ToolBar()
         {
             myScreenState = ToolBarState.SYSTEMRESOURCES;
+
+            ContentView colour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235), HorizontalOptions = LayoutOptions.Fill };
+            colour.VerticalOptions = LayoutOptions.Start;
+            colour.MinimumHeightRequest = 40;
+            colour.HeightRequest = 40;
+            Children.Add(colour, 0,0);
 
             #region Buttons
 

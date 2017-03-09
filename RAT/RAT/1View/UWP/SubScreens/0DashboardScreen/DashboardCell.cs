@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 //using System.ServiceModel.Channels;
 using System.Text;
+using IoTHubAmqpService;
 using RAT.zTest;
 using RAT._2ViewModel;
 using Rg.Plugins.Popup.Extensions;
@@ -228,6 +229,8 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
         public void AreaChart()
         {
+            SendCommand.SendCommandToDevice();
+
             //Chart
             myChart = new SfChart();
 

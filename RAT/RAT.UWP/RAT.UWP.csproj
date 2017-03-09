@@ -108,6 +108,7 @@
     <Compile Include="PlatformSpecificCode\FileHelper.cs" />
     <Compile Include="PlatformSpecificCode\GetTelemetry.cs" />
     <Compile Include="PlatformSpecificCode\PlatformInfo.cs" />
+    <Compile Include="PlatformSpecificCode\SendCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +188,7 @@
       <HintPath>..\..\packages\Syncfusion.Forms\SparkLine Windows10\Syncfusion.SfSparkline.XForms.UWP.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

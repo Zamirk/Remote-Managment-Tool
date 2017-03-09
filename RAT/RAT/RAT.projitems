@@ -54,6 +54,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Android\SubScreens\SingleDeviceScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Android\SubScreens\ViewDevicesScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Android\SubScreens\WifiScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\ProcessesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\DashboardViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CpuViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\DiskViewModel.cs" />
@@ -66,12 +67,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Login.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\OrderInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\DeviceInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Processes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\ProcessTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\TestModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Database\AzureLoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IOTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Model\ProcessData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Model\TelemetryDatapoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\ProcessData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\TelemetryDatapoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\HttpUtility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\SHA.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\TimeSpanExtension.cs" />

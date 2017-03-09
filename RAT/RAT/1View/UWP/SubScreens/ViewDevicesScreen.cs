@@ -32,7 +32,6 @@ namespace RAT._1View.Desktop.Manage
             sDataGrid.ColumnSizer = ColumnSizer.Star;
             //sDataGrid.SelectionMode = SelectionMode.Single;
 
-            sDataGrid.HeaderRowHeight = 55;
             sDataGrid.AllowDraggingColumn = true;
             sDataGrid.AutoExpandGroups = true;
             sDataGrid.VerticalOverScrollMode = VerticalOverScrollMode.Bounce;

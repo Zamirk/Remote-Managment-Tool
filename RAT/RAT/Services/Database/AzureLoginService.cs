@@ -22,7 +22,7 @@ namespace RAT.ZTry
             //Create our client
             Client = new MobileServiceClient("http://zmtool.azurewebsites.net/");
 
-
+            
         }
 
         public async Task<List<Login>> GetLogin(string a, string b)

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using ConsoleApplication1.Folder;
+using IoTHubAmqpService;
 using RAT.zTest;
 using RAT._1View;
 using Xamarin.Forms;
@@ -18,7 +19,6 @@ namespace RAT.ZTry
         public LoginScreen()
         {
             NavigationPage.SetHasNavigationBar(this, false);
-
             //Binding to model
             LoginViewModel myModel = new LoginViewModel();
             BindingContext = myModel;
