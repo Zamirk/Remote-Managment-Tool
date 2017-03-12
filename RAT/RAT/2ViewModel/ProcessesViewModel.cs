@@ -32,11 +32,7 @@ namespace RAT._2ViewModel
 
         private async void LoadData()
         {
-            Random r = new Random();
-            for (int i = 0; i < 200; i++)
-            {
-            data.Add(new ProcessTest());
-            }
+            for (int i = 0; i < 200; i++){ data.Add(new ProcessTest()); }
 
             //Initial data
             int processesCount = GetTelemetry.lastReceivedValue.ListTest.Count;
@@ -54,15 +50,6 @@ namespace RAT._2ViewModel
                 }
                 processesCount = GetTelemetry.lastReceivedValue.ListTest.Count;
 
-                //Increasing size of the grid if there are more processes
-                //if (Data.Count < processesCount)
-                {
-                 //   for (int i = 0; i < processesCount - Data.Count; i++)
-                    {
-                  //      data.Add(new ProcessTest());
-                    }
-
-                }
 
                 //Updating the grid
                 for (int i = 0; i < processesCount; i++)

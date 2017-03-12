@@ -116,10 +116,6 @@ namespace RAT.ZTry
             Debug();
         }
 
-        public void DoStaticIoT()
-        {
-            GetTelemetry.ReceiveTelemetry();
-        }
 
         //Debug Mode
         private void DebugButtonOnClicked(object sender, EventArgs eventArgs)

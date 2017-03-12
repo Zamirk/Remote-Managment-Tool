@@ -9,31 +9,33 @@ namespace RAT.Model
     {
         public ProcessTest()
         {
-            stockChange = "";
-            open = "";
+            name = "";
+            memory = "";
+            time = "";
+            cpu = "";
         }
 
-        private string stockChange;
-        private string open;
+        private string name;
+        private string memory;
         private string time;
         private string cpu;
 
         public string Name
         {
-            get { return stockChange; }
+            get { return name; }
             set
             {
-                stockChange = value;
+                name = value;
                 RaisePropertyChanged("Name");
             }
         }
 
         public string Memory
         {
-            get { return open; }
+            get { return memory; }
             set
             {
-                open = value;
+                memory = value;
                 RaisePropertyChanged("Memory");
             }
         }

@@ -27,8 +27,11 @@ namespace ConsoleApplication1.Folder
         List<string> devices = new List<string>(){"Device_1","Device_2"};
         public static bool go = true;
         public static string aaaaa = "";
-        public static List<Queue<TelemetryDatapoint>> listOfDevices;
-        public static TelemetryDatapoint lastReceivedValue;
+        public static List<Queue<TelemetryDatapoint>> listOfDevices = new List<Queue<TelemetryDatapoint>>()
+        {
+            new Queue<TelemetryDatapoint>()
+        };
+        public static TelemetryDatapoint lastReceivedValue = new TelemetryDatapoint("");
         public static void ReceiveTelemetry()
         {
             lastReceivedValue = new TelemetryDatapoint("");

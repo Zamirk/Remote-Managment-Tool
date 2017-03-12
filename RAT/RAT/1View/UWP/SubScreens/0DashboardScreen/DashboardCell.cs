@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 //using System.ServiceModel.Channels;
 using System.Text;
+using System.Threading.Tasks;
+using ConsoleApplication1;
 using IoTHubAmqpService;
 using RAT.zTest;
 using RAT._2ViewModel;
@@ -229,8 +231,18 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
         public void AreaChart()
         {
-            SendCommand.SendCommandToDevice();
 
+             Task t = Task.Factory.StartNew(() => {
+                 SendCommand aaaa = new SendCommand();
+                 aaaa.Command = new CommandDatapoint()
+                 {
+                     Command = "Stop Chrome",
+                     ExpireTime = DateTime.Now
+                 };
+                 aaaa.SendCommandToDevice();
+
+             });
+            /*
             //Chart
             myChart = new SfChart();
 
@@ -250,15 +262,16 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
 
-            DashboardViewModel aa = new DashboardViewModel();
-            BindingContext = aa;
-            myChart.Series[0].ItemsSource = aa.Data;
+            //DashboardViewModel aa = new DashboardViewModel();
+            //BindingContext = aa;
+            //myChart.Series[0].ItemsSource = aa.Data;
 
             myChart.PrimaryAxis.IsVisible = false;
             myChart.SecondaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             Common();
             Children.Add(myChart);
+            */
         }
 
         public void Common()
