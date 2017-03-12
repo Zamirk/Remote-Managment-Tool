@@ -58,6 +58,8 @@ namespace RAT._2ViewModel
                     Data[i].Cpu = GetTelemetry.lastReceivedValue.ListTest[i].C;
                     Data[i].Memory = GetTelemetry.lastReceivedValue.ListTest[i].M;
                     Data[i].Time = GetTelemetry.lastReceivedValue.ListTest[i].T;
+                    Data[i].CustomerID = GetTelemetry.lastReceivedValue.ListTest[i].N;
+
                 }
                 return true;
             });

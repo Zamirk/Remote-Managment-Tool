@@ -19,6 +19,43 @@ namespace RAT.Model
         private string memory;
         private string time;
         private string cpu;
+        #region private variables
+
+        private string _employeeID;
+        private string _customerID;
+        private string _userName;
+
+        #endregion
+
+        public string UserName
+        {
+            get { return _userName; }
+            set
+            {
+                this._userName = value;
+                RaisePropertyChanged("UserName");
+            }
+        }
+
+        public string EmployeeID
+        {
+            get { return _employeeID; }
+            set
+            {
+                this._employeeID = value;
+                RaisePropertyChanged("EmployeeID");
+            }
+        }
+
+        public string CustomerID
+        {
+            get { return _customerID; }
+            set
+            {
+                this._customerID = value;
+                RaisePropertyChanged("CustomerID");
+            }
+        }
 
         public string Name
         {

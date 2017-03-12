@@ -11,7 +11,7 @@ namespace IoTHubAmqpService
 {
     class SendCommand
     {
-        public static void SendCommandToDevice()
+        public void SendCommandToDevice()
         {
         }
         public CommandDatapoint Command { get; set; }

@@ -11,5 +11,7 @@ namespace ConsoleApplication1
     {
         public DateTime ExpireTime { get; set; }
         public string Command { get; set; }
+        public string ProcessName { get; set; }
+        public string CommandType { get; set; }
     }
 }

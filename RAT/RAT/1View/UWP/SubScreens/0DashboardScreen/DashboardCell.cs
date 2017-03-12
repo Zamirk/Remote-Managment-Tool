@@ -231,17 +231,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
         public void AreaChart()
         {
-
-             Task t = Task.Factory.StartNew(() => {
-                 SendCommand aaaa = new SendCommand();
-                 aaaa.Command = new CommandDatapoint()
-                 {
-                     Command = "Stop Chrome",
-                     ExpireTime = DateTime.Now
-                 };
-                 aaaa.SendCommandToDevice();
-
-             });
             /*
             //Chart
             myChart = new SfChart();

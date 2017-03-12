@@ -1,4 +1,9 @@
-﻿using RAT._2ViewModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ConsoleApplication1;
+using IoTHubAmqpService;
+using RAT._2ViewModel;
 using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
 
@@ -22,40 +27,74 @@ namespace RAT._1View.Desktop
             SfDataGrid sDataGrid = new SfDataGrid();
             sDataGrid.HorizontalOptions = LayoutOptions.FillAndExpand;
 
-            sDataGrid.AllowSorting = true;
             sDataGrid.VerticalOverScrollMode = VerticalOverScrollMode.Bounce;
             sDataGrid.AutoGenerateColumns = false;
-            sDataGrid.HeaderRowHeight = 15;
-            sDataGrid.RowHeight = 20;
-            sDataGrid.AutoGenerateColumns = false;
+            sDataGrid.HeaderRowHeight = 35;
+            sDataGrid.RowHeight = 25;
             sDataGrid.ColumnSizer = ColumnSizer.Star;
+            sDataGrid.AllowSorting = false;
+            sDataGrid.Margin = new Thickness(20, 20, 20, 20);
 
             //Column creation
             GridTextColumn column_1 = new GridTextColumn { MappingName = "Name", HeaderText = "Name" };
             GridTextColumn column_2 = new GridTextColumn { MappingName = "Memory", HeaderText = "Memory" };
             GridTextColumn column_3 = new GridTextColumn { MappingName = "Cpu", HeaderText = "Cpu" };
             GridTextColumn column_4 = new GridTextColumn { MappingName = "Time", HeaderText = "Time" };
-            GridTemplateColumn column_5 = new GridTemplateColumn { MappingName = "Close", HeaderText = "Close" };
+            GridTemplateColumn column_5 = new GridTemplateColumn { MappingName = "UserName", HeaderText = "UserName" };
 
-            column_5.CellTemplate = new DataTemplate(() =>
+            //Template for buttons
+            DataTemplate template = new DataTemplate(() =>
             {
-                Button close = new Button();
-                var myGrid = new Grid();
-                close.FontSize = 10;
-                close.VerticalOptions = LayoutOptions.Center;
-                close.HorizontalOptions = LayoutOptions.CenterAndExpand;
-                close.BorderColor = Color.Transparent;
-                close.BorderWidth = .000001;
-                close.WidthRequest = 200;
-                close.HeightRequest = 200;
-                //close.BackgroundColor = Color.Gray;
-                close.TextColor = Color.Red;
-                close.Text = "✘";
-                myGrid.Children.Add(close);
+                StackLayout stack = new StackLayout()
+                {
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    VerticalOptions = LayoutOptions.FillAndExpand,
+                    Orientation = StackOrientation.Vertical
+                };
+                //Button template
+                Button myButton = new Button()
+                {
+                    TextColor = Color.Red,
+                    FontSize = 12,
+                    FontAttributes = FontAttributes.Bold,
+                    VerticalOptions = LayoutOptions.StartAndExpand,
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    BorderColor = Color.Transparent,
+                    BorderWidth = .000001,
+                    WidthRequest = 100,
+                    Text = "✘"
+                };
+                //Temp label for databinding the name of the process
+                Label temp = new Label();
+                temp.SetBinding(Label.TextProperty, "CustomerID");
 
-                return myGrid;
+                myButton.Clicked += delegate (object sender, EventArgs args)
+                {
+                    System.Diagnostics.Debug.WriteLine("[Processes]::Sending command to kill process::" + temp.Text);
+
+                    //Sending an asyncranous command
+                    Task t = Task.Factory.StartNew(() => {
+                        SendCommand myCommand = new SendCommand();
+                        myCommand.Command = new CommandDatapoint()
+                        {
+                            CommandType = "Close Process",
+                            ProcessName = temp.Text,
+                            ExpireTime = DateTime.Now
+                        };
+                        myCommand.SendCommandToDevice();
+
+                    });
+                };
+                stack.Children.Add(myButton);
+                stack.Children.Add(temp);
+                temp.IsVisible = false;
+
+                return stack;
             });
+            //Setting the template
+            column_5.CellTemplate = template;
 
+            //Collumn sizes
             column_1.Width = 200;
             column_2.Width = 100;
             column_3.Width = 100;
@@ -67,11 +106,12 @@ namespace RAT._1View.Desktop
             sDataGrid.Columns.Add(column_4);
             sDataGrid.Columns.Add(column_5);
 
+            //Data binding
             sDataGrid.ItemsSource = viewModel.Data;
-            sDataGrid.Margin = new Thickness(20, 20, 20, 20);
+
             Children.Add(sDataGrid, 1, 1);
         }
-        Button aaaa = new Button();
+
         public void GC()
         {
             viewModel.GC();
