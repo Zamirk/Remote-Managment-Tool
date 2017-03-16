@@ -118,7 +118,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\image.png" />
-    <Content Include="Assets\PC.png" />
+	
+    <Content Include="Assets\Sleep.png" />
+	<Content Include="Assets\Hibernate.png" />
+	<Content Include="Assets\Shut Down.png" />
+	<Content Include="Assets\Restart.png" />
+	<Content Include="Assets\Lock.png" />
+    <Content Include="Assets\Logoff.png" />
+
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

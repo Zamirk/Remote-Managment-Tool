@@ -135,7 +135,9 @@ namespace IoTHubAmqpService
 
             // receive the response
             var response = cbsReceiver.Receive();
-                if (response == null || response.Properties == null || response.ApplicationProperties == null)
+            System.Diagnostics.Debug.WriteLine("Level 8I");
+
+            if (response == null || response.Properties == null || response.ApplicationProperties == null)
                 {
                     result = false;
                 }
@@ -148,13 +150,19 @@ namespace IoTHubAmqpService
                         result = false;
                     }
                 }
+            System.Diagnostics.Debug.WriteLine("Level 8J");
 
-                // the sender/receiver may be kept open for refreshing tokens
-                cbsSender.Close();
-                cbsReceiver.Close();
-                session.Close();
+            // the sender/receiver may be kept open for refreshing tokens
+            cbsSender.Close();
+            System.Diagnostics.Debug.WriteLine("Level 8K");
 
-                return result;
+            cbsReceiver.Close();
+            System.Diagnostics.Debug.WriteLine("Level 8L");
+
+            session.Close();
+            System.Diagnostics.Debug.WriteLine("Level 8M");
+
+            return result;
             }
 
             private static readonly long UtcReference = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).Ticks;

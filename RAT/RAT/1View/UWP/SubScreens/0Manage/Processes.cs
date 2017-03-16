@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ConsoleApplication1;
 using IoTHubAmqpService;
+using RAT.ZTry;
 using RAT._2ViewModel;
 using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
@@ -32,7 +33,7 @@ namespace RAT._1View.Desktop
             sDataGrid.HeaderRowHeight = 35;
             sDataGrid.RowHeight = 25;
             sDataGrid.ColumnSizer = ColumnSizer.Star;
-            sDataGrid.AllowSorting = false;
+            sDataGrid.AllowSorting = true;
             sDataGrid.Margin = new Thickness(20, 20, 20, 20);
 
             //Column creation
@@ -77,7 +78,7 @@ namespace RAT._1View.Desktop
                         SendCommand myCommand = new SendCommand();
                         myCommand.Command = new CommandDatapoint()
                         {
-                            CommandType = "Close Process",
+                            CommandType = CommandType.CloseProcess,
                             ProcessName = temp.Text,
                             ExpireTime = DateTime.Now
                         };
@@ -109,6 +110,19 @@ namespace RAT._1View.Desktop
             //Data binding
             sDataGrid.ItemsSource = viewModel.Data;
 
+            /*Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>
+            {
+                for (int i = 0; i < sDataGrid.Children.Count; i++)
+                {
+                    if (()sDataGrid.Children[i] == null)
+                    {
+                        sDataGrid.Children[i].IsVisible = false;
+                    }
+                }
+
+                return true;
+            });
+            */
             Children.Add(sDataGrid, 1, 1);
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using IoTHubAmqpService;
 using RAT.ZTry;
+using RAT._1.RAT._1View.Desktop;
 using RAT._1View.Desktop;
 using RAT._1View.Desktop.Screens.SubScreens.RAT._1View.Desktop;
 using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
@@ -20,10 +21,10 @@ namespace RAT._1View.UWP.SubScreens
         private ToolBarState myScreenState;
 
         //SubScreen
-        private SystemResources systemResourcesSc;
+        private SystemResourcesToolbar systemResourcesSc;
         private Processes processesSc;
         private AppHistory appHistorySc;
-        private Temp tempSc;
+        private CommandToolbar commandSc;
         public ToolBar()
         {
             myScreenState = ToolBarState.SYSTEMRESOURCES;
@@ -70,7 +71,7 @@ namespace RAT._1View.UWP.SubScreens
             apphistory.WidthRequest = 180;
 
             temp = new Button();
-            temp.Text = "App History";
+            temp.Text = "Command";
             temp.FontSize = 14;
             temp.VerticalOptions = LayoutOptions.Center;
             temp.HorizontalOptions = LayoutOptions.CenterAndExpand;
@@ -97,7 +98,7 @@ namespace RAT._1View.UWP.SubScreens
 
             //Initialising Overview Screen
             //Adding Cpu Screen
-            systemResourcesSc = new SystemResources();
+            systemResourcesSc = new SystemResourcesToolbar();
             systemResourcesSc.Margin = new Thickness(0, 40, 0, 0);
             Children.Add(systemResourcesSc, 0, 0);
 
@@ -118,9 +119,9 @@ namespace RAT._1View.UWP.SubScreens
                 RemoveScreen();
 
                 //Adding Wifi Screen
-                tempSc = new Temp();
-                tempSc.Margin = new Thickness(50, 50, 50, 0);
-                Children.Add(tempSc, 0, 0);
+                commandSc = new CommandToolbar();
+                commandSc.Margin = new Thickness(0, 40, 0, 0);
+                Children.Add(commandSc, 0, 0);
 
                 myScreenState = ToolBarState.TEMP;
             }
@@ -166,7 +167,7 @@ namespace RAT._1View.UWP.SubScreens
                 RemoveScreen();
 
                 //Adding Wifi Screen
-                systemResourcesSc = new SystemResources();
+                systemResourcesSc = new SystemResourcesToolbar();
                 systemResourcesSc.Margin = new Thickness(0, 40, 0, 0);
                 Children.Add(systemResourcesSc, 0, 0);
 
@@ -205,11 +206,12 @@ namespace RAT._1View.UWP.SubScreens
             }
             else if (myScreenState == ToolBarState.TEMP)
             {
+                BackgroundColor = Color.White;
                 temp.BackgroundColor = Color.Transparent;
-                Children.Remove(tempSc);
-                tempSc.GC();
-                tempSc.BindingContext = null;
-                tempSc = null;
+                Children.Remove(commandSc);
+                commandSc.GC();
+                commandSc.BindingContext = null;
+                commandSc = null;
             }
         }
         #endregion

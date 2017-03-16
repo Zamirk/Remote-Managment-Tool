@@ -43,7 +43,7 @@ namespace ConsoleApplication1.Folder
             EventHubClient client = factory.CreateEventHubClient(eventHubEntity);
             EventHubConsumerGroup group = client.GetDefaultConsumerGroup();
 
-            startingDateTimeUtc = DateTime.Now;
+            startingDateTimeUtc = DateTime.Now.AddSeconds(-30);
 
             EventHubReceiver receiver = group.CreateReceiver(partitionId, startingDateTimeUtc);
 
@@ -58,13 +58,15 @@ namespace ConsoleApplication1.Folder
             }
             listOfDevices.Add(myDevice);
             EventData data;
-            while (go)
+            try
             {
-                System.Diagnostics.Debug.WriteLine("Level 1: Looping");
-                data = receiver.Receive();
-                System.Diagnostics.Debug.WriteLine("Level 2: Data received");
-               // if (data.GetBytes() != null)
-               // {
+                while (go)
+                {
+                    System.Diagnostics.Debug.WriteLine("Level 1: Looping");
+                    data = receiver.Receive();
+                    System.Diagnostics.Debug.WriteLine("Level 2: Data received");
+                    // if (data.GetBytes() != null)
+                    // {
                     string JsonString = Encoding.UTF8.GetString(data.GetBytes());
                     System.Diagnostics.Debug.WriteLine("Level 3: JSon");
 
@@ -80,13 +82,19 @@ namespace ConsoleApplication1.Folder
                         System.Diagnostics.Debug.WriteLine("Level 4: Device ID" +
                                                            listOfDevices[0].ElementAt(0).Device_id);
                     }
-               // }
-               // else
-                //{
-                //    System.Diagnostics.Debug.WriteLine("----------------------------Avoided Error"+DateTime.Now);
-                //}
+                    // }
+                    // else
+                    //{
+                    //    System.Diagnostics.Debug.WriteLine("----------------------------Avoided Error"+DateTime.Now);
+                    //}
+                }
             }
-            
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("[GetTelemetry] Error IOT, you should probably check this" +e);
+            }
+
+
             receiver.Close();
             client.Close();
             factory.Close();

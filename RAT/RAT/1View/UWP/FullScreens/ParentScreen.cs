@@ -18,7 +18,7 @@ namespace RAT.ZTry
     {
         #region Member Variables
         private MenuState myMenuState;
-        private ViewDevicesScreen viewDevicesScreen;
+        private AllDevices viewDevicesScreen;
         private ToolBar singleDeviceScreen;
         private AppScreen appScreen;
         //private AppsScreen applicationManagmentScreen;
@@ -206,7 +206,7 @@ namespace RAT.ZTry
             midGrid.Children.Add(rightColour, 2, 0);
 
             //Initial Screen
-            viewDevicesScreen = new ViewDevicesScreen();
+            viewDevicesScreen = new AllDevices();
             midGrid.Children.Add(viewDevicesScreen, 1, 0);
             viewDevicesScreen.aaaa.Clicked += PcOne_Clicked;
 
@@ -270,7 +270,7 @@ namespace RAT.ZTry
 
                 //TODO: Remove Clickhandler and replace with ParentScreen Subscreen managment
                 //TODO: Maybe this shouldnt be initialised instantly: 06/12/16
-                viewDevicesScreen = new ViewDevicesScreen();
+                viewDevicesScreen = new AllDevices();
                 viewDevicesScreen.aaaa.Clicked += PcOne_Clicked;
                 midGrid.Children.Add(viewDevicesScreen, 1, 0);
 

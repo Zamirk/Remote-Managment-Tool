@@ -15,7 +15,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens
 
     namespace RAT._1View.Desktop
     {
-        public class SystemResources : Grid
+        public class SystemResourcesToolbar : Grid
         {
             private Button overviewButton, memoryButton, wifiButton, diskButton, cpuButton;
             int fontSize = 13;
@@ -30,7 +30,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens
             private DiskScreen diskScreen;
             private WifiScreen wifiScreen;
 
-            public SystemResources()
+            public SystemResourcesToolbar()
             {
                 myScreenState = ScreenState.CPU;
 
@@ -95,7 +95,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens
 
                 //Mid button grid
                 Grid midGrid2 = new Grid();
-                midGrid2.RowDefinitions.Add(new RowDefinition {Height = 50});
+                midGrid2.RowDefinitions.Add(new RowDefinition { Height = 50 });
                 midGrid2.ColumnSpacing = 0;
                 midGrid2.RowSpacing = 0;
                 midGrid2.HorizontalOptions = LayoutOptions.Center;
@@ -135,7 +135,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                     wifiScreen = new WifiScreen();
                     wifiScreen.Margin = new Thickness(50, 50, 50, 0);
                     Children.Add(wifiScreen, 0, 0);
-
                     myScreenState = ScreenState.WIFI;
                 }
             }

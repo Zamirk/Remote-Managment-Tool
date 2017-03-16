@@ -9,33 +9,37 @@
     <Import_RootNamespace>RAT</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\CommandState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\CommandType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\ToolBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\MenuState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\ScreenState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\LoginScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\ParentScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0DashboardScreen\Dashboard Backup\DashboardScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0DashboardScreen\Dashboard Backup\MyPopupPag.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0DashboardScreen\DashboardCell.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0DashboardScreen\DashboardScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0DashboardScreen\IPopupAnimation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0DashboardScreen\SelectItemPopup.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\AppHistory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\Temp.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\Processes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\AppScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources\CPUScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources\DiskScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\FullScreens\LoginScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\FullScreens\ParentScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\Dashboard Backup\DashboardScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\Dashboard Backup\MyPopupPag.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\DashboardCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\DashboardScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\IPopupAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\SelectItemPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\AppHistory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\StandardCommands.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\PowerShell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\ConsoleCmd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\Processes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\2Notifications\AppScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\ToolBars\CommandToolbar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\CPUScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\DiskScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\EasterEgg\GameButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\EasterEgg\GameParent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\EasterEgg\TheGame.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\OverviewAllScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources\OverviewScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources\RamScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ViewDevicesScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources\WifiScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\OverviewScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\RamScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\ToolBars\SystemResourcesToolbar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\ToolBars\ToolBar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\AllDevices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\WifiScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Android\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Android\ParentScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Android\SubScreens\0DashboardScreen\DashboardCell.cs" />
@@ -54,6 +58,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\Android\SubScreens\SingleDeviceScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Android\SubScreens\ViewDevicesScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Android\SubScreens\WifiScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CommandViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\ProcessesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\DashboardViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CpuViewModel.cs" />
@@ -94,6 +99,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)zTest\PanContainer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ToolBar\SystemResources\" />
+    <Folder Include="$(MSBuildThisFileDirectory)1View\UWP\FullScreens\" />
+    <Folder Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\" />
+    <Folder Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\2Notifications\" />
   </ItemGroup>
 </Project>

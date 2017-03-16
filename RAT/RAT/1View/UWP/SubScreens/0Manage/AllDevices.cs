@@ -14,10 +14,10 @@ using Label = Xamarin.Forms.Label;
 
 namespace RAT._1View.Desktop.Manage
 {
-	public class ViewDevicesScreen : Grid
+	public class AllDevices : Grid
 	{
 	    public Button aaaa = new Button();
-        public ViewDevicesScreen()
+        public AllDevices()
         {
             ViewDevicesViewModel viewModel = new ViewDevicesViewModel();
             BindingContext = viewModel;

@@ -8,18 +8,13 @@ using Xamarin.Forms;
 
 namespace RAT._1View.Desktop
 {
-    public class Temp : Grid
+    public class AppScreen : Grid
     {
         int fontSize = 13;
-        
-        public Temp()
-        {
-            Children.Add(new Label() { Text = "Temp" });
-        }
 
-        public void GC()
+        public AppScreen()
         {
-            //RemoveScreen();
+            Children.Add(new Label() { Text = "System Performance Screen" });
         }
     }
 }

@@ -77,7 +77,7 @@ namespace RAT._2ViewModel
         private async void LoadData()
         {
             y = 0;
-            //Iterating over the queue of telemetry obects, adding to the chart databound collection
+            //Iterating the queue of telemetry objects, adding to the chart collection
             foreach (var telemetry in GetTelemetry.listOfDevices[0])
             {
                     data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Cpu)));
