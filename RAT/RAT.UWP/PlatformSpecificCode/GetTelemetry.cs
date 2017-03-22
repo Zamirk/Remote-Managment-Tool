@@ -15,6 +15,9 @@ namespace ConsoleApplication1.Folder
 {
     public class GetTelemetry
     {
+        public static bool go = true;
+        public static string aaaaa = "";
+
         static string ConnectionString = "Endpoint=sb://iothub-ns-manageiot-119210-43e7bcdbe5.servicebus.windows.net/;" +
                              "SharedAccessKeyName=iothubowner;" +
                              "SharedAccessKey=XnRSB9kO1Knhq6sL7QMhWhxqshHsGV34NBw+HnDj5oU=";
@@ -22,19 +25,30 @@ namespace ConsoleApplication1.Folder
         static string eventHubEntity = "ManageIoT";
         static string partitionId = "1";
 
+        //Todays date and time
         static DateTime startingDateTimeUtc;
 
-        List<string> devices = new List<string>(){"Device_1","Device_2"};
-        public static bool go = true;
-        public static string aaaaa = "";
+        //List of devices
+        List<string> devices = new List<string>() { "Device_1", "Device_2" };
+
+        //Last received values
+        public static List<TelemetryDatapoint> lastTelemetryDatapoints = new List<TelemetryDatapoint>()
+        {
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint("")
+        };
+
+        //Storing data of all devices
         public static List<Queue<TelemetryDatapoint>> listOfDevices = new List<Queue<TelemetryDatapoint>>()
         {
+            //TODO TEMP HARDCODING 2 DEVICES
+            new Queue<TelemetryDatapoint>(),
             new Queue<TelemetryDatapoint>()
         };
-        public static TelemetryDatapoint lastReceivedValue = new TelemetryDatapoint("");
+
+        //Receive data method
         public static void ReceiveTelemetry()
         {
-            lastReceivedValue = new TelemetryDatapoint("");
             ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(ConnectionString);
             builder.TransportType = TransportType.Amqp;
 
@@ -51,12 +65,13 @@ namespace ConsoleApplication1.Folder
 
             listOfDevices = new List<Queue<TelemetryDatapoint>>();
 
-            Queue<TelemetryDatapoint> myDevice = new Queue<TelemetryDatapoint>();
+            //Filling default values
             for (int i = 0; i < 60; i++)
             {
-                myDevice.Enqueue(new TelemetryDatapoint(""));
+                listOfDevices[0].Enqueue(new TelemetryDatapoint(""));
+                listOfDevices[1].Enqueue(new TelemetryDatapoint(""));
             }
-            listOfDevices.Add(myDevice);
+
             EventData data;
             try
             {
@@ -77,7 +92,7 @@ namespace ConsoleApplication1.Folder
 
                         listOfDevices[0].Dequeue();
                         listOfDevices[0].Enqueue(telemetry);
-                        lastReceivedValue = telemetry;
+                        lastTelemetryDatapoints[0] = telemetry;
                         aaaaa = JsonString;
                         System.Diagnostics.Debug.WriteLine("Level 4: Device ID" +
                                                            listOfDevices[0].ElementAt(0).Device_id);

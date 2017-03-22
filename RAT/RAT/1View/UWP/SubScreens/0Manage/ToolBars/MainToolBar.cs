@@ -90,8 +90,8 @@ namespace RAT._1View.UWP.SubScreens
             midGrid1.HorizontalOptions = LayoutOptions.Center;
             midGrid1.Children.Add(systemResources, 0, 0);
             midGrid1.Children.Add(processes, 1, 0);
-            midGrid1.Children.Add(apphistory, 2, 0);
-            midGrid1.Children.Add(temp, 3, 0);
+            //midGrid1.Children.Add(apphistory, 2, 0);
+            midGrid1.Children.Add(temp, 2, 0);
 
             //Adding to mid-grid
             Children.Add(midGrid1, 0, 0);

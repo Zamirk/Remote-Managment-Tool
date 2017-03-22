@@ -24,8 +24,8 @@ namespace RAT.ZTry
         //private AppsScreen applicationManagmentScreen;
         private DashboardScreen dashboardScreen;
 
-        private Button signOutButton, performanceButton, manageButton, dashboardButton,
-            applicationButton, backButton, forwardButton, secretGameButton, apphistory;
+        private Button signOutButton, notificationsButton, manageButton, dashboardButton,
+            TEMPBUTTON4, backButton, forwardButton, secretGameButton, apphistory;
         ContentView leftColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235), HorizontalOptions = LayoutOptions.Fill };
         ContentView rightColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235) };
         private Grid midGrid;
@@ -62,7 +62,7 @@ namespace RAT.ZTry
             manageButton.BorderWidth = .000001;
             manageButton.WidthRequest = 500;
             manageButton.HeightRequest = 50;
-            manageButton.Margin = new Thickness(0, 50, 0, 0);
+            manageButton.Margin = new Thickness(0, 40, 0, 0);
             manageButton.BackgroundColor = Color.Gray;
 
             dashboardButton = new Button();
@@ -76,27 +76,27 @@ namespace RAT.ZTry
             dashboardButton.WidthRequest = 500;
             dashboardButton.HeightRequest = 50;
 
-            performanceButton = new Button();
-            performanceButton.Text = "System Performance";
-            performanceButton.FontSize = 20;
-            performanceButton.VerticalOptions = LayoutOptions.Center;
-            performanceButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            performanceButton.BorderColor = Color.Transparent;
-            performanceButton.BackgroundColor = Color.Transparent;
-            performanceButton.BorderWidth = .000001;
-            performanceButton.WidthRequest = 500;
-            performanceButton.HeightRequest = 50;
+            notificationsButton = new Button();
+            notificationsButton.Text = "Notifications";
+            notificationsButton.FontSize = 20;
+            notificationsButton.VerticalOptions = LayoutOptions.Center;
+            notificationsButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            notificationsButton.BorderColor = Color.Transparent;
+            notificationsButton.BackgroundColor = Color.Transparent;
+            notificationsButton.BorderWidth = .000001;
+            notificationsButton.WidthRequest = 500;
+            notificationsButton.HeightRequest = 50;
 
-            applicationButton = new Button();
-            applicationButton.Text = "Applications";
-            applicationButton.FontSize = 20;
-            applicationButton.VerticalOptions = LayoutOptions.Center;
-            applicationButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            applicationButton.BorderColor = Color.Transparent;
-            applicationButton.BackgroundColor = Color.Transparent;
-            applicationButton.BorderWidth = .000001;
-            applicationButton.HeightRequest = 50;
-            applicationButton.WidthRequest = 500;
+            TEMPBUTTON4 = new Button();
+            TEMPBUTTON4.Text = "TEMPBUTTON4";
+            TEMPBUTTON4.FontSize = 20;
+            TEMPBUTTON4.VerticalOptions = LayoutOptions.Center;
+            TEMPBUTTON4.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            TEMPBUTTON4.BorderColor = Color.Transparent;
+            TEMPBUTTON4.BackgroundColor = Color.Transparent;
+            TEMPBUTTON4.BorderWidth = .000001;
+            TEMPBUTTON4.HeightRequest = 50;
+            TEMPBUTTON4.WidthRequest = 500;
 
             backButton = new Button();
             backButton.Text = "<";
@@ -167,8 +167,7 @@ namespace RAT.ZTry
             leftButtonStack.Spacing = 0;
             leftButtonStack.Children.Add(manageButton);
             leftButtonStack.Children.Add(dashboardButton);
-            leftButtonStack.Children.Add(performanceButton);
-            leftButtonStack.Children.Add(applicationButton);
+            leftButtonStack.Children.Add(notificationsButton);
             //leftButtonStack.Children.Add(secretGameButton);
             #endregion
 
@@ -208,13 +207,14 @@ namespace RAT.ZTry
             //Initial Screen
             viewDevicesScreen = new AllDevices();
             midGrid.Children.Add(viewDevicesScreen, 1, 0);
-            viewDevicesScreen.aaaa.Clicked += PcOne_Clicked;
+            //TODO This is some crazy code remove it
+            //viewDevicesScreen.aaaa.Clicked += PcOne_Clicked;
 
             //Left Buttons
             manageButton.Clicked += ManageButton_Clicked;
             dashboardButton.Clicked += DashboardButton_Clicked;
-            performanceButton.Clicked += PerformanceButton_Clicked;
-            applicationButton.Clicked += ApplicationButton_Clicked;
+            notificationsButton.Clicked += NotificationsButtonClicked;
+            TEMPBUTTON4.Clicked += Tempbutton4Clicked;
             secretGameButton.Clicked += Secret_Game;
 
             //TODO Temp, Should be removed and added when needed
@@ -271,18 +271,19 @@ namespace RAT.ZTry
                 //TODO: Remove Clickhandler and replace with ParentScreen Subscreen managment
                 //TODO: Maybe this shouldnt be initialised instantly: 06/12/16
                 viewDevicesScreen = new AllDevices();
-                viewDevicesScreen.aaaa.Clicked += PcOne_Clicked;
+                //TODO Seriously remove it
+                //viewDevicesScreen.aaaa.Clicked += PcOne_Clicked;
                 midGrid.Children.Add(viewDevicesScreen, 1, 0);
 
                 myMenuState = MenuState.MANAGE_ALLDEVICES;
             }
         }
 
-        private void PerformanceButton_Clicked(object sender, EventArgs e)
+        private void NotificationsButtonClicked(object sender, EventArgs e)
         {
             if (myMenuState != MenuState.PERFORMANCE)
             {
-                performanceButton.BackgroundColor = Color.Gray;
+                notificationsButton.BackgroundColor = Color.Gray;
                 RemoveScreen();
 
                 //Adding Overview Screen
@@ -293,11 +294,11 @@ namespace RAT.ZTry
             }
         }
 
-        private void ApplicationButton_Clicked(object sender, EventArgs e)
+        private void Tempbutton4Clicked(object sender, EventArgs e)
         {
             if (myMenuState != MenuState.APPLICATIONS)
             {
-                applicationButton.BackgroundColor = Color.Gray;
+                TEMPBUTTON4.BackgroundColor = Color.Gray;
                 RemoveScreen();
 
                 //Adding Overview Screen
@@ -327,12 +328,12 @@ namespace RAT.ZTry
             }
             else if (myMenuState == MenuState.PERFORMANCE)
             {
-                performanceButton.BackgroundColor = Color.Transparent;
+                notificationsButton.BackgroundColor = Color.Transparent;
                 midGrid.Children.Remove(appScreen);
             }
             else if (myMenuState == MenuState.APPLICATIONS)
             {
-                applicationButton.BackgroundColor = Color.Transparent;
+                TEMPBUTTON4.BackgroundColor = Color.Transparent;
                 //midGrid.Children.Remove(applicationManagmentScreen);
             }
             else if (myMenuState == MenuState.MANAGE_SINGLEDEVICE)

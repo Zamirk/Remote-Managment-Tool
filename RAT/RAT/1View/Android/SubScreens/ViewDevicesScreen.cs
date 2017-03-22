@@ -19,8 +19,8 @@ namespace Mobile
 	    public Button aaaa = new Button();
         public ViewDevicesScreen()
         {
-            ViewDevicesViewModel viewModel = new ViewDevicesViewModel();
-            BindingContext = viewModel;
+            //ViewDevicesViewModel viewModel = new ViewDevicesViewModel();
+            //BindingContext = viewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;
             RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
@@ -72,7 +72,7 @@ namespace Mobile
             sDataGrid.Columns.Add(column_4);
             sDataGrid.Columns.Add(column_5);
             sDataGrid.Columns.Add(custColumn);
-            sDataGrid.ItemsSource = viewModel.data;
+            //sDataGrid.ItemsSource = viewModel.data;
             sDataGrid.Margin = new Thickness(20,20,20,20);
             Children.Add(sDataGrid, 1, 1);
         }

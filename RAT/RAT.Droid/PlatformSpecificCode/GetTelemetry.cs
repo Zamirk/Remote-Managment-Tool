@@ -24,7 +24,7 @@ namespace ConsoleApplication1.Folder
         public static bool go = true;
         public static string aaaaa = "";
         public static List<Queue<TelemetryDatapoint>> listOfDevices;
-        public static TelemetryDatapoint lastReceivedValue;
+        public static TelemetryDatapoint lastReceivedValue = new TelemetryDatapoint("");
         public static void ReceiveTelemetry()
         {
             lastReceivedValue = new TelemetryDatapoint("Device_1");

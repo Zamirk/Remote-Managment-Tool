@@ -13,11 +13,10 @@ namespace Mobile
         private ViewDevicesScreen viewDevicesScreen;
         private DeviceScreen singleDeviceScreen;
         private AppScreen appScreen;
-        //private AppsScreen applicationManagmentScreen;
         private DashboardScreen dashboardScreen;
 
         private Button signOutButton, performanceButton, manageButton, dashboardButton,
-            applicationButton, backButton, forwardButton, secretGameButton;
+            TEMPBUTTON4, backButton, forwardButton, secretGameButton;
         ContentView leftColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235), HorizontalOptions = LayoutOptions.Fill };
         ContentView rightColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235) };
         private Grid midGrid;
@@ -69,7 +68,7 @@ namespace Mobile
             dashboardButton.HeightRequest = 50;
 
             performanceButton = new Button();
-            performanceButton.Text = "System Performance";
+            performanceButton.Text = "Notifications";
             performanceButton.FontSize = 20;
             performanceButton.VerticalOptions = LayoutOptions.Center;
             performanceButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
@@ -79,16 +78,16 @@ namespace Mobile
             performanceButton.WidthRequest = 500;
             performanceButton.HeightRequest = 50;
 
-            applicationButton = new Button();
-            applicationButton.Text = "Applications";
-            applicationButton.FontSize = 20;
-            applicationButton.VerticalOptions = LayoutOptions.Center;
-            applicationButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            applicationButton.BorderColor = Color.Transparent;
-            applicationButton.BackgroundColor = Color.Transparent;
-            applicationButton.BorderWidth = .000001;
-            applicationButton.HeightRequest = 50;
-            applicationButton.WidthRequest = 500;
+            TEMPBUTTON4 = new Button();
+            TEMPBUTTON4.Text = "TEMPBUTTON4";
+            TEMPBUTTON4.FontSize = 20;
+            TEMPBUTTON4.VerticalOptions = LayoutOptions.Center;
+            TEMPBUTTON4.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            TEMPBUTTON4.BorderColor = Color.Transparent;
+            TEMPBUTTON4.BackgroundColor = Color.Transparent;
+            TEMPBUTTON4.BorderWidth = .000001;
+            TEMPBUTTON4.HeightRequest = 50;
+            TEMPBUTTON4.WidthRequest = 500;
 
             backButton = new Button();
             backButton.Text = "<";
@@ -156,8 +155,7 @@ namespace Mobile
             leftButtonStack.Spacing = 0;
             leftButtonStack.Children.Add(manageButton);
             leftButtonStack.Children.Add(dashboardButton);
-            leftButtonStack.Children.Add(performanceButton);
-            leftButtonStack.Children.Add(applicationButton);
+            //leftButtonStack.Children.Add(performanceButton);
             //leftButtonStack.Children.Add(secretGameButton);
             #endregion
 
@@ -189,7 +187,7 @@ namespace Mobile
             manageButton.Clicked += ManageButton_Clicked;
             dashboardButton.Clicked += DashboardButton_Clicked;
             performanceButton.Clicked += PerformanceButton_Clicked;
-            applicationButton.Clicked += ApplicationButton_Clicked;
+            TEMPBUTTON4.Clicked += Tempbutton4Clicked;
             secretGameButton.Clicked += Secret_Game;
 
             //TODO Temp, Should be removed and added when needed
@@ -268,11 +266,11 @@ namespace Mobile
             }
         }
 
-        private void ApplicationButton_Clicked(object sender, EventArgs e)
+        private void Tempbutton4Clicked(object sender, EventArgs e)
         {
             if (myMenuState != MenuState.APPLICATIONS)
             {
-                applicationButton.BackgroundColor = Color.Gray;
+                TEMPBUTTON4.BackgroundColor = Color.Gray;
                 RemoveScreen();
 
                 //Adding Overview Screen
@@ -307,7 +305,7 @@ namespace Mobile
             }
             else if (myMenuState == MenuState.APPLICATIONS)
             {
-                applicationButton.BackgroundColor = Color.Transparent;
+                TEMPBUTTON4.BackgroundColor = Color.Transparent;
                 //midGrid.Children.Remove(applicationManagmentScreen);
             }
             else if (myMenuState == MenuState.MANAGE_SINGLEDEVICE)

@@ -37,7 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\OverviewScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\RamScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\ToolBars\SystemResourcesToolbar.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\ToolBars\ToolBar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\ToolBars\MainToolBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\AllDevices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\WifiScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Android\LoginScreen.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\DiskViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\RamViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\ViewDevicesViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\AllDevicesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\WifiViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\CommandDatapoint.cs" />
