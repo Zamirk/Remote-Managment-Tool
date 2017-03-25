@@ -22,12 +22,14 @@ namespace RAT._2ViewModel
             LoadData();
         }
 
-        private string inUse = GetTelemetry.lastReceivedValue.RamInUse;
-        private string notInUse = GetTelemetry.lastReceivedValue.Ram;
-        private string committed = GetTelemetry.lastReceivedValue.RamCommitted;
-        private string cached = GetTelemetry.lastReceivedValue.RamCache;
-        private string pagedPool = GetTelemetry.lastReceivedValue.PagedPool;
-        private string nonPagedPool = GetTelemetry.lastReceivedValue.NonPagedPool;
+        private static int deviceNo = 0;
+
+        private string inUse = GetTelemetry.lastTelemetryDatapoints[deviceNo].RamInUse;
+        private string notInUse = GetTelemetry.lastTelemetryDatapoints[deviceNo].Ram;
+        private string committed = GetTelemetry.lastTelemetryDatapoints[deviceNo].RamCommitted;
+        private string cached = GetTelemetry.lastTelemetryDatapoints[deviceNo].RamCache;
+        private string pagedPool = GetTelemetry.lastTelemetryDatapoints[deviceNo].PagedPool;
+        private string nonPagedPool = GetTelemetry.lastTelemetryDatapoints[deviceNo].NonPagedPool;
 
         public string PagedPool
         {
@@ -91,13 +93,13 @@ namespace RAT._2ViewModel
             {
                 System.Diagnostics.Debug.WriteLine("RAM" + y);
                    y++;
-                double ramUsage = Convert.ToDouble(GetTelemetry.lastReceivedValue.RamInUse);
-                PagedPool = GetTelemetry.lastReceivedValue.PagedPool;
-                NonPagedPool = GetTelemetry.lastReceivedValue.NonPagedPool;
-                InUse = GetTelemetry.lastReceivedValue.RamInUse;
-                NotInUse = GetTelemetry.lastReceivedValue.Ram;
-                Cached = GetTelemetry.lastReceivedValue.RamCache;
-                Committed = GetTelemetry.lastReceivedValue.RamCommitted;
+                double ramUsage = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].RamInUse);
+                PagedPool = GetTelemetry.lastTelemetryDatapoints[deviceNo].PagedPool;
+                NonPagedPool = GetTelemetry.lastTelemetryDatapoints[deviceNo].NonPagedPool;
+                InUse = GetTelemetry.lastTelemetryDatapoints[deviceNo].RamInUse;
+                NotInUse = GetTelemetry.lastTelemetryDatapoints[deviceNo].Ram;
+                Cached = GetTelemetry.lastTelemetryDatapoints[deviceNo].RamCache;
+                Committed = GetTelemetry.lastTelemetryDatapoints[deviceNo].RamCommitted;
                 data.RemoveAt(0);
                 data.Add(new ChartDataPoint(y, ramUsage));
                 if (killThread)

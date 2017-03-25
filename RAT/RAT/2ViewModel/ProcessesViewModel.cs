@@ -30,10 +30,12 @@ namespace RAT._2ViewModel
             get { return data; }
         }
 
+        private static int deviceNo = 0;
+
         private async void LoadData()
         {
             //Initial data
-            int processesCount = GetTelemetry.lastReceivedValue.ListTest.Count;
+            int processesCount = GetTelemetry.lastTelemetryDatapoints[deviceNo].ListTest.Count;
 
             //Initial collection of empty objects displayed
             for (int i = 0; i < processesCount; i++)
@@ -44,11 +46,11 @@ namespace RAT._2ViewModel
             //Updating the empty objects with data
             for (int i = 0; i < processesCount; i++)
             {
-                Data[i].Name = GetTelemetry.lastReceivedValue.ListTest[i].N;
-                Data[i].Cpu = GetTelemetry.lastReceivedValue.ListTest[i].C;
-                Data[i].Memory = GetTelemetry.lastReceivedValue.ListTest[i].M;
-                Data[i].Time = GetTelemetry.lastReceivedValue.ListTest[i].T;
-                Data[i].CustomerID = GetTelemetry.lastReceivedValue.ListTest[i].N;
+                Data[i].Name = GetTelemetry.lastTelemetryDatapoints[deviceNo].ListTest[i].N;
+                Data[i].Cpu = GetTelemetry.lastTelemetryDatapoints[deviceNo].ListTest[i].C;
+                Data[i].Memory = GetTelemetry.lastTelemetryDatapoints[deviceNo].ListTest[i].M;
+                Data[i].Time = GetTelemetry.lastTelemetryDatapoints[deviceNo].ListTest[i].T;
+                Data[i].CustomerID = GetTelemetry.lastTelemetryDatapoints[deviceNo].ListTest[i].N;
             }
 
             //Updating the data in the grid once a second
@@ -61,7 +63,7 @@ namespace RAT._2ViewModel
                 }
 
                 //Getting current number of processes
-                processesCount = GetTelemetry.lastReceivedValue.ListTest.Count;
+                processesCount = GetTelemetry.lastTelemetryDatapoints[deviceNo].ListTest.Count;
 
                 //Resizing the size of the grid relative to the size of the processes
                 if (data.Count < processesCount)
@@ -81,11 +83,11 @@ namespace RAT._2ViewModel
                 //Updating the grid with data
                 for (int i = 0; i < processesCount; i++)
                 {
-                    Data[i].Name = GetTelemetry.lastReceivedValue.ListTest[i].N;
-                    Data[i].Cpu = GetTelemetry.lastReceivedValue.ListTest[i].C;
-                    Data[i].Memory = GetTelemetry.lastReceivedValue.ListTest[i].M;
-                    Data[i].Time = GetTelemetry.lastReceivedValue.ListTest[i].T;
-                    Data[i].CustomerID = GetTelemetry.lastReceivedValue.ListTest[i].N;
+                    Data[i].Name = GetTelemetry.lastTelemetryDatapoints[deviceNo].ListTest[i].N;
+                    Data[i].Cpu = GetTelemetry.lastTelemetryDatapoints[deviceNo].ListTest[i].C;
+                    Data[i].Memory = GetTelemetry.lastTelemetryDatapoints[deviceNo].ListTest[i].M;
+                    Data[i].Time = GetTelemetry.lastTelemetryDatapoints[deviceNo].ListTest[i].T;
+                    Data[i].CustomerID = GetTelemetry.lastTelemetryDatapoints[deviceNo].ListTest[i].N;
                 }
                 return true;
             });

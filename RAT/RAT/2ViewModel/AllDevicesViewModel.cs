@@ -12,16 +12,16 @@ namespace RAT._1View.Desktop.Screens.SubScreens
 {
     class AllDevicesViewModel : ViewModelBase
     {
-        public  bool collectGarbage = false;
-        ObservableCollection<ProcessTest> data;
+        public bool collectGarbage = false;
+        ObservableCollection<DeviceSummary> data;
 
         public AllDevicesViewModel()
         {
-            data = new ObservableCollection<ProcessTest>();
+            data = new ObservableCollection<DeviceSummary>();
             LoadData();
         }
 
-        public ObservableCollection<ProcessTest> Data
+        public ObservableCollection<DeviceSummary> Data
         {
             set { SetProperty(ref data, value); }
             get { return data; }
@@ -34,19 +34,20 @@ namespace RAT._1View.Desktop.Screens.SubScreens
             int devicesCount = GetTelemetry.listOfDevices.Count;
 
             //Initial collection of empty objects displayed
+            //TODO Hardcoding empty values for now
             for (int i = 0; i < 5; i++)
             {
-                data.Add(new ProcessTest());
+                data.Add(new DeviceSummary());
             }
 
             //Updating the empty objects with data
             for (int i = 0; i < devicesCount; i++)
             {
-                Data[i].Name = GetTelemetry.lastReceivedValue.Device_id;
-                Data[i].Cpu = GetTelemetry.lastReceivedValue.Cpu;
-                Data[i].Memory = GetTelemetry.lastReceivedValue.Ram;
-                Data[i].Time = GetTelemetry.lastReceivedValue.DiskTime;
-                Data[i].CustomerID = GetTelemetry.lastReceivedValue.Bandwidth;
+                Data[i].Name = GetTelemetry.lastTelemetryDatapoints[i].Device_id;
+                Data[i].Cpu = GetTelemetry.lastTelemetryDatapoints[i].Cpu;
+                Data[i].Memory = GetTelemetry.lastTelemetryDatapoints[i].Ram;
+                Data[i].Disk = GetTelemetry.lastTelemetryDatapoints[i].DiskTime;
+                Data[i].Wifi = GetTelemetry.lastTelemetryDatapoints[i].Bandwidth;
             }
 
             //Updating the data in the grid once a second
@@ -81,11 +82,11 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                 //Updating the grid with data
                 for (int i = 0; i < devicesCount; i++)
                 {
-                    Data[i].Name = GetTelemetry.lastReceivedValue.Device_id;
-                    Data[i].Cpu = GetTelemetry.lastReceivedValue.Cpu;
-                    Data[i].Memory = GetTelemetry.lastReceivedValue.Ram;
-                    Data[i].Time = GetTelemetry.lastReceivedValue.DiskTime;
-                    Data[i].CustomerID = GetTelemetry.lastReceivedValue.Bandwidth;
+                    Data[i].Name = GetTelemetry.lastTelemetryDatapoints[i].Device_id;
+                    Data[i].Cpu = GetTelemetry.lastTelemetryDatapoints[i].Cpu;
+                    Data[i].Memory = GetTelemetry.lastTelemetryDatapoints[i].Ram;
+                    Data[i].Disk = GetTelemetry.lastTelemetryDatapoints[i].DiskTime;
+                    Data[i].Wifi = GetTelemetry.lastTelemetryDatapoints[i].Bandwidth;
                 }
                 return true;
             });

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using RAT.ZTry;
 using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
 using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
 using Rg.Plugins.Popup.Extensions;
@@ -16,9 +17,10 @@ namespace RAT._1View.Desktop.Manage
 {
 	public class DashboardScreen : ScrollView
 	{
-        private bool moving = false;
-        private bool resizing = false;
+        private DashboardButtonState buttonState;
 
+	    private Button deleteButton, editing, movingButton, resizing, add;
+	    private Picker dashboardList;
         double width = 109.25;
         double height = 99.6;
 
@@ -48,42 +50,89 @@ namespace RAT._1View.Desktop.Manage
             buttonGrid.ColumnSpacing = 0;
             buttonGrid.RowSpacing = 0;
 
-            Button resizing = new Button();
+            #region myButtons and picker
+            dashboardList = new Picker();
+            dashboardList.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            dashboardList.VerticalOptions = LayoutOptions.CenterAndExpand;
+            dashboardList.WidthRequest = 200;
+            dashboardList.HeightRequest = 200;
+            dashboardList.Items.Add("Dashboard 1");
+            dashboardList.Items.Add("Dashboard 2");
+            dashboardList.Items.Add("Dashboard 3");
+            dashboardList.Items.Add("Dashboard 4");
+            dashboardList.Items.Add("Dashboard 5");
+            dashboardList.Items.Add("Dashboard 6");
+            dashboardList.SelectedIndex = 0;
+            buttonGrid.Children.Add(dashboardList, 0, 0);
+
+            add = new Button();
+            add.Text = "Add";
+            add.FontSize = 15;
+            add.WidthRequest = 200;
+            add.HeightRequest = 150;
+            add.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            add.VerticalOptions = LayoutOptions.Center;
+            add.BorderColor = Color.Transparent;
+            add.BackgroundColor = Color.Transparent;
+            add.BorderWidth = .000001;
+            add.Clicked += AddOnClicked;
+            buttonGrid.Children.Add(add, 1, 0);
+
+            editing = new Button();
+            editing.Text = "Editing";
+            editing.FontSize = 15;
+            editing.WidthRequest = 200;
+            editing.HeightRequest = 150;
+            editing.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            editing.VerticalOptions = LayoutOptions.Center;
+            editing.BackgroundColor = Color.Black;
+            editing.BorderColor = Color.Transparent;
+            editing.BackgroundColor = Color.Transparent;
+            editing.BorderWidth = .000001;
+            editing.Clicked += EditingOnClicked;
+            buttonGrid.Children.Add(editing, 2, 0);
+
+            resizing = new Button();
             resizing.Text = "Resize";
             resizing.FontSize = 15;
             resizing.WidthRequest = 150;
             resizing.HeightRequest = 150;
             resizing.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            resizing.VerticalOptions = LayoutOptions.CenterAndExpand;
-            resizing.BackgroundColor = Color.Black;
-            resizing.TextColor = Color.White;
+            resizing.VerticalOptions = LayoutOptions.Center;
+            resizing.BorderColor = Color.Transparent;
+            resizing.BackgroundColor = Color.Transparent;
+            resizing.BorderWidth = .000001;
             resizing.Clicked += ResizingOnClicked;
-            buttonGrid.Children.Add(resizing, 2, 0);
+            buttonGrid.Children.Add(resizing, 3, 0);
 
-            Button movingButton = new Button();
+            movingButton = new Button();
             movingButton.Text = "Move";
             movingButton.FontSize = 15;
-            movingButton.WidthRequest = 150;
+            movingButton.WidthRequest = 200;
             movingButton.HeightRequest = 150;
             movingButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            movingButton.VerticalOptions = LayoutOptions.CenterAndExpand;
-            movingButton.BackgroundColor = Color.Black;
-            movingButton.TextColor = Color.White;
+            movingButton.VerticalOptions = LayoutOptions.Center;
+            movingButton.BorderColor = Color.Transparent;
+            movingButton.BackgroundColor = Color.Transparent;
+            movingButton.BorderWidth = .000001;
             movingButton.Clicked += MovingButton;
-            buttonGrid.Children.Add(movingButton, 3, 0);
+            buttonGrid.Children.Add(movingButton, 4, 0);
 
-            Button deleteButton = new Button();
+            deleteButton = new Button();
             deleteButton.Text = "Delete";
             deleteButton.FontSize = 15;
-            deleteButton.WidthRequest = 150;
+            deleteButton.WidthRequest = 200;
             deleteButton.HeightRequest = 150;
             deleteButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            deleteButton.VerticalOptions = LayoutOptions.CenterAndExpand;
-            deleteButton.BackgroundColor = Color.Black;
-            deleteButton.TextColor = Color.White;
-            buttonGrid.Children.Add(deleteButton, 4, 0);
+            deleteButton.VerticalOptions = LayoutOptions.Center;
+            deleteButton.BorderColor = Color.Transparent;
+            deleteButton.BackgroundColor = Color.Transparent;
+            deleteButton.BorderWidth = .000001;
+            deleteButton.Clicked += DeleteButtonOnClicked;
+            buttonGrid.Children.Add(deleteButton, 5, 0);
+            #endregion
 
-            superGrid.Children.Add(buttonGrid,0,0);
+            superGrid.Children.Add(buttonGrid, 0, 0);
 
             myCells[0] = new DashboardCell[5];
             myCells[1] = new DashboardCell[5];
@@ -100,7 +149,7 @@ namespace RAT._1View.Desktop.Manage
             mainGrid = new Grid();
             mainGrid.ColumnSpacing = 3;
             mainGrid.RowSpacing = 3;
-            mainGrid.BackgroundColor = Color.FromRgb(237, 237, 235);
+            mainGrid.BackgroundColor = Color.White;
 
             mainGrid.Padding = new Thickness(5,5,0,0);
             mainGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
@@ -137,7 +186,6 @@ namespace RAT._1View.Desktop.Manage
                     myCells[xAxis][yAxis].west.Clicked += WestOnClicked;
                     myCells[xAxis][yAxis].north.Clicked += NorthOnClicked;
                     myCells[xAxis][yAxis].south.Clicked += SouthOnClicked;
-
                     System.Diagnostics.Debug.WriteLine(":::"+(yAxis)+":"+ xAxis);
                     mainGrid.Children.Add(myCell, xAxis, yAxis);
                 }
@@ -153,38 +201,125 @@ namespace RAT._1View.Desktop.Manage
             Content = superGrid;
             //Point of reference for animation movment
 
-
         }
 
-	    private void MovingButton(object sender, EventArgs eventArgs)
+	    private void AddOnClicked(object sender, EventArgs eventArgs)
+	    {
+            if (buttonState != DashboardButtonState.Neutral)
+            {
+                add.BackgroundColor = Color.Gray;
+                deleteButton.BackgroundColor = Color.Transparent;
+                editing.BackgroundColor = Color.Transparent;
+                resizing.BackgroundColor = Color.Transparent;
+                movingButton.BackgroundColor = Color.Transparent;
+
+                buttonState = DashboardButtonState.Neutral;
+                HideButtons();
+
+                for (int yAxis = 0; yAxis < 5; yAxis++)
+                {
+                    for (int xAxis = 0; xAxis < 8; xAxis++)
+                    {
+                        myCells[xAxis][yAxis].buttonState = DashboardButtonState.Neutral;
+                    }
+                }
+            }
+        }
+
+
+        private void DeleteButtonOnClicked(object sender, EventArgs eventArgs)
+	    {
+	        if (buttonState != DashboardButtonState.Delete)
+	        {
+                deleteButton.BackgroundColor = Color.Gray;
+                editing.BackgroundColor = Color.Transparent;
+                resizing.BackgroundColor = Color.Transparent;
+                movingButton.BackgroundColor = Color.Transparent;
+                add.BackgroundColor = Color.Transparent;
+
+                buttonState = DashboardButtonState.Delete;
+                HideButtons();
+
+                //Making all Dashboard Cells clickable clickable
+                for (int yAxis = 0; yAxis < 5; yAxis++)
+                {
+                    for (int xAxis = 0; xAxis < 8; xAxis++)
+                    {
+                        myCells[xAxis][yAxis].buttonState = DashboardButtonState.Delete;
+                    }
+                }
+            }
+        }
+
+	    private void EditingOnClicked(object sender, EventArgs eventArgs)
+	    {
+            if (buttonState != DashboardButtonState.Editing)
+            {
+                deleteButton.BackgroundColor = Color.Transparent;
+                editing.BackgroundColor = Color.Gray;
+                resizing.BackgroundColor = Color.Transparent;
+                movingButton.BackgroundColor = Color.Transparent;
+                add.BackgroundColor = Color.Transparent;
+
+                buttonState = DashboardButtonState.Editing;
+                HideButtons();
+
+                //Making all Dashboard Cells clickable clickable
+                for (int yAxis = 0; yAxis < 5; yAxis++)
+                {
+                    for (int xAxis = 0; xAxis < 8; xAxis++)
+                    {
+                        myCells[xAxis][yAxis].buttonState = DashboardButtonState.Editing;
+                    }
+                }
+            }
+        }
+
+        private void MovingButton(object sender, EventArgs eventArgs)
 	    {
             //When moving button clicked, show buttons or hide dashboard cell buttons, resizing is turned off
-	        if (moving)
+	        if (buttonState != DashboardButtonState.Move)
 	        {
-	            moving = false;
-	            HideButtons();
-	        }
-	        else
-	        {
+                deleteButton.BackgroundColor = Color.Transparent;
+                editing.BackgroundColor = Color.Transparent;
+                resizing.BackgroundColor = Color.Transparent;
+                movingButton.BackgroundColor = Color.Gray;
+                add.BackgroundColor = Color.Transparent;
+
+                buttonState = DashboardButtonState.Move;
                 ShowButtons();
-                moving = true;
-                resizing = false;
+
+                for (int yAxis = 0; yAxis < 5; yAxis++)
+                {
+                    for (int xAxis = 0; xAxis < 8; xAxis++)
+                    {
+                        myCells[xAxis][yAxis].buttonState = DashboardButtonState.Move;
+                    }
+                }
             }
         }
 
-	    private void ResizingOnClicked(object sender, EventArgs e)
+        private void ResizingOnClicked(object sender, EventArgs e)
         {
             //When resizing button clicked, show buttons or hide dashboard cell buttons, moving is turned off
-            if (resizing)
+            if (buttonState != DashboardButtonState.Resize)
             {
-                resizing = false;
-                HideButtons();
-            }
-            else
-            {
+                deleteButton.BackgroundColor = Color.Transparent;
+                editing.BackgroundColor = Color.Transparent;
+                resizing.BackgroundColor = Color.Gray;
+                movingButton.BackgroundColor = Color.Transparent;
+                add.BackgroundColor = Color.Transparent;
+
+                buttonState = DashboardButtonState.Resize;
                 ShowButtons();
-                resizing = true;
-                moving = false;
+
+                for (int yAxis = 0; yAxis < 5; yAxis++)
+                {
+                    for (int xAxis = 0; xAxis < 8; xAxis++)
+                    {
+                        myCells[xAxis][yAxis].buttonState = DashboardButtonState.Resize;
+                    }
+                }
             }
         }
 
@@ -200,7 +335,8 @@ namespace RAT._1View.Desktop.Manage
                 {
                     myCells[xAxis][yAxis].RemoveMovementButtons();
                     myCells[xAxis][yAxis].EnableButton();
-                        myCells[xAxis][yAxis].InputTransparent = false;
+                    myCells[xAxis][yAxis].InputTransparent = false;
+                    //TODO Remove opacity 24/03
                     if (myCells[xAxis][yAxis].Opacity == 0)
                     {
                         myCells[xAxis][yAxis].Opacity = 1.1;
@@ -238,7 +374,7 @@ namespace RAT._1View.Desktop.Manage
             int x2 = d.XLocation;
             int y2 = d.YLocation - 1;
 
-            if (moving)
+            if (buttonState == DashboardButtonState.Move)
             {
                 if (y > 0)
                 {
@@ -257,7 +393,7 @@ namespace RAT._1View.Desktop.Manage
                     myCells[x][y].SetLocation(x, y);
                     myCells[x2][y2].SetLocation(x2, y2);
                 }
-            } else if (resizing)
+            } else if (buttonState == DashboardButtonState.Resize)
             {
                 if (Grid.GetRowSpan(myCells[x][y]) != 1)
                 {
@@ -277,7 +413,7 @@ namespace RAT._1View.Desktop.Manage
             int x2 = d.XLocation;
             int y2 = d.YLocation + 1;
 
-            if (moving)
+            if (buttonState == DashboardButtonState.Move)
             {
                 if (y < 4)
                 {
@@ -296,7 +432,7 @@ namespace RAT._1View.Desktop.Manage
                     myCells[x][y].SetLocation(x, y);
                     myCells[x2][y2].SetLocation(x2, y2);
                 }
-            } else if (resizing)
+            } else if (buttonState == DashboardButtonState.Resize)
             {
                 //Checking max row span
                 if ((Grid.GetRowSpan(myCells[x][y]) + 1 <= myCells[x][y].MaxSpanRow)
@@ -321,7 +457,7 @@ namespace RAT._1View.Desktop.Manage
 	        int x2 = d.XLocation - 1;
 	        int y2 = d.YLocation;
 
-	        if (moving)
+	        if (buttonState == DashboardButtonState.Move)
 	        {
 	        if (x > 0)
 	        {
@@ -342,7 +478,7 @@ namespace RAT._1View.Desktop.Manage
                 myCells[x][y].SetLocation(x, y);
                 myCells[x2][y2].SetLocation(x2, y2);
             }
-            } else if (resizing)
+            } else if (buttonState == DashboardButtonState.Resize)
 	        {
 	            if (Grid.GetColumnSpan(myCells[x][y]) != 1)
 	            {
@@ -356,8 +492,7 @@ namespace RAT._1View.Desktop.Manage
         private void EastOnClicked(object sender, EventArgs eventArgs)
 	    {
             Button s = sender as Button;
-            s.BackgroundColor = Color.Green;
-	        DashboardCell d = (DashboardCell)s.Parent;
+            DashboardCell d = (DashboardCell)s.Parent;
 
             int x = d.XLocation;
             int y = d.YLocation;
@@ -365,7 +500,7 @@ namespace RAT._1View.Desktop.Manage
             int x2 = d.XLocation + 1;
             int y2 = d.YLocation;
 
-	        if (moving)
+	        if (buttonState == DashboardButtonState.Move)
 	        {
             if (x < 7)
             {
@@ -387,7 +522,7 @@ namespace RAT._1View.Desktop.Manage
             System.Diagnostics.Debug.WriteLine("Translation X"+myCells[x][y].TranslationX);
             System.Diagnostics.Debug.WriteLine("Distance X" + displacement2);
             }
-            } else if (resizing)
+            } else if (buttonState == DashboardButtonState.Resize)
 	        {
                 //Checking max collumn span
 	            if ((Grid.GetColumnSpan(myCells[x][y]) + 1 <= myCells[x][y].MaxSpanColumn)

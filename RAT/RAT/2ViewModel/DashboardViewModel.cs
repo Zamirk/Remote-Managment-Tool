@@ -20,12 +20,15 @@ namespace RAT._2ViewModel
             Data = new ObservableCollection<ChartDataPoint>();
             LoadData();
         }
-        private string pom = GetTelemetry.lastReceivedValue.Percent;
-        private string percent = GetTelemetry.lastReceivedValue.Cpu;
-        private string speed = GetTelemetry.lastReceivedValue.Cpu2;
-        private string processes = GetTelemetry.lastReceivedValue.Processes;
-        private string threads = GetTelemetry.lastReceivedValue.Thread;
-        private string temperature = GetTelemetry.lastReceivedValue.CpuTem;
+
+        private static int deviceNo = 0;
+
+        private string pom = GetTelemetry.lastTelemetryDatapoints[deviceNo].Percent;
+        private string percent = GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu;
+        private string speed = GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu2;
+        private string processes = GetTelemetry.lastTelemetryDatapoints[deviceNo].Processes;
+        private string threads = GetTelemetry.lastTelemetryDatapoints[deviceNo].Thread;
+        private string temperature = GetTelemetry.lastTelemetryDatapoints[deviceNo].CpuTem;
 
         public ObservableCollection<ChartDataPoint> Data
         {
@@ -90,7 +93,7 @@ namespace RAT._2ViewModel
             {
                 y++; System.Diagnostics.Debug.WriteLine("cpu" + y);
 
-                double cpuValue = Convert.ToDouble(GetTelemetry.lastReceivedValue.Cpu);
+                double cpuValue = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu);
                 Data.Add(new ChartDataPoint(y, cpuValue));
                 if (killThread)
                 {

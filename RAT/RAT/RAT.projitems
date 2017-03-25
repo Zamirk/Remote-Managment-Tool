@@ -16,11 +16,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\ScreenState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\FullScreens\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\FullScreens\ParentScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\DashboardButtonState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\Dashboard Backup\DashboardScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\Dashboard Backup\MyPopupPag.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\DashboardCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\DashboardScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\IPopupAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\EditScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\SelectItemPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\AppHistory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\StandardCommands.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\WifiViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\CommandDatapoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)3Model\DeviceSummary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\Login.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\OrderInfo.cs" />

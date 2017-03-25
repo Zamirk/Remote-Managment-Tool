@@ -25,14 +25,16 @@ namespace RAT._2ViewModel
             LoadData();
         }
 
-        private string diskReadTime = GetTelemetry.lastReceivedValue.DiskReadTime;
-        private string diskWriteTime = GetTelemetry.lastReceivedValue.DiskWriteTime;
-        private string diskRead = GetTelemetry.lastReceivedValue.DiskReadBytes;
-        private string diskWrite = GetTelemetry.lastReceivedValue.DiskWriteBytes;
-        private string freeMb = GetTelemetry.lastReceivedValue.FreeMB;
-        private string freeSpace = GetTelemetry.lastReceivedValue.FreeSpace;
-        private string idleTime = GetTelemetry.lastReceivedValue.IdleTime;
-        private string activeTime = GetTelemetry.lastReceivedValue.DiskTime;
+        private static int deviceNo = 0;
+
+        private string diskReadTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskReadTime;
+        private string diskWriteTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteTime;
+        private string diskRead = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskReadBytes;
+        private string diskWrite = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteBytes;
+        private string freeMb = GetTelemetry.lastTelemetryDatapoints[deviceNo].FreeMB;
+        private string freeSpace = GetTelemetry.lastTelemetryDatapoints[deviceNo].FreeSpace;
+        private string idleTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].IdleTime;
+        private string activeTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskTime;
 
         public string ActiveTime
         {
@@ -100,7 +102,7 @@ namespace RAT._2ViewModel
 
 
             //Adding data to piechart
-            double freeSpacePieChart = Convert.ToDouble(GetTelemetry.lastReceivedValue.FreeSpace);
+            double freeSpacePieChart = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].FreeSpace);
             double aaa = 100 - freeSpacePieChart;
             PieData.Add(new ChartDataPoint("Free Space", freeSpacePieChart));
             PieData.Add(new ChartDataPoint("Free Space", aaa));
@@ -113,20 +115,20 @@ namespace RAT._2ViewModel
             }
             await Task.Delay(1000);
 
-            System.Diagnostics.Debug.WriteLine("Le" + Convert.ToDouble(GetTelemetry.lastReceivedValue.FreeSpace));
+            System.Diagnostics.Debug.WriteLine("Le" + Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].FreeSpace));
             //Updates the information onece a second
             Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
             {
                 y++;
-                double diskTime = Convert.ToDouble(GetTelemetry.lastReceivedValue.DiskTime);
-                ActiveTime = GetTelemetry.lastReceivedValue.DiskTime;
-                IdleTime = GetTelemetry.lastReceivedValue.IdleTime;
-                FreeSpace = GetTelemetry.lastReceivedValue.FreeSpace;
-                FreeMb = GetTelemetry.lastReceivedValue.FreeMB;
-                DiskWrite = GetTelemetry.lastReceivedValue.DiskWriteBytes;
-                DiskRead = GetTelemetry.lastReceivedValue.DiskReadBytes;
-                DiskReadTime = GetTelemetry.lastReceivedValue.DiskReadTime;
-                DiskWriteTime = GetTelemetry.lastReceivedValue.DiskWriteTime;
+                double diskTime = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskTime);
+                ActiveTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskTime;
+                IdleTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].IdleTime;
+                FreeSpace = GetTelemetry.lastTelemetryDatapoints[deviceNo].FreeSpace;
+                FreeMb = GetTelemetry.lastTelemetryDatapoints[deviceNo].FreeMB;
+                DiskWrite = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteBytes;
+                DiskRead = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskReadBytes;
+                DiskReadTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskReadTime;
+                DiskWriteTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteTime;
                 Data.RemoveAt(0);
                 Data.Add(new ChartDataPoint(y, diskTime));
                 if (killThread)

@@ -21,13 +21,13 @@ namespace RAT._1View.Desktop.Manage
 {
 	public class AllDevices : Grid
 	{
-        private readonly AllDevicesViewModel viewModel;
+        private AllDevicesViewModel viewModel;
 
         public AllDevices()
         {
             viewModel = new AllDevicesViewModel();
             BindingContext = viewModel;
-
+           
             HorizontalOptions = LayoutOptions.FillAndExpand;
             VerticalOptions = LayoutOptions.FillAndExpand;
 
@@ -47,11 +47,12 @@ namespace RAT._1View.Desktop.Manage
 
             //Column creation
             GridTextColumn column_1 = new GridTextColumn { MappingName = "Name", HeaderText = "Name" };
-            GridTextColumn column_2 = new GridTextColumn { MappingName = "Memory", HeaderText = "Memory" };
-            GridTextColumn column_3 = new GridTextColumn { MappingName = "Cpu", HeaderText = "Cpu" };
-            GridTextColumn column_4 = new GridTextColumn { MappingName = "Time", HeaderText = "Time" };
-            GridTemplateColumn column_5 = new GridTemplateColumn { MappingName = "UserName", HeaderText = "UserName" };
-
+            GridTextColumn column_2 = new GridTextColumn { MappingName = "Cpu", HeaderText = "Cpu" };
+            GridTextColumn column_3 = new GridTextColumn { MappingName = "Memory", HeaderText = "Memory" };
+            GridTextColumn column_4 = new GridTextColumn { MappingName = "Disk", HeaderText = "Disk" };
+            GridTextColumn column_5 = new GridTextColumn { MappingName = "Wifi", HeaderText = "Wifi" };
+            GridTemplateColumn column_6 = new GridTemplateColumn { MappingName = "UserName", HeaderText = "UserName" };
+            
             //Template for buttons
             DataTemplate template = new DataTemplate(() =>
             {
@@ -72,7 +73,7 @@ namespace RAT._1View.Desktop.Manage
                     BorderColor = Color.Transparent,
                     BorderWidth = .000001,
                     WidthRequest = 100,
-                    Text = "✘"
+                    Text = "View"
                 };
                 //Temp label for databinding the name of the process
                 Label temp = new Label();
@@ -80,21 +81,16 @@ namespace RAT._1View.Desktop.Manage
 
                 myButton.Clicked += delegate (object sender, EventArgs args)
                 {
-                    System.Diagnostics.Debug.WriteLine("[Processes]::Sending command to kill process::" + temp.Text);
+                    System.Diagnostics.Debug.WriteLine("[AllDevices]::Changing Screen::");
 
                     //Sending an asyncranous command
-                    Task t = Task.Factory.StartNew(() => {
-                        SendCommand myCommand = new SendCommand();
-                        myCommand.Command = new CommandDatapoint()
-                        {
-                            CommandType = CommandType.CloseProcess,
-                            ProcessName = temp.Text,
-                            ExpireTime = DateTime.Now
-                        };
-                        myCommand.SendCommandToDevice();
-
-                    });
+                        Button s = sender as Button;
+                        ParentScreen d = (ParentScreen)s.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent;
+                       d.EnterDevice(temp.Text);
+                    BindingContext = null;
+                    viewModel = null;
                 };
+
                 stack.Children.Add(myButton);
                 stack.Children.Add(temp);
                 temp.IsVisible = false;
@@ -102,36 +98,24 @@ namespace RAT._1View.Desktop.Manage
                 return stack;
             });
             //Setting the template
-            column_5.CellTemplate = template;
+            column_6.CellTemplate = template;
 
             //Collumn sizes
-            column_1.Width = 200;
-            column_2.Width = 100;
-            column_3.Width = 100;
-            column_5.Width = 40;
+            //column_1.Width = 200;
+            //column_2.Width = 100;
+            //column_3.Width = 100;
+            column_6.Width = 40;
 
             sDataGrid.Columns.Add(column_1);
             sDataGrid.Columns.Add(column_2);
             sDataGrid.Columns.Add(column_3);
             sDataGrid.Columns.Add(column_4);
             sDataGrid.Columns.Add(column_5);
+            sDataGrid.Columns.Add(column_6);
 
             //Data binding
             sDataGrid.ItemsSource = viewModel.Data;
 
-            /*Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>
-            {
-                for (int i = 0; i < sDataGrid.Children.Count; i++)
-                {
-                    if (()sDataGrid.Children[i] == null)
-                    {
-                        sDataGrid.Children[i].IsVisible = false;
-                    }
-                }
-
-                return true;
-            });
-            */
             Children.Add(sDataGrid, 1, 1);
         }
 

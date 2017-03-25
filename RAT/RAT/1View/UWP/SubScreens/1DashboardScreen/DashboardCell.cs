@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ConsoleApplication1;
 using IoTHubAmqpService;
 using RAT.zTest;
+using RAT.ZTry;
 using RAT._2ViewModel;
 using Rg.Plugins.Popup.Extensions;
 using Syncfusion.SfChart.XForms;
@@ -20,6 +21,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         public Button myButton = new Button();
         private SfChart myChart;
         ObservableCollection<ChartDataPoint> data = new ObservableCollection<ChartDataPoint>();
+        public DashboardButtonState buttonState;
 
         public Button north = new Button();
         public Button west = new Button();
@@ -33,8 +35,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
         public DashboardCell()
         {
-
-            this.BackgroundColor = Color.White;
+            buttonState = DashboardButtonState.Neutral;
             Opacity = 1.1;
             //TODO ONLY USE AS TESTING
             int z = 0;
@@ -206,6 +207,11 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 RaiseChild(north);
                 LowerChild(myChart);
                 AlreadyGenerated = true;
+
+                south.IsVisible = true;
+                west.IsVisible = true;
+                east.IsVisible = true;
+                north.IsVisible = true;
             }
             else
             {
@@ -213,14 +219,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 west.IsVisible = true;
                 east.IsVisible = true;
                 north.IsVisible = true;
-                RaiseChild(south);
-
             }
-            RaiseChild(south);
-            RaiseChild(west);
-            RaiseChild(east);
-            RaiseChild(north);
-            LowerChild(myChart);
         }
 
         public void SetLocation(int x, int y)
@@ -853,29 +852,48 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         // Button Click
         private async void OnOpenPupup(object sender, EventArgs e)
         {
-            SelectItemPopup pickChart = new SelectItemPopup();
-            await Navigation.PushPopupAsync(pickChart);
-            pickChart.LineChart().Clicked += (o, args) => { LineChart(); };
-            pickChart.AreaChart().Clicked += (o, args) => { AreaChart(); };
-            pickChart.BarChart().Clicked += (o, args) => { BarChart(); };
-            pickChart.ColumnChart().Clicked += (o, args) => { ColumnChart(); };
-            pickChart.DoughnutChart().Clicked += (o, args) => { DoughnutChart(); };
-            pickChart.FastlineChart().Clicked += (o, args) => { FastLineChart(); };
-            pickChart.PieChart().Clicked += (o, args) => { PieChart(); };
-            pickChart.PyramidChart().Clicked += (o, args) => { PyramidChart(); };
-            pickChart.ScatterplotChart().Clicked += (o, args) => { ScatterChart(); };
-            pickChart.SplineChart().Clicked += (o, args) => { SplineSeriesChart(); };
-            pickChart.SplineAreaChart().Clicked += (o, args) => { SplineAreaChart(); };
-            pickChart.StackingBarChart().Clicked += (o, args) => { StackingArea(); };
-            pickChart.StrackingArea100Chart().Clicked += (o, args) => { StackingArea100(); };
-            pickChart.StepLineChart().Clicked += (o, args) => { StepLineSeries(); };
-            pickChart.StepAreaChart().Clicked += (o, args) => { StepArea(); };
-            pickChart.StackingColumnChart().Clicked += (o, args) => { StackingColumnSeries(); };
-            pickChart.StackingColumn10Chart().Clicked += (o, args) => { StackingColumn100Chart(); };
-            pickChart.StackingBarChart().Clicked += (o, args) => { StackingBarChart(); };
-            pickChart.StackingBar100Chart().Clicked += (o, args) => { StackingBar100Chart(); };
+            if (buttonState == DashboardButtonState.Neutral)
+            {
+                SelectItemPopup pickChart = new SelectItemPopup();
+                await Navigation.PushPopupAsync(pickChart);
+                pickChart.LineChart().Clicked += (o, args) => { LineChart(); };
+                pickChart.AreaChart().Clicked += (o, args) => { AreaChart(); };
+                pickChart.BarChart().Clicked += (o, args) => { BarChart(); };
+                pickChart.ColumnChart().Clicked += (o, args) => { ColumnChart(); };
+                pickChart.DoughnutChart().Clicked += (o, args) => { DoughnutChart(); };
+                pickChart.FastlineChart().Clicked += (o, args) => { FastLineChart(); };
+                pickChart.PieChart().Clicked += (o, args) => { PieChart(); };
+                pickChart.PyramidChart().Clicked += (o, args) => { PyramidChart(); };
+                pickChart.ScatterplotChart().Clicked += (o, args) => { ScatterChart(); };
+                pickChart.SplineChart().Clicked += (o, args) => { SplineSeriesChart(); };
+                pickChart.SplineAreaChart().Clicked += (o, args) => { SplineAreaChart(); };
+                pickChart.StackingBarChart().Clicked += (o, args) => { StackingArea(); };
+                pickChart.StrackingArea100Chart().Clicked += (o, args) => { StackingArea100(); };
+                pickChart.StepLineChart().Clicked += (o, args) => { StepLineSeries(); };
+                pickChart.StepAreaChart().Clicked += (o, args) => { StepArea(); };
+                pickChart.StackingColumnChart().Clicked += (o, args) => { StackingColumnSeries(); };
+                pickChart.StackingColumn10Chart().Clicked += (o, args) => { StackingColumn100Chart(); };
+                pickChart.StackingBarChart().Clicked += (o, args) => { StackingBarChart(); };
+                pickChart.StackingBar100Chart().Clicked += (o, args) => { StackingBar100Chart(); };
+            } else if (buttonState == DashboardButtonState.Editing)
+            {
+                EditScreen editChart = new EditScreen();
+                await Navigation.PushPopupAsync(editChart);
+
+
+
+            } else if (buttonState == DashboardButtonState.Delete)
+            {
+                CleanCell();
+            }
         }
 
+        public void CleanCell()
+        {
+            //TODO 24/03/17 Fix error graph removal causing error null or somthing
+                Children.Remove(myChart);
+            //Remove data source
+        }
         public Button GetButton()
         {
             return myButton;

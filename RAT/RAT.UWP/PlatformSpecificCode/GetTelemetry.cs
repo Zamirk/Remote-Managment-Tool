@@ -63,8 +63,6 @@ namespace ConsoleApplication1.Folder
 
             Console.WriteLine("Receiving Data");
 
-            listOfDevices = new List<Queue<TelemetryDatapoint>>();
-
             //Filling default values
             for (int i = 0; i < 60; i++)
             {

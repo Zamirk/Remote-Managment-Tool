@@ -208,7 +208,7 @@ namespace RAT.ZTry
             viewDevicesScreen = new AllDevices();
             midGrid.Children.Add(viewDevicesScreen, 1, 0);
             //TODO This is some crazy code remove it
-            //viewDevicesScreen.aaaa.Clicked += PcOne_Clicked;
+            //viewDevicesScreen.tempa.Command += SendResultCommand("d");
 
             //Left Buttons
             manageButton.Clicked += ManageButton_Clicked;
@@ -226,7 +226,6 @@ namespace RAT.ZTry
         }
 
 
-
         #region Screen Changing Click Handlers
 
         // Button Click
@@ -239,11 +238,10 @@ namespace RAT.ZTry
             // or
             //await PopupNavigation.PushAsync(page);
         }
-        private void PcOne_Clicked(object sender, EventArgs e)
+        public void EnterDevice(string deviceName)
         {
             RemoveScreen();
             manageButton.BackgroundColor = Color.Gray;
-
             singleDeviceScreen = new ToolBar();
             midGrid.Children.Add(singleDeviceScreen, 1, 0);
 
@@ -273,6 +271,7 @@ namespace RAT.ZTry
                 viewDevicesScreen = new AllDevices();
                 //TODO Seriously remove it
                 //viewDevicesScreen.aaaa.Clicked += PcOne_Clicked;
+
                 midGrid.Children.Add(viewDevicesScreen, 1, 0);
 
                 myMenuState = MenuState.MANAGE_ALLDEVICES;
@@ -320,6 +319,8 @@ namespace RAT.ZTry
             {
                 manageButton.BackgroundColor = Color.Transparent;
                 midGrid.Children.Remove(viewDevicesScreen);
+                viewDevicesScreen.BindingContext = null;
+                viewDevicesScreen.GC();
             }
             else if (myMenuState == MenuState.DASHBOARDS)
             {
