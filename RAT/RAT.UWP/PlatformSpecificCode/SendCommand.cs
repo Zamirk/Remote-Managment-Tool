@@ -17,8 +17,9 @@ namespace IoTHubAmqpService
             private const int PORT = 5671;
             private const string SHARED_ACCESS_KEY_NAME = "iothubowner";
             private const string SHARED_ACCESS_KEY = "XnRSB9kO1Knhq6sL7QMhWhxqshHsGV34NBw+HnDj5oU=";
+        //private const string SHARED_ACCESS_KEY = "ztqW3Ibsf14nTK3G2sTlQLRYEwaVsXVtM918wD0k9BA=";
 
-            private const string DEVICE_ID = "Device_1";
+        private const string DEVICE_ID = "Device_1";
 
             private static Address address;
             private static Connection connection;

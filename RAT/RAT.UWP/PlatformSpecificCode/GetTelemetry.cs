@@ -20,7 +20,7 @@ namespace ConsoleApplication1.Folder
 
         static string ConnectionString = "Endpoint=sb://iothub-ns-manageiot-119210-43e7bcdbe5.servicebus.windows.net/;" +
                              "SharedAccessKeyName=iothubowner;" +
-                             "SharedAccessKey=XnRSB9kO1Knhq6sL7QMhWhxqshHsGV34NBw+HnDj5oU=";
+                             "SharedAccessKey=9MVDBFa+gjD8C1awDRPW8oGVraiJm6XV72ui4fm8UIA=";
 
         static string eventHubEntity = "ManageIoT";
         static string partitionId = "1";
@@ -29,11 +29,12 @@ namespace ConsoleApplication1.Folder
         static DateTime startingDateTimeUtc;
 
         //List of devices
-        List<string> devices = new List<string>() { "Device_1", "Device_2" };
+        //ist<string> devices = new List<string>() { "Device_1", "Device_2" };
 
         //Last received values
         public static List<TelemetryDatapoint> lastTelemetryDatapoints = new List<TelemetryDatapoint>()
         {
+            new TelemetryDatapoint(""),
             new TelemetryDatapoint(""),
             new TelemetryDatapoint("")
         };
@@ -43,7 +44,9 @@ namespace ConsoleApplication1.Folder
         {
             //TODO TEMP HARDCODING 2 DEVICES
             new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
             new Queue<TelemetryDatapoint>()
+
         };
 
         //Receive data method
@@ -68,6 +71,7 @@ namespace ConsoleApplication1.Folder
             {
                 listOfDevices[0].Enqueue(new TelemetryDatapoint(""));
                 listOfDevices[1].Enqueue(new TelemetryDatapoint(""));
+                listOfDevices[2].Enqueue(new TelemetryDatapoint(""));
             }
 
             EventData data;
@@ -77,13 +81,15 @@ namespace ConsoleApplication1.Folder
                 {
                     System.Diagnostics.Debug.WriteLine("Level 1: Looping");
                     data = receiver.Receive();
-                    System.Diagnostics.Debug.WriteLine("Level 2: Data received");
+                    System.Diagnostics.Debug.WriteLine("Level 2: Data received"+data);
                     // if (data.GetBytes() != null)
                     // {
                     string JsonString = Encoding.UTF8.GetString(data.GetBytes());
-                    System.Diagnostics.Debug.WriteLine("Level 3: JSon");
+                    System.Diagnostics.Debug.WriteLine("Level 3: JSon"+JsonString);
 
                     TelemetryDatapoint telemetry = JsonConvert.DeserializeObject<TelemetryDatapoint>(JsonString);
+                    System.Diagnostics.Debug.WriteLine(JsonString);
+
                     if (telemetry.Device_id.Equals("Device_1"))
                     {
                         System.Diagnostics.Debug.WriteLine(JsonString);
@@ -92,8 +98,15 @@ namespace ConsoleApplication1.Folder
                         listOfDevices[0].Enqueue(telemetry);
                         lastTelemetryDatapoints[0] = telemetry;
                         aaaaa = JsonString;
-                        System.Diagnostics.Debug.WriteLine("Level 4: Device ID" +
-                                                           listOfDevices[0].ElementAt(0).Device_id);
+                    }
+                    else if (telemetry.Device_id.Equals("Device_2"))
+                    {
+                        System.Diagnostics.Debug.WriteLine(JsonString);
+                        System.Diagnostics.Debug.WriteLine(JsonString);
+
+                        listOfDevices[1].Dequeue();
+                        listOfDevices[1].Enqueue(telemetry);
+                        lastTelemetryDatapoints[1] = telemetry;
                     }
                     // }
                     // else

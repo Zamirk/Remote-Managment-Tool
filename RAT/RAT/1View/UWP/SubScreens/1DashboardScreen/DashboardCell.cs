@@ -17,11 +17,31 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 {
     class DashboardCell: Grid
     {
+        //todo remove
+        ObservableCollection<ChartDataPoint> data = new ObservableCollection<ChartDataPoint>();
+        
+        //Maxium span value
+        public int MaxSpanColumn { get; set; }
+        public int MaxSpanRow { get; set; }
+
+        //Style values
+        public bool GridLinesOn { get; set; }
+        public bool xAxisOn { get; set; }
+        public bool yAxisOn { get; set; }
+        public string title { get; set; }
+        public int colourValue { get; set; }
+
+        private EditScreen editChart;
+        private DashboardViewModel viewModel;
         public bool hasGraph = false;
         public Button myButton = new Button();
         private SfChart myChart;
-        ObservableCollection<ChartDataPoint> data = new ObservableCollection<ChartDataPoint>();
+
         public DashboardButtonState buttonState;
+
+        private float buttonSize = 15f;
+        private int radius = 25;
+        private bool AlreadyGenerated = false;
 
         public Button north = new Button();
         public Button west = new Button();
@@ -32,18 +52,28 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         public Button northeast;
         public Button southeast;
         public Button southwest;
+        int z = 0;
+        bool a = true;
+        Random rand = new Random();
 
         public DashboardCell()
         {
             buttonState = DashboardButtonState.Neutral;
             Opacity = 1.1;
             //TODO ONLY USE AS TESTING
-            int z = 0;
-            bool a = true;
-            double value = 50;
-            Random rand = new Random();
 
-            for (var i = 0; i < 25; i++)
+            //Initial values
+            xAxisOn = false;
+            yAxisOn = false;
+            GridLinesOn = true;
+            title = "";
+            colourValue = 0;
+
+        double value = 50;
+
+            data = new ObservableCollection<ChartDataPoint>();
+
+                for (var i = 0; i < 25; i++)
             {
                 z++;
                 if (a)
@@ -80,50 +110,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
         public int XLocation { get; set; }
         public int YLocation { get; set; }
-        public int PosInLayout { get; set; }
-
-        public void other()
-        {
-            northwest.Text = "";
-            northwest.FontSize = 25;
-            northwest.VerticalOptions = LayoutOptions.Start;
-            northwest.HorizontalOptions = LayoutOptions.Start;
-            northwest.BorderColor = Color.Transparent;
-            northwest.BackgroundColor = Color.Black;
-            northwest.BorderWidth = .000001;
-            northwest.WidthRequest = 10f;
-            northwest.HeightRequest = 10f;
-
-            northeast.Text = "";
-            northeast.FontSize = 25;
-            northeast.VerticalOptions = LayoutOptions.Start;
-            northeast.HorizontalOptions = LayoutOptions.End;
-            northeast.BorderColor = Color.Transparent;
-            northeast.BackgroundColor = Color.Black;
-            northeast.BorderWidth = .000001;
-            northeast.WidthRequest = 10f;
-            northeast.HeightRequest = 10f;
-
-            southwest.Text = "";
-            southwest.FontSize = 25;
-            southwest.VerticalOptions = LayoutOptions.End;
-            southwest.HorizontalOptions = LayoutOptions.Start;
-            southwest.BorderColor = Color.Transparent;
-            southwest.BackgroundColor = Color.Black;
-            southwest.BorderWidth = .000001;
-            southwest.WidthRequest = 10f;
-            southwest.HeightRequest = 10f;
-
-            southeast.Text = "";
-            southeast.FontSize = 25;
-            southeast.VerticalOptions = LayoutOptions.End;
-            southeast.HorizontalOptions = LayoutOptions.End;
-            southeast.BorderColor = Color.Transparent;
-            southeast.BackgroundColor = Color.Black;
-            southeast.BorderWidth = .000001;
-            southeast.WidthRequest = 10f;
-            southeast.HeightRequest = 10f;
-        }
 
         public void DisableButton()
         {
@@ -144,9 +130,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             west.IsVisible = false;
         }
 
-        private float buttonSize = 15f;
-        private int radius = 25;
-        private bool AlreadyGenerated = false;
         public void PositionalButtons()
         {
             if (!AlreadyGenerated)
@@ -230,9 +213,10 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
         public void AreaChart()
         {
-            /*
             //Chart
             myChart = new SfChart();
+            viewModel= new DashboardViewModel();
+            BindingContext = viewModel;
 
             myChart.Series.Add(new AreaSeries());
 
@@ -250,16 +234,16 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].AnimationDuration = .5;
             myChart.Series[0].EnableAnimation = true;
 
-            //DashboardViewModel aa = new DashboardViewModel();
-            //BindingContext = aa;
-            //myChart.Series[0].ItemsSource = aa.Data;
+
+            data = new ObservableCollection<ChartDataPoint>();
+            viewModel.Load1();
+            myChart.Series[0].ItemsSource = viewModel.Data;
 
             myChart.PrimaryAxis.IsVisible = false;
             myChart.SecondaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             Common();
             Children.Add(myChart);
-            */
         }
 
         public void Common()
@@ -290,7 +274,25 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].EnableAnimation = true;
             Common();
 
+
+            data = new ObservableCollection<ChartDataPoint>();
             myChart.Series[0].ItemsSource = data;
+            for (var i = 0; i < 55; i++)
+            {
+                z++;
+                if (a)
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = false;
+                }
+                else
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = true;
+                }
+            }
+            data = new ObservableCollection<ChartDataPoint>();
+
             myChart.PrimaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
@@ -319,7 +321,23 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].EnableAnimation = true;
             Common();
 
+
+            data = new ObservableCollection<ChartDataPoint>();
             myChart.Series[0].ItemsSource = data;
+            for (var i = 0; i < 55; i++)
+            {
+                z++;
+                if (a)
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = false;
+                }
+                else
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = true;
+                }
+            }
             myChart.PrimaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
@@ -377,7 +395,23 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].EnableAnimation = true;
             Common();
 
+
+            data = new ObservableCollection<ChartDataPoint>();
             myChart.Series[0].ItemsSource = data;
+            for (var i = 0; i < 55; i++)
+            {
+                z++;
+                if (a)
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = false;
+                }
+                else
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = true;
+                }
+            }
             myChart.PrimaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
@@ -406,7 +440,23 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].EnableAnimation = true;
             Common();
 
+
+            data = new ObservableCollection<ChartDataPoint>();
             myChart.Series[0].ItemsSource = data;
+            for (var i = 0; i < 2; i++)
+            {
+                z++;
+                if (a)
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = false;
+                }
+                else
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = true;
+                }
+            }
             myChart.PrimaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
@@ -435,7 +485,23 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].EnableAnimation = true;
             Common();
 
+
+            data = new ObservableCollection<ChartDataPoint>();
             myChart.Series[0].ItemsSource = data;
+            for (var i = 0; i < 55; i++)
+            {
+                z++;
+                if (a)
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = false;
+                }
+                else
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = true;
+                }
+            }
             myChart.PrimaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
@@ -444,6 +510,8 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
         public void PieChart()
         {
+            viewModel = new DashboardViewModel();
+
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new PieSeries());
@@ -463,7 +531,23 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].EnableAnimation = true;
             Common();
 
+
+            data = new ObservableCollection<ChartDataPoint>();
             myChart.Series[0].ItemsSource = data;
+            for (var i = 0; i < 2; i++)
+            {
+                z++;
+                if (a)
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = false;
+                }
+                else
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = true;
+                }
+            }
             myChart.PrimaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
@@ -492,7 +576,23 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].EnableAnimation = true;
             Common();
 
+
+            data = new ObservableCollection<ChartDataPoint>();
             myChart.Series[0].ItemsSource = data;
+            for (var i = 0; i < 6; i++)
+            {
+                z++;
+                if (a)
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = false;
+                }
+                else
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = true;
+                }
+            }
             myChart.PrimaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
@@ -521,7 +621,23 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].EnableAnimation = true;
             Common();
 
+            data = new ObservableCollection<ChartDataPoint>();
             myChart.Series[0].ItemsSource = data;
+            for (var i = 0; i < 6; i++)
+            {
+                z++;
+                if (a)
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = false;
+                }
+                else
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = true;
+                }
+            }
+            
             myChart.PrimaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
@@ -550,7 +666,22 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].EnableAnimation = true;
             Common();
 
+            data = new ObservableCollection<ChartDataPoint>();
             myChart.Series[0].ItemsSource = data;
+            for (var i = 0; i < 6; i++)
+            {
+                z++;
+                if (a)
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = false;
+                }
+                else
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = true;
+                }
+            }
             myChart.PrimaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
@@ -579,7 +710,22 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].EnableAnimation = true;
             Common();
 
+            data = new ObservableCollection<ChartDataPoint>();
             myChart.Series[0].ItemsSource = data;
+            for (var i = 0; i < 6; i++)
+            {
+                z++;
+                if (a)
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = false;
+                }
+                else
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = true;
+                }
+            }
             myChart.PrimaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
@@ -614,8 +760,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.SecondaryAxis.IsVisible = false;
             Children.Add(myChart);
         }
-        public int MaxSpanColumn { get; set; }
-        public int MaxSpanRow { get; set; }
+
 
         public void StackingArea100()
         {
@@ -668,7 +813,22 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].EnableAnimation = true;
             Common();
 
+            data = new ObservableCollection<ChartDataPoint>();
             myChart.Series[0].ItemsSource = data;
+            for (var i = 0; i < 40; i++)
+            {
+                z++;
+                if (a)
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = false;
+                }
+                else
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = true;
+                }
+            }
             myChart.PrimaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
@@ -697,7 +857,22 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].EnableAnimation = true;
             Common();
 
+            data = new ObservableCollection<ChartDataPoint>();
             myChart.Series[0].ItemsSource = data;
+            for (var i = 0; i < 55; i++)
+            {
+                z++;
+                if (a)
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = false;
+                }
+                else
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = true;
+                }
+            }
             myChart.PrimaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
@@ -726,7 +901,22 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.Series[0].EnableAnimation = true;
             Common();
 
+            data = new ObservableCollection<ChartDataPoint>();
             myChart.Series[0].ItemsSource = data;
+            for (var i = 0; i < 40; i++)
+            {
+                z++;
+                if (a)
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = false;
+                }
+                else
+                {
+                    data.Add(new ChartDataPoint(z, rand.Next(100)));
+                    a = true;
+                }
+            }
             myChart.PrimaryAxis.IsVisible = false;
             myChart.InputTransparent = true;
             myChart.SecondaryAxis.IsVisible = false;
@@ -875,31 +1065,77 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 pickChart.StackingColumn10Chart().Clicked += (o, args) => { StackingColumn100Chart(); };
                 pickChart.StackingBarChart().Clicked += (o, args) => { StackingBarChart(); };
                 pickChart.StackingBar100Chart().Clicked += (o, args) => { StackingBar100Chart(); };
+
             } else if (buttonState == DashboardButtonState.Editing)
             {
-                EditScreen editChart = new EditScreen();
-                await Navigation.PushPopupAsync(editChart);
-
-
-
+                if (hasGraph)
+                {
+                    //Creating new edit popup screen, adding clickhandler
+                    editChart = new EditScreen(xAxisOn, yAxisOn, GridLinesOn, title, colourValue);
+                    editChart.CloseWhenBackgroundIsClicked = false;
+                    editChart.saveButton.Clicked += SaveButtonOnClicked;
+                    await Navigation.PushPopupAsync(editChart);
+                }
             } else if (buttonState == DashboardButtonState.Delete)
             {
                 CleanCell();
             }
         }
 
+
+//When clickin the save button
+private void SaveButtonOnClicked(object sender, EventArgs eventArgs)
+        {
+            //Getting values
+            GridLinesOn = editChart.GridLinesValues;
+            xAxisOn = editChart.XAxisValue;
+            yAxisOn = editChart.YXaxisValue;
+            colourValue = editChart.ColourPicked;
+            title = editChart.TitleTyped;
+
+            //Setting title
+            myChart.PrimaryAxis.Title = new ChartAxisTitle() { Text = title };
+
+            //Setting grid lines
+            myChart.PrimaryAxis.ShowMajorGridLines = GridLinesOn;
+            myChart.SecondaryAxis.ShowMinorGridLines = GridLinesOn;
+
+            //Setting axis lines
+            myChart.PrimaryAxis.IsVisible = xAxisOn;
+            myChart.SecondaryAxis.IsVisible = yAxisOn;
+
+            //Setting colour
+            if (colourValue == 0)
+            {
+                myChart.ColorModel.Palette = ChartColorPalette.Metro;
+            } else if (colourValue == 1)
+            {
+                myChart.ColorModel.Palette = ChartColorPalette.Pineapple;
+            }
+            else if (colourValue == 2)
+            {
+                myChart.ColorModel.Palette = ChartColorPalette.TomatoSpectrum;
+            }
+            //Removing click handler to allow garbage collection
+            editChart.saveButton.Clicked -= SaveButtonOnClicked;
+
+            //Removing popup screen after saving
+            Navigation.PopAllPopupAsync(true);
+            editChart = null;
+            GC.Collect();
+        }
+
+        //Resetting cell when graph is deleted
         public void CleanCell()
         {
-            //TODO 24/03/17 Fix error graph removal causing error null or somthing
+            if (myChart != null)
+            {
                 Children.Remove(myChart);
+                SetColumnSpan(this, 1);
+                SetRowSpan(this, 1);
+                hasGraph = false;
+            }
             //Remove data source
         }
-        public Button GetButton()
-        {
-            return myButton;
-        }
-
-
-
     }
 }

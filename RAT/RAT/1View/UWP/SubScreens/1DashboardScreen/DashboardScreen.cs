@@ -21,7 +21,7 @@ namespace RAT._1View.Desktop.Manage
 
 	    private Button deleteButton, editing, movingButton, resizing, add;
 	    private Picker dashboardList;
-        double width = 109.25;
+        double width = 109.25; //Todo stop hardcoding values
         double height = 99.6;
 
         private Grid superGrid;
@@ -29,6 +29,7 @@ namespace RAT._1View.Desktop.Manage
         //private List<DashboardCell> myCellList = new List<DashboardCell>();
         private DashboardCell[][] myCells = new DashboardCell[8][];
         private bool singleSquares = true;
+
         public DashboardScreen()
         {
             Orientation = ScrollOrientation.Both;
@@ -42,6 +43,7 @@ namespace RAT._1View.Desktop.Manage
             //buttonGrid.VerticalOptions = LayoutOptions.FillAndExpand;
             //buttonGrid.HorizontalOptions = LayoutOptions.Start;
 
+            //Todo loops
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
@@ -134,6 +136,8 @@ namespace RAT._1View.Desktop.Manage
 
             superGrid.Children.Add(buttonGrid, 0, 0);
 
+            //Todo loops
+            //Todo fix p key
             myCells[0] = new DashboardCell[5];
             myCells[1] = new DashboardCell[5];
             myCells[2] = new DashboardCell[5];
