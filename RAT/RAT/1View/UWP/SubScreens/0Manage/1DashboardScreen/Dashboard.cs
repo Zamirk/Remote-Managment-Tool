@@ -11,11 +11,12 @@ using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
 using Rg.Plugins.Popup.Extensions;
 using Syncfusion.SfChart.XForms;
 using Xamarin.Forms;
+using Cell = RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen.Cell;
 using Label = Xamarin.Forms.Label;
 
 namespace RAT._1View.Desktop.Manage
 {
-	public class DashboardScreen : ScrollView
+	public class Dashboard : ScrollView
 	{
         private DashboardButtonState buttonState;
 
@@ -26,11 +27,11 @@ namespace RAT._1View.Desktop.Manage
 
         private Grid superGrid;
         private Grid mainGrid;
-        //private List<DashboardCell> myCellList = new List<DashboardCell>();
-        private DashboardCell[][] myCells = new DashboardCell[8][];
+        //private List<Cell> myCellList = new List<Cell>();
+        private Cell[][] myCells = new Cell[8][];
         private bool singleSquares = true;
 
-        public DashboardScreen()
+        public Dashboard()
         {
             Orientation = ScrollOrientation.Both;
             superGrid = new Grid();
@@ -138,14 +139,14 @@ namespace RAT._1View.Desktop.Manage
 
             //Todo loops
             //Todo fix p key
-            myCells[0] = new DashboardCell[5];
-            myCells[1] = new DashboardCell[5];
-            myCells[2] = new DashboardCell[5];
-            myCells[3] = new DashboardCell[5];
-            myCells[4] = new DashboardCell[5];
-            myCells[5] = new DashboardCell[5];
-            myCells[6] = new DashboardCell[5];
-            myCells[7] = new DashboardCell[5];
+            myCells[0] = new Cell[5];
+            myCells[1] = new Cell[5];
+            myCells[2] = new Cell[5];
+            myCells[3] = new Cell[5];
+            myCells[4] = new Cell[5];
+            myCells[5] = new Cell[5];
+            myCells[6] = new Cell[5];
+            myCells[7] = new Cell[5];
 
             VerticalOptions = LayoutOptions.FillAndExpand;
             HorizontalOptions = LayoutOptions.FillAndExpand;
@@ -174,7 +175,7 @@ namespace RAT._1View.Desktop.Manage
             {
                 for (int xAxis = 0; xAxis < 8; xAxis++)
                 {
-                    DashboardCell myCell = new DashboardCell();
+                    Cell myCell = new Cell();
                     myCells[xAxis][yAxis] = myCell;
                     //myCells[xAxis][yAxis].BackgroundColor = Color.FromRgb(rand.Next(255), rand.Next(255), rand.Next(255));
                     //Position in the grid/layout
@@ -204,7 +205,6 @@ namespace RAT._1View.Desktop.Manage
 
             Content = superGrid;
             //Point of reference for animation movment
-
         }
 
 	    private void AddOnClicked(object sender, EventArgs eventArgs)
@@ -370,7 +370,7 @@ namespace RAT._1View.Desktop.Manage
         private void NorthOnClicked(object sender, EventArgs e)
         {
             Button s = sender as Button;
-            DashboardCell d = (DashboardCell)s.Parent;
+            Cell d = (Cell)s.Parent;
 
             int x = d.XLocation;
             int y = d.YLocation;
@@ -409,7 +409,7 @@ namespace RAT._1View.Desktop.Manage
         private void SouthOnClicked(object sender, EventArgs e)
         {
             Button s = sender as Button;
-            DashboardCell d = (DashboardCell)s.Parent;
+            Cell d = (Cell)s.Parent;
 
             int x = d.XLocation;
             int y = d.YLocation;
@@ -447,13 +447,11 @@ namespace RAT._1View.Desktop.Manage
                 //myCells[x2][y2].IsVisible = false;
             }
         }
-
-
-
+        
         private void WestOnClicked(object sender, EventArgs e)
 	    {
             Button s = sender as Button;
-	        DashboardCell d = (DashboardCell) s.Parent;
+	        Cell d = (Cell) s.Parent;
 
 	        int x = d.XLocation;
 	        int y = d.YLocation;
@@ -496,7 +494,7 @@ namespace RAT._1View.Desktop.Manage
         private void EastOnClicked(object sender, EventArgs eventArgs)
 	    {
             Button s = sender as Button;
-            DashboardCell d = (DashboardCell)s.Parent;
+            Cell d = (Cell)s.Parent;
 
             int x = d.XLocation;
             int y = d.YLocation;
@@ -538,9 +536,9 @@ namespace RAT._1View.Desktop.Manage
         }
 
         //Swapping values on Dashboard
-        static void swap(ref DashboardCell a, ref DashboardCell b)
+        static void swap(ref Cell a, ref Cell b)
         {
-            DashboardCell temp = a;
+            Cell temp = a;
             a = b;
             b = temp;
         }

@@ -22,7 +22,7 @@ namespace RAT.ZTry
         private ToolBar singleDeviceScreen;
         private AppScreen appScreen;
         //private AppsScreen applicationManagmentScreen;
-        private DashboardScreen dashboardScreen;
+        private Dashboard _dashboard;
 
         private Button signOutButton, notificationsButton, manageButton, dashboardButton,
             TEMPBUTTON4, backButton, forwardButton, secretGameButton, apphistory;
@@ -253,8 +253,8 @@ namespace RAT.ZTry
             RemoveScreen();
             dashboardButton.BackgroundColor = Color.Gray;
 
-            dashboardScreen = new DashboardScreen();
-            midGrid.Children.Add(dashboardScreen, 1, 0);
+            _dashboard = new Dashboard();
+            midGrid.Children.Add(_dashboard, 1, 0);
 
             myMenuState = MenuState.DASHBOARDS;
         }
@@ -325,7 +325,7 @@ namespace RAT.ZTry
             else if (myMenuState == MenuState.DASHBOARDS)
             {
                 dashboardButton.BackgroundColor = Color.Transparent;
-                midGrid.Children.Remove(dashboardScreen);
+                midGrid.Children.Remove(_dashboard);
             }
             else if (myMenuState == MenuState.PERFORMANCE)
             {

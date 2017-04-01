@@ -29,7 +29,7 @@ namespace ConsoleApplication1.Folder
         static DateTime startingDateTimeUtc;
 
         //List of devices
-        //ist<string> devices = new List<string>() { "Device_1", "Device_2" };
+        public static List<string> devices = new List<string>() { "Device_1", "Device_2" };
 
         //Last received values
         public static List<TelemetryDatapoint> lastTelemetryDatapoints = new List<TelemetryDatapoint>()

@@ -134,6 +134,20 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+	
+	    <Content Include="Assets\Graphs\Area.png" />
+		<Content Include="Assets\Graphs\Bar.png" />
+		<Content Include="Assets\Graphs\Column.png" />
+		<Content Include="Assets\Graphs\Line.png" />
+		<Content Include="Assets\Graphs\StepArea.png" />
+		<Content Include="Assets\Graphs\Pyramid.png" />
+		<Content Include="Assets\Graphs\Scatter.png" />
+	    <Content Include="Assets\Graphs\Spline.png" />
+		<Content Include="Assets\Graphs\SplineArea.png" />
+		<Content Include="Assets\Graphs\Step.png" />
+		<Content Include="Assets\Graphs\Pie.png" />
+		<Content Include="Assets\Graphs\Doughnut.png" />
+		
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

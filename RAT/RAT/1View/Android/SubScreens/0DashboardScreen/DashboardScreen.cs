@@ -22,7 +22,7 @@ namespace Mobile
 
         private Grid superGrid;
         private Grid mainGrid;
-        //private List<DashboardCell> myCellList = new List<DashboardCell>();
+        //private List<Cell> myCellList = new List<Cell>();
         private DashboardCell[][] myCells = new DashboardCell[8][];
         private bool singleSquares = true;
         public DashboardScreen()

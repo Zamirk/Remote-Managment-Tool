@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using ConsoleApplication1;
 using ConsoleApplication1.Folder;
 using Syncfusion.SfChart.XForms;
 using Tools;
@@ -20,8 +22,6 @@ namespace RAT._2ViewModel
             Data = new ObservableCollection<ChartDataPoint>();
         }
 
-        private static int deviceNo = 0;
-
         public ObservableCollection<ChartDataPoint> Data
         {
             set { SetProperty(ref data, value); }
@@ -33,46 +33,79 @@ namespace RAT._2ViewModel
             killThread = true;
         }
 
-        public async void Load1()
+        //Passing in device and data selection from graph selection screen
+        public async void LoadMultipleValues(int deviceNo, int dataSelection)
         {
             y = 0;
-            //Iterating over the queue of telemetry obects, adding to the chart databound collection
-            foreach (var telemetry in GetTelemetry.listOfDevices[0])
+            if (dataSelection == 0)
             {
-                    data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Cpu)));
-                y++;
-            }
-            await Task.Delay(1000);
-
-            //Updates the information onece a second
-            Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
-            {
-                Data.RemoveAt(0);
-                y++;
-                System.Diagnostics.Debug.WriteLine("cpu" + y);
-
-                double cpuValue = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu);
-                Data.Add(new ChartDataPoint(y, cpuValue));
-                if (killThread)
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
                 {
-                    return false;
+                    data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Cpu)));
+                    y++;
                 }
-                return true;
-            });
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var cpuValue = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu);
+                    Data.Add(new ChartDataPoint(y, cpuValue));
+                    if (killThread)
+                        return false;
+                    return true;
+                });
+            }
+            else if (dataSelection == 1)
+            {
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
+                {
+                    data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Cpu2)));
+                    y++;
+                }
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var cpuValue = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu2);
+                    Data.Add(new ChartDataPoint(y, cpuValue));
+                    if (killThread)
+                        return false;
+                    return true;
+                });
+            }
         }
 
-        public async void Load2()
+        public async void LoadSingleValues(int deviceNo, int dataSelection)
         {
             //Initial value
-            data.Add(new ChartDataPoint(0, Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo])));
+            //TODO CHANGE
+            double cpuUsage = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu);
+            double restOfSpace = 100 - cpuUsage;
 
+            Data.Add(new ChartDataPoint("CPU %", cpuUsage));
+            Data.Add(new ChartDataPoint("Empty Space", restOfSpace));
             await Task.Delay(1000);
 
             //Updates the information onece a second
             Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
             {
                 Data.RemoveAt(0);
-                Data.Add(new ChartDataPoint(0, Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo])));
+                Data.RemoveAt(0);
+                Data.Add(new ChartDataPoint("CPU %", Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu)));
+                restOfSpace = 100 - cpuUsage;
+                Data.Add(new ChartDataPoint("Empty Space", restOfSpace));
                 if (killThread)
                 {
                     return false;
@@ -80,5 +113,6 @@ namespace RAT._2ViewModel
                 return true;
             });
         }
+        
     }
 }

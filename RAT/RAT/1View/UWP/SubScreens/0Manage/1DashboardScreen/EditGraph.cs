@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 {
-    public partial class EditScreen : PopupPage
+    public partial class EditGraph : PopupPage
     {
         private StackLayout mainLayout, titleLayout;
         private StackLayout[] layouts;
@@ -28,7 +28,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         public int ColourPicked { get; set; }
         public string TitleTyped { get; set; }
 
-        public EditScreen(bool a, bool b, bool c, string d, int e)
+        public EditGraph(bool a, bool b, bool c, string d, int e)
         {
         //Initialising
         layouts = new StackLayout[10];
