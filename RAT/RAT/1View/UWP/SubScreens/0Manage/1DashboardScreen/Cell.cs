@@ -17,10 +17,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 {
     class Cell: Grid
     {
-        //todo remove
-        ObservableCollection<ChartDataPoint> data = new ObservableCollection<ChartDataPoint>();
-        private GraphSelection _chart;
-
         //Maxium span value
         public int MaxSpanColumn { get; set; }
         public int MaxSpanRow { get; set; }
@@ -32,7 +28,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         public string title { get; set; }
         public int colourValue { get; set; }
 
-        private EditGraph editChart;
         private DashboardViewModel viewModel;
         public bool hasGraph = false;
         public Button myButton = new Button();
@@ -49,17 +44,12 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         public Button east = new Button();
         public Button south = new Button();
 
-        public Button northwest;
-        public Button northeast;
-        public Button southeast;
-        public Button southwest;
         int z = 0;
         bool a = true;
-        Random rand = new Random();
 
         public Cell()
         {
-            buttonState = DashboardButtonState.Neutral;
+            buttonState = DashboardButtonState.Add;
             Opacity = 1.1;
             //TODO ONLY USE AS TESTING
 
@@ -70,9 +60,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             title = "";
             colourValue = 0;
 
-
             Button();
-
         }
 
         private void Button()
@@ -87,7 +75,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myButton.BorderWidth = .000001;
             myButton.WidthRequest = 500;
             myButton.HeightRequest = 500;
-            myButton.Clicked += OnOpenPupup;
+            //myButton.Clicked += OnOpenPupup;
             Children.Add(myButton);
         }
 
@@ -194,115 +182,115 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             YLocation = y;
         }
 
-        public void AreaChart()
+        #region Generate graphs
+      
+        public void AreaChart(int a, int b)
         {
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new AreaSeries());
-            Common(false);
+            Common(a, b, false);
         }
 
-        public void BarChart()
+        public void BarChart(int a, int b)
         {
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new BarSeries());
-            Common(false);
+            Common(a, b, false);
         }
 
-        public void ColumnChart()
+        public void ColumnChart(int a, int b)
         {
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new ColumnSeries());
-            Common(false);
+            Common(a, b, false);
             Children.Add(myChart);
         }
 
-
-        public void LineChart()
+        public void LineChart(int a, int b)
         {
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new LineSeries());
-            Common(false);
+            Common(a, b, false);
             Children.Add(myChart);
         }
 
-        public void PyramidChart()
+        public void PyramidChart(int a, int b)
         {
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new PyramidSeries());
-            Common(false);
+            Common(a, b, false);
             Children.Add(myChart);
         }
 
-        public void ScatterChart()
+        public void ScatterChart(int a, int b)
         {
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new ScatterSeries());
-            Common(false);
+            Common(a, b, false);
             Children.Add(myChart);
         }
 
-        public void SplineAreaChart()
+        public void SplineAreaChart(int a, int b)
         {
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new SplineAreaSeries());
-            Common(false);
+            Common(a, b, false);
             Children.Add(myChart);
         }
 
-
-        public void SplineSeriesChart()
+        public void SplineSeriesChart(int a, int b)
         {
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new SplineSeries());
-            Common(false);
+            Common(a, b, false);
             Children.Add(myChart);
         }
 
-        public void StepArea()
+        public void StepArea(int a, int b)
         {
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new StepLineSeries());
-            Common(false);
+            Common(a, b, false);
             Children.Add(myChart);
         }
 
-        public void StepLineSeries()
+        public void StepLineSeries(int a, int b)
         {
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new StepLineSeries());
-            Common(false);
+            Common(a, b, false);
             Children.Add(myChart);
         }
 
-        public void DoughnutChart()
+        public void DoughnutChart(int a, int b)
         {
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new DoughnutSeries());
-            Common(true);
+            Common(a, b, true);
             Children.Add(myChart);
         }
 
-        public void PieChart()
+        public void PieChart(int a, int b)
         {
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new PieSeries());
-            Common(true);
+            Common(a, b, true);
             Children.Add(myChart);
         }
 
-        public void Common(bool singleData)
+        public void Common(int a, int b, bool singleData)
         {
             hasGraph = true;
             Opacity = 1;
@@ -315,12 +303,12 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.PrimaryAxis = new NumericalAxis();
             myChart.SecondaryAxis = new NumericalAxis();
 
-            if (_chart.selectDataSource.SelectedIndex == 0)
+            if (a == 0)
             {
                 (myChart.SecondaryAxis as NumericalAxis).Maximum = 100;
                 (myChart.SecondaryAxis as NumericalAxis).Minimum = 0;
             }
-            else if (_chart.selectDataSource.SelectedIndex == 1)
+            else if (a == 1)
             {
                 //(myChart.SecondaryAxis as NumericalAxis).Maximum = 100;
                 (myChart.SecondaryAxis as NumericalAxis).Minimum = 0;
@@ -337,71 +325,37 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             BindingContext = viewModel;
             viewModel = new DashboardViewModel();
             myChart.Series[0].ItemsSource = viewModel.Data;
+
             //If you only want single values for pie/donut charts
             if (singleData)
             {
-                viewModel.LoadSingleValues(_chart.selectDevice.SelectedIndex, _chart.selectDataSource.SelectedIndex);
+                viewModel.LoadSingleValues(a, b);
             }
             else
             {
-                viewModel.LoadMultipleValues(_chart.selectDevice.SelectedIndex, _chart.selectDataSource.SelectedIndex);
+                viewModel.LoadMultipleValues(a, b);
             }
             Children.Add(myChart);
         }
+        #endregion
 
-        // Button Click
-        private async void OnOpenPupup(object sender, EventArgs e)
-        {
-            if (buttonState == DashboardButtonState.Neutral)
-            {
-                _chart = new GraphSelection();
-                await Navigation.PushPopupAsync(_chart);
-                
-                //Adding graph generating method to chart select buttons
-                _chart.AreaChart().Clicked += (o, args) => { AreaChart(); GCGraphSelect(); };
-                _chart.BarChart().Clicked += (o, args) => { BarChart(); GCGraphSelect(); };
-                _chart.ColumnChart().Clicked += (o, args) => { ColumnChart(); GCGraphSelect(); };
-                _chart.LineChart().Clicked += (o, args) => { LineChart(); GCGraphSelect(); };
-                _chart.StepAreaChart().Clicked += (o, args) => { StepArea(); GCGraphSelect(); };
-                _chart.PyramidChart().Clicked += (o, args) => { PyramidChart(); GCGraphSelect(); };
-                _chart.ScatterplotChart().Clicked += (o, args) => { ScatterChart(); GCGraphSelect(); };
-                _chart.SplineChart().Clicked += (o, args) => { SplineSeriesChart(); GCGraphSelect(); };
-                _chart.SplineAreaChart().Clicked += (o, args) => { SplineAreaChart(); GCGraphSelect(); };
-                _chart.StepLineChart().Clicked += (o, args) => { StepLineSeries(); GCGraphSelect(); };
-                _chart.PieChart().Clicked += (o, args) => { PieChart(); GCGraphSelect(); };
-                _chart.DoughnutChart().Clicked += (o, args) => { DoughnutChart(); GCGraphSelect(); };
-            }
-            else if (buttonState == DashboardButtonState.Editing)
-            {
-                if (hasGraph)
-                {
-                    //Creating new edit popup screen, adding clickhandler
-                    editChart = new EditGraph(xAxisOn, yAxisOn, GridLinesOn, title, colourValue);
-                    editChart.CloseWhenBackgroundIsClicked = false;
-                    editChart.saveButton.Clicked += SaveButtonOnClicked;
-                    await Navigation.PushPopupAsync(editChart);
-                }
-            } else if (buttonState == DashboardButtonState.Delete)
-            {
-                CleanCell();
-            }
-        }
         public void GCGraphSelect()
         {
             //Removing graph select screen
-            Navigation.RemovePopupPageAsync(_chart ,false);
-            _chart = null;
+            //Navigation.RemovePopupPageAsync(_chart ,false);
+            //_chart = null;
         }
 
-//When clicking the save button
-private void SaveButtonOnClicked(object sender, EventArgs eventArgs)
+        public void ApplyChanges(bool a, bool b, bool c, int d, string e)
         {
+            //When clicking the save button on editscreen
+
             //Getting values
-            GridLinesOn = editChart.GridLinesValues;
-            xAxisOn = editChart.XAxisValue;
-            yAxisOn = editChart.YXaxisValue;
-            colourValue = editChart.ColourPicked;
-            title = editChart.TitleTyped;
+            xAxisOn = a;
+            yAxisOn = b;
+            GridLinesOn = c;
+            colourValue = d;
+            title = e;
 
             //Setting title
             myChart.PrimaryAxis.Title = new ChartAxisTitle() { Text = title };
@@ -426,19 +380,11 @@ private void SaveButtonOnClicked(object sender, EventArgs eventArgs)
             {
                 myChart.ColorModel.Palette = ChartColorPalette.TomatoSpectrum;
             }
-            //Removing click handler to allow garbage collection
-            editChart.saveButton.Clicked -= SaveButtonOnClicked;
-
-            //Removing popup screen after saving
-            editChart.GC();
-            Navigation.PopAllPopupAsync(true);
-            editChart = null;
-            GC.Collect();
         }
 
-        //Resetting cell when graph is deleted
         public void CleanCell()
         {
+            //Resetting cell when graph is deleted
             if (myChart != null)
             {
                 Children.Remove(myChart);

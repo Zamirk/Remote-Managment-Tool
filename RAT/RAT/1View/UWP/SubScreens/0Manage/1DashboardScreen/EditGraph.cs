@@ -19,7 +19,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         private Picker colourSelect;
         private Label[] labels;
         public Button saveButton = new Button();
-        public Editor titleName;
+        public Editor titleEditor;
         private Label myLabel, switchLabel1, switchLabel2;
 
         public bool XAxisValue { get; set; }
@@ -28,26 +28,18 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         public int ColourPicked { get; set; }
         public string TitleTyped { get; set; }
 
-        public EditGraph(bool a, bool b, bool c, string d, int e)
+        public EditGraph()
         {
         //Initialising
         layouts = new StackLayout[10];
             switches = new Switch[10];
             labels = new Label[10];
-            titleName = new Editor();
+            titleEditor = new Editor();
 
             colourSelect = new Picker();
             colourSelect.Items.Add("Orange theme");
             colourSelect.Items.Add("Blue theme");
             colourSelect.Items.Add("Green theme");
-
-            //Setting values that were sent in
-            XAxisValue = a;
-            YXaxisValue = b;
-            GridLinesValues = c;
-            TitleTyped = d;
-            titleName.Text = d;
-            colourSelect.SelectedIndex = e;
 
             //Layout
             mainLayout = new StackLayout();
@@ -61,9 +53,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             #region MyRegion
             StackLayout aaa = new StackLayout();
             aaa.BackgroundColor = Color.Gray;
-            titleName.WidthRequest = 200;
-            titleName.VerticalOptions = LayoutOptions.CenterAndExpand;
-            aaa.Children.Add(titleName);
+            titleEditor.WidthRequest = 200;
+            titleEditor.VerticalOptions = LayoutOptions.CenterAndExpand;
+            aaa.Children.Add(titleEditor);
 
             mainLayout.Children.Add(aaa);
             #endregion
@@ -116,11 +108,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 layouts[i].Children.Add(switches[i]);
                 mainLayout.Children.Add(layouts[i]);
             }
-            //Setting initial toggle state/dropdown selection
-            switches[0].IsToggled = a;
-            switches[1].IsToggled = b;
-            switches[2].IsToggled = c;
-            colourSelect.SelectedIndex = e;
 
             //Adding event handlers
             switches[0].Toggled += OnToggledXAxis;
@@ -131,7 +118,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             colourSelect.SelectedIndexChanged += ColourSelectOnSelectedIndexChanged;
             
             //Editor changed event
-            titleName.TextChanged += TitleNameOnTextChanged;
+            titleEditor.TextChanged += TitleEditorOnTextChanged;
             
             #endregion
 
@@ -141,28 +128,35 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             buttonLayout.Orientation = StackOrientation.Horizontal;
             buttonLayout.BackgroundColor = Color.Gray;
 
-            Button cancelButton = new Button(); 
             saveButton.Text = "Save";
-            cancelButton.Text = "Cancel";
-
             saveButton.VerticalOptions = LayoutOptions.Center;
             saveButton.HorizontalOptions = LayoutOptions.Center;
-            cancelButton.VerticalOptions = LayoutOptions.Center;
-            cancelButton.HorizontalOptions = LayoutOptions.Center;
-            cancelButton.Clicked += CancelButtonOnClicked;
             saveButton.Margin = new Thickness(75,0,0,0);
-
             saveButton.FontSize = 20;
-            cancelButton.FontSize = 20;
-            
             buttonLayout.Children.Add(saveButton);
-            buttonLayout.Children.Add(cancelButton);
 
             mainLayout.Children.Add(buttonLayout);
 
                 #endregion
 
             this.Content = mainLayout;
+        }
+
+        public void SetAttributes(bool a, bool b, bool c, string d, int e)
+        {
+            //Setting values that were sent in
+            XAxisValue = a;
+            YXaxisValue = b;
+            GridLinesValues = c;
+            TitleTyped = d;
+            colourSelect.SelectedIndex = e;
+
+            //Setting initial toggle state/dropdown selection
+            titleEditor.Text = d;
+            colourSelect.SelectedIndex = e;
+            switches[0].IsToggled = a;
+            switches[1].IsToggled = b;
+            switches[2].IsToggled = c;
         }
 
         public void GC()
@@ -176,12 +170,12 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             colourSelect.SelectedIndexChanged -= ColourSelectOnSelectedIndexChanged;
 
             //Editor changed event
-            titleName.TextChanged -= TitleNameOnTextChanged;
+            titleEditor.TextChanged -= TitleEditorOnTextChanged;
         }
 
-        private void TitleNameOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
+        private void TitleEditorOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
         {
-            TitleTyped = titleName.Text;
+            TitleTyped = titleEditor.Text;
         }
 
         #region EventHandlers
@@ -228,10 +222,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         }
 
 #endregion
-        private void CancelButtonOnClicked(object sender, EventArgs eventArgs)
-        {
-        }
-
         
             protected override void OnAppearing()
         {

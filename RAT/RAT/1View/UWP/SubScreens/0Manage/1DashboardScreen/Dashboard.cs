@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using Amqp;
 using RAT.ZTry;
 using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
 using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
@@ -19,8 +20,11 @@ namespace RAT._1View.Desktop.Manage
 	public class Dashboard : ScrollView
 	{
         private DashboardButtonState buttonState;
+        //Popup screens
+        private GraphSelection selectGraph = new GraphSelection();
+        private EditGraph editChart = new EditGraph();
 
-	    private Button deleteButton, editing, movingButton, resizing, add;
+        private Button deleteButton, editing, movingButton, resizing, add;
 	    private Picker dashboardList;
         double width = 109.25; //Todo stop hardcoding values
         double height = 99.6;
@@ -31,8 +35,24 @@ namespace RAT._1View.Desktop.Manage
         private Cell[][] myCells = new Cell[8][];
         private bool singleSquares = true;
 
+        EventHandler handler0 = null;
+        EventHandler handler1 = null;
+        EventHandler handler2 = null;
+        EventHandler handler3 = null;
+        EventHandler handler4 = null;
+        EventHandler handler5 = null;
+        EventHandler handler6 = null;
+        EventHandler handler7 = null;
+        EventHandler handler8 = null;
+        EventHandler handler9 = null;
+        EventHandler handler10 = null;
+        EventHandler handler11 = null;
+
+        //Edit screen event handler
+        EventHandler handler12 = null;
         public Dashboard()
         {
+            selectGraph.CloseWhenBackgroundIsClicked = false;
             Orientation = ScrollOrientation.Both;
             superGrid = new Grid();
             superGrid.RowDefinitions.Add(new RowDefinition { Height = 35 });
@@ -191,6 +211,7 @@ namespace RAT._1View.Desktop.Manage
                     myCells[xAxis][yAxis].west.Clicked += WestOnClicked;
                     myCells[xAxis][yAxis].north.Clicked += NorthOnClicked;
                     myCells[xAxis][yAxis].south.Clicked += SouthOnClicked;
+                    myCells[xAxis][yAxis].myButton.Clicked += MyButtonOnClicked;
                     System.Diagnostics.Debug.WriteLine(":::"+(yAxis)+":"+ xAxis);
                     mainGrid.Children.Add(myCell, xAxis, yAxis);
                 }
@@ -207,9 +228,212 @@ namespace RAT._1View.Desktop.Manage
             //Point of reference for animation movment
         }
 
-	    private void AddOnClicked(object sender, EventArgs eventArgs)
+	    private async void MyButtonOnClicked(object sender, EventArgs eventArgs)
 	    {
-            if (buttonState != DashboardButtonState.Neutral)
+            //Getting the references
+            Button s = (Button)sender;
+	        Cell myCell = (Cell)s.Parent;
+
+            //If adding option is selected
+	        if (myCell.buttonState == DashboardButtonState.Add)
+	        {
+                //If the cell does not havea graph
+	            if (!myCell.hasGraph)
+	            {
+	                //Event handlers which remove themselves(and all others) after a single use
+	                handler0 = (o, e) =>
+	                {
+	                    myCell.AreaChart(
+	                        selectGraph.selectDataSource.SelectedIndex,
+	                        selectGraph.selectDevice.SelectedIndex);
+	                    GCGraphSelect();
+	                    Navigation.PopPopupAsync(true);
+	                };
+
+	                handler1 = (o, e) =>
+	                {
+	                    myCell.BarChart(
+	                        selectGraph.selectDataSource.SelectedIndex,
+	                        selectGraph.selectDevice.SelectedIndex);
+	                    GCGraphSelect();
+	                    Navigation.PopPopupAsync(true);
+	                };
+
+	                handler2 = (o, e) =>
+	                {
+	                    myCell.ColumnChart(
+	                        selectGraph.selectDataSource.SelectedIndex,
+	                        selectGraph.selectDevice.SelectedIndex);
+	                    GCGraphSelect();
+	                    Navigation.PopPopupAsync(true);
+	                };
+
+	                handler3 = (o, e) =>
+	                {
+	                    myCell.LineChart(
+	                        selectGraph.selectDataSource.SelectedIndex,
+	                        selectGraph.selectDevice.SelectedIndex);
+	                    GCGraphSelect();
+	                    Navigation.PopPopupAsync(true);
+	                };
+
+	                handler4 = (o, e) =>
+	                {
+	                    myCell.StepArea(
+	                        selectGraph.selectDataSource.SelectedIndex,
+	                        selectGraph.selectDevice.SelectedIndex);
+	                    GCGraphSelect();
+	                    Navigation.PopPopupAsync(true);
+	                };
+
+	                handler5 = (o, e) =>
+	                {
+	                    myCell.PyramidChart(
+	                        selectGraph.selectDataSource.SelectedIndex,
+	                        selectGraph.selectDevice.SelectedIndex);
+	                    GCGraphSelect();
+	                    Navigation.PopPopupAsync(true);
+	                };
+
+	                handler6 = (o, e) =>
+	                {
+	                    myCell.ScatterChart(
+	                        selectGraph.selectDataSource.SelectedIndex,
+	                        selectGraph.selectDevice.SelectedIndex);
+	                    GCGraphSelect();
+	                    Navigation.PopPopupAsync(true);
+	                };
+
+	                handler7 = (o, e) =>
+	                {
+	                    myCell.SplineSeriesChart(
+	                        selectGraph.selectDataSource.SelectedIndex,
+	                        selectGraph.selectDevice.SelectedIndex);
+	                    GCGraphSelect();
+	                    Navigation.PopPopupAsync(true);
+	                };
+
+	                handler8 = (o, e) =>
+	                {
+	                    myCell.SplineAreaChart(
+	                        selectGraph.selectDataSource.SelectedIndex,
+	                        selectGraph.selectDevice.SelectedIndex);
+	                    GCGraphSelect();
+	                    Navigation.PopPopupAsync(true);
+	                };
+
+	                handler9 = (o, e) =>
+	                {
+	                    myCell.StepLineSeries(
+	                        selectGraph.selectDataSource.SelectedIndex,
+	                        selectGraph.selectDevice.SelectedIndex);
+	                    GCGraphSelect();
+	                    Navigation.PopPopupAsync(true);
+	                };
+
+	                handler10 = (o, e) =>
+	                {
+	                    myCell.PieChart(
+	                        selectGraph.selectDataSource.SelectedIndex,
+	                        selectGraph.selectDevice.SelectedIndex);
+	                    GCGraphSelect();
+	                    Navigation.PopPopupAsync(true);
+	                };
+
+	                handler11 = (o, e) =>
+	                {
+	                    myCell.DoughnutChart(
+	                        selectGraph.selectDataSource.SelectedIndex,
+	                        selectGraph.selectDevice.SelectedIndex);
+	                    GCGraphSelect();
+	                    Navigation.PopPopupAsync(true);
+	                };
+	            //Connection events to select graph screen
+                AddEventHandlers();
+
+                await Navigation.PushPopupAsync(selectGraph);
+                }
+            } else if (myCell.buttonState == DashboardButtonState.Editing)
+            {
+                //If there is a graph
+                if (myCell.hasGraph)
+                {
+                    //Set attributes of edit screen initially from the cell
+                    editChart.SetAttributes(
+                        myCell.xAxisOn,
+                        myCell.yAxisOn,
+                        myCell.GridLinesOn,
+                        myCell.title,
+                        myCell.colourValue);
+
+                    await Navigation.PushPopupAsync(editChart);
+
+                    handler12 = (o, e) =>
+                    {
+                        //Applying back the new changes
+                        myCell.ApplyChanges(
+                            editChart.XAxisValue,
+                            editChart.YXaxisValue,
+                            editChart.GridLinesValues,
+                            editChart.ColourPicked,
+                            editChart.TitleTyped);
+
+                        editChart.saveButton.Clicked -= handler12;
+                        Navigation.PopPopupAsync(true);
+                    };
+
+                    editChart.saveButton.Clicked += handler12;
+
+                    //Creating new edit popup screen, adding clickhandler
+                    // editChart = new EditGraph(xAxisOn, yAxisOn, GridLinesOn, title, colourValue);
+                    //  editChart.CloseWhenBackgroundIsClicked = false;
+                    //  editChart.saveButton.Clicked += SaveButtonOnClicked;
+                    //  await Navigation.PushPopupAsync(editChart);
+                }
+            }
+            else if (myCell.buttonState == DashboardButtonState.Delete)
+            {
+                //If delete is selected, then invoke the clean cell method
+                myCell.CleanCell();
+            }
+        }
+
+	    public void AddEventHandlers()
+	    {
+            //Adding graph generating method to chart select buttons
+            selectGraph.AreaChart().Clicked += handler0;
+            selectGraph.BarChart().Clicked += handler1;
+            selectGraph.ColumnChart().Clicked += handler2;
+            selectGraph.LineChart().Clicked += handler3;
+            selectGraph.StepAreaChart().Clicked += handler4;
+            selectGraph.PyramidChart().Clicked += handler5;
+            selectGraph.ScatterplotChart().Clicked += handler6; ;
+            selectGraph.SplineChart().Clicked += handler7;
+            selectGraph.SplineAreaChart().Clicked += handler8;
+            selectGraph.StepLineChart().Clicked += handler9;
+            selectGraph.PieChart().Clicked += handler10;
+            selectGraph.DoughnutChart().Clicked += handler11;
+        }
+
+	    public void GCGraphSelect()
+	    {
+            selectGraph.AreaChart().Clicked -= handler0;
+            selectGraph.BarChart().Clicked -= handler1;
+            selectGraph.ColumnChart().Clicked -= handler2;
+            selectGraph.LineChart().Clicked -= handler3;
+            selectGraph.StepAreaChart().Clicked -= handler4;
+            selectGraph.PyramidChart().Clicked -= handler5;
+            selectGraph.ScatterplotChart().Clicked -= handler6; ;
+            selectGraph.SplineChart().Clicked -= handler7;
+            selectGraph.SplineAreaChart().Clicked -= handler8;
+            selectGraph.StepLineChart().Clicked -= handler9;
+            selectGraph.PieChart().Clicked -= handler10;
+            selectGraph.DoughnutChart().Clicked -= handler11;
+        }
+
+        private void AddOnClicked(object sender, EventArgs eventArgs)
+	    {
+            if (buttonState != DashboardButtonState.Add)
             {
                 add.BackgroundColor = Color.Gray;
                 deleteButton.BackgroundColor = Color.Transparent;
@@ -217,14 +441,14 @@ namespace RAT._1View.Desktop.Manage
                 resizing.BackgroundColor = Color.Transparent;
                 movingButton.BackgroundColor = Color.Transparent;
 
-                buttonState = DashboardButtonState.Neutral;
+                buttonState = DashboardButtonState.Add;
                 HideButtons();
 
                 for (int yAxis = 0; yAxis < 5; yAxis++)
                 {
                     for (int xAxis = 0; xAxis < 8; xAxis++)
                     {
-                        myCells[xAxis][yAxis].buttonState = DashboardButtonState.Neutral;
+                        myCells[xAxis][yAxis].buttonState = DashboardButtonState.Add;
                     }
                 }
             }

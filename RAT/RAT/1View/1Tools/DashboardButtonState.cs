@@ -2,6 +2,6 @@
 {
     public enum DashboardButtonState
     {
-        Delete, Resize, Move, Editing, Neutral
+        Delete, Resize, Move, Editing, Add
     }
 }
