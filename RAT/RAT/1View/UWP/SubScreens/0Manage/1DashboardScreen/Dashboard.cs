@@ -244,8 +244,8 @@ namespace RAT._1View.Desktop.Manage
 	                handler0 = (o, e) =>
 	                {
 	                    myCell.AreaChart(
-	                        selectGraph.selectDataSource.SelectedIndex,
-	                        selectGraph.selectDevice.SelectedIndex);
+                            selectGraph.selectDevice.SelectedIndex,
+                            selectGraph.selectDataSource.SelectedIndex);
 	                    GCGraphSelect();
 	                    Navigation.PopPopupAsync(true);
 	                };
@@ -253,99 +253,99 @@ namespace RAT._1View.Desktop.Manage
 	                handler1 = (o, e) =>
 	                {
 	                    myCell.BarChart(
-	                        selectGraph.selectDataSource.SelectedIndex,
-	                        selectGraph.selectDevice.SelectedIndex);
-	                    GCGraphSelect();
+                            selectGraph.selectDevice.SelectedIndex,
+                            selectGraph.selectDataSource.SelectedIndex);
+                        GCGraphSelect();
 	                    Navigation.PopPopupAsync(true);
 	                };
 
 	                handler2 = (o, e) =>
 	                {
 	                    myCell.ColumnChart(
-	                        selectGraph.selectDataSource.SelectedIndex,
-	                        selectGraph.selectDevice.SelectedIndex);
-	                    GCGraphSelect();
+                            selectGraph.selectDevice.SelectedIndex,
+                            selectGraph.selectDataSource.SelectedIndex);
+                        GCGraphSelect();
 	                    Navigation.PopPopupAsync(true);
 	                };
 
 	                handler3 = (o, e) =>
 	                {
 	                    myCell.LineChart(
-	                        selectGraph.selectDataSource.SelectedIndex,
-	                        selectGraph.selectDevice.SelectedIndex);
-	                    GCGraphSelect();
+                            selectGraph.selectDevice.SelectedIndex,
+                            selectGraph.selectDataSource.SelectedIndex);
+                        GCGraphSelect();
 	                    Navigation.PopPopupAsync(true);
 	                };
 
 	                handler4 = (o, e) =>
 	                {
 	                    myCell.StepArea(
-	                        selectGraph.selectDataSource.SelectedIndex,
-	                        selectGraph.selectDevice.SelectedIndex);
-	                    GCGraphSelect();
+                            selectGraph.selectDevice.SelectedIndex,
+                            selectGraph.selectDataSource.SelectedIndex);
+                        GCGraphSelect();
 	                    Navigation.PopPopupAsync(true);
 	                };
 
 	                handler5 = (o, e) =>
 	                {
 	                    myCell.PyramidChart(
-	                        selectGraph.selectDataSource.SelectedIndex,
-	                        selectGraph.selectDevice.SelectedIndex);
-	                    GCGraphSelect();
+                            selectGraph.selectDevice.SelectedIndex,
+                            selectGraph.selectDataSource.SelectedIndex);
+                        GCGraphSelect();
 	                    Navigation.PopPopupAsync(true);
 	                };
 
 	                handler6 = (o, e) =>
 	                {
 	                    myCell.ScatterChart(
-	                        selectGraph.selectDataSource.SelectedIndex,
-	                        selectGraph.selectDevice.SelectedIndex);
-	                    GCGraphSelect();
+                            selectGraph.selectDevice.SelectedIndex,
+                            selectGraph.selectDataSource.SelectedIndex);
+                        GCGraphSelect();
 	                    Navigation.PopPopupAsync(true);
 	                };
 
 	                handler7 = (o, e) =>
 	                {
 	                    myCell.SplineSeriesChart(
-	                        selectGraph.selectDataSource.SelectedIndex,
-	                        selectGraph.selectDevice.SelectedIndex);
-	                    GCGraphSelect();
+                            selectGraph.selectDevice.SelectedIndex,
+                            selectGraph.selectDataSource.SelectedIndex);
+                        GCGraphSelect();
 	                    Navigation.PopPopupAsync(true);
 	                };
 
 	                handler8 = (o, e) =>
 	                {
 	                    myCell.SplineAreaChart(
-	                        selectGraph.selectDataSource.SelectedIndex,
-	                        selectGraph.selectDevice.SelectedIndex);
-	                    GCGraphSelect();
+                            selectGraph.selectDevice.SelectedIndex,
+                            selectGraph.selectDataSource.SelectedIndex);
+                        GCGraphSelect();
 	                    Navigation.PopPopupAsync(true);
 	                };
 
 	                handler9 = (o, e) =>
 	                {
 	                    myCell.StepLineSeries(
-	                        selectGraph.selectDataSource.SelectedIndex,
-	                        selectGraph.selectDevice.SelectedIndex);
-	                    GCGraphSelect();
+                            selectGraph.selectDevice.SelectedIndex,
+                            selectGraph.selectDataSource.SelectedIndex);
+                        GCGraphSelect();
 	                    Navigation.PopPopupAsync(true);
 	                };
 
 	                handler10 = (o, e) =>
 	                {
 	                    myCell.PieChart(
-	                        selectGraph.selectDataSource.SelectedIndex,
-	                        selectGraph.selectDevice.SelectedIndex);
-	                    GCGraphSelect();
+                            selectGraph.selectDevice.SelectedIndex,
+                            selectGraph.selectDataSource.SelectedIndex);
+                        GCGraphSelect();
 	                    Navigation.PopPopupAsync(true);
 	                };
 
 	                handler11 = (o, e) =>
 	                {
 	                    myCell.DoughnutChart(
-	                        selectGraph.selectDataSource.SelectedIndex,
-	                        selectGraph.selectDevice.SelectedIndex);
-	                    GCGraphSelect();
+                            selectGraph.selectDevice.SelectedIndex,
+                            selectGraph.selectDataSource.SelectedIndex);
+                        GCGraphSelect();
 	                    Navigation.PopPopupAsync(true);
 	                };
 	            //Connection events to select graph screen

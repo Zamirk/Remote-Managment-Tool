@@ -303,12 +303,12 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.PrimaryAxis = new NumericalAxis();
             myChart.SecondaryAxis = new NumericalAxis();
 
-            if (a == 0)
+            if (b == 0)
             {
                 (myChart.SecondaryAxis as NumericalAxis).Maximum = 100;
                 (myChart.SecondaryAxis as NumericalAxis).Minimum = 0;
             }
-            else if (a == 1)
+            else if (b == 1)
             {
                 //(myChart.SecondaryAxis as NumericalAxis).Maximum = 100;
                 (myChart.SecondaryAxis as NumericalAxis).Minimum = 0;

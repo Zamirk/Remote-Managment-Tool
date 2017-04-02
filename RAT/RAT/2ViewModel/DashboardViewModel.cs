@@ -16,6 +16,7 @@ namespace RAT._2ViewModel
         private ObservableCollection<ChartDataPoint> data;
         private bool killThread = false;
         private int y;
+
         public DashboardViewModel()
         {
             y = 0;
@@ -43,7 +44,11 @@ namespace RAT._2ViewModel
                 Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
                 foreach (var telemetry in telemetryTemp)
                 {
-                    data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Cpu)));
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Cpu)));
+                    }
                     y++;
                 }
                 await Task.Delay(1000);
@@ -57,17 +62,23 @@ namespace RAT._2ViewModel
                     var cpuValue = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu);
                     Data.Add(new ChartDataPoint(y, cpuValue));
                     if (killThread)
+                    {
                         return false;
+                    }
                     return true;
                 });
-            }
+            }           //CPU
             else if (dataSelection == 1)
             {
                 //Iterating over the queue of telemetry obects, adding to the chart databound collection
                 Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
                 foreach (var telemetry in telemetryTemp)
                 {
-                    data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Cpu2)));
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Cpu2)));
+                    }
                     y++;
                 }
                 await Task.Delay(1000);
@@ -81,38 +92,753 @@ namespace RAT._2ViewModel
                     var cpuValue = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu2);
                     Data.Add(new ChartDataPoint(y, cpuValue));
                     if (killThread)
+                    {
                         return false;
+                    }
                     return true;
                 });
-            }
+            }      //CPU Frequency
+            else if (dataSelection == 2)
+            {
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
+                {
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Thread)));
+                    }
+                    y++;
+                }
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var thread = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Thread);
+                    Data.Add(new ChartDataPoint(y, thread));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Thread Count
+            else if (dataSelection == 3)
+            {
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
+                {
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.CpuTem)));
+                    }
+                    y++;
+                }
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var cpuTemp = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].CpuTem);
+                    Data.Add(new ChartDataPoint(y, cpuTemp));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //CPU Temperature
+            else if (dataSelection == 4)
+            {
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
+                {
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Processes)));
+                    }
+                    y++;
+                }
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var processes = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Processes);
+                    Data.Add(new ChartDataPoint(y, processes));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Number of processes
+            else if (dataSelection == 5)
+            {
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
+                {
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Percent)));
+                    }
+                    y++;
+                }
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var percent = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Percent);
+                    Data.Add(new ChartDataPoint(y, percent));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Percent of CPU Frequency of Max
+            else if (dataSelection == 6)
+            {
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
+                {
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Ram)));
+                    }
+                    y++;
+                }
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var percent = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Ram);
+                    Data.Add(new ChartDataPoint(y, percent));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Ram left
+            else if (dataSelection == 7)
+            {
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
+                {
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.RamInUse)));
+                    }
+                    y++;
+                }
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var ramInUse = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].RamInUse);
+                    Data.Add(new ChartDataPoint(y, ramInUse));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Ram in use %
+            else if (dataSelection == 8)
+            {
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
+                {
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.RamCache)));
+                    }
+                    y++;
+                }
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var ramInUse = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].RamCache);
+                    Data.Add(new ChartDataPoint(y, ramInUse));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Ram cahce
+            else if (dataSelection == 9)
+            {
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
+                {
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.RamCommitted)));
+                    }
+                    y++;
+                }
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var ramCommitted = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].RamCommitted);
+                    Data.Add(new ChartDataPoint(y, ramCommitted));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Ram committed
+            else if (dataSelection == 10)
+            {
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
+                {
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.PagedPool)));
+                    }
+                    y++;
+                }
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var pagedPool = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].PagedPool);
+                    Data.Add(new ChartDataPoint(y, pagedPool));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }     //Ram paged pool
+            else if (dataSelection == 11)
+            {
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
+                {
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.NonPagedPool)));
+                    }
+                    y++;
+                }
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var nonPagedPool = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].NonPagedPool);
+                    Data.Add(new ChartDataPoint(y, nonPagedPool));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }     //Ram non paged pool
+            else if (dataSelection == 12)
+            {
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
+                {
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.DiskReadTime)));
+                    }
+                    y++;
+                }
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var diskReadTime = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskReadTime);
+                    Data.Add(new ChartDataPoint(y, diskReadTime));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }     //Disk read time
+            else if (dataSelection == 13)
+            {
+                //Iterating over the queue of telemetry obects, adding to the chart databound collection
+                Queue<TelemetryDatapoint> telemetryTemp = GetTelemetry.listOfDevices[deviceNo];
+                foreach (var telemetry in telemetryTemp)
+                {
+                    //Only 30 values
+                    if (y > 29)
+                    {
+                        data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.DiskWriteTime)));
+                    }
+                    y++;
+                }
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    y++;
+
+                    var diskWriteTime = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteTime);
+                    Data.Add(new ChartDataPoint(y, diskWriteTime));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }     //Disk write time
         }
 
         public async void LoadSingleValues(int deviceNo, int dataSelection)
         {
-            //Initial value
-            //TODO CHANGE
-            double cpuUsage = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu);
-            double restOfSpace = 100 - cpuUsage;
-
-            Data.Add(new ChartDataPoint("CPU %", cpuUsage));
-            Data.Add(new ChartDataPoint("Empty Space", restOfSpace));
-            await Task.Delay(1000);
-
-            //Updates the information onece a second
-            Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+            if (dataSelection == 0)
             {
-                Data.RemoveAt(0);
-                Data.RemoveAt(0);
-                Data.Add(new ChartDataPoint("CPU %", Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu)));
-                restOfSpace = 100 - cpuUsage;
+                //Initial value
+                double cpuUsage = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu);
+                double restOfSpace = 100 - cpuUsage;
+
+                Data.Add(new ChartDataPoint("CPU %", cpuUsage));
                 Data.Add(new ChartDataPoint("Empty Space", restOfSpace));
-                if (killThread)
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
                 {
-                    return false;
-                }
-                return true;
-            });
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    Data.Add(new ChartDataPoint("CPU %",
+                        Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu)));
+                    restOfSpace = 100 - cpuUsage;
+                    Data.Add(new ChartDataPoint("Empty Space", restOfSpace));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }           //CPU
+            else if (dataSelection == 1)
+            {
+                //Initial value
+                double frequency = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu2);
+                double restOfFrequency = 2400 - frequency;
+
+                Data.Add(new ChartDataPoint("Frequency", frequency));
+                Data.Add(new ChartDataPoint("", restOfFrequency));
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    frequency = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu2);
+                    restOfFrequency = 2400 - frequency;
+
+                    Data.Add(new ChartDataPoint("Frequency", frequency));
+                    Data.Add(new ChartDataPoint("", restOfFrequency));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //CPU Frequency
+            else if (dataSelection == 2)
+            {
+                //Initial value
+                double threadcount = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Thread);
+                double restOfFrequency = 3000 - threadcount;
+
+                Data.Add(new ChartDataPoint("Threads", threadcount));
+                Data.Add(new ChartDataPoint("", restOfFrequency));
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    threadcount = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Thread);
+                    restOfFrequency = 3000 - threadcount;
+
+                    Data.Add(new ChartDataPoint("Threads", threadcount));
+                    Data.Add(new ChartDataPoint("", restOfFrequency));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Thread Count
+            else if (dataSelection == 3)
+            {
+                //Initial value
+                double cpuTemp = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].CpuTem);
+                double remainingTemp = 85 - cpuTemp;
+
+                Data.Add(new ChartDataPoint("C*", cpuTemp));
+                Data.Add(new ChartDataPoint("", remainingTemp));
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    cpuTemp = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].CpuTem);
+                    remainingTemp = 85 - cpuTemp;
+
+                    Data.Add(new ChartDataPoint("CPU Temp", cpuTemp));
+                    Data.Add(new ChartDataPoint("", remainingTemp));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //CPU Temperature
+            else if (dataSelection == 4)
+            {
+                //Initial value
+                double processes = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].CpuTem);
+                double remainingProcesses = 150 - processes;
+
+                Data.Add(new ChartDataPoint("No. Processes", processes));
+                Data.Add(new ChartDataPoint("", remainingProcesses));
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    processes = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].CpuTem);
+                    remainingProcesses = 150 - processes;
+
+                    Data.Add(new ChartDataPoint("No. Processes", processes));
+                    Data.Add(new ChartDataPoint("", remainingProcesses));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Number of processes
+            else if (dataSelection == 5)
+            {
+                //Initial value
+                double percent = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Percent);
+                double remaining = 100 - percent;
+
+                Data.Add(new ChartDataPoint("CPU % of Max", percent));
+                Data.Add(new ChartDataPoint("", remaining));
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    percent = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Percent);
+                    remaining = 100 - percent;
+
+                    Data.Add(new ChartDataPoint("CPU % of Max", percent));
+                    Data.Add(new ChartDataPoint("", remaining));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Percent of CPU Frequency of Max
+            else if (dataSelection == 6)
+            {
+                //Initial value
+                double ram = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Ram);
+                double remaining = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].RamInUse);
+
+                Data.Add(new ChartDataPoint("Ram left", ram));
+                Data.Add(new ChartDataPoint("Ram InUse", remaining));
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    ram = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Ram);
+                    remaining = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].RamInUse);
+
+                    Data.Add(new ChartDataPoint("Ram left", ram));
+                    Data.Add(new ChartDataPoint("Ram InUse", remaining));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Ram left
+            else if (dataSelection == 7)
+            {
+                //Initial value
+                double ram = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Ram);
+                double remaining = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].RamInUse);
+
+                Data.Add(new ChartDataPoint("Ram InUse", remaining));
+                Data.Add(new ChartDataPoint("Ram left", ram));
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    ram = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Ram);
+                    remaining = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].RamInUse);
+
+                    Data.Add(new ChartDataPoint("Ram InUse", remaining));
+                    Data.Add(new ChartDataPoint("Ram left", ram));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Ram in use %
+            else if (dataSelection == 8)
+            {
+                //Initial value
+                double ramCache = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].RamCache);
+                double remaining = 8500 - ramCache;
+
+                Data.Add(new ChartDataPoint("Ram cached", ramCache));
+                Data.Add(new ChartDataPoint("", remaining));
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    ramCache = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].RamCache);
+                    remaining = 8500 - ramCache;
+
+                    Data.Add(new ChartDataPoint("Ram cached", ramCache));
+                    Data.Add(new ChartDataPoint("", remaining));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Ram cache
+            else if (dataSelection == 9)
+            {
+                //Initial value
+                double ramCommitted = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].RamCommitted);
+                double remaining = 8500 - ramCommitted;
+
+                Data.Add(new ChartDataPoint("Ram committed", ramCommitted));
+                Data.Add(new ChartDataPoint("", remaining));
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    ramCommitted = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].RamCommitted);
+                    remaining = 8500 - ramCommitted;
+
+                    Data.Add(new ChartDataPoint("Ram committed", ramCommitted));
+                    Data.Add(new ChartDataPoint("", remaining));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }      //Ram committed
+            else if (dataSelection == 10)
+            {
+                //Initial value
+                double pagedPool = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].PagedPool);
+                double remaining = 8500 - pagedPool;
+
+                Data.Add(new ChartDataPoint("Paged Pool", pagedPool));
+                Data.Add(new ChartDataPoint("", remaining));
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    pagedPool = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].PagedPool);
+                    remaining = 8500 - pagedPool;
+
+                    Data.Add(new ChartDataPoint("Paged Pool", pagedPool));
+                    Data.Add(new ChartDataPoint("", remaining));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }     //Paged pool
+            else if (dataSelection == 11)
+            {
+                //Initial value
+                double nonpagedPool = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].NonPagedPool);
+                double remaining = 8500 - nonpagedPool;
+
+                Data.Add(new ChartDataPoint("Non paged Pool", nonpagedPool));
+                Data.Add(new ChartDataPoint("", remaining));
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    nonpagedPool = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].PagedPool);
+                    remaining = 8500 - nonpagedPool;
+
+                    Data.Add(new ChartDataPoint("Non Paged Pool", nonpagedPool));
+                    Data.Add(new ChartDataPoint("", remaining));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }     //Non Paged pool
+            else if (dataSelection == 12)
+            {
+                //Initial value
+                double diskReadTime = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskReadTime);
+                double remaining = 100 - diskReadTime;
+
+                Data.Add(new ChartDataPoint("Disk read time", diskReadTime));
+                Data.Add(new ChartDataPoint("", remaining));
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    diskReadTime = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskReadTime);
+                    remaining = 100 - diskReadTime;
+
+                    Data.Add(new ChartDataPoint("Disk read time", diskReadTime));
+                    Data.Add(new ChartDataPoint("", remaining));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }     //Disk read 
+            else if (dataSelection == 13)
+            {
+                //Initial value
+                double diskWriteTime = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteTime);
+                double remaining = 100 - diskWriteTime;
+
+                Data.Add(new ChartDataPoint("Disk write time", diskWriteTime));
+                Data.Add(new ChartDataPoint("", remaining));
+                await Task.Delay(1000);
+
+                //Updates the information onece a second
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                {
+                    Data.RemoveAt(0);
+                    Data.RemoveAt(0);
+                    diskWriteTime = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteTime);
+                    remaining = 100 - diskWriteTime;
+
+                    Data.Add(new ChartDataPoint("Disk write time", diskWriteTime));
+                    Data.Add(new ChartDataPoint("", remaining));
+                    if (killThread)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            }     //Disk write 
         }
-        
     }
 }

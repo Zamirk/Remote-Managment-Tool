@@ -29,7 +29,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         };
         private string[] dataSources = new string[]
 {
-            "Cpu", "Cpu2", "Thread", "CpuTem", "Processes", "Percent", "Ram", "RamInUse,"
+            "Cpu", "Cpu Frequency", "Thread Count", "CpuTem", "Processes", "Percent", "Ram", "RamInUse,"
             ,"RamCache","RamCommitted","PagedPool", "NonPagedPool","DiskReadTime", "DiskWriteTime", "DiskReadBytes",
             "FreeMB","IdleTime", "DiskTime", "DownloadRate", "UploadRate", "Bandwidth", "PacketsReceived", "PacketsSent", "Packets"
 };
