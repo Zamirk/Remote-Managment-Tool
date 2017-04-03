@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\FullScreens\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\FullScreens\ParentScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\DashboardButtonState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\1DashboardScreen\DashboardFromDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\1DashboardScreen\ImageCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\Dashboard Backup\DashboardScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\Dashboard Backup\MyPopupPag.cs" />

@@ -29,9 +29,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         };
         private string[] dataSources = new string[]
 {
-            "Cpu", "Cpu Frequency", "Thread Count", "CpuTem", "Processes", "Percent", "Ram", "RamInUse,"
-            ,"RamCache","RamCommitted","PagedPool", "NonPagedPool","DiskReadTime", "DiskWriteTime", "DiskReadBytes",
-            "FreeMB","IdleTime", "DiskTime", "DownloadRate", "UploadRate", "Bandwidth", "PacketsReceived", "PacketsSent", "Packets"
+            "Cpu", "Cpu Frequency", "Thread Count", "Cpu Temperature", "No. Processes", "CPU Util Percent", "Ram left", "Ram In Use"
+            ,"Ram Cache","Ram Committed","Paged Pool", "Non Paged Pool","Disk Read Time", "Disk Write Time", "Disk Read Bytes", "Disk Write Bytes",
+            "Free MB","Idle Time", "Disk Time", "Download Rate", "Upload Rate", "Band width", "Packets Received", "Packets Sent", "Packets"
 };
         //List of buttons
         private List<Button> myButtons = new List<Button>();

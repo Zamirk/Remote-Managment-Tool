@@ -43,3 +43,12 @@
 
    SELECT * FROM dbo.Login;
    SELECT * FROM dbo.Devices where Username = 'Admin';
+   
+   /*Creating Devices*/
+ CREATE TABLE Dashboards(
+  DPrimaryKey Varchar(255) NOT NULL,
+  DashID Varchar(255) NOT NULL,
+  DashString Varchar(255) NOT NULL,
+  Username Varchar(255) NOT NULL,
+  FOREIGN KEY (Username) REFERENCES Login(Username),
+  PRIMARY KEY (DeviceID))

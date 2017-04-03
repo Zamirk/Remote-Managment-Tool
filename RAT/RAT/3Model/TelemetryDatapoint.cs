@@ -31,6 +31,7 @@ namespace ConsoleApplication1
         public string RamCommitted { get; set; }
         public string PagedPool { get; set; }
         public string NonPagedPool { get; set; }
+        //Disk
         public string DiskReadTime { get; set; }
         public string DiskWriteTime { get; set; }
         public string DiskReadBytes { get; set; }
@@ -39,6 +40,7 @@ namespace ConsoleApplication1
         public string FreeSpace { get; set; }
         public string IdleTime { get; set; }
         public string DiskTime { get; set; }
+        //Network
         public string DownloadRate { get; set; }
         public string UploadRate { get; set; }
         public string Bandwidth { get; set; }

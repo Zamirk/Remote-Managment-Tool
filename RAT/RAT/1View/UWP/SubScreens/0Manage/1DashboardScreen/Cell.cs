@@ -28,6 +28,16 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         public string title { get; set; }
         public int colourValue { get; set; }
 
+        //Information for saving
+        public int GraphType { get; set; }
+
+        public int ColumnSpan { get; set; }
+        public int RowSpan { get; set; }
+
+        public int Device { get; set; }
+        public int Datasource { get; set; }
+        public bool SingleData { get; set; }
+
         private DashboardViewModel viewModel;
         public bool hasGraph = false;
         public Button myButton = new Button();
@@ -60,6 +70,12 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             title = "";
             colourValue = 0;
 
+            RowSpan = 0;
+            ColumnSpan = 0;
+            Device = 0;
+            Datasource = 0;
+            GraphType = 0;
+
             Button();
         }
 
@@ -75,7 +91,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myButton.BorderWidth = .000001;
             myButton.WidthRequest = 500;
             myButton.HeightRequest = 500;
-            //myButton.Clicked += OnOpenPupup;
             Children.Add(myButton);
         }
 
@@ -189,6 +204,8 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new AreaSeries());
+
+            GraphType = 0;
             Common(a, b, false);
         }
 
@@ -197,6 +214,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             //Chart
             myChart = new SfChart();
             myChart.Series.Add(new BarSeries());
+            GraphType = 1;
             Common(a, b, false);
         }
 
@@ -206,6 +224,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart = new SfChart();
             myChart.Series.Add(new ColumnSeries());
             Common(a, b, false);
+            GraphType = 2;
             Children.Add(myChart);
         }
 
@@ -215,42 +234,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart = new SfChart();
             myChart.Series.Add(new LineSeries());
             Common(a, b, false);
-            Children.Add(myChart);
-        }
-
-        public void PyramidChart(int a, int b)
-        {
-            //Chart
-            myChart = new SfChart();
-            myChart.Series.Add(new PyramidSeries());
-            Common(a, b, false);
-            Children.Add(myChart);
-        }
-
-        public void ScatterChart(int a, int b)
-        {
-            //Chart
-            myChart = new SfChart();
-            myChart.Series.Add(new ScatterSeries());
-            Common(a, b, false);
-            Children.Add(myChart);
-        }
-
-        public void SplineAreaChart(int a, int b)
-        {
-            //Chart
-            myChart = new SfChart();
-            myChart.Series.Add(new SplineAreaSeries());
-            Common(a, b, false);
-            Children.Add(myChart);
-        }
-
-        public void SplineSeriesChart(int a, int b)
-        {
-            //Chart
-            myChart = new SfChart();
-            myChart.Series.Add(new SplineSeries());
-            Common(a, b, false);
+            GraphType = 3;
             Children.Add(myChart);
         }
 
@@ -260,8 +244,50 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart = new SfChart();
             myChart.Series.Add(new StepLineSeries());
             Common(a, b, false);
+            GraphType = 4;
             Children.Add(myChart);
         }
+
+        public void PyramidChart(int a, int b)
+        {
+            //Chart
+            myChart = new SfChart();
+            myChart.Series.Add(new PyramidSeries());
+            Common(a, b, false);
+            GraphType = 5;
+            Children.Add(myChart);
+        }
+
+        public void ScatterChart(int a, int b)
+        {
+            //Chart
+            myChart = new SfChart();
+            myChart.Series.Add(new ScatterSeries());
+            Common(a, b, false);
+            GraphType = 6;
+            Children.Add(myChart);
+        }
+
+        public void SplineSeriesChart(int a, int b)
+        {
+            //Chart
+            myChart = new SfChart();
+            myChart.Series.Add(new SplineSeries());
+            Common(a, b, false);
+            GraphType = 7;
+            Children.Add(myChart);
+        }
+
+        public void SplineAreaChart(int a, int b)
+        {
+            //Chart
+            myChart = new SfChart();
+            myChart.Series.Add(new SplineAreaSeries());
+            Common(a, b, false);
+            GraphType = 8;
+            Children.Add(myChart);
+        }
+
 
         public void StepLineSeries(int a, int b)
         {
@@ -269,15 +295,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart = new SfChart();
             myChart.Series.Add(new StepLineSeries());
             Common(a, b, false);
-            Children.Add(myChart);
-        }
-
-        public void DoughnutChart(int a, int b)
-        {
-            //Chart
-            myChart = new SfChart();
-            myChart.Series.Add(new DoughnutSeries());
-            Common(a, b, true);
+            GraphType = 9;
             Children.Add(myChart);
         }
 
@@ -287,11 +305,26 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart = new SfChart();
             myChart.Series.Add(new PieSeries());
             Common(a, b, true);
+            GraphType = 10;
+            Children.Add(myChart);
+        }
+
+        public void DoughnutChart(int a, int b)
+        {
+            //Chart
+            myChart = new SfChart();
+            myChart.Series.Add(new DoughnutSeries());
+            Common(a, b, true);
+            GraphType = 11;
             Children.Add(myChart);
         }
 
         public void Common(int a, int b, bool singleData)
         {
+            Device = a;
+            Datasource = b;
+            SingleData = singleData;
+
             hasGraph = true;
             Opacity = 1;
 
@@ -387,6 +420,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             //Resetting cell when graph is deleted
             if (myChart != null)
             {
+                viewModel.GC();
                 Children.Remove(myChart);
                 SetColumnSpan(this, 1);
                 SetRowSpan(this, 1);

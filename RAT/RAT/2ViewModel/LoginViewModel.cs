@@ -43,10 +43,10 @@ namespace RAT.ZTry
         //Checks Login, Changes screen if found
         async Task LoginValidate()
         {
-            //   List <Login> logins = await azureService.GetLogin(userName, password);
-            //   if (logins[0].Username.Equals(UserName) && logins[0].Password.Equals(Password))
-            //    {
-            //       System.Diagnostics.Debug.WriteLine("\n-----Entering Main Menu");
+               //List <Login> logins = await azureService.GetLogin(userName, password);
+               //if (logins[0].Username.Equals(UserName) && logins[0].Password.Equals(Password))
+                {
+                   System.Diagnostics.Debug.WriteLine("\n-----Entering Main Menu");
             //Screen Navigation
             if (Device.OS == TargetPlatform.Android)
             {
@@ -66,12 +66,13 @@ namespace RAT.ZTry
                 GetTelemetry.ReceiveTelemetry();
 
             });
-            //    }
-            //     else
-            //     {
+             /*   }
+                 else
+                 {
             //Incorrect Credentials
-            //         System.Diagnostics.Debug.WriteLine("Incorrect Login");
-            //     }
+                     System.Diagnostics.Debug.WriteLine("Incorrect Login"); */
+                 }
+                
         }
     }
 }

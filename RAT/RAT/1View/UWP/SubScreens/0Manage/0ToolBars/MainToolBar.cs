@@ -175,6 +175,10 @@ namespace RAT._1View.UWP.SubScreens
             }
         }
 
+        public void GC()
+        {
+            RemoveScreen();
+        }
         public void RemoveScreen()
         {
             //Removes screen, sets button off
@@ -193,15 +197,6 @@ namespace RAT._1View.UWP.SubScreens
                 processesSc.GC();
                 processesSc.BindingContext = null;
                 processesSc = null;
-
-            }
-            else if (myScreenState == ToolBarState.APPHISTORY)
-            {
-                apphistory.BackgroundColor = Color.Transparent;
-                Children.Remove(appHistorySc);
-                appHistorySc.GC();
-                appHistorySc.BindingContext = null;
-                appHistorySc = null;
 
             }
             else if (myScreenState == ToolBarState.TEMP)

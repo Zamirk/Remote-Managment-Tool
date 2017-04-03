@@ -326,21 +326,18 @@ namespace RAT.ZTry
             {
                 dashboardButton.BackgroundColor = Color.Transparent;
                 midGrid.Children.Remove(_dashboard);
+                _dashboard.GC();
             }
             else if (myMenuState == MenuState.PERFORMANCE)
             {
                 notificationsButton.BackgroundColor = Color.Transparent;
                 midGrid.Children.Remove(appScreen);
             }
-            else if (myMenuState == MenuState.APPLICATIONS)
-            {
-                TEMPBUTTON4.BackgroundColor = Color.Transparent;
-                //midGrid.Children.Remove(applicationManagmentScreen);
-            }
             else if (myMenuState == MenuState.MANAGE_SINGLEDEVICE)
             {
                 manageButton.BackgroundColor = Color.Transparent;
                 midGrid.Children.Remove(singleDeviceScreen);
+                singleDeviceScreen.GC();
             }
         }
         #endregion
