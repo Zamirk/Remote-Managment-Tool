@@ -236,6 +236,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
         {
             myViewModel.StopUpdate();
             myChart.Series[0].ItemsSource = null;
+            myChart2.Series[0].ItemsSource = null;
         }
     }
 }

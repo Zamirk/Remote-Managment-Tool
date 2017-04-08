@@ -20,6 +20,8 @@ namespace RAT._1View.Desktop
 	{
 	    private DiskViewModel myViewModel;
 	    private SfChart myChart;
+	    private SfChart pieChart;
+
         public DiskScreen()
         {
             myViewModel = new DiskViewModel();
@@ -51,7 +53,7 @@ namespace RAT._1View.Desktop
             myChart.Series[0].ItemsSource = myViewModel.Data;
 
             //PieChart
-            SfChart pieChart = new SfChart();
+            pieChart = new SfChart();
             pieChart.VerticalOptions = LayoutOptions.CenterAndExpand;
             pieChart.HorizontalOptions = LayoutOptions.CenterAndExpand;
 
@@ -235,6 +237,7 @@ namespace RAT._1View.Desktop
         public void GC()
         {
             myChart.Series[0].ItemsSource = null;
+            pieChart.Series[0].ItemsSource = null;
             myViewModel.StopUpdate();
         }
     }

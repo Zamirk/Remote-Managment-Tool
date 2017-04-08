@@ -113,10 +113,13 @@ namespace RAT._2ViewModel
             }
             await Task.Delay(1000);
 
-            System.Diagnostics.Debug.WriteLine("Le" + Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].FreeSpace));
             //Updates the information onece a second
             Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
             {
+                if (killThread)
+                {
+                    return false;
+                }
                 y++;
                 double diskTime = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskTime);
                 ActiveTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskTime;
@@ -129,10 +132,6 @@ namespace RAT._2ViewModel
                 DiskWriteTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteTime;
                 Data.RemoveAt(0);
                 Data.Add(new ChartDataPoint(y, diskTime));
-                if (killThread)
-                {
-                    return false;
-                }
                 return true;
             });
         }

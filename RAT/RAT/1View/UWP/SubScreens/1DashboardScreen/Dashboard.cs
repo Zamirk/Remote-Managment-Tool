@@ -6,10 +6,12 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using Amqp;
+using Newtonsoft.Json;
 using RAT.ZTry;
 using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
 using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
 using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
+using RAT._3Model;
 using Rg.Plugins.Popup.Extensions;
 using Syncfusion.SfChart.XForms;
 using Xamarin.Forms;
@@ -23,20 +25,19 @@ namespace RAT._1View.Desktop.Manage
         private DashboardButtonState buttonState;
         //Popup screens
         private GraphSelection selectGraph = new GraphSelection();
-        private EditGraph editChart = new EditGraph();
+        private EditGraph editGraph = new EditGraph();
 
         private Button deleteButton, editing, movingButton, resizing, add;
 	    private Picker dashboardList;
+
         double width = 109.25; //Todo stop hardcoding values
         double height = 99.6;
 
         private Grid superGrid;
         private Grid mainGrid;
-        //private List<Cell> myCellList = new List<Cell>();
         private Cell[][] myCells = new Cell[8][];
 
-        private bool singleSquares = true;
-
+	    #region Eventhandlers
         EventHandler handler0 = null;
         EventHandler handler1 = null;
         EventHandler handler2 = null;
@@ -49,6 +50,54 @@ namespace RAT._1View.Desktop.Manage
         EventHandler handler9 = null;
         EventHandler handler10 = null;
         EventHandler handler11 = null;
+        #endregion
+
+        public void SaveDashboard()
+	    {
+            DashboardCellModel[][] savingDashboard = new DashboardCellModel[8][];
+            for (int i = 0; i < 8; i++)
+            {
+                savingDashboard[i] = new DashboardCellModel[5]
+                {
+                    new DashboardCellModel(), new DashboardCellModel(),
+                    new DashboardCellModel(), new DashboardCellModel(),
+                    new DashboardCellModel(),
+                };
+            }
+
+            //Looping through dashboard cells
+            for (int yAxis = 0; yAxis < 5; yAxis++)
+	        {
+	            for (int xAxis = 0; xAxis < 8; xAxis++)
+	            {
+	                if (myCells[xAxis][yAxis].hasGraph)
+	                {
+                        savingDashboard[xAxis][yAxis].G = true;
+	                    savingDashboard[xAxis][yAxis].T = myCells[xAxis][yAxis].GraphType;
+                        savingDashboard[xAxis][yAxis].R = myCells[xAxis][yAxis].RowSpan;
+                        savingDashboard[xAxis][yAxis].C = myCells[xAxis][yAxis].ColumnSpan;
+                        savingDashboard[xAxis][yAxis].D = myCells[xAxis][yAxis].Device;
+                        savingDashboard[xAxis][yAxis].S = myCells[xAxis][yAxis].Datasource;
+
+                        savingDashboard[xAxis][yAxis].N = myCells[xAxis][yAxis].title;
+                        savingDashboard[xAxis][yAxis].O = myCells[xAxis][yAxis].colourValue;
+                        savingDashboard[xAxis][yAxis].X = myCells[xAxis][yAxis].xAxisOn;
+                        savingDashboard[xAxis][yAxis].Y = myCells[xAxis][yAxis].yAxisOn;
+                        savingDashboard[xAxis][yAxis].L = myCells[xAxis][yAxis].GridLinesOn;
+
+                    }
+                }
+            }
+
+            //var messageString = JsonConvert.SerializeObject(savingDashboard);
+            //System.Diagnostics.Debug.WriteLine(messageString);
+            //System.Diagnostics.Debug.WriteLine((Encoding.ASCII.GetBytes(messageString)));
+            //DashboardCellModel[][] mydashboard = JsonConvert.DeserializeObject<DashboardCellModel[][]>(DashboardFromDatabase.testString);
+
+            //TODO Temp
+            DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex] = savingDashboard;
+
+	    }
 
 	    public void GenerateDashboard()
 	    {
@@ -57,75 +106,83 @@ namespace RAT._1View.Desktop.Manage
             {
                 for (int xAxis = 0; xAxis < 8; xAxis++)
                 {
-                    //Getting values
-                    int columnSpan = DashboardFromDatabase.myCells[xAxis][yAxis].ColumnSpan;
-                    int rowSpan = DashboardFromDatabase.myCells[xAxis][yAxis].RowSpan;
-                    int device = DashboardFromDatabase.myCells[xAxis][yAxis].Device;
-                    int dataSource = DashboardFromDatabase.myCells[xAxis][yAxis].Datasource;
-                    int colour = DashboardFromDatabase.myCells[xAxis][yAxis].Colour;
-                    string title = DashboardFromDatabase.myCells[xAxis][yAxis].Title;
-
-                    bool x = DashboardFromDatabase.myCells[xAxis][yAxis].xAx;
-                    bool y = DashboardFromDatabase.myCells[xAxis][yAxis].yAx;
-                    bool grid = DashboardFromDatabase.myCells[xAxis][yAxis].grid;
-
                     //If a graph is present
-                    if (DashboardFromDatabase.myCells[xAxis][yAxis].hasGraph)
+                    if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].G)
                     {
-                            if (DashboardFromDatabase.myCells[xAxis][yAxis].GraphType == 0)
+                        //Getting values
+                        int columnSpan = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].C;
+                        int rowSpan = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].R;
+                        int device = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].D;
+                        int dataSource = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].S;
+                        int colour = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].O;
+                        string title = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].N;
+
+                        bool x = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].X;
+                        bool y = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].Y;
+                        bool grid = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].L;
+
+                        if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 0)
                             {
                                 myCells[xAxis][yAxis].AreaChart(device, dataSource);
                             }
-                            else if (DashboardFromDatabase.myCells[xAxis][yAxis].GraphType == 1)
+                            else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 1)
                             {
                                 myCells[xAxis][yAxis].BarChart(device, dataSource);
                         }
-                            else if (DashboardFromDatabase.myCells[xAxis][yAxis].GraphType == 2)
+                            else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 2)
                             {
                                 myCells[xAxis][yAxis].ColumnChart(device, dataSource);
                         }
-                            else if (DashboardFromDatabase.myCells[xAxis][yAxis].GraphType == 3)
+                            else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 3)
                             {
                                 myCells[xAxis][yAxis].LineChart(device, dataSource);
                         }
-                            else if (DashboardFromDatabase.myCells[xAxis][yAxis].GraphType == 4)
+                            else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 4)
                             {
                                 myCells[xAxis][yAxis].StepArea(device, dataSource);
                         }
-                            else if (DashboardFromDatabase.myCells[xAxis][yAxis].GraphType == 5)
+                            else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 5)
                             {
                                 myCells[xAxis][yAxis].PyramidChart(device, dataSource);
                         }
-                            else if (DashboardFromDatabase.myCells[xAxis][yAxis].GraphType == 6)
+                            else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 6)
                             {
                                 myCells[xAxis][yAxis].ScatterChart(device, dataSource);
                         }
-                            else if (DashboardFromDatabase.myCells[xAxis][yAxis].GraphType == 7)
+                            else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 7)
                             {
                                 myCells[xAxis][yAxis].SplineSeriesChart(device, dataSource);
                         }
-                            else if (DashboardFromDatabase.myCells[xAxis][yAxis].GraphType == 8)
+                            else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 8)
                             {
                                 myCells[xAxis][yAxis].SplineAreaChart(device, dataSource);
                         }
-                            else if (DashboardFromDatabase.myCells[xAxis][yAxis].GraphType == 9)
+                            else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 9)
                             {
                                 myCells[xAxis][yAxis].StepLineSeries(device, dataSource);
                         }
-                            else if (DashboardFromDatabase.myCells[xAxis][yAxis].GraphType == 10)
+                            else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 10)
                             {
                                 myCells[xAxis][yAxis].PieChart(device, dataSource);
                         }
-                            else if (DashboardFromDatabase.myCells[xAxis][yAxis].GraphType == 11)
+                            else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 11)
                             {
                                 myCells[xAxis][yAxis].DoughnutChart(device, dataSource);
                         }
+                        if (columnSpan == 0)
+                        {
+                            columnSpan = 1;
+                        }
                         myCells[xAxis][yAxis].ColumnSpan = columnSpan;
+                        //TODO STOP ROW AND COLUMN SPAN BEING 0
+                        System.Diagnostics.Debug.WriteLine("Error Column span" + columnSpan);
                         Grid.SetColumnSpan(myCells[xAxis][yAxis], columnSpan);
-
-                        myCells[xAxis][yAxis].RowSpan = rowSpan;
-                        Grid.SetRowSpan(myCells[xAxis][yAxis], rowSpan);
-
+                        if (rowSpan == 0)
+                        {
+                            rowSpan = 1;
+                        }
+                            myCells[xAxis][yAxis].RowSpan = rowSpan;
+                            Grid.SetRowSpan(myCells[xAxis][yAxis], rowSpan);
                         myCells[xAxis][yAxis].Device = device;
                         myCells[xAxis][yAxis].Datasource = dataSource;
                         myCells[xAxis][yAxis].ApplyChanges(x, y, grid, colour, title);
@@ -141,6 +198,7 @@ namespace RAT._1View.Desktop.Manage
         {
             selectGraph.CloseWhenBackgroundIsClicked = false;
             Orientation = ScrollOrientation.Both;
+            buttonState = buttonState = DashboardButtonState.Neutral;
             superGrid = new Grid();
             superGrid.RowDefinitions.Add(new RowDefinition { Height = 35 });
             superGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
@@ -173,6 +231,7 @@ namespace RAT._1View.Desktop.Manage
             dashboardList.Items.Add("Dashboard 5");
             dashboardList.Items.Add("Dashboard 6");
             dashboardList.SelectedIndex = 0;
+            dashboardList.SelectedIndexChanged += DashboardListOnSelectedIndexChanged;
             buttonGrid.Children.Add(dashboardList, 0, 0);
 
             add = new Button();
@@ -244,8 +303,6 @@ namespace RAT._1View.Desktop.Manage
 
             superGrid.Children.Add(buttonGrid, 0, 0);
 
-            //Todo loops
-            //Todo fix p key
             myCells[0] = new Cell[5];
             myCells[1] = new Cell[5];
             myCells[2] = new Cell[5];
@@ -317,8 +374,27 @@ namespace RAT._1View.Desktop.Manage
             GenerateDashboard();
         }
 
+	    private void DashboardListOnSelectedIndexChanged(object sender, EventArgs eventArgs)
+	    {
+            var picker = (Picker)sender;
+            //if(picker.se)
+
+            SaveDashboard();
+            //Addings cells, X and Y grid
+            for (int yAxis = 0; yAxis < 5; yAxis++)
+            {
+                for (int xAxis = 0; xAxis < 8; xAxis++)
+                {
+                    myCells[xAxis][yAxis].CleanCell();
+                    //mainGrid.Children.Clear();
+                    //BindingContext = null;
+                }
+            }
+	    }
+
 	    public void GC()
 	    {
+	        SaveDashboard();
             //Addings cells, X and Y grid
             for (int yAxis = 0; yAxis < 5; yAxis++)
             {
@@ -326,11 +402,11 @@ namespace RAT._1View.Desktop.Manage
                 {
                     myCells[xAxis][yAxis].CleanCell();
                     mainGrid.Children.Clear();
-                    BindingContext = null;
                 }
             }
+            BindingContext = null;
         }
-	    private async void MyButtonOnClicked(object sender, EventArgs eventArgs)
+        private async void MyButtonOnClicked(object sender, EventArgs eventArgs)
 	    {
             //Getting the references
             Button s = (Button)sender;
@@ -461,36 +537,36 @@ namespace RAT._1View.Desktop.Manage
                 if (myCell.hasGraph)
                 {
                     //Set attributes of edit screen initially from the cell
-                    editChart.SetAttributes(
+                    editGraph.SetAttributes(
                         myCell.xAxisOn,
                         myCell.yAxisOn,
                         myCell.GridLinesOn,
                         myCell.title,
                         myCell.colourValue);
 
-                    await Navigation.PushPopupAsync(editChart);
+                    await Navigation.PushPopupAsync(editGraph);
 
                     handler12 = (o, e) =>
                     {
                         //Applying back the new changes
                         myCell.ApplyChanges(
-                            editChart.XAxisValue,
-                            editChart.YXaxisValue,
-                            editChart.GridLinesValues,
-                            editChart.ColourPicked,
-                            editChart.TitleTyped);
+                            editGraph.XAxisValue,
+                            editGraph.YXaxisValue,
+                            editGraph.GridLinesValues,
+                            editGraph.ColourPicked,
+                            editGraph.TitleTyped);
 
-                        editChart.saveButton.Clicked -= handler12;
+                        editGraph.saveButton.Clicked -= handler12;
                         Navigation.PopPopupAsync(true);
                     };
 
-                    editChart.saveButton.Clicked += handler12;
+                    editGraph.saveButton.Clicked += handler12;
 
                     //Creating new edit popup screen, adding clickhandler
-                    // editChart = new EditGraph(xAxisOn, yAxisOn, GridLinesOn, title, colourValue);
-                    //  editChart.CloseWhenBackgroundIsClicked = false;
-                    //  editChart.saveButton.Clicked += SaveButtonOnClicked;
-                    //  await Navigation.PushPopupAsync(editChart);
+                    // editGraph = new EditGraph(xAxisOn, yAxisOn, GridLinesOn, title, colourValue);
+                    //  editGraph.CloseWhenBackgroundIsClicked = false;
+                    //  editGraph.saveButton.Clicked += SaveButtonOnClicked;
+                    //  await Navigation.PushPopupAsync(editGraph);
                 }
             }
             else if (myCell.buttonState == DashboardButtonState.Delete)
@@ -551,6 +627,13 @@ namespace RAT._1View.Desktop.Manage
                     for (int xAxis = 0; xAxis < 8; xAxis++)
                     {
                         myCells[xAxis][yAxis].buttonState = DashboardButtonState.Add;
+                        //If there is no graph
+                        if (!myCells[xAxis][yAxis].hasGraph)
+                        {
+                            myCells[xAxis][yAxis].EnableButton();
+                            myCells[xAxis][yAxis].IsVisible = true;
+                            myCells[xAxis][yAxis].InputTransparent = false;
+                        }
                     }
                 }
             }
@@ -576,6 +659,10 @@ namespace RAT._1View.Desktop.Manage
                     for (int xAxis = 0; xAxis < 8; xAxis++)
                     {
                         myCells[xAxis][yAxis].buttonState = DashboardButtonState.Delete;
+                        if (!myCells[xAxis][yAxis].hasGraph)
+                        {
+                            myCells[xAxis][yAxis].DisableButton();
+                        }
                     }
                 }
             }
@@ -600,6 +687,12 @@ namespace RAT._1View.Desktop.Manage
                     for (int xAxis = 0; xAxis < 8; xAxis++)
                     {
                         myCells[xAxis][yAxis].buttonState = DashboardButtonState.Editing;
+                        //If there is no graph
+                        if (!myCells[xAxis][yAxis].hasGraph)
+                        {
+                            myCells[xAxis][yAxis].IsVisible = false;
+                            myCells[xAxis][yAxis].InputTransparent = true;
+                        }
                     }
                 }
             }
@@ -666,11 +759,6 @@ namespace RAT._1View.Desktop.Manage
                     myCells[xAxis][yAxis].RemoveMovementButtons();
                     myCells[xAxis][yAxis].EnableButton();
                     myCells[xAxis][yAxis].InputTransparent = false;
-                    //TODO Remove opacity 24/03
-                    if (myCells[xAxis][yAxis].Opacity == 0)
-                    {
-                        myCells[xAxis][yAxis].Opacity = 1.1;
-                    }
                 }
             }
         }
@@ -682,17 +770,17 @@ namespace RAT._1View.Desktop.Manage
             {
                 for (int xAxis = 0; xAxis < 8; xAxis++)
                 {
-                    myCells[xAxis][yAxis].PositionalButtons();
+                    myCells[xAxis][yAxis].GenerateMovementButtons();
                     myCells[xAxis][yAxis].DisableButton();
                     if (!myCells[xAxis][yAxis].hasGraph)
                     {
                         myCells[xAxis][yAxis].InputTransparent = true;
-                        myCells[xAxis][yAxis].Opacity = 0;
                     }
                 }
             }
         }
 
+	    #region Cell movement animations
         private void NorthOnClicked(object sender, EventArgs e)
         {
             Button s = sender as Button;
@@ -727,9 +815,9 @@ namespace RAT._1View.Desktop.Manage
             {
                 if (Grid.GetRowSpan(myCells[x][y]) != 1)
                 {
-                    Grid.SetRowSpan(myCells[x][y], Grid.GetRowSpan(myCells[x][y]) - 1);
                     //Setting data
                     myCells[x][y].RowSpan = Grid.GetRowSpan(myCells[x][y]) - 1;
+                    Grid.SetRowSpan(myCells[x][y], Grid.GetRowSpan(myCells[x][y]) - 1);
                 }
             }
         }
@@ -770,8 +858,9 @@ namespace RAT._1View.Desktop.Manage
                 if ((Grid.GetRowSpan(myCells[x][y]) + 1 <= myCells[x][y].MaxSpanRow)
                     && Grid.GetRowSpan(myCells[x][y]) + y < 5)
                 {
-                    Grid.SetRowSpan(myCells[x][y], Grid.GetRowSpan(myCells[x][y]) + 1);
+                    //Setting data, next line is setting span
                     myCells[x][y].RowSpan = Grid.GetRowSpan(myCells[x][y]) + 1;
+                    Grid.SetRowSpan(myCells[x][y], Grid.GetRowSpan(myCells[x][y]) + 1);
                 }
                 //myCells[x2][y2].IsVisible = false;
             }
@@ -813,9 +902,9 @@ namespace RAT._1View.Desktop.Manage
 	        {
 	            if (Grid.GetColumnSpan(myCells[x][y]) != 1)
 	            {
-	                Grid.SetColumnSpan(myCells[x][y], Grid.GetColumnSpan(myCells[x][y]) - 1);
-                    //Setting data
-	                myCells[x][y].ColumnSpan = Grid.GetColumnSpan(myCells[x][y]) - 1;
+                    //Setting data, next line is setting span
+                    myCells[x][y].ColumnSpan = Grid.GetColumnSpan(myCells[x][y]) - 1;
+                    Grid.SetColumnSpan(myCells[x][y], Grid.GetColumnSpan(myCells[x][y]) - 1);
 	            }
 	        }
 
@@ -861,12 +950,13 @@ namespace RAT._1View.Desktop.Manage
 	            if ((Grid.GetColumnSpan(myCells[x][y]) + 1 <= myCells[x][y].MaxSpanColumn)
                     && Grid.GetColumnSpan(myCells[x][y]) + x < 8 )
 	            {
-                Grid.SetColumnSpan(myCells[x][y], Grid.GetColumnSpan(myCells[x][y]) + 1);
-                    //Setting data
+                    //Setting data, then setting the span
                     myCells[x][y].ColumnSpan = Grid.GetColumnSpan(myCells[x][y]) + 1;
+                    Grid.SetColumnSpan(myCells[x][y], Grid.GetColumnSpan(myCells[x][y]) + 1);
                 }
             }
         }
+        #endregion
 
         //Swapping values on Dashboard
         static void swap(ref Cell a, ref Cell b)

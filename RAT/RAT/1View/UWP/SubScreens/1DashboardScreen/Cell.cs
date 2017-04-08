@@ -17,6 +17,12 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 {
     class Cell: Grid
     {
+        private DashboardViewModel viewModel;
+        private SfChart myChart;
+        public bool hasGraph = false;
+        public DashboardButtonState buttonState;
+
+        #region Model data
         //Maxium span value
         public int MaxSpanColumn { get; set; }
         public int MaxSpanRow { get; set; }
@@ -38,30 +44,27 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         public int Datasource { get; set; }
         public bool SingleData { get; set; }
 
-        private DashboardViewModel viewModel;
-        public bool hasGraph = false;
-        public Button myButton = new Button();
-        private SfChart myChart;
+        public int XLocation { get; set; }
+        public int YLocation { get; set; }
 
-        public DashboardButtonState buttonState;
+        #endregion
 
+        #region Declaring buttons
         private float buttonSize = 15f;
         private int radius = 25;
         private bool AlreadyGenerated = false;
+
+        public Button myButton = new Button();
 
         public Button north = new Button();
         public Button west = new Button();
         public Button east = new Button();
         public Button south = new Button();
-
-        int z = 0;
-        bool a = true;
+        #endregion
 
         public Cell()
         {
             buttonState = DashboardButtonState.Add;
-            Opacity = 1.1;
-            //TODO ONLY USE AS TESTING
 
             //Initial values
             xAxisOn = false;
@@ -76,26 +79,17 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             Datasource = 0;
             GraphType = 0;
 
-            Button();
-        }
-
-        private void Button()
-        {
             myButton = new Button();
             myButton.Text = "";
             myButton.FontSize = 25;
             myButton.VerticalOptions = LayoutOptions.Center;
             myButton.HorizontalOptions = LayoutOptions.Center;
             myButton.BorderColor = Color.Transparent;
-            myButton.BackgroundColor = Color.Transparent;
             myButton.BorderWidth = .000001;
-            myButton.WidthRequest = 500;
-            myButton.HeightRequest = 500;
+            myButton.WidthRequest = 2000;
+            myButton.HeightRequest = 2000;
             Children.Add(myButton);
         }
-
-        public int XLocation { get; set; }
-        public int YLocation { get; set; }
 
         public void DisableButton()
         {
@@ -116,7 +110,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             west.IsVisible = false;
         }
 
-        public void PositionalButtons()
+        public void GenerateMovementButtons()
         {
             if (!AlreadyGenerated)
             {
@@ -177,17 +171,24 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 LowerChild(myChart);
                 AlreadyGenerated = true;
 
-                south.IsVisible = true;
-                west.IsVisible = true;
-                east.IsVisible = true;
-                north.IsVisible = true;
+                //If there is a graph, show buttons
+                if (hasGraph)
+                {
+                    south.IsVisible = true;
+                    west.IsVisible = true;
+                    east.IsVisible = true;
+                    north.IsVisible = true;
+                }
             }
             else
             {
-                south.IsVisible = true;
-                west.IsVisible = true;
-                east.IsVisible = true;
-                north.IsVisible = true;
+                if (hasGraph)
+                {
+                    south.IsVisible = true;
+                    west.IsVisible = true;
+                    east.IsVisible = true;
+                    north.IsVisible = true;
+                }
             }
         }
 
@@ -326,7 +327,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             SingleData = singleData;
 
             hasGraph = true;
-            Opacity = 1;
 
             myChart.VerticalOptions = LayoutOptions.Start;
             myChart.HorizontalOptions = LayoutOptions.Start;
@@ -348,7 +348,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             }
 
             (myChart.PrimaryAxis as NumericalAxis).AutoScrollingDelta = 120;
-            myChart.Series[0].AnimationDuration = .5;
+            myChart.Series[0].AnimationDuration = .7;
             myChart.Series[0].EnableAnimation = true;
 
             myChart.PrimaryAxis.IsVisible = false;
@@ -371,13 +371,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             Children.Add(myChart);
         }
         #endregion
-
-        public void GCGraphSelect()
-        {
-            //Removing graph select screen
-            //Navigation.RemovePopupPageAsync(_chart ,false);
-            //_chart = null;
-        }
 
         public void ApplyChanges(bool a, bool b, bool c, int d, string e)
         {
@@ -421,7 +414,11 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             if (myChart != null)
             {
                 viewModel.GC();
+                BindingContext = null;
+                viewModel = null;
+                myChart.Series[0].ItemsSource = null;
                 Children.Remove(myChart);
+                myChart = null;
                 SetColumnSpan(this, 1);
                 SetRowSpan(this, 1);
                 hasGraph = false;

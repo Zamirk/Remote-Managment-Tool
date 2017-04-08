@@ -22,6 +22,7 @@ namespace RAT._1View.Desktop.Manage
 	public class AllDevices : Grid
 	{
         private AllDevicesViewModel viewModel;
+	    private SfDataGrid sDataGrid;
 
         public AllDevices()
         {
@@ -34,7 +35,7 @@ namespace RAT._1View.Desktop.Manage
             RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
-            SfDataGrid sDataGrid = new SfDataGrid();
+            sDataGrid = new SfDataGrid();
             sDataGrid.HorizontalOptions = LayoutOptions.FillAndExpand;
 
             sDataGrid.VerticalOverScrollMode = VerticalOverScrollMode.Bounce;
@@ -121,7 +122,10 @@ namespace RAT._1View.Desktop.Manage
 
         public void GC()
         {
+            sDataGrid.ItemsSource = null;
             viewModel.GC();
+            BindingContext = null;
+            sDataGrid = null;
         }
     }
 }

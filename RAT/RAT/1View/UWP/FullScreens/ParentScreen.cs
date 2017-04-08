@@ -22,7 +22,7 @@ namespace RAT.ZTry
         private ToolBar singleDeviceScreen;
         private AppScreen appScreen;
         //private AppsScreen applicationManagmentScreen;
-        private Dashboard _dashboard;
+        private static Dashboard _dashboard;
 
         private Button signOutButton, notificationsButton, manageButton, dashboardButton,
             TEMPBUTTON4, backButton, forwardButton, secretGameButton, apphistory;
@@ -250,13 +250,16 @@ namespace RAT.ZTry
 
         private void DashboardButton_Clicked(object sender, EventArgs e)
         {
-            RemoveScreen();
-            dashboardButton.BackgroundColor = Color.Gray;
+            if (myMenuState != MenuState.DASHBOARDS)
+            {
+                RemoveScreen();
+                dashboardButton.BackgroundColor = Color.Gray;
 
-            _dashboard = new Dashboard();
-            midGrid.Children.Add(_dashboard, 1, 0);
+                _dashboard = new Dashboard();
+                midGrid.Children.Add(_dashboard, 1, 0);
 
-            myMenuState = MenuState.DASHBOARDS;
+                myMenuState = MenuState.DASHBOARDS;
+            }
         }
 
         private void ManageButton_Clicked(object sender, EventArgs e)
@@ -312,7 +315,7 @@ namespace RAT.ZTry
         {
             //Removes screen, sets button off
             //NOTE
-            //ObjectS should be collected by Garbage Collector!
+            //Objects should be collected by Garbage Collector!
             //If Not, Check the async/Device.Timers/Extra Threads
 
             if (myMenuState == MenuState.MANAGE_ALLDEVICES)
@@ -321,17 +324,23 @@ namespace RAT.ZTry
                 midGrid.Children.Remove(viewDevicesScreen);
                 viewDevicesScreen.BindingContext = null;
                 viewDevicesScreen.GC();
+                viewDevicesScreen = null;
             }
             else if (myMenuState == MenuState.DASHBOARDS)
             {
                 dashboardButton.BackgroundColor = Color.Transparent;
                 midGrid.Children.Remove(_dashboard);
+                _dashboard.BindingContext = null;
                 _dashboard.GC();
+                _dashboard = null;
             }
             else if (myMenuState == MenuState.PERFORMANCE)
             {
                 notificationsButton.BackgroundColor = Color.Transparent;
                 midGrid.Children.Remove(appScreen);
+                //appScreen.GC();
+                appScreen.BindingContext = null;
+                appScreen = null;
             }
             else if (myMenuState == MenuState.MANAGE_SINGLEDEVICE)
             {

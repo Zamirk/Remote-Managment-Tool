@@ -51,7 +51,7 @@ namespace RAT._2ViewModel
                     }
                     y++;
                 }
-                await Task.Delay(1000);
+                await Task.Delay(1500);
 
                 //Updates the information onece a second
                 Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
@@ -81,7 +81,7 @@ namespace RAT._2ViewModel
                     }
                     y++;
                 }
-                await Task.Delay(1000);
+                await Task.Delay(1500);
 
                 //Updates the information onece a second
                 Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
@@ -111,20 +111,21 @@ namespace RAT._2ViewModel
                     }
                     y++;
                 }
-                await Task.Delay(1000);
+                await Task.Delay(1500);
 
                 //Updates the information onece a second
-                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1500), () =>
                 {
+                    if (killThread)
+                    {
+                        return false;
+                    }
                     Data.RemoveAt(0);
                     y++;
 
                     var thread = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Thread);
                     Data.Add(new ChartDataPoint(y, thread));
-                    if (killThread)
-                    {
-                        return false;
-                    }
+
                     return true;
                 });
             } //Thread Count

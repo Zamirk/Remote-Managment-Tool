@@ -24,7 +24,6 @@ namespace RAT.ZTry
 
             
         }
-
         public async Task<List<Login>> GetLogin(string a, string b)
         {
             System.Diagnostics.Debug.WriteLine("\n-----Checkin database " );
