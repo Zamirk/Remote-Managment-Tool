@@ -25,7 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)zTest\Dashboard Backup\MyPopupPag.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\Cell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\Dashboard.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\IPopupAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\IPopupAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\EditGraph.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\GraphSelection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\0Manage\AppHistory.cs" />

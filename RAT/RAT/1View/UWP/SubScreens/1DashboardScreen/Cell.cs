@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-//using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleApplication1;
@@ -15,13 +14,15 @@ using Xamarin.Forms;
 
 namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 {
-    class Cell: Grid
+    class Cell: Grid, IComparable<Cell>
     {
         private DashboardViewModel viewModel;
         private SfChart myChart;
         public bool hasGraph = false;
         public DashboardButtonState buttonState;
-
+        public int Pos { get; set; }
+        public int OriginalX { get; set; }
+        public int OriginalY { get; set; }
         #region Model data
         //Maxium span value
         public int MaxSpanColumn { get; set; }
@@ -61,9 +62,18 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         public Button east = new Button();
         public Button south = new Button();
         #endregion
+        Random rand = new Random();
+
+        //Compare method
+        public int CompareTo(Cell o)
+        {
+
+            return this.Pos.CompareTo(o.Pos);
+        }
 
         public Cell()
         {
+            Pos = rand.Next(100);
             buttonState = DashboardButtonState.Add;
 
             //Initial values
@@ -73,8 +83,8 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             title = "";
             colourValue = 0;
 
-            RowSpan = 0;
-            ColumnSpan = 0;
+            RowSpan = 1;
+            ColumnSpan = 1;
             Device = 0;
             Datasource = 0;
             GraphType = 0;
@@ -328,6 +338,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
             hasGraph = true;
 
+            RowSpan = 1;
+            ColumnSpan = 1;
+
             myChart.VerticalOptions = LayoutOptions.Start;
             myChart.HorizontalOptions = LayoutOptions.Start;
 
@@ -410,6 +423,8 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
         public void CleanCell()
         {
+            hasGraph = false;
+
             //Resetting cell when graph is deleted
             if (myChart != null)
             {
