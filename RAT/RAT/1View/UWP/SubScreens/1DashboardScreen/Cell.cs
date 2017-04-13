@@ -7,6 +7,7 @@ using ConsoleApplication1;
 using IoTHubAmqpService;
 using RAT.zTest;
 using RAT.ZTry;
+using RAT._1View.Desktop.Manage;
 using RAT._2ViewModel;
 using Rg.Plugins.Popup.Extensions;
 using Syncfusion.SfChart.XForms;
@@ -378,6 +379,8 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
         public void Common(int a, int b, bool singleData)
         {
+            //Adding a graph allows for a database update
+            ((Dashboard) Parent.Parent.Parent).changed = true;
             Device = a;
             Datasource = b;
             SingleData = singleData;

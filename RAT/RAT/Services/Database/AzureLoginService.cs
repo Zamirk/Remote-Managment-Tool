@@ -44,12 +44,14 @@ namespace RAT.ZTry
                 ToListAsync();
 
             items.Add(new Login() { Password = "Empty", Username = "Empty" });
-            System.Diagnostics.Debug.WriteLine("aa" + items[0].Username);
 
             if (items[0].Username.Equals(a) && items[0].Password.Equals(b))
             {
+                System.Diagnostics.Debug.WriteLine("User found: " + items[0].Username);
+                DashboardFromDatabase.userName = a;
+
                 //Getting dashboards
-                GetDashboards(a);
+                await GetDashboards(a);
                 return true;
             }
             else
@@ -61,8 +63,9 @@ namespace RAT.ZTry
 
         public async Task GetDashboards(string a)
         {
+            listOfIds = new List<string>();
             dashboardTable = client.GetTable<Dashboards>();
-            //System.Diagnostics.Debug.WriteLine("List of dashboards");
+            System.Diagnostics.Debug.WriteLine("List of dashboards");
 
             List<Dashboards> listOfDashboards = await dashboardTable.
                 Where(r => r.Username == a).
@@ -85,19 +88,9 @@ namespace RAT.ZTry
 
         public async Task UpdateDashboard(Dashboards item)
         {
-            Dashboards updatedDashboard = new Dashboards()
-            {
-                //Id = DashboardFromDatabase.listOfIds[currentDashboard],
-                Id = "44CF1125-02BA-43AF-8F53-8C86B2C5304C",
-                //DashNo = "" + currentDashboard,
-                DashNo = "0",
-                DashString = DashboardFromDatabase.testString,
-                //Username = DashboardFromDatabase.userName
-                Username = "Admin"
-            };er
+            System.Diagnostics.Debug.WriteLine("Connecting to DashboardTable in Azure");
             dashboardTable = client.GetTable<Dashboards>();
-
-            await dashboardTable.UpdateAsync(updatedDashboard);
+            await dashboardTable.UpdateAsync(item);
         }
     }
     public class TodoItem

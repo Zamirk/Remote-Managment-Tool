@@ -22,6 +22,7 @@ namespace RAT.ZTry
         public LoginViewModel()
         {
             //azureService = DependencyService.Get<AzureLoginService>();
+            azureService = new AzureLoginService();
         }
 
         public string UserName
@@ -43,7 +44,6 @@ namespace RAT.ZTry
         //Checks Login, Changes screen if found
         async Task LoginValidate()
         {
-            azureService = new AzureLoginService();
 
             if (await azureService.GetLogin(userName, password))
             {

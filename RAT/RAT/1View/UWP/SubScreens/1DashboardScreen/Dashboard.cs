@@ -41,7 +41,7 @@ namespace RAT._1View.Desktop.Manage
         private Grid mainGrid;
         private Cell[][] myCells = new Cell[8][];
 
-        private bool changed = false;
+        public bool changed = false;
         private const string replace = @"{""G"":false,""T"":0,""R"":0,""C"":0,""D"":0,""S"":0,""N"":null,""O"":0,""X"":false,""Y"":false,""L"":false}";
         private const string placeHolder = "¬";
 
@@ -61,162 +61,6 @@ namespace RAT._1View.Desktop.Manage
         EventHandler handler11 = null;
 
         #endregion
-
-        public void SaveDashboard()
-        {
-            DashboardCellModel[][] savingDashboard = new DashboardCellModel[8][];
-            for (int i = 0; i < 8; i++)
-            {
-                savingDashboard[i] = new DashboardCellModel[5]
-                {
-                    new DashboardCellModel(), new DashboardCellModel(),
-                    new DashboardCellModel(), new DashboardCellModel(),
-                    new DashboardCellModel(),
-                };
-            }
-
-            //Looping through dashboard cells
-            for (int yAxis = 0; yAxis < 5; yAxis++)
-            {
-                for (int xAxis = 0; xAxis < 8; xAxis++)
-                {
-                    if (myCells[xAxis][yAxis].hasGraph)
-                    {
-                        savingDashboard[xAxis][yAxis].G = true;
-                        savingDashboard[xAxis][yAxis].T = myCells[xAxis][yAxis].GraphType;
-                        savingDashboard[xAxis][yAxis].R = myCells[xAxis][yAxis].RowSpan;
-                        savingDashboard[xAxis][yAxis].C = myCells[xAxis][yAxis].ColumnSpan;
-                        savingDashboard[xAxis][yAxis].D = myCells[xAxis][yAxis].Device;
-                        savingDashboard[xAxis][yAxis].S = myCells[xAxis][yAxis].Datasource;
-
-                        savingDashboard[xAxis][yAxis].N = myCells[xAxis][yAxis].title;
-                        savingDashboard[xAxis][yAxis].O = myCells[xAxis][yAxis].colourValue;
-                        savingDashboard[xAxis][yAxis].X = myCells[xAxis][yAxis].xAxisOn;
-                        savingDashboard[xAxis][yAxis].Y = myCells[xAxis][yAxis].yAxisOn;
-                        savingDashboard[xAxis][yAxis].L = myCells[xAxis][yAxis].GridLinesOn;
-                    }
-                }
-            }
-
-            //Saving to the previously selected dashboard
-            DashboardFromDatabase.listOfDashboard[currentDashboard] = savingDashboard;
-
-            //Saving dashbard to database
-            //if (!changed)
-            {
-                var messageString = JsonConvert.SerializeObject(savingDashboard);
-                messageString = messageString.Replace(replace, placeHolder);
-                trgtr
-                Dashboards updatedDashboard = new Dashboards()
-                {
-                    //Id = DashboardFromDatabase.listOfIds[currentDashboard],
-                    Id = "44CF1125-02BA-43AF-8F53-8C86B2C5304C",
-                    //DashNo = "" + currentDashboard,
-                    DashNo = "0",
-                    DashString = messageString,
-                    //Username = DashboardFromDatabase.userName
-                    Username = "Admin"
-                };
-                System.Diagnostics.Debug.WriteLine(messageString);
-                updateItem = new AzureLoginService();
-                updateItem.UpdateDashboard(updatedDashboard);
-                changed = false;
-            }
-        }
-
-        public void LoadDashboard()
-        {
-            //Loading dashboard based on selected option
-            //Looping through dashboard cells
-            for (int yAxis = 0; yAxis < 5; yAxis++)
-            {
-                for (int xAxis = 0; xAxis < 8; xAxis++)
-                {
-                    myCells[xAxis][yAxis].OriginalX = xAxis;
-                    myCells[xAxis][yAxis].OriginalY = yAxis;
-
-                    //If a graph is present
-                    if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].G)
-                    {
-                        //Getting values
-                        int columnSpan =
-                            DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].C;
-                        int rowSpan = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].R;
-                        int device = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].D;
-                        int dataSource =
-                            DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].S;
-                        int colour = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].O;
-                        string title =
-                            DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].N;
-
-                        bool x = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].X;
-                        bool y = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].Y;
-                        bool grid = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].L;
-
-                        if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 0)
-                        {
-                            myCells[xAxis][yAxis].AreaChart(device, dataSource);
-                        }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 1)
-                        {
-                            myCells[xAxis][yAxis].BarChart(device, dataSource);
-                        }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 2)
-                        {
-                            myCells[xAxis][yAxis].ColumnChart(device, dataSource);
-                        }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 3)
-                        {
-                            myCells[xAxis][yAxis].LineChart(device, dataSource);
-                        }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 4)
-                        {
-                            myCells[xAxis][yAxis].StepArea(device, dataSource);
-                        }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 5)
-                        {
-                            myCells[xAxis][yAxis].PyramidChart(device, dataSource);
-                        }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 6)
-                        {
-                            myCells[xAxis][yAxis].ScatterChart(device, dataSource);
-                        }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 7)
-                        {
-                            myCells[xAxis][yAxis].SplineSeriesChart(device, dataSource);
-                        }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 8)
-                        {
-                            myCells[xAxis][yAxis].SplineAreaChart(device, dataSource);
-                        }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 9)
-                        {
-                            myCells[xAxis][yAxis].StepLineSeries(device, dataSource);
-                        }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 10)
-                        {
-                            myCells[xAxis][yAxis].PieChart(device, dataSource);
-                        }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 11)
-                        {
-                            myCells[xAxis][yAxis].DoughnutChart(device, dataSource);
-                        }
-
-                        //Setting column span
-                        myCells[xAxis][yAxis].ColumnSpan = columnSpan;
-                        Grid.SetColumnSpan(myCells[xAxis][yAxis], columnSpan);
-
-                        //Setting row span
-                        myCells[xAxis][yAxis].RowSpan = rowSpan;
-                        Grid.SetRowSpan(myCells[xAxis][yAxis], rowSpan);
-
-                        myCells[xAxis][yAxis].Device = device;
-                        myCells[xAxis][yAxis].Datasource = dataSource;
-                        myCells[xAxis][yAxis].ApplyChanges(x, y, grid, colour, title);
-                    }
-                }
-            }
-        }
 
         //Edit screen event handler
         EventHandler handler12 = null;
@@ -260,6 +104,10 @@ namespace RAT._1View.Desktop.Manage
             dashboardList.Items.Add("Dashboard 4");
             dashboardList.Items.Add("Dashboard 5");
             dashboardList.Items.Add("Dashboard 6");
+            dashboardList.Items.Add("Dashboard 7");
+            dashboardList.Items.Add("Dashboard 8");
+            dashboardList.Items.Add("Dashboard 9");
+            dashboardList.Items.Add("Dashboard 10");
             dashboardList.SelectedIndex = 0;
             dashboardList.SelectedIndexChanged += DashboardListOnSelectedIndexChanged;
             buttonGrid.Children.Add(dashboardList, 0, 0);
@@ -409,6 +257,161 @@ namespace RAT._1View.Desktop.Manage
 
             Content = superGrid;
             LoadDashboard();
+
+            changed = false;
+        }
+        public void SaveDashboard()
+        {
+            DashboardCellModel[][] savingDashboard = new DashboardCellModel[8][];
+            for (int i = 0; i < 8; i++)
+            {
+                savingDashboard[i] = new DashboardCellModel[5]
+                {
+                    new DashboardCellModel(), new DashboardCellModel(),
+                    new DashboardCellModel(), new DashboardCellModel(),
+                    new DashboardCellModel(),
+                };
+            }
+
+            //Looping through dashboard cells
+            for (int yAxis = 0; yAxis < 5; yAxis++)
+            {
+                for (int xAxis = 0; xAxis < 8; xAxis++)
+                {
+                    if (myCells[xAxis][yAxis].hasGraph)
+                    {
+                        savingDashboard[xAxis][yAxis].G = true;
+                        savingDashboard[xAxis][yAxis].T = myCells[xAxis][yAxis].GraphType;
+                        savingDashboard[xAxis][yAxis].R = myCells[xAxis][yAxis].RowSpan;
+                        savingDashboard[xAxis][yAxis].C = myCells[xAxis][yAxis].ColumnSpan;
+                        savingDashboard[xAxis][yAxis].D = myCells[xAxis][yAxis].Device;
+                        savingDashboard[xAxis][yAxis].S = myCells[xAxis][yAxis].Datasource;
+
+                        savingDashboard[xAxis][yAxis].N = myCells[xAxis][yAxis].title;
+                        savingDashboard[xAxis][yAxis].O = myCells[xAxis][yAxis].colourValue;
+                        savingDashboard[xAxis][yAxis].X = myCells[xAxis][yAxis].xAxisOn;
+                        savingDashboard[xAxis][yAxis].Y = myCells[xAxis][yAxis].yAxisOn;
+                        savingDashboard[xAxis][yAxis].L = myCells[xAxis][yAxis].GridLinesOn;
+                    }
+                }
+            }
+
+            //Saving to the previously selected dashboard
+            DashboardFromDatabase.listOfDashboard[currentDashboard] = savingDashboard;
+
+            //Saving dashbard to database
+            if(changed) {
+                var messageString = JsonConvert.SerializeObject(savingDashboard);
+                messageString = messageString.Replace(replace, placeHolder);
+
+                Dashboards updatedDashboard = new Dashboards()
+                {
+                    Id = DashboardFromDatabase.listOfIds[currentDashboard],
+                    DashNo = "" + currentDashboard,
+                    DashString = messageString,
+                    Username = DashboardFromDatabase.userName
+                };
+
+                System.Diagnostics.Debug.WriteLine(messageString);
+                updateItem = new AzureLoginService();
+                updateItem.UpdateDashboard(updatedDashboard);
+                changed = false;
+            }
+        }
+
+        public void LoadDashboard()
+        {
+            //Loading dashboard based on selected option
+            //Looping through dashboard cells
+            for (int yAxis = 0; yAxis < 5; yAxis++)
+            {
+                for (int xAxis = 0; xAxis < 8; xAxis++)
+                {
+                    myCells[xAxis][yAxis].OriginalX = xAxis;
+                    myCells[xAxis][yAxis].OriginalY = yAxis;
+
+                    //If a graph is present
+                    if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].G)
+                    {
+                        //Getting values
+                        int columnSpan =
+                            DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].C;
+                        int rowSpan = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].R;
+                        int device = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].D;
+                        int dataSource =
+                            DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].S;
+                        int colour = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].O;
+                        string title =
+                            DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].N;
+
+                        bool x = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].X;
+                        bool y = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].Y;
+                        bool grid = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].L;
+
+                        if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 0)
+                        {
+                            myCells[xAxis][yAxis].AreaChart(device, dataSource);
+                        }
+                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 1)
+                        {
+                            myCells[xAxis][yAxis].BarChart(device, dataSource);
+                        }
+                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 2)
+                        {
+                            myCells[xAxis][yAxis].ColumnChart(device, dataSource);
+                        }
+                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 3)
+                        {
+                            myCells[xAxis][yAxis].LineChart(device, dataSource);
+                        }
+                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 4)
+                        {
+                            myCells[xAxis][yAxis].StepArea(device, dataSource);
+                        }
+                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 5)
+                        {
+                            myCells[xAxis][yAxis].PyramidChart(device, dataSource);
+                        }
+                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 6)
+                        {
+                            myCells[xAxis][yAxis].ScatterChart(device, dataSource);
+                        }
+                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 7)
+                        {
+                            myCells[xAxis][yAxis].SplineSeriesChart(device, dataSource);
+                        }
+                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 8)
+                        {
+                            myCells[xAxis][yAxis].SplineAreaChart(device, dataSource);
+                        }
+                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 9)
+                        {
+                            myCells[xAxis][yAxis].StepLineSeries(device, dataSource);
+                        }
+                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 10)
+                        {
+                            myCells[xAxis][yAxis].PieChart(device, dataSource);
+                        }
+                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 11)
+                        {
+                            myCells[xAxis][yAxis].DoughnutChart(device, dataSource);
+                        }
+
+                        //Setting column span
+                        myCells[xAxis][yAxis].ColumnSpan = columnSpan;
+                        Grid.SetColumnSpan(myCells[xAxis][yAxis], columnSpan);
+
+                        //Setting row span
+                        myCells[xAxis][yAxis].RowSpan = rowSpan;
+                        Grid.SetRowSpan(myCells[xAxis][yAxis], rowSpan);
+
+                        myCells[xAxis][yAxis].Device = device;
+                        myCells[xAxis][yAxis].Datasource = dataSource;
+                        myCells[xAxis][yAxis].ApplyChanges(x, y, grid, colour, title);
+                    }
+                }
+            }
+            changed = false;
         }
 
         public void ResetDashboard()
@@ -498,6 +501,7 @@ namespace RAT._1View.Desktop.Manage
                 }
             }
             BindingContext = null;
+            changed = false;
         }
 
         private async void MyButtonOnClicked(object sender, EventArgs eventArgs)
@@ -771,6 +775,7 @@ namespace RAT._1View.Desktop.Manage
                     }
                 }
             }
+            changed = true;
         }
 
         private void EditingOnClicked(object sender, EventArgs eventArgs)
@@ -800,6 +805,7 @@ namespace RAT._1View.Desktop.Manage
                         }
                     }
                 }
+                changed = true;
             }
         }
 
@@ -825,6 +831,7 @@ namespace RAT._1View.Desktop.Manage
                     }
                 }
             }
+            changed = true;
         }
 
         private void ResizingOnClicked(object sender, EventArgs e)
@@ -849,6 +856,7 @@ namespace RAT._1View.Desktop.Manage
                     }
                 }
             }
+            changed = true;
         }
 
         private void HideButtons()
