@@ -20,7 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\DashboardFromDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\ImageCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\DashboardCellModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)3Model\Dashboards.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)3Model\DashboardModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\Dashboard Backup\DashboardScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\Dashboard Backup\MyPopupPag.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\Cell.cs" />

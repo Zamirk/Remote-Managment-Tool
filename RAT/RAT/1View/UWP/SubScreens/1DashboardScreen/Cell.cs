@@ -64,6 +64,17 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         #endregion
         Random rand = new Random();
 
+        public bool CheckChartType()
+        {
+            if (myChart.Series[0] is PieSeries || myChart.Series[0] is DoughnutSeries)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         //Compare method
         public int CompareTo(Cell o)
         {
@@ -314,9 +325,28 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         {
             //Chart
             myChart = new SfChart();
-            myChart.Series.Add(new PieSeries());
+            myChart.Series.Add(new PieSeries()
+            {
+                DataMarkerPosition = CircularSeriesDataMarkerPosition.OutsideExtended,
+                EnableSmartLabels = true,
+                ConnectorLineType = ConnectorLineType.Bezier,
+            });
+
+            myChart.Legend = new ChartLegend();
+            myChart.Legend.Title = new ChartTitle() { Text = ""};
+            myChart.Legend.Orientation = ChartOrientation.Default;
+            myChart.Legend.DockPosition = LegendPlacement.Right;
+
+            myChart.Series[0].DataMarker = new ChartDataMarker();
+            myChart.Series[0].DataMarker.LabelContent = LabelContent.Percentage;
+
+            //myChart.Legend.IsVisible = false;
+            yAxisOn = true;
+            myChart.Series[0].DataMarker.ShowLabel = false;
+
             Common(a, b, true);
             GraphType = 10;
+
             Children.Add(myChart);
         }
 
@@ -324,7 +354,23 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         {
             //Chart
             myChart = new SfChart();
-            myChart.Series.Add(new DoughnutSeries());
+            myChart.Series.Add(new DoughnutSeries(){
+                DataMarkerPosition = CircularSeriesDataMarkerPosition.OutsideExtended,
+                EnableSmartLabels = true,
+                ConnectorLineType = ConnectorLineType.Bezier,
+            });
+
+            myChart.Legend = new ChartLegend();
+            myChart.Legend.Title = new ChartTitle() { Text = ""};
+            myChart.Legend.Orientation = ChartOrientation.Default;
+            myChart.Legend.DockPosition = LegendPlacement.Right;
+
+            myChart.Series[0].DataMarker = new ChartDataMarker();
+            myChart.Series[0].DataMarker.LabelContent = LabelContent.Percentage;
+
+            yAxisOn = true;
+            myChart.Series[0].DataMarker.ShowLabel = false;
+
             Common(a, b, true);
             GraphType = 11;
             Children.Add(myChart);
@@ -397,7 +443,78 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             title = e;
 
             //Setting title
+            if (myChart.Series[0] is PieSeries || myChart.Series[0] is DoughnutSeries)
+            {
+                myChart.Legend.Title.Text = title;
+                if (xAxisOn)
+                {
+                    myChart.Legend.DockPosition = LegendPlacement.Right;
+                }
+                else
+                {
+                    myChart.Legend.DockPosition = LegendPlacement.Bottom;
+                }
+                myChart.Legend.IsVisible = yAxisOn;
+                if (GridLinesOn)
+                {
+                    ((PieSeries)myChart.Series[0]).DataMarkerPosition = CircularSeriesDataMarkerPosition.Inside;
+                }
+                else
+                {
+                    ((PieSeries)myChart.Series[0]).DataMarkerPosition = CircularSeriesDataMarkerPosition.OutsideExtended;
+                }
+
+                //Setting colour
+                if (colourValue == 0)
+                {
+                    myChart.Series[0].ColorModel.Palette = ChartColorPalette.Metro;
+                    myChart.Series[0].DataMarker.ShowLabel = false;
+                }
+                else if (colourValue == 1)
+                {
+                    myChart.Series[0].ColorModel.Palette = ChartColorPalette.Pineapple;
+                    myChart.Series[0].DataMarker.ShowLabel = false;
+                }
+                else if (colourValue == 2)
+                {
+                    myChart.Series[0].ColorModel.Palette = ChartColorPalette.TomatoSpectrum;
+                    myChart.Series[0].DataMarker.ShowLabel = false;
+                }
+                else if (colourValue == 3)
+                {
+                    myChart.Series[0].ColorModel.Palette = ChartColorPalette.Metro;
+                    myChart.Series[0].DataMarker.ShowLabel = true;
+                }
+                else if (colourValue == 4)
+                {
+                    myChart.Series[0].ColorModel.Palette = ChartColorPalette.Pineapple;
+                    myChart.Series[0].DataMarker.ShowLabel = true;
+                }
+                else if (colourValue == 5)
+                {
+                    myChart.Series[0].ColorModel.Palette = ChartColorPalette.TomatoSpectrum;
+                    myChart.Series[0].DataMarker.ShowLabel = true;
+                }
+
+            }
+            else
+            {
             myChart.PrimaryAxis.Title = new ChartAxisTitle() { Text = title };
+
+                //Setting colour
+                if (colourValue == 0)
+                {
+                    myChart.ColorModel.Palette = ChartColorPalette.Metro;
+                }
+                else if (colourValue == 1)
+                {
+                    myChart.ColorModel.Palette = ChartColorPalette.Pineapple;
+                }
+                else if (colourValue == 2)
+                {
+                    myChart.ColorModel.Palette = ChartColorPalette.TomatoSpectrum;
+                }
+            }
 
             //Setting grid lines
             myChart.PrimaryAxis.ShowMajorGridLines = GridLinesOn;
@@ -407,23 +524,17 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myChart.PrimaryAxis.IsVisible = xAxisOn;
             myChart.SecondaryAxis.IsVisible = yAxisOn;
 
-            //Setting colour
-            if (colourValue == 0)
-            {
-                myChart.ColorModel.Palette = ChartColorPalette.Metro;
-            } else if (colourValue == 1)
-            {
-                myChart.ColorModel.Palette = ChartColorPalette.Pineapple;
-            }
-            else if (colourValue == 2)
-            {
-                myChart.ColorModel.Palette = ChartColorPalette.TomatoSpectrum;
-            }
         }
 
         public void CleanCell()
         {
+            //Setting default values
             hasGraph = false;
+            xAxisOn = false;
+            yAxisOn = false;
+            GridLinesOn = false;
+            colourValue = 0;
+            title = "";
 
             //Resetting cell when graph is deleted
             if (myChart != null)
@@ -436,7 +547,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 myChart = null;
                 SetColumnSpan(this, 1);
                 SetRowSpan(this, 1);
-                hasGraph = false;
             }
             //Remove data source
         }

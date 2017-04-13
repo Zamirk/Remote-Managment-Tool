@@ -21,7 +21,7 @@ namespace RAT.ZTry
 
         public LoginViewModel()
         {
-            azureService = DependencyService.Get<AzureLoginService>();
+            //azureService = DependencyService.Get<AzureLoginService>();
         }
 
         public string UserName
@@ -43,36 +43,37 @@ namespace RAT.ZTry
         //Checks Login, Changes screen if found
         async Task LoginValidate()
         {
-               //List <Login> logins = await azureService.GetLogin(userName, password);
-               //if (logins[0].Username.Equals(UserName) && logins[0].Password.Equals(Password))
-                {
-                   System.Diagnostics.Debug.WriteLine("\n-----Entering Main Menu");
-            //Screen Navigation
-            if (Device.OS == TargetPlatform.Android)
+            azureService = new AzureLoginService();
+
+            if (await azureService.GetLogin(userName, password))
             {
-                (Application.Current.MainPage).Navigation.InsertPageBefore(new Mobile.ParentScreen(), (Application.Current.MainPage).Navigation.NavigationStack[0]);
+                System.Diagnostics.Debug.WriteLine("\n-----Entering Main Menu");
+                //Screen Navigation
+                if (Device.OS == TargetPlatform.Android)
+                {
+                    (Application.Current.MainPage).Navigation.InsertPageBefore(new Mobile.ParentScreen(),
+                        (Application.Current.MainPage).Navigation.NavigationStack[0]);
+                    await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
+                    GC.Collect();
+                }
+                else
+                {
+                    (Application.Current.MainPage).Navigation.InsertPageBefore(new ParentScreen(),
+                        (Application.Current.MainPage).Navigation.NavigationStack[0]);
+                    GC.Collect();
+                }
+
+                //Gets the data IoT
+                Task t = Task.Factory.StartNew(() => {
+                    GetTelemetry.ReceiveTelemetry();
+                });
+
                 await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
-                GC.Collect();
             }
             else
             {
-                (Application.Current.MainPage).Navigation.InsertPageBefore(new ParentScreen(), (Application.Current.MainPage).Navigation.NavigationStack[0]);
-                await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
-                GC.Collect();
+                        System.Diagnostics.Debug.WriteLine("Incorrect Login");
             }
-
-            //Gets the data IoT
-            Task t = Task.Factory.StartNew(() => {
-                GetTelemetry.ReceiveTelemetry();
-
-            });
-             /*   }
-                 else
-                 {
-            //Incorrect Credentials
-                     System.Diagnostics.Debug.WriteLine("Incorrect Login"); */
-                 }
-                
         }
     }
 }

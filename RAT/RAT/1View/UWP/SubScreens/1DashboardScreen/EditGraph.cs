@@ -142,6 +142,27 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             this.Content = mainLayout;
         }
 
+        public void AddOptions()
+        {
+            colourSelect.Items.Add("Orange & values");
+            colourSelect.Items.Add("Blue & values");
+            colourSelect.Items.Add("Green & values");
+
+            labels[0].Text = "Legend: Bottom/Right ";
+            labels[1].Text = "Legend: Show/Hide ";
+            labels[2].Text = "Values: Inside/Outside";
+
+        }
+        public void RemoveOptions()
+        {
+            colourSelect.Items.Remove("Orange & values");
+            colourSelect.Items.Remove("Blue & values");
+            colourSelect.Items.Remove("Green & values");
+
+            labels[0].Text = "XAxis";
+            labels[1].Text = "YAxis";
+            labels[2].Text = "GridLines";
+        }
         public void SetAttributes(bool a, bool b, bool c, string d, int e)
         {
             //Setting values that were sent in

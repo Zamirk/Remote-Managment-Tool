@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RAT.ZTry
 {
-    public class Dasshboards
+    public class Login
     {
         [Newtonsoft.Json.JsonProperty("Id")]
         public string Id { get; set; }

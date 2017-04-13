@@ -6,6 +6,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using Amqp;
+using DashboardModel;
 using Newtonsoft.Json;
 using RAT.ZTry;
 using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
@@ -22,6 +23,7 @@ namespace RAT._1View.Desktop.Manage
 {
     public class Dashboard : ScrollView
     {
+        private AzureLoginService updateItem;
         private DashboardButtonState buttonState;
         //Popup screens
         private GraphSelection selectGraph = new GraphSelection();
@@ -38,6 +40,11 @@ namespace RAT._1View.Desktop.Manage
         private Grid superGrid;
         private Grid mainGrid;
         private Cell[][] myCells = new Cell[8][];
+
+        private bool changed = false;
+        private const string replace = @"{""G"":false,""T"":0,""R"":0,""C"":0,""D"":0,""S"":0,""N"":null,""O"":0,""X"":false,""Y"":false,""L"":false}";
+        private const string placeHolder = "¬";
+
         #region Eventhandlers
 
         EventHandler handler0 = null;
@@ -91,13 +98,30 @@ namespace RAT._1View.Desktop.Manage
                 }
             }
 
-            var messageString = JsonConvert.SerializeObject(savingDashboard);
-            System.Diagnostics.Debug.WriteLine(messageString);
-            //System.Diagnostics.Debug.WriteLine((Encoding.ASCII.GetBytes(messageString)));
-            //DashboardCellModel[][] mydashboard = JsonConvert.DeserializeObject<DashboardCellModel[][]>(DashboardFromDatabase.testString);
-
             //Saving to the previously selected dashboard
             DashboardFromDatabase.listOfDashboard[currentDashboard] = savingDashboard;
+
+            //Saving dashbard to database
+            //if (!changed)
+            {
+                var messageString = JsonConvert.SerializeObject(savingDashboard);
+                messageString = messageString.Replace(replace, placeHolder);
+                trgtr
+                Dashboards updatedDashboard = new Dashboards()
+                {
+                    //Id = DashboardFromDatabase.listOfIds[currentDashboard],
+                    Id = "44CF1125-02BA-43AF-8F53-8C86B2C5304C",
+                    //DashNo = "" + currentDashboard,
+                    DashNo = "0",
+                    DashString = messageString,
+                    //Username = DashboardFromDatabase.userName
+                    Username = "Admin"
+                };
+                System.Diagnostics.Debug.WriteLine(messageString);
+                updateItem = new AzureLoginService();
+                updateItem.UpdateDashboard(updatedDashboard);
+                changed = false;
+            }
         }
 
         public void LoadDashboard()
@@ -178,10 +202,14 @@ namespace RAT._1View.Desktop.Manage
                             myCells[xAxis][yAxis].DoughnutChart(device, dataSource);
                         }
 
+                        //Setting column span
                         myCells[xAxis][yAxis].ColumnSpan = columnSpan;
                         Grid.SetColumnSpan(myCells[xAxis][yAxis], columnSpan);
+
+                        //Setting row span
                         myCells[xAxis][yAxis].RowSpan = rowSpan;
                         Grid.SetRowSpan(myCells[xAxis][yAxis], rowSpan);
+
                         myCells[xAxis][yAxis].Device = device;
                         myCells[xAxis][yAxis].Datasource = dataSource;
                         myCells[xAxis][yAxis].ApplyChanges(x, y, grid, colour, title);
@@ -338,7 +366,8 @@ namespace RAT._1View.Desktop.Manage
             mainGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Star});
             int pos = 0;
 
-            int[] posArray = new int[40] {000, 001, 002,003,004,005,006,007,008,009,010,011,012,013,014, 015,016,017,018,019,020,021,022,023,024,025,026,027,028,029,030,031,032,033,034,035,036,037,038,039};
+            //Reference for future sorting
+            int[] posArray = new int[40] {000, 001, 002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024,025,026,027,028,029,030,031,032,033,034,035,036,037,038,039};
 
             //Addings cells, X and Y grid
             for (int yAxis = 0; yAxis < 5; yAxis++)
@@ -385,6 +414,9 @@ namespace RAT._1View.Desktop.Manage
         public void ResetDashboard()
         {
             //Resetting the board for reuse when loading other dashboards
+
+            //Resetting database saving
+            changed = false;
 
             //Temp list for sorting
             List<Cell> myList = new List<Cell>();
@@ -437,6 +469,9 @@ namespace RAT._1View.Desktop.Manage
 
         private void DashboardListOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
+            //Setting dashboard to add mode
+            AddOnClickMethod();
+
             //Saving current dashboard
             SaveDashboard();
 
@@ -596,6 +631,10 @@ namespace RAT._1View.Desktop.Manage
                 //If there is a graph
                 if (myCell.hasGraph)
                 {
+                    if (myCell.CheckChartType())
+                    {
+                        editGraph.AddOptions();
+                    }
                     //Set attributes of edit screen initially from the cell
                     editGraph.SetAttributes(
                         myCell.xAxisOn,
@@ -615,6 +654,9 @@ namespace RAT._1View.Desktop.Manage
                             editGraph.GridLinesValues,
                             editGraph.ColourPicked,
                             editGraph.TitleTyped);
+
+                        //Removing extra options
+                        editGraph.RemoveOptions();
 
                         editGraph.saveButton.Clicked -= handler12;
                         Navigation.PopPopupAsync(true);
@@ -668,8 +710,13 @@ namespace RAT._1View.Desktop.Manage
             selectGraph.PieChart().Clicked -= handler10;
             selectGraph.DoughnutChart().Clicked -= handler11;
         }
-
+        
         private void AddOnClicked(object sender, EventArgs eventArgs)
+        {
+            AddOnClickMethod();
+        }
+
+        public void AddOnClickMethod()
         {
             if (buttonState != DashboardButtonState.Add)
             {
@@ -698,7 +745,6 @@ namespace RAT._1View.Desktop.Manage
                 }
             }
         }
-
         private void DeleteButtonOnClicked(object sender, EventArgs eventArgs)
         {
             if (buttonState != DashboardButtonState.Delete)
