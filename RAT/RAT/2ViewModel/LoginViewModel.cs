@@ -51,10 +51,10 @@ namespace RAT.ZTry
                 //Screen Navigation
                 if (Device.OS == TargetPlatform.Android)
                 {
-                    (Application.Current.MainPage).Navigation.InsertPageBefore(new Mobile.ParentScreen(),
-                        (Application.Current.MainPage).Navigation.NavigationStack[0]);
-                    await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
-                    GC.Collect();
+                    //(Application.Current.MainPage).Navigation.InsertPageBefore(new Mobile.ParentScreen(),
+                    //    (Application.Current.MainPage).Navigation.NavigationStack[0]);
+                   // await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
+                   // GC.Collect();
                 }
                 else
                 {

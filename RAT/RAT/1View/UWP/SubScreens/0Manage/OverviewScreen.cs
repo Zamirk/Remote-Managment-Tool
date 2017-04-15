@@ -33,7 +33,7 @@ namespace RAT._1View.Desktop
             Children.Add(myEditor);
             myEditor.Text = "Receiving Data!";
             myEditor.FontSize = 8;
-            myEditor.Text = GetTelemetry.aaaaa;
+            //myEditor.Text = GetTelemetry.aaaaa;
 
 
             WaitForItToWork();
@@ -48,7 +48,7 @@ namespace RAT._1View.Desktop
         {
             while (!succeeded)
             {
-                myEditor.Text = GetTelemetry.aaaaa;
+                //myEditor.Text = GetTelemetry.aaaaa;
                 await Task.Delay(1000); // arbitrary delay
             }
             return succeeded;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 using RAT.ZTry;
-using Mobile;
+//using Mobile;
 
 namespace RAT
 {
@@ -19,7 +19,7 @@ namespace RAT
             }
             else if (Device.OS == TargetPlatform.Android)
             {
-                MainPage = new NavigationPage(new Mobile.LoginScreen());
+               // MainPage = new NavigationPage(new Mobile.LoginScreen());
             }
             //MainPage = new NavigationPage(new MainPage());
         }

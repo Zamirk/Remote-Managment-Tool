@@ -23,10 +23,11 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
         private SfChart myChart2;
         Label myLabel;
         Label myLabel2;
+        private string deviceId = "";
 
-        public WifiScreen()
+        public WifiScreen(int deviceNum)
         {
-            myViewModel = new WifiViewModel();
+            myViewModel = new WifiViewModel(deviceNum);
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;

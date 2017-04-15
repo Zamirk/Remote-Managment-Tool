@@ -10,19 +10,14 @@ using IoTHubAmqp;
 using Newtonsoft.Json;
 using ppatierno.AzureSBLite;
 using ppatierno.AzureSBLite.Messaging;
+using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 
 namespace ConsoleApplication1.Folder
 {
     public class GetTelemetry
     {
         public static bool go = true;
-        public static string aaaaa = "";
 
-        static string ConnectionString = "Endpoint=sb://iothub-ns-manageiot2-135779-1d0655b8a3.servicebus.windows.net/;" +
-                             "SharedAccessKeyName=iothubowner;" +
-                             "SharedAccessKey=7qKgybfNWoSoD9nTr6IRB2z7oLegSnxAux25ZTlmFGc=";
-
-        static string eventHubEntity = "ManageIoT2";
         static string partitionId = "0";
         static string partitionId1 = "1";
 
@@ -53,12 +48,12 @@ namespace ConsoleApplication1.Folder
         //Receive data partition 1
         public static void ReceiveTelemetry2()
         {
-            ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(ConnectionString);
+            ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(DashboardFromDatabase.connectionString);
             builder.TransportType = TransportType.Amqp;
 
-            MessagingFactory factory = MessagingFactory.CreateFromConnectionString(ConnectionString);
+            MessagingFactory factory = MessagingFactory.CreateFromConnectionString(DashboardFromDatabase.connectionString);
 
-            EventHubClient client = factory.CreateEventHubClient(eventHubEntity);
+            EventHubClient client = factory.CreateEventHubClient(DashboardFromDatabase.eventHubEntity);
             EventHubConsumerGroup group = client.GetDefaultConsumerGroup();
 
             startingDateTimeUtc = DateTime.Now.AddSeconds(-30);
@@ -107,12 +102,13 @@ namespace ConsoleApplication1.Folder
         //Receive data partition 0
         public static void ReceiveTelemetry()
         {
-            ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(ConnectionString);
+            System.Diagnostics.Debug.WriteLine("AAAAAAAAAAAAAAAAAA"+ DashboardFromDatabase.connectionString);
+            ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(DashboardFromDatabase.connectionString);
             builder.TransportType = TransportType.Amqp;
 
-            MessagingFactory factory = MessagingFactory.CreateFromConnectionString(ConnectionString);
+            MessagingFactory factory = MessagingFactory.CreateFromConnectionString(DashboardFromDatabase.connectionString);
 
-            EventHubClient client = factory.CreateEventHubClient(eventHubEntity);
+            EventHubClient client = factory.CreateEventHubClient(DashboardFromDatabase.eventHubEntity);
             EventHubConsumerGroup group = client.GetDefaultConsumerGroup();
 
             startingDateTimeUtc = DateTime.Now.AddSeconds(-30);

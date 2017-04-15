@@ -24,9 +24,9 @@ namespace Mobile
         Label myLabel;
         Label myLabel2;
 
-        public WifiScreen()
+        public WifiScreen(String deviceId)
         {
-            myViewModel = new WifiViewModel();
+            myViewModel = new WifiViewModel(deviceId);
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;

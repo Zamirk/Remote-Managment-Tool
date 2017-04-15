@@ -21,9 +21,10 @@ namespace RAT._1View.Desktop
 	{
 	    private CpuViewModel myViewModel;
 	    private SfChart myChart;
-        public CPUScreen()
+	    private string deviceId = "";
+        public CPUScreen(int deviceNum)
         {
-            myViewModel = new CpuViewModel();
+            myViewModel = new CpuViewModel(deviceNum);
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;

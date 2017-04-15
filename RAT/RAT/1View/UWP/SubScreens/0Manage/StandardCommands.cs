@@ -16,9 +16,12 @@ namespace RAT._1View.Desktop
     {
         //private CommandViewModel viewModel;
         private Editor myEditor;
+        private string deviceId = "";
 
-        public StandardCommands()
+        public StandardCommands(string a)
         {
+            deviceId = a;
+
             BackgroundColor = Color.FromRgb(29, 29, 29);
             List<Image> myImages = new List<Image>();
 
@@ -62,7 +65,7 @@ namespace RAT._1View.Desktop
                 Command = new Command(() =>
                 {
                     Task t = Task.Factory.StartNew(() => {
-                        SendCommand myCommand = new SendCommand();
+                        SendCommand myCommand = new SendCommand(deviceId);
                         myCommand.Command = new CommandDatapoint() { CommandType = CommandType.Hibernate, ExpireTime = DateTime.Now };
                         myCommand.SendCommandToDevice();
                     });
@@ -74,7 +77,7 @@ namespace RAT._1View.Desktop
                 Command = new Command(() =>
                 {
                     Task t = Task.Factory.StartNew(() => {
-                        SendCommand myCommand = new SendCommand();
+                        SendCommand myCommand = new SendCommand(deviceId);
                         myCommand.Command = new CommandDatapoint() { CommandType = CommandType.ShutDown, ExpireTime = DateTime.Now };
                         myCommand.SendCommandToDevice();
                     });
@@ -86,7 +89,7 @@ namespace RAT._1View.Desktop
                 Command = new Command(() =>
                 {
                     Task t = Task.Factory.StartNew(() => {
-                        SendCommand myCommand = new SendCommand();
+                        SendCommand myCommand = new SendCommand(deviceId);
                         myCommand.Command = new CommandDatapoint() { CommandType = CommandType.Restart, ExpireTime = DateTime.Now };
                         myCommand.SendCommandToDevice();
                     });
@@ -98,7 +101,7 @@ namespace RAT._1View.Desktop
                 Command = new Command(() =>
                 {
                     Task t = Task.Factory.StartNew(() => {
-                        SendCommand myCommand = new SendCommand();
+                        SendCommand myCommand = new SendCommand(deviceId);
                         myCommand.Command = new CommandDatapoint() { CommandType = CommandType.Sleep, ExpireTime = DateTime.Now };
                         myCommand.SendCommandToDevice();
                     });
@@ -110,7 +113,7 @@ namespace RAT._1View.Desktop
                 Command = new Command(() =>
                 {
                     Task t = Task.Factory.StartNew(() => {
-                        SendCommand myCommand = new SendCommand();
+                        SendCommand myCommand = new SendCommand(deviceId);
                         myCommand.Command = new CommandDatapoint() { CommandType = CommandType.Logoff, ExpireTime = DateTime.Now };
                         myCommand.SendCommandToDevice();
                     });
@@ -122,7 +125,7 @@ namespace RAT._1View.Desktop
                 Command = new Command(() =>
                 {
                     Task t = Task.Factory.StartNew(() => {
-                        SendCommand myCommand = new SendCommand();
+                        SendCommand myCommand = new SendCommand(deviceId);
                         myCommand.Command = new CommandDatapoint() { CommandType = CommandType.Lock, ExpireTime = DateTime.Now };
                         myCommand.SendCommandToDevice();
                     });

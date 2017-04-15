@@ -238,11 +238,11 @@ namespace RAT.ZTry
             // or
             //await PopupNavigation.PushAsync(page);
         }
-        public void EnterDevice(string deviceName)
+        public void EnterDevice(string deviceName, int deviceNum)
         {
             RemoveScreen();
             manageButton.BackgroundColor = Color.Gray;
-            singleDeviceScreen = new ToolBar(deviceName);
+            singleDeviceScreen = new ToolBar(deviceName, deviceNum);
             midGrid.Children.Add(singleDeviceScreen, 1, 0);
 
             myMenuState = MenuState.MANAGE_SINGLEDEVICE;

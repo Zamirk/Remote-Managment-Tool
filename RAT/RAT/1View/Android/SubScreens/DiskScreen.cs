@@ -20,9 +20,9 @@ namespace Mobile
 	{
 	    private DiskViewModel myViewModel;
 	    private SfChart myChart;
-        public DiskScreen()
+        public DiskScreen(String deviceId)
         {
-            myViewModel = new DiskViewModel();
+            myViewModel = new DiskViewModel(deviceId);
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;

@@ -21,10 +21,11 @@ namespace RAT._1View.Desktop
 	    private DiskViewModel myViewModel;
 	    private SfChart myChart;
 	    private SfChart pieChart;
+        private string deviceId = "";
 
-        public DiskScreen()
+        public DiskScreen(int deviceNum)
         {
-            myViewModel = new DiskViewModel();
+            myViewModel = new DiskViewModel(deviceNum);
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleApplication1.Folder;
+using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 using Syncfusion.SfChart.XForms;
 using Tools;
 using Xamarin.Forms;
@@ -16,16 +17,18 @@ namespace RAT._2ViewModel
         private ObservableCollection<ChartDataPoint> uploadData;
         private bool killThread = false;
         private int y;
+        private int deviceNum = 9;
 
-        public WifiViewModel()
+        public WifiViewModel(int deviceNum)
         {
+            this.deviceNum = deviceNum;
             y = 0;
             DownloadData = new ObservableCollection<ChartDataPoint>();
             UploadData = new ObservableCollection<ChartDataPoint>();
             LoadData();
         }
 
-        private static int deviceNo = 0;
+        private static int deviceNo = DashboardFromDatabase.deviceChosen;
 
         private string downloadRate = GetTelemetry.lastTelemetryDatapoints[deviceNo].DownloadRate;
         private string uploadRate = GetTelemetry.lastTelemetryDatapoints[deviceNo].UploadRate;
@@ -86,7 +89,7 @@ namespace RAT._2ViewModel
         {
             y = 0;
             //Iterating over the queue of telemetry obects, adding to the chart databound collection
-            foreach (var telemetry in GetTelemetry.listOfDevices[0])
+            foreach (var telemetry in GetTelemetry.listOfDevices[deviceNum])
             {
                 DownloadData.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.DownloadRate)));
                 UploadData.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.UploadRate)));
@@ -100,14 +103,14 @@ namespace RAT._2ViewModel
                 System.Diagnostics.Debug.WriteLine("WIFI" + y);
 
                 y++;
-                double downloadRate = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].DownloadRate);
-                double uploadRate = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].UploadRate);
-                Packets = GetTelemetry.lastTelemetryDatapoints[deviceNo].Packets;
-                PacketsReceived = GetTelemetry.lastTelemetryDatapoints[deviceNo].PacketsReceived;
-                PacketsSent = GetTelemetry.lastTelemetryDatapoints[deviceNo].PacketsSent;
-                Bandwidth = GetTelemetry.lastTelemetryDatapoints[deviceNo].Bandwidth;
-                DownloadRate = GetTelemetry.lastTelemetryDatapoints[deviceNo].DownloadRate;
-                UploadRate = GetTelemetry.lastTelemetryDatapoints[deviceNo].UploadRate;
+                double downloadRate = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNum].DownloadRate);
+                double uploadRate = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNum].UploadRate);
+                Packets = GetTelemetry.lastTelemetryDatapoints[deviceNum].Packets;
+                PacketsReceived = GetTelemetry.lastTelemetryDatapoints[deviceNum].PacketsReceived;
+                PacketsSent = GetTelemetry.lastTelemetryDatapoints[deviceNum].PacketsSent;
+                Bandwidth = GetTelemetry.lastTelemetryDatapoints[deviceNum].Bandwidth;
+                DownloadRate = GetTelemetry.lastTelemetryDatapoints[deviceNum].DownloadRate;
+                UploadRate = GetTelemetry.lastTelemetryDatapoints[deviceNum].UploadRate;
                 DownloadData.RemoveAt(0);
                 UploadData.RemoveAt(0);
                 DownloadData.Add(new ChartDataPoint(y, downloadRate));

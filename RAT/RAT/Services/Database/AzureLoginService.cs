@@ -49,6 +49,10 @@ namespace RAT.ZTry
             {
                 System.Diagnostics.Debug.WriteLine("User found: " + items[0].Username);
                 DashboardFromDatabase.userName = a;
+                DashboardFromDatabase.connectionCode = items[0].ConnectionCode;
+                DashboardFromDatabase.connectionString = items[0].ConnectionString;
+                DashboardFromDatabase.eventHubEntity = items[0].EventHubEntity;
+                DashboardFromDatabase.hostLink = items[0].HostLink;
 
                 //Getting dashboards
                 await GetDashboards(a);

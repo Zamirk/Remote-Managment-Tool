@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleApplication1.Folder;
+using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 using Syncfusion.SfChart.XForms;
 using Tools;
 using Xamarin.Forms;
@@ -15,14 +16,17 @@ namespace RAT._2ViewModel
         private ObservableCollection<ChartDataPoint> data;
         private bool killThread = false;
         private int y;
-        public RamViewModel()
+        private int deviceNum = 9;
+
+        public RamViewModel(int deviceNum)
         {
+            this.deviceNum = deviceNum;
             y = 0;
             Data = new ObservableCollection<ChartDataPoint>();
             LoadData();
         }
 
-        private static int deviceNo = 0;
+        private static int deviceNo = DashboardFromDatabase.deviceChosen;
 
         private string inUse = GetTelemetry.lastTelemetryDatapoints[deviceNo].RamInUse;
         private string notInUse = GetTelemetry.lastTelemetryDatapoints[deviceNo].Ram;
@@ -81,7 +85,7 @@ namespace RAT._2ViewModel
         {
             y = 0;
             //Iterating over the queue of telemetry obects, adding to the chart databound collection
-            foreach (var telemetry in GetTelemetry.listOfDevices[0])
+            foreach (var telemetry in GetTelemetry.listOfDevices[deviceNum])
             {
                 data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.RamInUse)));
                 y++;
@@ -93,13 +97,13 @@ namespace RAT._2ViewModel
             {
                 System.Diagnostics.Debug.WriteLine("RAM" + y);
                    y++;
-                double ramUsage = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].RamInUse);
-                PagedPool = GetTelemetry.lastTelemetryDatapoints[deviceNo].PagedPool;
-                NonPagedPool = GetTelemetry.lastTelemetryDatapoints[deviceNo].NonPagedPool;
-                InUse = GetTelemetry.lastTelemetryDatapoints[deviceNo].RamInUse;
-                NotInUse = GetTelemetry.lastTelemetryDatapoints[deviceNo].Ram;
-                Cached = GetTelemetry.lastTelemetryDatapoints[deviceNo].RamCache;
-                Committed = GetTelemetry.lastTelemetryDatapoints[deviceNo].RamCommitted;
+                double ramUsage = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNum].RamInUse);
+                PagedPool = GetTelemetry.lastTelemetryDatapoints[deviceNum].PagedPool;
+                NonPagedPool = GetTelemetry.lastTelemetryDatapoints[deviceNum].NonPagedPool;
+                InUse = GetTelemetry.lastTelemetryDatapoints[deviceNum].RamInUse;
+                NotInUse = GetTelemetry.lastTelemetryDatapoints[deviceNum].Ram;
+                Cached = GetTelemetry.lastTelemetryDatapoints[deviceNum].RamCache;
+                Committed = GetTelemetry.lastTelemetryDatapoints[deviceNum].RamCommitted;
                 data.RemoveAt(0);
                 data.Add(new ChartDataPoint(y, ramUsage));
                 if (killThread)

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleApplication1.Folder;
+using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 using Syncfusion.SfChart.XForms;
 using Tools;
 using Xamarin.Forms;
@@ -16,16 +17,18 @@ namespace RAT._2ViewModel
         private ObservableCollection<ChartDataPoint> piedata;
         private int y;
         private bool killThread = false;
+        private int deviceNum = 9;
 
-        public DiskViewModel()
+        public DiskViewModel(int deviceNum)
         {
+            this.deviceNum = deviceNum;
             y = 0;
             Data = new ObservableCollection<ChartDataPoint>();
             PieData = new ObservableCollection<ChartDataPoint>();
             LoadData();
         }
 
-        private static int deviceNo = 0;
+        private static int deviceNo = DashboardFromDatabase.deviceChosen;
 
         private string diskReadTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskReadTime;
         private string diskWriteTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteTime;
@@ -100,13 +103,13 @@ namespace RAT._2ViewModel
         {
             y = 0;
             //Adding data to piechart
-            double freeSpacePieChart = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].FreeSpace);
+            double freeSpacePieChart = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNum].FreeSpace);
             double aaa = 100 - freeSpacePieChart;
             PieData.Add(new ChartDataPoint("Free Space", freeSpacePieChart));
             PieData.Add(new ChartDataPoint("Free Space", aaa));
 
             //Iterating over the queue of telemetry obects, adding to the chart databound collection
-            foreach (var telemetry in GetTelemetry.listOfDevices[0])
+            foreach (var telemetry in GetTelemetry.listOfDevices[deviceNum])
             {
                 data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.DiskTime)));
                 y++;
@@ -121,15 +124,15 @@ namespace RAT._2ViewModel
                     return false;
                 }
                 y++;
-                double diskTime = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskTime);
-                ActiveTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskTime;
-                IdleTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].IdleTime;
-                FreeSpace = GetTelemetry.lastTelemetryDatapoints[deviceNo].FreeSpace;
-                FreeMb = GetTelemetry.lastTelemetryDatapoints[deviceNo].FreeMB;
-                DiskWrite = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteBytes;
-                DiskRead = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskReadBytes;
-                DiskReadTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskReadTime;
-                DiskWriteTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteTime;
+                double diskTime = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNum].DiskTime);
+                ActiveTime = GetTelemetry.lastTelemetryDatapoints[deviceNum].DiskTime;
+                IdleTime = GetTelemetry.lastTelemetryDatapoints[deviceNum].IdleTime;
+                FreeSpace = GetTelemetry.lastTelemetryDatapoints[deviceNum].FreeSpace;
+                FreeMb = GetTelemetry.lastTelemetryDatapoints[deviceNum].FreeMB;
+                DiskWrite = GetTelemetry.lastTelemetryDatapoints[deviceNum].DiskWriteBytes;
+                DiskRead = GetTelemetry.lastTelemetryDatapoints[deviceNum].DiskReadBytes;
+                DiskReadTime = GetTelemetry.lastTelemetryDatapoints[deviceNum].DiskReadTime;
+                DiskWriteTime = GetTelemetry.lastTelemetryDatapoints[deviceNum].DiskWriteTime;
                 Data.RemoveAt(0);
                 Data.Add(new ChartDataPoint(y, diskTime));
                 return true;

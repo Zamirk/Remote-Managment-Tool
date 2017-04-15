@@ -14,9 +14,9 @@ namespace RAT._1View.Desktop
     {
         private readonly ProcessesViewModel viewModel;
 
-        public Processes()
+        public Processes(int deviceNum)
         {
-            viewModel = new ProcessesViewModel();
+            viewModel = new ProcessesViewModel(deviceNum);
             BindingContext = viewModel;
 
             HorizontalOptions = LayoutOptions.FillAndExpand;
@@ -67,7 +67,7 @@ namespace RAT._1View.Desktop
                 };
                 //Temp label for databinding the name of the process
                 Label temp = new Label();
-                temp.SetBinding(Label.TextProperty, "CustomerID");
+                temp.SetBinding(Label.TextProperty, "Name");
 
                 myButton.Clicked += delegate (object sender, EventArgs args)
                 {
@@ -75,7 +75,7 @@ namespace RAT._1View.Desktop
 
                     //Sending an asyncranous command
                     Task t = Task.Factory.StartNew(() => {
-                        SendCommand myCommand = new SendCommand();
+                        SendCommand myCommand = new SendCommand(temp.Text);
                         myCommand.Command = new CommandDatapoint()
                         {
                             CommandType = CommandType.CloseProcess,

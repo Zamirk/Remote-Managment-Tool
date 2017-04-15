@@ -21,9 +21,9 @@ namespace Mobile
 	{
 	    private CpuViewModel myViewModel;
 	    private SfChart myChart;
-        public CPUScreen()
+        public CPUScreen(String deviceId)
         {
-            myViewModel = new CpuViewModel();
+            myViewModel = new CpuViewModel(deviceId);
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;

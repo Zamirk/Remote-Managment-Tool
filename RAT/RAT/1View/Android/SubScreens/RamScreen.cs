@@ -20,9 +20,9 @@ namespace Mobile
 	{
 	    private RamViewModel myViewModel;
 	    private SfChart myChart;
-        public RamScreen()
+        public RamScreen(String deviceId)
         {
-            myViewModel = new RamViewModel();
+            myViewModel = new RamViewModel(deviceId);
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;

@@ -6,10 +6,12 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleApplication1;
+using ConsoleApplication1.Folder;
 using IoTHubAmqpService;
 using RAT.Syncfusion;
 using RAT.ZTry;
 using RAT._1View.Desktop.Screens.SubScreens;
+using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 using RAT._2ViewModel;
 using RAT._2ViewModel.Test;
 using Syncfusion.SfChart.XForms;
@@ -82,12 +84,26 @@ namespace RAT._1View.Desktop.Manage
 
                 myButton.Clicked += delegate (object sender, EventArgs args)
                 {
-                    System.Diagnostics.Debug.WriteLine("[AllDevices]::Changing Screen::");
+                    System.Diagnostics.Debug.WriteLine("[AllDevices]::Changing Screen::"+ temp.Text);
 
+                    int deviceNum = 9;
+                    bool found = false;
+                    for (int i = 0; i < GetTelemetry.devices.Count; i++)
+                    {
+                        if (GetTelemetry.devices[i] == temp.Text)
+                        {
+                            deviceNum = i;
+                            found = true;
+                        }
+                    }
+                    if (!found)
+                    {
+                        deviceNum = 9;
+                    }
                     //Sending an asyncranous command
-                        Button s = sender as Button;
+                    Button s = sender as Button;
                         ParentScreen d = (ParentScreen)s.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent;
-                       d.EnterDevice(temp.Text);
+                       d.EnterDevice(temp.Text, deviceNum);
                     BindingContext = null;
                     viewModel = null;
                 };

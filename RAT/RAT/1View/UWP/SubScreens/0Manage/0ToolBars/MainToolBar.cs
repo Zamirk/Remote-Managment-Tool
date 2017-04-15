@@ -25,8 +25,13 @@ namespace RAT._1View.UWP.SubScreens
         private Processes processesSc;
         private AppHistory appHistorySc;
         private CommandToolbar commandSc;
-        public ToolBar(string name)
+        private string deviceId = "";
+        private int deviceNum = 9;
+        public ToolBar(string name, int num)
         {
+            deviceId = name;
+            deviceNum = num;
+
             myScreenState = ToolBarState.SYSTEMRESOURCES;
 
             ContentView colour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235), HorizontalOptions = LayoutOptions.Fill };
@@ -98,7 +103,7 @@ namespace RAT._1View.UWP.SubScreens
 
             //Initialising Overview Screen
             //Adding Cpu Screen
-            systemResourcesSc = new SystemResourcesToolbar();
+            systemResourcesSc = new SystemResourcesToolbar(deviceId, num);
             systemResourcesSc.Margin = new Thickness(0, 40, 0, 0);
             Children.Add(systemResourcesSc, 0, 0);
 
@@ -118,8 +123,8 @@ namespace RAT._1View.UWP.SubScreens
                 temp.BackgroundColor = Color.Gray;
                 RemoveScreen();
 
-                //Adding Wifi Screen
-                commandSc = new CommandToolbar();
+                //Adding Command Screen
+                commandSc = new CommandToolbar(deviceId);
                 commandSc.Margin = new Thickness(0, 40, 0, 0);
                 Children.Add(commandSc, 0, 0);
 
@@ -151,7 +156,7 @@ namespace RAT._1View.UWP.SubScreens
                 RemoveScreen();
 
                 //Adding Wifi Screen
-                processesSc = new Processes();
+                processesSc = new Processes(deviceNum);
                 processesSc.Margin = new Thickness(50, 50, 50, 0);
                 Children.Add(processesSc, 0, 0);
 
@@ -167,7 +172,7 @@ namespace RAT._1View.UWP.SubScreens
                 RemoveScreen();
 
                 //Adding Wifi Screen
-                systemResourcesSc = new SystemResourcesToolbar();
+                systemResourcesSc = new SystemResourcesToolbar(deviceId, deviceNum);
                 systemResourcesSc.Margin = new Thickness(0, 40, 0, 0);
                 Children.Add(systemResourcesSc, 0, 0);
 

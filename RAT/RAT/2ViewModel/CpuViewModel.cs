@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using ConsoleApplication1.Folder;
+using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 using Syncfusion.SfChart.XForms;
 using Tools;
 using Xamarin.Forms;
@@ -14,8 +15,11 @@ namespace RAT._2ViewModel
         private ObservableCollection<ChartDataPoint> data;
         private bool killThread = false;
         private int y;
-        public CpuViewModel()
+        private int deviceNum = 9;
+
+        public CpuViewModel(int deviceNum)
         {
+            this.deviceNum = deviceNum;
             y = 0;
             Data = new ObservableCollection<ChartDataPoint>();
             LoadData();
@@ -80,7 +84,7 @@ namespace RAT._2ViewModel
         {
             y = 0;
             //Iterating the queue of telemetry objects, adding to the chart collection
-            foreach (var telemetry in GetTelemetry.listOfDevices[0])
+            foreach (var telemetry in GetTelemetry.listOfDevices[deviceNum])
             {
                     data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Cpu)));
                 y++;
@@ -92,13 +96,13 @@ namespace RAT._2ViewModel
             {
                 y++; System.Diagnostics.Debug.WriteLine("cpu" + y);
 
-                double cpuValue = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu);
-                Processes = GetTelemetry.lastTelemetryDatapoints[deviceNo].Processes;
-                Threads = GetTelemetry.lastTelemetryDatapoints[deviceNo].Thread;
-                Temperature = GetTelemetry.lastTelemetryDatapoints[deviceNo].CpuTem;
-                Percent = GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu;
-                Speed = GetTelemetry.lastTelemetryDatapoints[deviceNo].Cpu2;
-                PoM = GetTelemetry.lastTelemetryDatapoints[deviceNo].Percent;
+                double cpuValue = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNum].Cpu);
+                Processes = GetTelemetry.lastTelemetryDatapoints[deviceNum].Processes;
+                Threads = GetTelemetry.lastTelemetryDatapoints[deviceNum].Thread;
+                Temperature = GetTelemetry.lastTelemetryDatapoints[deviceNum].CpuTem;
+                Percent = GetTelemetry.lastTelemetryDatapoints[deviceNum].Cpu;
+                Speed = GetTelemetry.lastTelemetryDatapoints[deviceNum].Cpu2;
+                PoM = GetTelemetry.lastTelemetryDatapoints[deviceNum].Percent;
                 Data.RemoveAt(0);
                 Data.Add(new ChartDataPoint(y, cpuValue));
                 if (killThread)

@@ -17,5 +17,17 @@ namespace RAT.ZTry
 
         [Newtonsoft.Json.JsonProperty("Email")]
         public string Email { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ConnectionCode")]
+        public string ConnectionCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ConnectionString")]
+        public string ConnectionString { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("EventHubEntity")]
+        public string EventHubEntity { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("HostLink")]
+        public string HostLink { get; set; }
     }
 }

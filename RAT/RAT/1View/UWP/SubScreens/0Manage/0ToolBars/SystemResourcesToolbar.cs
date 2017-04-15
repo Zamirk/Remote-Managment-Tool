@@ -30,8 +30,13 @@ namespace RAT._1View.Desktop.Screens.SubScreens
             private DiskScreen diskScreen;
             private WifiScreen wifiScreen;
 
-            public SystemResourcesToolbar()
+            private string deviceId = "";
+            private int deviceNum = 9;
+            public SystemResourcesToolbar(String deviceId, int deviceNum)
             {
+                this.deviceId = deviceId;
+                this.deviceNum = deviceNum;
+
                 myScreenState = ScreenState.CPU;
 
                 #region Buttons
@@ -103,14 +108,14 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                 midGrid2.Children.Add(memoryButton, 1, 0);
                 midGrid2.Children.Add(diskButton, 2, 0);
                 midGrid2.Children.Add(wifiButton, 3, 0);
-                midGrid2.Children.Add(overviewButton, 4, 0);
+                //midGrid2.Children.Add(overviewButton, 4, 0);
 
                 //Adding to mid-grid
                 Children.Add(midGrid2, 0, 0);
 
                 //Initialising Overview Screen
                 //Adding Cpu Screen
-                cpuScreen = new CPUScreen();
+                cpuScreen = new CPUScreen(deviceNum);
                 cpuScreen.Margin = new Thickness(50, 50, 50, 0);
                 Children.Add(cpuScreen, 0, 0);
 
@@ -132,7 +137,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                     RemoveScreen();
 
                     //Adding Wifi Screen
-                    wifiScreen = new WifiScreen();
+                    wifiScreen = new WifiScreen(deviceNum);
                     wifiScreen.Margin = new Thickness(50, 50, 50, 0);
                     Children.Add(wifiScreen, 0, 0);
                     myScreenState = ScreenState.WIFI;
@@ -147,7 +152,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                     RemoveScreen();
 
                     //Adding Dsik Screen
-                    diskScreen = new DiskScreen();
+                    diskScreen = new DiskScreen(deviceNum);
                     diskScreen.Margin = new Thickness(50, 50, 50, 0);
                     Children.Add(diskScreen, 0, 0);
 
@@ -163,7 +168,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                     RemoveScreen();
 
                     //Adding Ram Screen
-                    ramScreen = new RamScreen();
+                    ramScreen = new RamScreen(deviceNum);
                     ramScreen.Margin = new Thickness(50, 50, 50, 0);
                     Children.Add(ramScreen, 0, 0);
 
@@ -179,7 +184,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                     RemoveScreen();
 
                     //Adding Cpu Screen
-                    cpuScreen = new CPUScreen();
+                    cpuScreen = new CPUScreen(deviceNum);
                     cpuScreen.Margin = new Thickness(50, 50, 50, 0);
                     Children.Add(cpuScreen, 0, 0);
 

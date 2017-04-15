@@ -32,8 +32,7 @@ namespace Mobile
             myEditor = new Editor();
             Children.Add(myEditor);
             myEditor.Text = "Receiving Data!";
-            myEditor.Text = GetTelemetry.aaaaa;
-
+            //myEditor.Text = GetTelemetry.aaaaa;
 
             WaitForItToWork();
 
@@ -47,8 +46,9 @@ namespace Mobile
         {
             while (!succeeded)
             {
-                myEditor.Text = GetTelemetry.aaaaa;
-                await Task.Delay(1000); // arbitrary delay
+                //myEditor.Text = GetTelemetry.aaaaa;
+                await Task.Delay(1000);
+                // arbitrary delay
             }
             return succeeded;
         }

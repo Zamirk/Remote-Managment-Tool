@@ -28,11 +28,12 @@ namespace RAT._1
             private StandardCommands commandSc;
             private CmdConsole consoleSc;
             private PowerShell powershellSc;
+            private String deviceId = "";
 
-            public CommandToolbar()
+            public CommandToolbar(String deviceId)
             {
+                this.deviceId = deviceId;
                 myScreenState = CommandState.Standard;
-                BackgroundColor = Color.White;
                 #region Buttons
 
                 standard = new Button();
@@ -78,16 +79,35 @@ namespace RAT._1
                 midGrid2.HorizontalOptions = LayoutOptions.Center;
 
                 midGrid2.Children.Add(standard, 0, 0);
-                midGrid2.Children.Add(console, 1, 0);
-                midGrid2.Children.Add(powershell, 2, 0);
+                //midGrid2.Children.Add(console, 1, 0);
+                //midGrid2.Children.Add(powershell, 2, 0);
 
                 //Adding to mid-grid
                 Children.Add(midGrid2, 0, 0);
 
                 //Adding the first Screen
-                commandSc = new StandardCommands();
+                commandSc = new StandardCommands(deviceId);
                 commandSc.Margin = new Thickness(0, 40, 0, 0);
                 Children.Add(commandSc, 0, 0);
+
+                console.BackgroundColor = Color.Gray;
+                RemoveScreen();
+
+                //Adding Ram Screen
+                consoleSc = new CmdConsole();
+                consoleSc.Margin = new Thickness(50, 40, 50, 0);
+                Children.Add(consoleSc, 0, 0);
+
+                myScreenState = CommandState.Console;
+                standard.BackgroundColor = Color.Gray;
+                RemoveScreen();
+
+                //Adding command Screen
+                commandSc = new StandardCommands(deviceId);
+                commandSc.Margin = new Thickness(0, 40, 0, 0);
+                Children.Add(commandSc, 0, 0);
+
+                myScreenState = CommandState.Standard;
 
                 //Centre Buttons
                 standard.Clicked += StandardOnClicked;
@@ -104,8 +124,8 @@ namespace RAT._1
                     standard.BackgroundColor = Color.Gray;
                     RemoveScreen();
 
-                    //Adding Dsik Screen
-                    commandSc = new StandardCommands();
+                    //Adding command Screen
+                    commandSc = new StandardCommands(deviceId);
                     commandSc.Margin = new Thickness(0, 40, 0, 0);
                     Children.Add(commandSc, 0, 0);
 

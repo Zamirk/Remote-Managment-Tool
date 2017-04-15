@@ -20,9 +20,11 @@ namespace RAT._1View.Desktop
 	{
 	    private RamViewModel myViewModel;
 	    private SfChart myChart;
-        public RamScreen()
+        private string deviceId = "";
+
+        public RamScreen(int deviceNum)
         {
-            myViewModel = new RamViewModel();
+            myViewModel = new RamViewModel(deviceNum);
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;

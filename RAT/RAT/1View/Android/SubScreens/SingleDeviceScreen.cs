@@ -26,9 +26,12 @@ namespace Mobile
             private RamScreen ramScreen;
             private DiskScreen diskScreen;
             private WifiScreen wifiScreen;
+            private String deviceId = "";
 
-            public DeviceScreen()
+            public DeviceScreen(string deviceId)
             {
+                this.deviceId = deviceId;
+
                 myScreenState = ScreenState.CPU;
 
                 #region Buttons
@@ -99,7 +102,8 @@ namespace Mobile
                 midGrid2.Children.Add(memoryButton, 1, 0);
                 midGrid2.Children.Add(diskButton, 2, 0);
                 midGrid2.Children.Add(wifiButton, 3, 0);
-                midGrid2.Children.Add(overviewButton, 4, 0);
+            //Screen used for debugging purposes
+                //midGrid2.Children.Add(overviewButton, 4, 0);
 
                 //Adding to mid-grid
                 Children.Add(midGrid2, 0, 0);
@@ -110,7 +114,8 @@ namespace Mobile
 
             //Initialising Overview Screen
             //Adding Cpu Screen
-            cpuScreen = new CPUScreen();
+            cpuScreen = new CPUScreen(deviceId);
+
                 //cpuScreen.Margin = new Thickness(0, 50, 0, 0);
                 myScrollView.Content = cpuScreen;
                 Children.Add(myScrollView, 0, 1);
@@ -135,7 +140,7 @@ namespace Mobile
                 RemoveScreen();
 
                     //Adding Wifi Screen
-                    wifiScreen = new WifiScreen();
+                    wifiScreen = new WifiScreen(deviceId);
                     //wifiScreen.Margin = new Thickness(0, 50, 0, 0);
                     myScrollView.Content = wifiScreen;
 
@@ -152,7 +157,7 @@ namespace Mobile
                 RemoveScreen();
 
                     //Adding Dsik Screen
-                    diskScreen = new DiskScreen();
+                    diskScreen = new DiskScreen(deviceId);
                     //diskScreen.Margin = new Thickness(0, 50, 0, 0);
                     myScrollView.Content = diskScreen;
 
@@ -169,7 +174,7 @@ namespace Mobile
                 RemoveScreen();
 
                     //Adding Ram Screen
-                    ramScreen = new RamScreen();
+                    ramScreen = new RamScreen(deviceId);
                     //ramScreen.Margin = new Thickness(0, 50, 0, 0);
                     myScrollView.Content = ramScreen;
 
@@ -186,7 +191,7 @@ namespace Mobile
                 RemoveScreen();
 
                     //Adding Cpu Screen
-                    cpuScreen = new CPUScreen();
+                    cpuScreen = new CPUScreen(deviceId);
                     //cpuScreen.Margin = new Thickness(0, 50, 0, 0);
                     myScrollView.Content = cpuScreen;
 
