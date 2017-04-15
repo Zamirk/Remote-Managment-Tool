@@ -25,7 +25,7 @@ namespace RAT._1View.UWP.SubScreens
         private Processes processesSc;
         private AppHistory appHistorySc;
         private CommandToolbar commandSc;
-        public ToolBar()
+        public ToolBar(string name)
         {
             myScreenState = ToolBarState.SYSTEMRESOURCES;
 

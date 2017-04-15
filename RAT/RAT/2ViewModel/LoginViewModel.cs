@@ -67,7 +67,9 @@ namespace RAT.ZTry
                 Task t = Task.Factory.StartNew(() => {
                     GetTelemetry.ReceiveTelemetry();
                 });
-
+                Task tt = Task.Factory.StartNew(() => {
+                    GetTelemetry.ReceiveTelemetry2();
+                });
                 await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
             }
             else

@@ -35,7 +35,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens
 
             //Initial collection of empty objects displayed
             //TODO Hardcoding empty values for now
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 data.Add(new DeviceSummary());
             }

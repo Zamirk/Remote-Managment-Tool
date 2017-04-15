@@ -76,9 +76,9 @@ namespace RAT._1View.Desktop.Manage
                     WidthRequest = 100,
                     Text = "View"
                 };
-                //Temp label for databinding the name of the process
+                //Temp label for databinding the name of the device
                 Label temp = new Label();
-                temp.SetBinding(Label.TextProperty, "CustomerID");
+                temp.SetBinding(Label.TextProperty, "Name");
 
                 myButton.Clicked += delegate (object sender, EventArgs args)
                 {

@@ -18,38 +18,93 @@ namespace ConsoleApplication1.Folder
         public static bool go = true;
         public static string aaaaa = "";
 
-        static string ConnectionString = "Endpoint=sb://iothub-ns-manageiot-119210-43e7bcdbe5.servicebus.windows.net/;" +
+        static string ConnectionString = "Endpoint=sb://iothub-ns-manageiot2-135779-1d0655b8a3.servicebus.windows.net/;" +
                              "SharedAccessKeyName=iothubowner;" +
-                             "SharedAccessKey=9MVDBFa+gjD8C1awDRPW8oGVraiJm6XV72ui4fm8UIA=";
+                             "SharedAccessKey=7qKgybfNWoSoD9nTr6IRB2z7oLegSnxAux25ZTlmFGc=";
 
-        static string eventHubEntity = "ManageIoT";
-        static string partitionId = "1";
+        static string eventHubEntity = "ManageIoT2";
+        static string partitionId = "0";
+        static string partitionId1 = "1";
 
         //Todays date and time
         static DateTime startingDateTimeUtc;
 
         //List of devices
-        public static List<string> devices = new List<string>() { "Device_1", "Device_2" };
+        public static List<string> devices = new List<string>() { "Device_1", "Device_2", "Device_3", "Device_4", "Device_5", "Device_6", "Device_7", "Device_8", "Device_9", "Device_10" };
 
         //Last received values
         public static List<TelemetryDatapoint> lastTelemetryDatapoints = new List<TelemetryDatapoint>()
         {
-            new TelemetryDatapoint(""),
-            new TelemetryDatapoint(""),
-            new TelemetryDatapoint("")
+            new TelemetryDatapoint(""),new TelemetryDatapoint(""),new TelemetryDatapoint(""),new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),new TelemetryDatapoint(""),new TelemetryDatapoint(""),new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),new TelemetryDatapoint("")
         };
 
         //Storing data of all devices
         public static List<Queue<TelemetryDatapoint>> listOfDevices = new List<Queue<TelemetryDatapoint>>()
         {
             //TODO TEMP HARDCODING 2 DEVICES
-            new Queue<TelemetryDatapoint>(),
-            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),
             new Queue<TelemetryDatapoint>()
-
         };
 
-        //Receive data method
+        //Receive data partition 1
+        public static void ReceiveTelemetry2()
+        {
+            ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(ConnectionString);
+            builder.TransportType = TransportType.Amqp;
+
+            MessagingFactory factory = MessagingFactory.CreateFromConnectionString(ConnectionString);
+
+            EventHubClient client = factory.CreateEventHubClient(eventHubEntity);
+            EventHubConsumerGroup group = client.GetDefaultConsumerGroup();
+
+            startingDateTimeUtc = DateTime.Now.AddSeconds(-30);
+
+            EventHubReceiver receiver2 = group.CreateReceiver(partitionId1, startingDateTimeUtc);
+            Console.WriteLine("Receiving Data");
+
+
+            EventData data;
+            try
+            {
+                while (go)
+                {
+                    //System.Diagnostics.Debug.WriteLine("Level 1: Looping");
+                    data = receiver2.Receive();
+                    //System.Diagnostics.Debug.WriteLine("Level 2: Data received" + data);
+                    // if (data.GetBytes() != null)
+                    // {
+                    string JsonString = Encoding.UTF8.GetString(data.GetBytes());
+                    //System.Diagnostics.Debug.WriteLine("Level 3: JSon" + JsonString);
+
+                    TelemetryDatapoint telemetry = JsonConvert.DeserializeObject<TelemetryDatapoint>(JsonString);
+                    //System.Diagnostics.Debug.WriteLine(JsonString);
+
+                    for (int i = 0; i < devices.Count; i++)
+                    {
+                        if (telemetry.Device_id.Equals(devices[i]))
+                        {
+                            listOfDevices[i].Dequeue();
+                            listOfDevices[i].Enqueue(telemetry);
+                            lastTelemetryDatapoints[i] = telemetry;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("[GetTelemetry] Error IOT, you should probably check this" + e);
+            }
+
+            receiver2.Close();
+            client.Close();
+            factory.Close();
+        }
+
+        //Receive data partition 0
         public static void ReceiveTelemetry()
         {
             ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(ConnectionString);
@@ -63,7 +118,7 @@ namespace ConsoleApplication1.Folder
             startingDateTimeUtc = DateTime.Now.AddSeconds(-30);
 
             EventHubReceiver receiver = group.CreateReceiver(partitionId, startingDateTimeUtc);
-
+            EventHubReceiver receiver2 = group.CreateReceiver(partitionId, startingDateTimeUtc);
             Console.WriteLine("Receiving Data");
 
             //Filling default values
@@ -72,6 +127,13 @@ namespace ConsoleApplication1.Folder
                 listOfDevices[0].Enqueue(new TelemetryDatapoint(""));
                 listOfDevices[1].Enqueue(new TelemetryDatapoint(""));
                 listOfDevices[2].Enqueue(new TelemetryDatapoint(""));
+                listOfDevices[3].Enqueue(new TelemetryDatapoint(""));
+                listOfDevices[4].Enqueue(new TelemetryDatapoint(""));
+                listOfDevices[5].Enqueue(new TelemetryDatapoint(""));
+                listOfDevices[6].Enqueue(new TelemetryDatapoint(""));
+                listOfDevices[7].Enqueue(new TelemetryDatapoint(""));
+                listOfDevices[8].Enqueue(new TelemetryDatapoint(""));
+                listOfDevices[9].Enqueue(new TelemetryDatapoint(""));
             }
 
             EventData data;
@@ -79,40 +141,26 @@ namespace ConsoleApplication1.Folder
             {
                 while (go)
                 {
-                    System.Diagnostics.Debug.WriteLine("Level 1: Looping");
+                    //System.Diagnostics.Debug.WriteLine("Level 1: Looping");
                     data = receiver.Receive();
-                    System.Diagnostics.Debug.WriteLine("Level 2: Data received"+data);
+                    //System.Diagnostics.Debug.WriteLine("Level 2: Data received"+data);
                     // if (data.GetBytes() != null)
                     // {
                     string JsonString = Encoding.UTF8.GetString(data.GetBytes());
-                    System.Diagnostics.Debug.WriteLine("Level 3: JSon"+JsonString);
+                    //System.Diagnostics.Debug.WriteLine("Level 3: JSon"+JsonString);
 
                     TelemetryDatapoint telemetry = JsonConvert.DeserializeObject<TelemetryDatapoint>(JsonString);
-                    System.Diagnostics.Debug.WriteLine(JsonString);
+                    //System.Diagnostics.Debug.WriteLine(JsonString);
 
-                    if (telemetry.Device_id.Equals("Device_1"))
+                    for (int i = 0; i < devices.Count; i++)
                     {
-                        System.Diagnostics.Debug.WriteLine(JsonString);
-
-                        listOfDevices[0].Dequeue();
-                        listOfDevices[0].Enqueue(telemetry);
-                        lastTelemetryDatapoints[0] = telemetry;
-                        aaaaa = JsonString;
+                        if (telemetry.Device_id.Equals(devices[i]))
+                        {
+                            listOfDevices[i].Dequeue();
+                            listOfDevices[i].Enqueue(telemetry);
+                            lastTelemetryDatapoints[i] = telemetry;
+                        }
                     }
-                    else if (telemetry.Device_id.Equals("Device_2"))
-                    {
-                        System.Diagnostics.Debug.WriteLine(JsonString);
-                        System.Diagnostics.Debug.WriteLine(JsonString);
-
-                        listOfDevices[1].Dequeue();
-                        listOfDevices[1].Enqueue(telemetry);
-                        lastTelemetryDatapoints[1] = telemetry;
-                    }
-                    // }
-                    // else
-                    //{
-                    //    System.Diagnostics.Debug.WriteLine("----------------------------Avoided Error"+DateTime.Now);
-                    //}
                 }
             }
             catch (Exception e)

@@ -242,7 +242,7 @@ namespace RAT.ZTry
         {
             RemoveScreen();
             manageButton.BackgroundColor = Color.Gray;
-            singleDeviceScreen = new ToolBar();
+            singleDeviceScreen = new ToolBar(deviceName);
             midGrid.Children.Add(singleDeviceScreen, 1, 0);
 
             myMenuState = MenuState.MANAGE_SINGLEDEVICE;
