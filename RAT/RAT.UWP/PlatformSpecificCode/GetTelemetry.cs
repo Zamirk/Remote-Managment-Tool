@@ -10,6 +10,7 @@ using IoTHubAmqp;
 using Newtonsoft.Json;
 using ppatierno.AzureSBLite;
 using ppatierno.AzureSBLite.Messaging;
+using RAT;
 using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 
 namespace ConsoleApplication1.Folder
@@ -48,12 +49,12 @@ namespace ConsoleApplication1.Folder
         //Receive data partition 1
         public static void ReceiveTelemetry2()
         {
-            ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(DashboardFromDatabase.connectionString);
+            ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(UserData.connectionString);
             builder.TransportType = TransportType.Amqp;
 
-            MessagingFactory factory = MessagingFactory.CreateFromConnectionString(DashboardFromDatabase.connectionString);
+            MessagingFactory factory = MessagingFactory.CreateFromConnectionString(UserData.connectionString);
 
-            EventHubClient client = factory.CreateEventHubClient(DashboardFromDatabase.eventHubEntity);
+            EventHubClient client = factory.CreateEventHubClient(UserData.eventHubEntity);
             EventHubConsumerGroup group = client.GetDefaultConsumerGroup();
 
             startingDateTimeUtc = DateTime.Now.AddSeconds(-30);
@@ -94,27 +95,27 @@ namespace ConsoleApplication1.Folder
                 System.Diagnostics.Debug.WriteLine("[GetTelemetry] Error IOT, you should probably check this" + e);
             }
 
-            receiver2.Close();
-            client.Close();
-            factory.Close();
+            //receiver2.Close();
+            //client.Close();
+            //factory.Close();
         }
 
         //Receive data partition 0
         public static void ReceiveTelemetry()
         {
-            System.Diagnostics.Debug.WriteLine("AAAAAAAAAAAAAAAAAA"+ DashboardFromDatabase.connectionString);
-            ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(DashboardFromDatabase.connectionString);
+            System.Diagnostics.Debug.WriteLine("AAAAAAAAAAAAAAAAAA"+ UserData.connectionString);
+            ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(UserData.connectionString);
             builder.TransportType = TransportType.Amqp;
 
-            MessagingFactory factory = MessagingFactory.CreateFromConnectionString(DashboardFromDatabase.connectionString);
+            MessagingFactory factory = MessagingFactory.CreateFromConnectionString(UserData.connectionString);
 
-            EventHubClient client = factory.CreateEventHubClient(DashboardFromDatabase.eventHubEntity);
+            EventHubClient client = factory.CreateEventHubClient(UserData.eventHubEntity);
             EventHubConsumerGroup group = client.GetDefaultConsumerGroup();
 
             startingDateTimeUtc = DateTime.Now.AddSeconds(-30);
 
             EventHubReceiver receiver = group.CreateReceiver(partitionId, startingDateTimeUtc);
-            EventHubReceiver receiver2 = group.CreateReceiver(partitionId, startingDateTimeUtc);
+
             Console.WriteLine("Receiving Data");
 
             //Filling default values
@@ -165,9 +166,9 @@ namespace ConsoleApplication1.Folder
             }
 
 
-            receiver.Close();
-            client.Close();
-            factory.Close();
+            //receiver.Close();
+            //client.Close();
+            //factory.Close();
         }
 
         public static void StopReceive()

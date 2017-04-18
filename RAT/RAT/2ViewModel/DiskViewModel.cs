@@ -28,7 +28,7 @@ namespace RAT._2ViewModel
             LoadData();
         }
 
-        private static int deviceNo = DashboardFromDatabase.deviceChosen;
+        private static int deviceNo = UserData.deviceChosen;
 
         private string diskReadTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskReadTime;
         private string diskWriteTime = GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteTime;

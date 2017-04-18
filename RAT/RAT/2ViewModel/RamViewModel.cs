@@ -26,7 +26,7 @@ namespace RAT._2ViewModel
             LoadData();
         }
 
-        private static int deviceNo = DashboardFromDatabase.deviceChosen;
+        private static int deviceNo = UserData.deviceChosen;
 
         private string inUse = GetTelemetry.lastTelemetryDatapoints[deviceNo].RamInUse;
         private string notInUse = GetTelemetry.lastTelemetryDatapoints[deviceNo].Ram;

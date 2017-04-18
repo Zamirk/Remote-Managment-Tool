@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26206.0
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RAT", "RAT\RAT\RAT.shproj", "{1B084EDB-6A33-4E16-AFE0-205ABFCB34B0}"
 EndProject
@@ -14,7 +14,6 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		RAT\RAT\RAT.projitems*{1b084edb-6a33-4e16-afe0-205abfcb34b0}*SharedItemsImports = 13
-		RAT\RAT\RAT.projitems*{41959bfb-721c-46e2-99ae-eef49a510bcc}*SharedItemsImports = 4
 		RAT\RAT\RAT.projitems*{881cd4cb-8f82-4db2-949e-a7a11fbf2dbc}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

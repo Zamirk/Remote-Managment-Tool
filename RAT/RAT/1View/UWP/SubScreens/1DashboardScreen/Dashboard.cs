@@ -5,9 +5,9 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
-using Amqp;
 using DashboardModel;
 using Newtonsoft.Json;
+using qwerty;
 using RAT.ZTry;
 using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
 using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
@@ -19,11 +19,12 @@ using Xamarin.Forms;
 using Cell = RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen.Cell;
 using Label = Xamarin.Forms.Label;
 
+[assembly: Dependency(typeof(AzureService))]
 namespace RAT._1View.Desktop.Manage
 {
     public class Dashboard : ScrollView
     {
-        private AzureLoginService updateItem;
+        private AzureService updateItem;
         private DashboardButtonState buttonState;
         //Popup screens
         private GraphSelection selectGraph = new GraphSelection();
@@ -297,7 +298,7 @@ namespace RAT._1View.Desktop.Manage
             }
 
             //Saving to the previously selected dashboard
-            DashboardFromDatabase.listOfDashboard[currentDashboard] = savingDashboard;
+            UserData.listOfDashboard[currentDashboard] = savingDashboard;
 
             //Saving dashbard to database
             if(changed) {
@@ -306,14 +307,14 @@ namespace RAT._1View.Desktop.Manage
 
                 Dashboards updatedDashboard = new Dashboards()
                 {
-                    Id = DashboardFromDatabase.listOfIds[currentDashboard],
+                    Id = UserData.listOfIds[currentDashboard],
                     DashNo = "" + currentDashboard,
                     DashString = messageString,
-                    Username = DashboardFromDatabase.userName
+                    userId = UserData.userId
                 };
 
                 System.Diagnostics.Debug.WriteLine(messageString);
-                updateItem = new AzureLoginService();
+                updateItem = DependencyService.Get<AzureService>();
                 updateItem.UpdateDashboard(updatedDashboard);
                 changed = false;
             }
@@ -331,68 +332,68 @@ namespace RAT._1View.Desktop.Manage
                     myCells[xAxis][yAxis].OriginalY = yAxis;
 
                     //If a graph is present
-                    if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].G)
+                    if (UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].G)
                     {
                         //Getting values
                         int columnSpan =
-                            DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].C;
-                        int rowSpan = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].R;
-                        int device = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].D;
+                            UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].C;
+                        int rowSpan = UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].R;
+                        int device = UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].D;
                         int dataSource =
-                            DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].S;
-                        int colour = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].O;
+                            UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].S;
+                        int colour = UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].O;
                         string title =
-                            DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].N;
+                            UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].N;
 
-                        bool x = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].X;
-                        bool y = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].Y;
-                        bool grid = DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].L;
+                        bool x = UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].X;
+                        bool y = UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].Y;
+                        bool grid = UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].L;
 
-                        if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 0)
+                        if (UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 0)
                         {
                             myCells[xAxis][yAxis].AreaChart(device, dataSource);
                         }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 1)
+                        else if (UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 1)
                         {
                             myCells[xAxis][yAxis].BarChart(device, dataSource);
                         }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 2)
+                        else if (UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 2)
                         {
                             myCells[xAxis][yAxis].ColumnChart(device, dataSource);
                         }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 3)
+                        else if (UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 3)
                         {
                             myCells[xAxis][yAxis].LineChart(device, dataSource);
                         }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 4)
+                        else if (UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 4)
                         {
                             myCells[xAxis][yAxis].StepArea(device, dataSource);
                         }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 5)
+                        else if (UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 5)
                         {
                             myCells[xAxis][yAxis].PyramidChart(device, dataSource);
                         }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 6)
+                        else if (UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 6)
                         {
                             myCells[xAxis][yAxis].ScatterChart(device, dataSource);
                         }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 7)
+                        else if (UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 7)
                         {
                             myCells[xAxis][yAxis].SplineSeriesChart(device, dataSource);
                         }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 8)
+                        else if (UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 8)
                         {
                             myCells[xAxis][yAxis].SplineAreaChart(device, dataSource);
                         }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 9)
+                        else if (UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 9)
                         {
                             myCells[xAxis][yAxis].StepLineSeries(device, dataSource);
                         }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 10)
+                        else if (UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 10)
                         {
                             myCells[xAxis][yAxis].PieChart(device, dataSource);
                         }
-                        else if (DashboardFromDatabase.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 11)
+                        else if (UserData.listOfDashboard[dashboardList.SelectedIndex][xAxis][yAxis].T == 11)
                         {
                             myCells[xAxis][yAxis].DoughnutChart(device, dataSource);
                         }

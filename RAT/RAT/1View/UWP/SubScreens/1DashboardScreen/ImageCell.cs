@@ -22,9 +22,30 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 
         public ImageCell()
         {
-        //Image locations
-        imgUri = new string[]
-        {
+            if (Device.OS == TargetPlatform.Android)
+            {
+                //Image locations
+                imgUri = new string[]
+            {
+                "Area.png",
+                "Bar.png",
+                "Column.png",
+                "Line.png",
+                "StepArea.png",
+                "Pyramid.png",
+                "Scatter.png",
+                "Spline.png",
+                "SplineArea.png",
+                "Step.png",
+                "Pie.png",
+                "Doughnut.png",
+            };
+            }
+            else
+            {
+                //Image locations
+                imgUri = new string[]
+            {
                 "Assets\\Graphs\\Area.png",
                 "Assets\\Graphs\\Bar.png",
                 "Assets\\Graphs\\Column.png",
@@ -37,7 +58,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 "Assets\\Graphs\\Step.png",
                 "Assets\\Graphs\\Pie.png",
                 "Assets\\Graphs\\Doughnut.png",
-        };
+            };
+            }
+
             //Generating the images
             myImage = new Image();
             myImage.VerticalOptions = LayoutOptions.Center;

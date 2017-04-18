@@ -19,7 +19,9 @@ namespace RAT
             }
             else if (Device.OS == TargetPlatform.Android)
             {
-               // MainPage = new NavigationPage(new Mobile.LoginScreen());
+                MainPage = new NavigationPage(new ZTry.LoginScreen());
+
+                // MainPage = new NavigationPage(new Mobile.LoginScreen());
             }
             //MainPage = new NavigationPage(new MainPage());
         }

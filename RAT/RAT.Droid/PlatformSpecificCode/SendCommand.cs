@@ -11,6 +11,10 @@ namespace IoTHubAmqpService
 {
     class SendCommand
     {
+        public SendCommand(string a)
+        {
+            
+        }
         public void SendCommandToDevice()
         {
         }

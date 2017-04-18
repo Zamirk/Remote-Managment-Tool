@@ -28,8 +28,8 @@ namespace IoTHubAmqpService
         public SendCommand(String Id)
         {
             DEVICE_ID = Id;
-            SHARED_ACCESS_KEY = DashboardFromDatabase.connectionCode;
-            HOST = DashboardFromDatabase.hostLink;
+            SHARED_ACCESS_KEY = UserData.connectionCode;
+            HOST = UserData.hostLink;
         }
 
         public void SendCommandToDevice()

@@ -26,11 +26,15 @@ namespace RAT.ZTry
             //Username
             Entry username = new Entry();
             username.Placeholder = "Username";
+            username.IsEnabled = false;
+            username.Text = "xxxxx";
 
             //Password
             Entry password = new Entry();
             password.Placeholder = "Password";
             password.IsPassword = true;
+            password.Text = "..........";
+            password.IsEnabled = false;
 
             //Button
             Button loginButton = new Button();
@@ -48,15 +52,37 @@ namespace RAT.ZTry
             //Layout
             StackLayout myStack = new StackLayout();
             myStack.VerticalOptions = LayoutOptions.Start;
+
+            String uri = "Icon.png";
+            //Generating the images
+            Image myImage = new Image();
+            myImage.Source = uri;
+            myImage.VerticalOptions = LayoutOptions.StartAndExpand;
+            myImage.HorizontalOptions = LayoutOptions.EndAndExpand;
+            myImage.WidthRequest = 620;
+            myImage.HeightRequest = 120;
+
+            username.VerticalOptions = LayoutOptions.Start;
+            password.VerticalOptions = LayoutOptions.Start;
+
+            mainGrid = new Grid();
+            mainGrid.ColumnSpacing = 0;
+            mainGrid.RowSpacing = 0;
+
+            if (Device.OS == TargetPlatform.Android)
+            {
+                BackgroundColor = Color.FromHex("0078D7");
+                myStack.BackgroundColor = Color.FromHex("0078D7");
+                mainGrid.BackgroundColor = Color.FromHex("0078D7");
+                myStack.Children.Add(myImage);
+
+            }
+
             myStack.Children.Add(username);
             myStack.Children.Add(password);
             myStack.Children.Add(loginButton);
             myStack.Spacing = 20;
             myStack.Padding = 50;
-
-            mainGrid = new Grid();
-            mainGrid.ColumnSpacing = 0;
-            mainGrid.RowSpacing = 0;
 
             mainGrid.RowDefinitions.Add(new RowDefinition {Height = 100});
             mainGrid.RowDefinitions.Add(new RowDefinition {Height = 10});
@@ -96,12 +122,13 @@ namespace RAT.ZTry
             mainGrid.Children.Add(maroonView, 2, 3);
 
             mainGrid.Children.Add(myStack, 1, 2);
-            mainGrid.Children.Add(colourButton, 2, 3);
+            //mainGrid.Children.Add(colourButton, 2, 3);
 
             Grid.SetColumnSpan(silverView, 3);
 
-            username.SetBinding(Entry.TextProperty, "UserName");
-            password.SetBinding(Entry.TextProperty, "Password");
+            //No longer binded, using microsoft login auth
+            //username.SetBinding(Entry.TextProperty, "UserName");
+            //password.SetBinding(Entry.TextProperty, "Password");
             loginButton.SetBinding(Button.CommandProperty, new Binding("LoginValidateCommand"));
 
             //Padding

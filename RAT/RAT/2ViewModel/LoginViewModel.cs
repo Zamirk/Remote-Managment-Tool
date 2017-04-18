@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CoffeeCups;
+using CoffeeCups.Helpers;
 using ConsoleApplication1.Folder;
 using Tools;
 using Xamarin.Forms;
+using qwerty;
+using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 
+[assembly: Dependency(typeof(AzureService))]
 namespace RAT.ZTry
 {
     public class LoginViewModel: ViewModelBase
     {
-        AzureLoginService azureService;
+        //AzureLoginService azureService;
+        public AzureService azureService;
 
         //Login details
         private string userName = "";
@@ -22,7 +29,33 @@ namespace RAT.ZTry
         public LoginViewModel()
         {
             //azureService = DependencyService.Get<AzureLoginService>();
-            azureService = new AzureLoginService();
+            //azureService = new AzureLoginService();
+            azureService = DependencyService.Get<AzureService>();
+
+            //Logining first
+            GetUserCredentials();
+        }
+
+         async Task GetUserCredentials()
+         {
+             if (!(await LoginAsync()))
+                 return;
+             try
+             {
+                 await azureService.GetLogin();
+             }
+             catch (Exception ex)
+             {
+                 System.Diagnostics.Debug.WriteLine("GetUserCredentials OH NO!" + ex);
+             }
+         }
+         
+        public Task<bool> LoginAsync()
+        {
+            if (Settings.IsLoggedIn)
+                return Task.FromResult(true);
+
+            return azureService.LoginAsync();
         }
 
         public string UserName
@@ -44,38 +77,30 @@ namespace RAT.ZTry
         //Checks Login, Changes screen if found
         async Task LoginValidate()
         {
-
-            if (await azureService.GetLogin(userName, password))
-            {
-                System.Diagnostics.Debug.WriteLine("\n-----Entering Main Menu");
-                //Screen Navigation
-                if (Device.OS == TargetPlatform.Android)
-                {
-                    //(Application.Current.MainPage).Navigation.InsertPageBefore(new Mobile.ParentScreen(),
-                    //    (Application.Current.MainPage).Navigation.NavigationStack[0]);
-                   // await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
-                   // GC.Collect();
-                }
-                else
+                if (UserData.userId != "")
                 {
                     (Application.Current.MainPage).Navigation.InsertPageBefore(new ParentScreen(),
                         (Application.Current.MainPage).Navigation.NavigationStack[0]);
                     GC.Collect();
+
+                    //Starts 2 async tasks to get telemetry data
+                    Task t = Task.Factory.StartNew(() => {
+                        GetTelemetry.ReceiveTelemetry();
+                    });
+                    Task tt = Task.Factory.StartNew(() => {
+                        GetTelemetry.ReceiveTelemetry2();
+                    });
+
+                    await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Please login with a valid account",
+                        "Restart the application to login", "OK");
+                    Settings.AuthToken = string.Empty;
+                    Settings.UserId = string.Empty;
                 }
 
-                //Gets the data IoT
-                Task t = Task.Factory.StartNew(() => {
-                    GetTelemetry.ReceiveTelemetry();
-                });
-                Task tt = Task.Factory.StartNew(() => {
-                    GetTelemetry.ReceiveTelemetry2();
-                });
-                await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
-            }
-            else
-            {
-                        System.Diagnostics.Debug.WriteLine("Incorrect Login");
-            }
         }
     }
 }

@@ -21,21 +21,36 @@ namespace RAT._1View.Desktop
         public StandardCommands(string a)
         {
             deviceId = a;
-
+            string[] imgUri;
             BackgroundColor = Color.FromRgb(29, 29, 29);
             List<Image> myImages = new List<Image>();
 
-            //Image locations
-            string[] imgUri = new string[]
+            if (Device.OS == TargetPlatform.Android)
             {
+                //Image locations
+                imgUri = new string[]
+                {
+                    "Hibernate.png",
+                    "ShutDown.png",
+                    "Restart.png",
+                    "Sleep.png",
+                    "Logoff.png",
+                    "Lock.png",
+                };
+            }
+            else
+            {
+                //Image locations
+                imgUri = new string[]
+                {
                 "Assets\\Hibernate.png",
                 "Assets\\Shut Down.png",
                 "Assets\\Restart.png",
                 "Assets\\Sleep.png",
                 "Assets\\Logoff.png",
                 "Assets\\Lock.png",
-            };
-
+                };
+            }
             int y = 10;
             int x = 125;
             //Generating the images

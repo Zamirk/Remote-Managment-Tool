@@ -15,7 +15,7 @@ using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 using RAT._3Model;
 
 namespace RAT.ZTry
-{
+{/*
     public class AzureLoginService
     {
         private const string replace = @"{""G"":false,""T"":0,""R"":0,""C"":0,""D"":0,""S"":0,""N"":null,""O"":0,""X"":false,""Y"":false,""L"":false}";
@@ -34,7 +34,7 @@ namespace RAT.ZTry
 
         //public async Task<ObservableCollection<Login>> GetLogin(string a, string b)
 
-        public async Task<bool> GetLogin(string a, string b)
+       /* public async Task<bool> GetLogin(string a, string b)
         {
             loginTable = client.GetTable<Login>();
 
@@ -48,11 +48,11 @@ namespace RAT.ZTry
             if (items[0].Username.Equals(a) && items[0].Password.Equals(b))
             {
                 System.Diagnostics.Debug.WriteLine("User found: " + items[0].Username);
-                DashboardFromDatabase.userName = a;
-                DashboardFromDatabase.connectionCode = items[0].ConnectionCode;
-                DashboardFromDatabase.connectionString = items[0].ConnectionString;
-                DashboardFromDatabase.eventHubEntity = items[0].EventHubEntity;
-                DashboardFromDatabase.hostLink = items[0].HostLink;
+                UserData.userName = a;
+                UserData.connectionCode = items[0].ConnectionCode;
+                UserData.connectionString = items[0].ConnectionString;
+                UserData.eventHubEntity = items[0].EventHubEntity;
+                UserData.hostLink = items[0].HostLink;
 
                 //Getting dashboards
                 await GetDashboards(a);
@@ -72,7 +72,7 @@ namespace RAT.ZTry
             System.Diagnostics.Debug.WriteLine("List of dashboards");
 
             List<Dashboards> listOfDashboards = await dashboardTable.
-                Where(r => r.Username == a).
+                Where(r => r.userId == a).
                 ToListAsync();
 
             //Looping trough dashboards
@@ -82,12 +82,12 @@ namespace RAT.ZTry
                 listOfDashboards[i].DashString = listOfDashboards[i].DashString.Replace(placeHolder, replace);
 
                 //Deserialising
-                DashboardFromDatabase.listOfDashboard[i] = JsonConvert.DeserializeObject<DashboardCellModel[][]>(listOfDashboards[i].DashString);
+                UserData.listOfDashboard[i] = JsonConvert.DeserializeObject<DashboardCellModel[][]>(listOfDashboards[i].DashString);
 
                 //Saving dashboard ids
                 listOfIds.Add(listOfDashboards[i].Id);
             }
-            DashboardFromDatabase.listOfIds = listOfIds;
+            UserData.listOfIds = listOfIds;
         }
 
         public async Task UpdateDashboard(Dashboards item)
@@ -104,5 +104,6 @@ namespace RAT.ZTry
         public string Notes { get; set; }
         public bool Done { get; set; }
     }
+*/
 }
 

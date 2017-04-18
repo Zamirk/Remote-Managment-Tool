@@ -183,7 +183,7 @@ namespace RAT.ZTry
                 midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 225 });
             }
             midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
-            //TODO REMOVE AND REPLACE WITH MOBILE AND DESTOP SECTIONS 03/03/017C
+
             if (Device.Idiom == TargetIdiom.Phone)
             {
                 midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 5 });

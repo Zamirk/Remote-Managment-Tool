@@ -8,8 +8,9 @@ namespace DashboardModel
     {
         [Newtonsoft.Json.JsonProperty("Id")]
         public string Id { get; set; }
+
         public string DashNo { get; set; }
         public string DashString { get; set; }
-        public string Username { get; set; }
+        public string userId { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace RAT._2ViewModel
             LoadData();
         }
 
-        private static int deviceNo = DashboardFromDatabase.deviceChosen;
+        private static int deviceNo = UserData.deviceChosen;
 
         private string downloadRate = GetTelemetry.lastTelemetryDatapoints[deviceNo].DownloadRate;
         private string uploadRate = GetTelemetry.lastTelemetryDatapoints[deviceNo].UploadRate;

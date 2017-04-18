@@ -9,15 +9,6 @@ namespace RAT.ZTry
         [Newtonsoft.Json.JsonProperty("Id")]
         public string Id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Username")]
-        public string Username { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("Password")]
-        public string Password { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("Email")]
-        public string Email { get; set; }
-
         [Newtonsoft.Json.JsonProperty("ConnectionCode")]
         public string ConnectionCode { get; set; }
 
@@ -29,5 +20,8 @@ namespace RAT.ZTry
 
         [Newtonsoft.Json.JsonProperty("HostLink")]
         public string HostLink { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("userId")]
+        public string userId { get; set; }
     }
 }

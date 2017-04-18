@@ -56,7 +56,10 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         private int radius = 25;
         private bool AlreadyGenerated = false;
 
-        public Button myButton = new Button();
+        public Button myButton = new Button()
+        {
+            BackgroundColor = Color.Transparent
+        };
 
         public Button north = new Button();
         public Button west = new Button();
