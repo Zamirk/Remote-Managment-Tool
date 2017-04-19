@@ -43,7 +43,12 @@ namespace ConsoleApplication1.Folder
         };
 
         //Receive data partition 0
-        public static void ReceiveTelemetry()
+        public static void ReceiveTelemetry2()
+        {
+        }
+
+        //Receive data partition 0
+            public static void ReceiveTelemetry()
         {
             System.Diagnostics.Debug.WriteLine("AAAAAAAAAAAAAAAAAA" + UserData.connectionString);
 
@@ -107,16 +112,16 @@ namespace ConsoleApplication1.Folder
         }
         private static async Task ReceiveMessagesFromDeviceAsync(string partition, CancellationToken ct)
         {
-            var eventHubReceiver = Microsoft.ServiceBus.Messaging.EventDataeventHubClient.GetDefaultConsumerGroup().CreateReceiver(partition, DateTime.UtcNow);
+           // var eventHubReceiver = Microsoft.ServiceBus.Messaging.EventDataeventHubClient.GetDefaultConsumerGroup().CreateReceiver(partition, DateTime.UtcNow);
             while (true)
             {
-                Microsoft.Azure.Devices.Client.DeviceClient.Create().ReceiveAsync()
-                if (ct.IsCancellationRequested) break;
-                EventData eventData = await eventHubReceiver.ReceiveAsync();
-                if (eventData == null) continue;
+               // Microsoft.Azure.Devices.Client.DeviceClient.Create().ReceiveAsync()
+               // if (ct.IsCancellationRequested) break;
+             //   EventData eventData = await eventHubReceiver.ReceiveAsync();
+             //   if (eventData == null) continue;
 
-                string data = Encoding.UTF8.GetString(eventData.GetBytes());
-                Console.WriteLine("Message received. Partition: {0} Data: '{1}'", partition, data);
+             //   string data = Encoding.UTF8.GetString(eventData.GetBytes());
+             //   Console.WriteLine("Message received. Partition: {0} Data: '{1}'", partition, data);
             }
         }
 
