@@ -7,40 +7,96 @@ namespace RAT.Model
 {
     public class Processes: INotifyPropertyChanged
     {
-	    public Processes()
+        public Processes()
         {
-            symbol = "";
-            account = "";
+            name = "";
+            memory = "";
+            time = "";
+            cpu = "";
         }
 
-        public void InitializeOn(Processes other)
-        {
-            this.Symbol = other.Symbol;
-            this.Account = other.Account;
-        }
+        private string name;
+        private string memory;
+        private string time;
+        private string cpu;
+        #region private variables
 
-        private string symbol;
-        private string account;
+        private string _employeeID;
+        private string _customerID;
+        private string _userName;
 
-        public string Symbol
+        #endregion
+
+        public string UserName
         {
-            get { return symbol; }
+            get { return _userName; }
             set
             {
-                symbol = value;
-                RaisePropertyChanged("Symbol");
+                this._userName = value;
+                RaisePropertyChanged("UserName");
             }
         }
 
-        public string Account
+        public string EmployeeID
         {
-            get { return account; }
+            get { return _employeeID; }
             set
             {
-                account = value;
-                RaisePropertyChanged("Account");
+                this._employeeID = value;
+                RaisePropertyChanged("EmployeeID");
             }
         }
+
+        public string CustomerID
+        {
+            get { return _customerID; }
+            set
+            {
+                this._customerID = value;
+                RaisePropertyChanged("CustomerID");
+            }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                RaisePropertyChanged("Name");
+            }
+        }
+
+        public string Memory
+        {
+            get { return memory; }
+            set
+            {
+                memory = value;
+                RaisePropertyChanged("Memory");
+            }
+        }
+
+        public string Cpu
+        {
+            get { return cpu; }
+            set
+            {
+                cpu = value;
+                RaisePropertyChanged("Cpu");
+            }
+        }
+
+        public string Time
+        {
+            get { return time; }
+            set
+            {
+                time = value;
+                RaisePropertyChanged("Time");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void RaisePropertyChanged(string propertyName)

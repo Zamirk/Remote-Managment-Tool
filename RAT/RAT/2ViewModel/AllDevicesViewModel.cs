@@ -70,7 +70,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                       {
                           while (data.Count < processesCount)
                           {
-                              data.Add(new ProcessTest());
+                              data.Add(new Processes());
                           }
                       }
                       else if (processesCount < data.Count)

@@ -13,7 +13,6 @@ using RAT.ZTry;
 using RAT._1View.Desktop.Screens.SubScreens;
 using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 using RAT._2ViewModel;
-using RAT._2ViewModel.Test;
 using Syncfusion.SfChart.XForms;
 using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;

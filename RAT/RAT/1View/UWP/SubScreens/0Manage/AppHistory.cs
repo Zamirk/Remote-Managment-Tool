@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RAT.ZTry;
-using RAT._2ViewModel.Test;
 using Xamarin.Forms;
 
 namespace RAT._1View.Desktop

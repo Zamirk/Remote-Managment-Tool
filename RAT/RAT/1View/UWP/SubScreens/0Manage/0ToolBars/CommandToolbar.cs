@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using RAT.ZTry;
 using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
-using RAT._2ViewModel.Test;
 using Xamarin.Forms;
 using RAT._1View.Desktop;
 

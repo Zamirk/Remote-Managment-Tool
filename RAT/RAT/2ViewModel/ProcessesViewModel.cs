@@ -16,16 +16,16 @@ namespace RAT._2ViewModel
     public class ProcessesViewModel : ViewModelBase
     {
         public bool collectGarbage = false;
-        ObservableCollection<ProcessTest> data;
+        ObservableCollection<Processes> data;
         private int deviceNum = 9;
         public ProcessesViewModel(int deviceNum)
         {
             this.deviceNum = deviceNum;
-            data = new ObservableCollection<ProcessTest>();
+            data = new ObservableCollection<Processes>();
             LoadData();
         }
 
-        public ObservableCollection<ProcessTest> Data
+        public ObservableCollection<Processes> Data
         {
             set { SetProperty(ref data, value); }
             get { return data; }
@@ -41,7 +41,7 @@ namespace RAT._2ViewModel
             //Initial collection of empty objects displayed
             for (int i = 0; i < processesCount; i++)
             {
-                data.Add(new ProcessTest());
+                data.Add(new Processes());
             }
 
             //Updating the empty objects with data
@@ -71,7 +71,7 @@ namespace RAT._2ViewModel
                 {
                     while (data.Count < processesCount)
                     {
-                        data.Add(new ProcessTest());
+                        data.Add(new Processes());
                     }
                 } else if (processesCount < data.Count)
                 {

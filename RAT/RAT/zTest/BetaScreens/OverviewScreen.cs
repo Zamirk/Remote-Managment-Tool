@@ -1,6 +1,5 @@
 ﻿using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
-using RAT._2ViewModel.Test;
 
 namespace RAT._1View.Desktop
 {

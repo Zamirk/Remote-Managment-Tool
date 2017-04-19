@@ -6,7 +6,7 @@ namespace RAT._3Model
 {
     public class DashboardCellModel
     {
-        //If yes, make graph
+        //If true, make graph
         public bool G { get; set; }
 
         public int T { get; set; }

@@ -65,11 +65,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)3Model\DeviceSummary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\Login.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)3Model\OrderInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)3Model\DeviceInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\Processes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)3Model\ProcessTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)3Model\TestModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Database\AzureLoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IOTest.cs" />
@@ -83,7 +79,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\MainScreenViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\Model.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\OverviewScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\OverviewViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\Temp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\ViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\zDiskScreen.cs" />

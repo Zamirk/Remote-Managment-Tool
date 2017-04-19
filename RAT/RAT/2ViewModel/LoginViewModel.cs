@@ -96,7 +96,7 @@ namespace RAT.ZTry
                 else
                 {
                     await App.Current.MainPage.DisplayAlert("Please login with a valid account",
-                        "Restart the application to login", "OK");
+                        "Error: Invalid account, or connection problem", "OK");
                     Settings.AuthToken = string.Empty;
                     Settings.UserId = string.Empty;
                 }
