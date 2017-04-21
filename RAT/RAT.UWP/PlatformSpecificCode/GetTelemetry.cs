@@ -99,6 +99,7 @@ namespace ConsoleApplication1.Folder
             //client.Close();
             //factory.Close();
         }
+        public void EventHubClientTests() { }
 
         //Receive data partition 0
         public static void ReceiveTelemetry()

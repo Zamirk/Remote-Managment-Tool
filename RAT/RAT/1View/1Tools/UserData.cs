@@ -37,6 +37,11 @@ namespace RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen
         //Event hub entity
         public static string hostLink = "";
 
+        //Device chosen
         public static int deviceChosen = 0;
+
+        //Device id
+        public static string deviceId = "";
+
     }
 }

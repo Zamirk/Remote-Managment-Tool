@@ -5,7 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ARAT.Droid.PlatformSpecificCode;
 using IoTHubAmqp;
+using Microsoft.Azure.EventHubs;
+using Microsoft.Azure.EventHubs.Processor;
 using Newtonsoft.Json;
 using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 
@@ -13,6 +16,9 @@ namespace ConsoleApplication1.Folder
 {
     public class GetTelemetry
     {
+
+
+
         public static bool go = true;
 
         static string partitionId = "0";
@@ -75,9 +81,6 @@ namespace ConsoleApplication1.Folder
 
 
 
-
-
-
                 //while (go)
                 {
                     //System.Diagnostics.Debug.WriteLine("Level 1: Looping");
@@ -110,24 +113,43 @@ namespace ConsoleApplication1.Folder
 
 
         }
-        private static async Task ReceiveMessagesFromDeviceAsync(string partition, CancellationToken ct)
+
+
+        private const string EhConnectionString = "Endpoint=sb://iothub-ns-manageiot2-135779-1d0655b8a3.servicebus.windows.net/;SharedAccessKeyName=iothubowner;SharedAccessKey=7qKgybfNWoSoD9nTr6IRB2z7oLegSnxAux25ZTlmFGc=";
+        private const string EhEntityPath = "ManageIoT2";
+        private const string StorageAccountName = "mystorageaccountscus";
+        private const string StorageAccountKey = "KgcTJAQNEgDMICrdzkwHsp43LoSBUrs1pdKu6uSy2AXz4ohFCZk07eWNiJ1sgUDfddttDXUAjfUvVFDUctIEqA==";
+
+        private static readonly string StorageConnectionString = string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}", StorageAccountName, StorageAccountKey);
+
+    public async void EventHubClientTests()
         {
-           // var eventHubReceiver = Microsoft.ServiceBus.Messaging.EventDataeventHubClient.GetDefaultConsumerGroup().CreateReceiver(partition, DateTime.UtcNow);
-            while (true)
+            string _guid = Guid.NewGuid().ToString();
+            string eventProcessorHostName = _guid;
+
+            string leaseName = eventProcessorHostName = _guid;
+            Console.WriteLine("Registering EventProcessor...");
+
+            var eventProcessorHost = new EventProcessorHost(
+                eventProcessorHostName,
+                        EhEntityPath,
+                        PartitionReceiver.DefaultConsumerGroupName,
+                        EhConnectionString,
+                        StorageConnectionString,
+                        leaseName);
+
+            // Registers the Event Processor Host and starts receiving messages
+            await eventProcessorHost.RegisterEventProcessorAsync<SimpleEventProcessor>(new EventProcessorOptions()
             {
-               // Microsoft.Azure.Devices.Client.DeviceClient.Create().ReceiveAsync()
-               // if (ct.IsCancellationRequested) break;
-             //   EventData eventData = await eventHubReceiver.ReceiveAsync();
-             //   if (eventData == null) continue;
+                InitialOffsetProvider = (partitionId) => DateTime.UtcNow,
+            });
+            //Console.WriteLine("Receiving. Press ENTER to stop worker.");
+            //Console.ReadLine();
 
-             //   string data = Encoding.UTF8.GetString(eventData.GetBytes());
-             //   Console.WriteLine("Message received. Partition: {0} Data: '{1}'", partition, data);
-            }
+            // Disposes of the Event Processor Host
+           // await eventProcessorHost.UnregisterEventProcessorAsync();
         }
 
-        public static void StopReceive()
-        {
-            go = false;
-        }
+
     }
 }

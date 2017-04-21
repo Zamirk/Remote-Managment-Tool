@@ -26,6 +26,7 @@ namespace ARAT.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Microsoft.Azure.Amqp.Amqp.Resource.String.ApplicationName = global::ARAT.Droid.Resource.String.ApplicationName;
 			global::PCLCrypto.Resource.String.ApplicationName = global::ARAT.Droid.Resource.String.ApplicationName;
 			global::PCLCrypto.Resource.String.Hello = global::ARAT.Droid.Resource.String.Hello;
 			global::Syncfusion.Data.Resource.String.library_name = global::ARAT.Droid.Resource.String.library_name;

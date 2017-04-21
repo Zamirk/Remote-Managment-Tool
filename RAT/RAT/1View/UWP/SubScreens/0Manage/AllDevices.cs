@@ -83,7 +83,8 @@ namespace RAT._1View.Desktop.Manage
 
                 myButton.Clicked += delegate (object sender, EventArgs args)
                 {
-                    System.Diagnostics.Debug.WriteLine("[AllDevices]::Changing Screen::"+ temp.Text);
+                    //Setting device id
+                    UserData.deviceId = temp.Text;
 
                     int deviceNum = 9;
                     bool found = false;

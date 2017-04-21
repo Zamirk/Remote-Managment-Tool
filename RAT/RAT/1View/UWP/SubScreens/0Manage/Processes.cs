@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using ConsoleApplication1;
 using IoTHubAmqpService;
 using RAT.ZTry;
+using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 using RAT._2ViewModel;
 using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
@@ -75,7 +76,7 @@ namespace RAT._1View.Desktop
 
                     //Sending an asyncranous command
                     Task t = Task.Factory.StartNew(() => {
-                        SendCommand myCommand = new SendCommand(temp.Text);
+                        SendCommand myCommand = new SendCommand(UserData.deviceId);
                         myCommand.Command = new CommandDatapoint()
                         {
                             CommandType = CommandType.CloseProcess,

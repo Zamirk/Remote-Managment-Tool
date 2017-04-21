@@ -77,7 +77,7 @@ namespace RAT.ZTry
         //Checks Login, Changes screen if found
         async Task LoginValidate()
         {
-                if (UserData.userId != "")
+            if (UserData.userId != "")
                 {
                     (Application.Current.MainPage).Navigation.InsertPageBefore(new ParentScreen(),
                         (Application.Current.MainPage).Navigation.NavigationStack[0]);
@@ -90,7 +90,8 @@ namespace RAT.ZTry
                     Task tt = Task.Factory.StartNew(() => {
                         GetTelemetry.ReceiveTelemetry2();
                     });
-
+                    GetTelemetry aa = new GetTelemetry();
+                    aa.EventHubClientTests();
                     await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
                 }
                 else

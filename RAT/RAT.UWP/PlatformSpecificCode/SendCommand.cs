@@ -35,7 +35,17 @@ namespace IoTHubAmqpService
         public void SendCommandToDevice()
         {
             if (DEVICE_ID != "")
+
             {
+                System.Diagnostics.Debug.WriteLine("Key"+DEVICE_ID);
+                System.Diagnostics.Debug.WriteLine(SHARED_ACCESS_KEY);
+                System.Diagnostics.Debug.WriteLine(HOST);
+                System.Diagnostics.Debug.WriteLine(Command.Command);
+                System.Diagnostics.Debug.WriteLine(Command.CommandType);
+                System.Diagnostics.Debug.WriteLine(Command.ExpireTime);
+                System.Diagnostics.Debug.WriteLine(Command.ProcessName);
+
+
                 System.Diagnostics.Debug.WriteLine("Level 1");
                 Amqp.Trace.TraceLevel = Amqp.TraceLevel.Frame | Amqp.TraceLevel.Verbose;
                 //Amqp.Trace.TraceListener = (f, a) => System.Diagnostics.Trace.WriteLine(DateTime.Now.ToString("[hh:ss.fff]") + " " + Fx.Format(f, a));
