@@ -22,13 +22,22 @@ namespace qwerty
 {
     public class AzureService
     {
-        private const string replace =
+        public string replace { get; set; }=
             @"{""G"":false,""T"":0,""R"":0,""C"":0,""D"":0,""S"":0,""N"":null,""O"":0,""X"":false,""Y"":false,""L"":false}";
 
-        private const string placeHolder = "¬";
+        public string initialDashboard { get; set; }= "[[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬]]";
+
+        public string placeHolder { get; set; } = "¬";
+
+        //List of dashboards test
+        public List<DashboardCellModel[][]> listOfDashboard { get; set; } = new List<DashboardCellModel[][]>()
+        {
+            new DashboardCellModel[8][]
+        };
 
         public MobileServiceClient Client;
         public static bool UseAuth { get; set; } = true;
+        private bool initialise = false;
 
         IMobileServiceTable<Login> loginTable;
         IMobileServiceTable<Dashboards> dashboardTable;
@@ -37,6 +46,7 @@ namespace qwerty
 
         public async Task Initialize()
         {
+            initialise = true;
             try
             {
                 if (Client?.SyncContext?.IsInitialized ?? false)

@@ -315,6 +315,7 @@ namespace RAT._1View.Desktop.Manage
 
                 System.Diagnostics.Debug.WriteLine(messageString);
                 updateItem = DependencyService.Get<AzureService>();
+
                 updateItem.UpdateDashboard(updatedDashboard);
                 changed = false;
             }
@@ -746,6 +747,8 @@ namespace RAT._1View.Desktop.Manage
                             myCells[xAxis][yAxis].IsVisible = true;
                             myCells[xAxis][yAxis].InputTransparent = false;
                         }
+                        myCells[xAxis][yAxis].BackgroundColor = Color.Transparent;
+                        myCells[xAxis][yAxis].myButton.BackgroundColor = Color.Transparent;
                     }
                 }
             }

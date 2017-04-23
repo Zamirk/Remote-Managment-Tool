@@ -43,7 +43,7 @@ namespace ARAT.Droid.PlatformSpecificCode
             foreach (var eventData in messages)
             {
                 var data = Encoding.UTF8.GetString(eventData.Body.Array, eventData.Body.Offset, eventData.Body.Count);
-                System.Diagnostics.Debug.WriteLine("" + data);
+                //System.Diagnostics.Debug.WriteLine("" + data);
 
                 TelemetryDatapoint telemetry = JsonConvert.DeserializeObject<TelemetryDatapoint>(data);
 

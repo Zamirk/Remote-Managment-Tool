@@ -61,6 +61,7 @@ namespace RAT._1View.Desktop
             Label utilizationLabel;
             utilizationLabel = new Label();
             utilizationLabel.Text = "Utilization";
+
             utilizationLabel.Margin = new Thickness(col1, 20, 0, 0);
 
             Label uLive;
@@ -200,7 +201,9 @@ namespace RAT._1View.Desktop
 	    public void GC()
 	    {
 	        myViewModel.StopUpdate();
-	        myChart.Series[0].ItemsSource = null;
+            myChart.Series[0].ItemsSource = null;
+            myChart = null;
+            myViewModel = null;
 	    }
     }
 }

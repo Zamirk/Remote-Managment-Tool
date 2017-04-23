@@ -168,6 +168,33 @@ namespace RAT.ZTry
             leftButtonStack.Children.Add(manageButton);
             leftButtonStack.Children.Add(dashboardButton);
             leftButtonStack.Children.Add(notificationsButton);
+            if (Device.OS == TargetPlatform.Android)
+            {
+                leftButtonStack.Children.Add(signOutButton);
+                signOutButton.Text = "Sign out";
+                signOutButton.FontSize = 20;
+                signOutButton.VerticalOptions = LayoutOptions.EndAndExpand;
+                signOutButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                signOutButton.BorderColor = Color.Transparent;
+                signOutButton.BackgroundColor = Color.Transparent;
+                signOutButton.BorderWidth = .000001;
+                signOutButton.WidthRequest = 500;
+                signOutButton.HeightRequest = 50;
+            }
+            else if (Device.Idiom == TargetIdiom.Phone)
+            {
+                leftButtonStack.Children.Add(signOutButton);
+                signOutButton.Text = "Sign out";
+                signOutButton.FontSize = 20;
+                signOutButton.VerticalOptions = LayoutOptions.EndAndExpand;
+                signOutButton.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                signOutButton.BorderColor = Color.Transparent;
+                signOutButton.BackgroundColor = Color.Transparent;
+                signOutButton.BorderWidth = .000001;
+                signOutButton.WidthRequest = 500;
+                signOutButton.HeightRequest = 50;
+            }
+
             //leftButtonStack.Children.Add(secretGameButton);
             #endregion
 

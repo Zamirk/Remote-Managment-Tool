@@ -8,6 +8,7 @@ using IoTHubAmqpService;
 using RAT.zTest;
 using RAT.ZTry;
 using RAT._1View.Desktop.Manage;
+using RAT._1View.UWP.SubScreens._1DashboardScreen;
 using RAT._2ViewModel;
 using Rg.Plugins.Popup.Extensions;
 using Syncfusion.SfChart.XForms;
@@ -15,7 +16,7 @@ using Xamarin.Forms;
 
 namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 {
-    class Cell: Grid, IComparable<Cell>
+    public class Cell: Grid, IComparable<Cell>
     {
         private DashboardViewModel viewModel;
         private SfChart myChart;
@@ -24,6 +25,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         public int Pos { get; set; }
         public int OriginalX { get; set; }
         public int OriginalY { get; set; }
+        private CellPos myPos;
         #region Model data
         //Maxium span value
         public int MaxSpanColumn { get; set; }
@@ -82,13 +84,12 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         //Compare method
         public int CompareTo(Cell o)
         {
-
             return this.Pos.CompareTo(o.Pos);
         }
 
         public Cell()
         {
-            Pos = rand.Next(100);
+            //Pos = rand.Next(100);
             buttonState = DashboardButtonState.Add;
 
             //Initial values
@@ -97,6 +98,8 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             GridLinesOn = true;
             title = "";
             colourValue = 0;
+            //Adding in the position
+            myPos = new CellPos(){ Pos = Pos};
 
             RowSpan = 1;
             ColumnSpan = 1;

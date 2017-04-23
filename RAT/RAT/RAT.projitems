@@ -18,9 +18,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\FullScreens\ParentScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\MenuStates\DashboardButtonState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\UserData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\CellPos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\1DashboardScreen\ImageCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\ConsoleCmd.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\UWP\SubScreens\PowerShell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\ICloseApplication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\DashboardCellModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\DashboardModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Authentication\AuthHandler.cs" />
@@ -76,7 +78,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\TimeSpanExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Singleton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\DataGenerator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\MainScreenViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\MainScreenViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\Model.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\OverviewScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\Temp.cs" />

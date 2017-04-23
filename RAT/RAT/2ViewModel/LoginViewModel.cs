@@ -90,8 +90,7 @@ namespace RAT.ZTry
                     Task tt = Task.Factory.StartNew(() => {
                         GetTelemetry.ReceiveTelemetry2();
                     });
-                    GetTelemetry aa = new GetTelemetry();
-                    aa.EventHubClientTests();
+
                     await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
                 }
                 else

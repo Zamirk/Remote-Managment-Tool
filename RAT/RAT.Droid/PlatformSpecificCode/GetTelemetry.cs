@@ -16,8 +16,9 @@ namespace ConsoleApplication1.Folder
 {
     public class GetTelemetry
     {
-
-
+        //Storage account const
+        private const string StorageAccountName = "mystorageaccountscus";
+        private const string StorageAccountKey = "KgcTJAQNEgDMICrdzkwHsp43LoSBUrs1pdKu6uSy2AXz4ohFCZk07eWNiJ1sgUDfddttDXUAjfUvVFDUctIEqA==";
 
         public static bool go = true;
 
@@ -53,8 +54,8 @@ namespace ConsoleApplication1.Folder
         {
         }
 
-        //Receive data partition 0
-            public static void ReceiveTelemetry()
+        //Receive data all partitions
+            public static async void ReceiveTelemetry()
         {
             System.Diagnostics.Debug.WriteLine("AAAAAAAAAAAAAAAAAA" + UserData.connectionString);
 
@@ -75,55 +76,10 @@ namespace ConsoleApplication1.Folder
                 listOfDevices[8].Enqueue(new TelemetryDatapoint(""));
                 listOfDevices[9].Enqueue(new TelemetryDatapoint(""));
             }
-            try
-            {
 
+            EhConnectionString = UserData.connectionString;
+            EhEntityPath = UserData.eventHubEntity;
 
-
-
-                //while (go)
-                {
-                    //System.Diagnostics.Debug.WriteLine("Level 1: Looping");
-                   // data = receiver.Receive();
-                    //System.Diagnostics.Debug.WriteLine("Level 2: Data received"+data);
-                    // if (data.GetBytes() != null)
-                    // {
-                    //string JsonString = Encoding.UTF8.GetString(data.GetBytes());
-                    //System.Diagnostics.Debug.WriteLine("Level 3: JSon"+JsonString);
-
-                    //TelemetryDatapoint telemetry = JsonConvert.DeserializeObject<TelemetryDatapoint>(JsonString);
-                    //System.Diagnostics.Debug.WriteLine(JsonString);
-
-                    //for (int i = 0; i < devices.Count; i++)
-                    {
-                       // if (telemetry.Device_id.Equals(devices[i]))
-                        {
-                         //   listOfDevices[i].Dequeue();
-                         //   listOfDevices[i].Enqueue(telemetry);
-                         //   lastTelemetryDatapoints[i] = telemetry;
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine("[GetTelemetry] Error IOT, you should probably check this" + e);
-            }
-
-
-
-        }
-
-
-        private const string EhConnectionString = "Endpoint=sb://iothub-ns-manageiot2-135779-1d0655b8a3.servicebus.windows.net/;SharedAccessKeyName=iothubowner;SharedAccessKey=7qKgybfNWoSoD9nTr6IRB2z7oLegSnxAux25ZTlmFGc=";
-        private const string EhEntityPath = "ManageIoT2";
-        private const string StorageAccountName = "mystorageaccountscus";
-        private const string StorageAccountKey = "KgcTJAQNEgDMICrdzkwHsp43LoSBUrs1pdKu6uSy2AXz4ohFCZk07eWNiJ1sgUDfddttDXUAjfUvVFDUctIEqA==";
-
-        private static readonly string StorageConnectionString = string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}", StorageAccountName, StorageAccountKey);
-
-    public async void EventHubClientTests()
-        {
             string _guid = Guid.NewGuid().ToString();
             string eventProcessorHostName = _guid;
 
@@ -147,8 +103,15 @@ namespace ConsoleApplication1.Folder
             //Console.ReadLine();
 
             // Disposes of the Event Processor Host
-           // await eventProcessorHost.UnregisterEventProcessorAsync();
+            // await eventProcessorHost.UnregisterEventProcessorAsync();
         }
+
+
+        private static string EhConnectionString = UserData.connectionString;
+        private static string EhEntityPath = UserData.eventHubEntity;
+
+        private static readonly string StorageConnectionString = string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}", StorageAccountName, StorageAccountKey);
+
 
 
     }

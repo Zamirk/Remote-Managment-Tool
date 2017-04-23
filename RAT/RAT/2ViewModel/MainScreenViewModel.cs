@@ -9,8 +9,9 @@ using qwerty;
 using RAT.ZTry;
 using Tools;
 using Xamarin.Forms;
+using PlatInfoSap2;
 
-[assembly: Dependency(typeof(AzureService))]
+
 namespace RAT._2ViewModel
 {
 	public class MainScreenViewModel : ViewModelBase
@@ -27,19 +28,20 @@ namespace RAT._2ViewModel
 
 	    private AzureService signingout;
 
-        //Checks Login, Changes screen if found
+        //Clears microsoft auth details, closes app
         async Task SignOut()
         {
             signingout = DependencyService.Get<AzureService>();
 
             System.Diagnostics.Debug.WriteLine("\n-----Entering Main Menu");
             //Screen Navigation
-            (Application.Current.MainPage).Navigation.InsertPageBefore(new LoginScreen(), (Application.Current.MainPage).Navigation.NavigationStack[0]);
-            await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
+            //(Application.Current.MainPage).Navigation.InsertPageBefore(new LoginScreen(), (Application.Current.MainPage).Navigation.NavigationStack[0]);
+            //await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
 
             signingout.Logout();
-
-            GC.Collect();
+            
+            CloseApplication aaa = new CloseApplication();
+                aaa.closeApplication();
         }
     }
 }

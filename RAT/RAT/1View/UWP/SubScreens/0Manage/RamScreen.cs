@@ -196,6 +196,8 @@ namespace RAT._1View.Desktop
         {
             myViewModel.StopUpdate();
             myChart.Series[0].ItemsSource = null;
+            myChart = null;
+            myViewModel = null;
         }
     }
 }

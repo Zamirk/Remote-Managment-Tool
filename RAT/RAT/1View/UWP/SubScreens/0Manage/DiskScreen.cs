@@ -239,7 +239,9 @@ namespace RAT._1View.Desktop
         {
             myChart.Series[0].ItemsSource = null;
             pieChart.Series[0].ItemsSource = null;
+            myChart = null;
             myViewModel.StopUpdate();
+            myViewModel = null;
         }
     }
 }

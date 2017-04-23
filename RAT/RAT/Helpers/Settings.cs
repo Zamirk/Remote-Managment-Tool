@@ -72,9 +72,6 @@ namespace CoffeeCups.Helpers
         {
             get
             {
-                if (!AzureService.UseAuth)
-                    return true;
-
                 return !string.IsNullOrWhiteSpace(UserId);
             }
         }

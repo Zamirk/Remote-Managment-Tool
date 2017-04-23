@@ -27,6 +27,7 @@ namespace RAT._1View.UWP.SubScreens
         private CommandToolbar commandSc;
         private string deviceId = "";
         private int deviceNum = 9;
+
         public ToolBar(string name, int num)
         {
             deviceId = name;
@@ -42,49 +43,105 @@ namespace RAT._1View.UWP.SubScreens
 
             #region Buttons
 
-            systemResources = new Button();
-            systemResources.Text = "System Resources";
-            systemResources.FontSize = 14;
-            systemResources.VerticalOptions = LayoutOptions.Center;
-            systemResources.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            systemResources.BorderColor = Color.Transparent;
-            systemResources.BackgroundColor = Color.Gray;
-            systemResources.BorderWidth = .000001;
-            systemResources.WidthRequest = 180;
-            systemResources.HeightRequest = 40;
+            if (Device.OS == TargetPlatform.Android)
+            {
+                systemResources = new Button();
+                systemResources.Text = "System Resources";
+                systemResources.FontSize = 14;
+                systemResources.VerticalOptions = LayoutOptions.Center;
+                systemResources.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                systemResources.BorderColor = Color.Transparent;
+                systemResources.BackgroundColor = Color.Transparent;
+                systemResources.BorderWidth = .000001;
+                systemResources.WidthRequest = 180;
+                systemResources.HeightRequest = 35;
+                systemResources.TextColor = Color.Maroon;
+                systemResources.FontAttributes = FontAttributes.Bold;
 
-            processes = new Button();
-            processes.Text = "Processes";
-            processes.FontSize = 14;
-            processes.VerticalOptions = LayoutOptions.Center;
-            processes.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            processes.BorderColor = Color.Transparent;
-            processes.BackgroundColor = Color.Transparent;
-            processes.BorderWidth = .000001;
-            processes.WidthRequest = 180;
-            processes.HeightRequest = 40;
+                processes = new Button();
+                processes.Text = "Processes";
+                processes.FontSize = 14;
+                processes.VerticalOptions = LayoutOptions.Center;
+                processes.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                processes.BorderColor = Color.Transparent;
+                processes.BackgroundColor = Color.Transparent;
+                processes.BorderWidth = .000001;
+                processes.WidthRequest = 180;
+                processes.HeightRequest = 35;
+                processes.TextColor = Color.Maroon;
 
-            apphistory = new Button();
-            apphistory.Text = "App History";
-            apphistory.FontSize = 14;
-            apphistory.VerticalOptions = LayoutOptions.Center;
-            apphistory.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            apphistory.BorderColor = Color.Transparent;
-            apphistory.BackgroundColor = Color.Transparent;
-            apphistory.BorderWidth = .000001;
-            apphistory.HeightRequest = 50;
-            apphistory.WidthRequest = 180;
+                apphistory = new Button();
+                apphistory.Text = "App History";
+                apphistory.FontSize = 14;
+                apphistory.VerticalOptions = LayoutOptions.Center;
+                apphistory.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                apphistory.BorderColor = Color.Transparent;
+                apphistory.BackgroundColor = Color.Transparent;
+                apphistory.BorderWidth = .000001;
+                processes.HeightRequest = 35;
+                processes.TextColor = Color.Maroon;
+                processes.WidthRequest = 180;
 
-            temp = new Button();
-            temp.Text = "Command";
-            temp.FontSize = 14;
-            temp.VerticalOptions = LayoutOptions.Center;
-            temp.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            temp.BorderColor = Color.Transparent;
-            temp.BackgroundColor = Color.Transparent;
-            temp.BorderWidth = .000001;
-            temp.HeightRequest = 50;
-            temp.WidthRequest = 180;
+                temp = new Button();
+                temp.Text = "Command";
+                temp.FontSize = 14;
+                temp.VerticalOptions = LayoutOptions.Center;
+                temp.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                temp.BorderColor = Color.Transparent;
+                temp.BackgroundColor = Color.Transparent;
+                temp.BorderWidth = .000001;
+                temp.HeightRequest = 35;
+                temp.TextColor = Color.Maroon;
+                temp.WidthRequest = 180;
+            }
+            else
+            {
+                systemResources = new Button();
+                systemResources.Text = "System Resources";
+                systemResources.FontSize = 14;
+                systemResources.VerticalOptions = LayoutOptions.Center;
+                systemResources.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                systemResources.BorderColor = Color.Transparent;
+                systemResources.BackgroundColor = Color.Gray;
+                systemResources.BorderWidth = .000001;
+                systemResources.WidthRequest = 180;
+                systemResources.HeightRequest = 40;
+
+                processes = new Button();
+                processes.Text = "Processes";
+                processes.FontSize = 14;
+                processes.VerticalOptions = LayoutOptions.Center;
+                processes.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                processes.BorderColor = Color.Transparent;
+                processes.BackgroundColor = Color.Transparent;
+                processes.BorderWidth = .000001;
+                processes.WidthRequest = 180;
+                processes.HeightRequest = 40;
+
+                apphistory = new Button();
+                apphistory.Text = "App History";
+                apphistory.FontSize = 14;
+                apphistory.VerticalOptions = LayoutOptions.Center;
+                apphistory.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                apphistory.BorderColor = Color.Transparent;
+                apphistory.BackgroundColor = Color.Transparent;
+                apphistory.BorderWidth = .000001;
+                apphistory.HeightRequest = 50;
+                apphistory.WidthRequest = 180;
+
+                temp = new Button();
+                temp.Text = "Command";
+                temp.FontSize = 14;
+                temp.VerticalOptions = LayoutOptions.Center;
+                temp.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                temp.BorderColor = Color.Transparent;
+                temp.BackgroundColor = Color.Transparent;
+                temp.BorderWidth = .000001;
+                temp.HeightRequest = 50;
+                temp.WidthRequest = 180;
+            }
+
+
             #endregion
 
             //Mid button grid 1
@@ -120,7 +177,15 @@ namespace RAT._1View.UWP.SubScreens
         {
             if (myScreenState != ToolBarState.TEMP)
             {
+                if (Device.OS == TargetPlatform.Android)
+                {
+                    temp.TextColor = Color.Maroon;
+                    temp.FontAttributes = FontAttributes.Bold;
+                }
+                else
+                {
                 temp.BackgroundColor = Color.Gray;
+                }
                 RemoveScreen();
 
                 //Adding Command Screen
@@ -136,7 +201,15 @@ namespace RAT._1View.UWP.SubScreens
         {
             if (myScreenState != ToolBarState.APPHISTORY)
             {
-                apphistory.BackgroundColor = Color.Gray;
+                if (Device.OS == TargetPlatform.Android)
+                {
+                    apphistory.TextColor = Color.Maroon;
+                    apphistory.FontAttributes = FontAttributes.Bold;
+                }
+                else
+                {
+                    apphistory.BackgroundColor = Color.Gray;
+                }
                 RemoveScreen();
 
                 //Adding Wifi Screen
@@ -152,7 +225,15 @@ namespace RAT._1View.UWP.SubScreens
         {
             if (myScreenState != ToolBarState.PROCESSES)
             {
-                processes.BackgroundColor = Color.Gray;
+                if (Device.OS == TargetPlatform.Android)
+                {
+                    processes.TextColor = Color.Maroon;
+                    processes.FontAttributes = FontAttributes.Bold;
+                }
+                else
+                {
+                    processes.BackgroundColor = Color.Gray;
+                }
                 RemoveScreen();
 
                 //Adding Wifi Screen
@@ -168,7 +249,15 @@ namespace RAT._1View.UWP.SubScreens
         {
             if (myScreenState != ToolBarState.SYSTEMRESOURCES)
             {
-                systemResources.BackgroundColor = Color.Gray;
+                if (Device.OS == TargetPlatform.Android)
+                {
+                    systemResources.TextColor = Color.Maroon;
+                    systemResources.FontAttributes = FontAttributes.Bold;
+                }
+                else
+                {
+                    systemResources.BackgroundColor = Color.Gray;
+                }
                 RemoveScreen();
 
                 //Adding Wifi Screen
@@ -189,6 +278,15 @@ namespace RAT._1View.UWP.SubScreens
             //Removes screen, sets button off
             if (myScreenState == ToolBarState.SYSTEMRESOURCES)
             {
+                if (Device.OS == TargetPlatform.Android)
+                {
+                    systemResources.TextColor = Color.Black;
+                    systemResources.FontAttributes = FontAttributes.None;
+                }
+                else
+                {
+                    systemResources.BackgroundColor = Color.Transparent;
+                }
                 systemResources.BackgroundColor = Color.Transparent;
                 Children.Remove(systemResourcesSc);
                 systemResourcesSc.GC();
@@ -197,6 +295,15 @@ namespace RAT._1View.UWP.SubScreens
             }
             else if (myScreenState == ToolBarState.PROCESSES)
             {
+                if (Device.OS == TargetPlatform.Android)
+                {
+                    processes.TextColor = Color.Black;
+                    processes.FontAttributes = FontAttributes.None;
+                }
+                else
+                {
+                    processes.BackgroundColor = Color.Transparent;
+                }
                 processes.BackgroundColor = Color.Transparent;
                 Children.Remove(processesSc);
                 processesSc.GC();
@@ -206,6 +313,15 @@ namespace RAT._1View.UWP.SubScreens
             }
             else if (myScreenState == ToolBarState.TEMP)
             {
+                if (Device.OS == TargetPlatform.Android)
+                {
+                    temp.TextColor = Color.Black;
+                    temp.FontAttributes = FontAttributes.None;
+                }
+                else
+                {
+                    temp.BackgroundColor = Color.Transparent;
+                }
                 BackgroundColor = Color.White;
                 temp.BackgroundColor = Color.Transparent;
                 Children.Remove(commandSc);

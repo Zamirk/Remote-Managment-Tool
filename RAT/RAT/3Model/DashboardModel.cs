@@ -6,6 +6,16 @@ namespace DashboardModel
 {
     public class Dashboards
     {
+        public Dashboards(string id)
+        {
+            if (id.Length < 10)
+            {
+                throw new ArgumentException("Parameter");
+            }
+            Id = id;
+        }
+
+        public Dashboards() { }
         [Newtonsoft.Json.JsonProperty("Id")]
         public string Id { get; set; }
 

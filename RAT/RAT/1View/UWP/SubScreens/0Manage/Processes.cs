@@ -35,7 +35,14 @@ namespace RAT._1View.Desktop
             sDataGrid.RowHeight = 25;
             sDataGrid.ColumnSizer = ColumnSizer.Star;
             sDataGrid.AllowSorting = true;
-            sDataGrid.Margin = new Thickness(20, 20, 20, 20);
+            if (Device.OS == TargetPlatform.Android)
+            {
+                sDataGrid.Margin = new Thickness(0, 0, 0, 0);
+            }
+            else
+            {
+                sDataGrid.Margin = new Thickness(20, 20, 20, 20);
+            }
 
             //Column creation
             GridTextColumn column_1 = new GridTextColumn { MappingName = "Name", HeaderText = "Name" };
