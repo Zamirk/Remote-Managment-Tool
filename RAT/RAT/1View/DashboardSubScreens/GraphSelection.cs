@@ -158,7 +158,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             return myButtons[4];
         }
 
-           public Button PyramidChart()
+        public Button PyramidChart()
         {
             return myButtons[5];
         }

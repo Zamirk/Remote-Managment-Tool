@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace RAT._2ViewModel
 {
-    class WifiViewModel: ViewModelBase
+    class WifiViewModel : ViewModelBase
     {
         private ObservableCollection<ChartDataPoint> downloadData;
         private ObservableCollection<ChartDataPoint> uploadData;

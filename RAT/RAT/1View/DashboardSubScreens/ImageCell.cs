@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsoleApplication1;
 using IoTHubAmqpService;
-using RAT.zTest;
 using RAT.ZTry;
 using RAT._2ViewModel;
 using Rg.Plugins.Popup.Extensions;

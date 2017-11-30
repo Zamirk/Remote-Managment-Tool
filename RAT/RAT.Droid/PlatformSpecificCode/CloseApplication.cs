@@ -22,7 +22,7 @@ namespace PlatInfoSap2
             Settings.UserId = String.Empty;
             Settings.AuthToken = String.Empty;
 
-            var activity = (Activity)Forms.Context;
+            var activity = (Activity) Forms.Context;
             activity.FinishAffinity();
         }
     }

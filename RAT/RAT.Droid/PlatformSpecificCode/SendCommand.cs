@@ -13,11 +13,12 @@ namespace IoTHubAmqpService
     {
         public SendCommand(string a)
         {
-            
         }
+
         public void SendCommandToDevice()
         {
         }
+
         public CommandDatapoint Command { get; set; }
     }
 }

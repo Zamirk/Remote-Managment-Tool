@@ -16,32 +16,44 @@ namespace ConsoleApplication1
             RamInUse = "50";
             ListTest = new List<ProcessData>();
         }
+
         public string Device_id { get; set; }
+
         //CPU
         public string Cpu { get; set; }
+
         public string Cpu2 { get; set; }
         public string Thread { get; set; }
         public string CpuTem { get; set; }
         public string Processes { get; set; }
+
         public string Percent { get; set; }
+
         //Ram
         public string Ram { get; set; }
+
         public string RamInUse { get; set; }
         public string RamCache { get; set; }
         public string RamCommitted { get; set; }
         public string PagedPool { get; set; }
+
         public string NonPagedPool { get; set; }
+
         //Disk
         public string DiskReadTime { get; set; }
+
         public string DiskWriteTime { get; set; }
         public string DiskReadBytes { get; set; }
         public string DiskWriteBytes { get; set; }
         public string FreeMB { get; set; }
         public string FreeSpace { get; set; }
         public string IdleTime { get; set; }
+
         public string DiskTime { get; set; }
+
         //Network
         public string DownloadRate { get; set; }
+
         public string UploadRate { get; set; }
         public string Bandwidth { get; set; }
         public string PacketsReceived { get; set; }

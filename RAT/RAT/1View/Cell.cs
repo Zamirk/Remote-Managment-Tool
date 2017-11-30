@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsoleApplication1;
 using IoTHubAmqpService;
-using RAT.zTest;
 using RAT.ZTry;
 using RAT._1View.Desktop.Manage;
 using RAT._1View.UWP.SubScreens._1DashboardScreen;
@@ -14,9 +13,11 @@ using Rg.Plugins.Popup.Extensions;
 using Syncfusion.SfChart.XForms;
 using Xamarin.Forms;
 
+//Dashboard cell used on the dashboard screen, each cell contains a graph
+
 namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
 {
-    public class Cell: Grid, IComparable<Cell>
+    public class Cell : Grid, IComparable<Cell>
     {
         private DashboardViewModel viewModel;
         private SfChart myChart;
@@ -26,19 +27,23 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         public int OriginalX { get; set; }
         public int OriginalY { get; set; }
         private CellPos myPos;
+
         #region Model data
+
         //Maxium span value
         public int MaxSpanColumn { get; set; }
+
         public int MaxSpanRow { get; set; }
 
         //Style values
         public bool GridLinesOn { get; set; }
+
         public bool xAxisOn { get; set; }
         public bool yAxisOn { get; set; }
         public string title { get; set; }
         public int colourValue { get; set; }
 
-        //Information for saving
+        //Information for saving/loading to/from database
         public int GraphType { get; set; }
 
         public int ColumnSpan { get; set; }
@@ -54,6 +59,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         #endregion
 
         #region Declaring buttons
+
         private float buttonSize = 15f;
         private int radius = 25;
         private bool AlreadyGenerated = false;
@@ -67,7 +73,9 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         public Button west = new Button();
         public Button east = new Button();
         public Button south = new Button();
+
         #endregion
+
         Random rand = new Random();
 
         public bool CheckChartType()
@@ -81,6 +89,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 return false;
             }
         }
+
         //Compare method
         public int CompareTo(Cell o)
         {
@@ -99,7 +108,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             title = "";
             colourValue = 0;
             //Adding in the position
-            myPos = new CellPos(){ Pos = Pos};
+            myPos = new CellPos() {Pos = Pos};
 
             RowSpan = 1;
             ColumnSpan = 1;
@@ -124,6 +133,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             myButton.IsVisible = false;
             myButton.InputTransparent = true;
         }
+
         public void EnableButton()
         {
             myButton.IsVisible = true;
@@ -227,7 +237,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         }
 
         #region Generate graphs
-      
+
         public void AreaChart(int a, int b)
         {
             //Chart
@@ -340,7 +350,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             });
 
             myChart.Legend = new ChartLegend();
-            myChart.Legend.Title = new ChartTitle() { Text = ""};
+            myChart.Legend.Title = new ChartTitle() {Text = ""};
             myChart.Legend.Orientation = ChartOrientation.Default;
             myChart.Legend.DockPosition = LegendPlacement.Right;
 
@@ -361,14 +371,15 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
         {
             //Chart
             myChart = new SfChart();
-            myChart.Series.Add(new DoughnutSeries(){
+            myChart.Series.Add(new DoughnutSeries()
+            {
                 DataMarkerPosition = CircularSeriesDataMarkerPosition.OutsideExtended,
                 EnableSmartLabels = true,
                 ConnectorLineType = ConnectorLineType.Bezier,
             });
 
             myChart.Legend = new ChartLegend();
-            myChart.Legend.Title = new ChartTitle() { Text = ""};
+            myChart.Legend.Title = new ChartTitle() {Text = ""};
             myChart.Legend.Orientation = ChartOrientation.Default;
             myChart.Legend.DockPosition = LegendPlacement.Right;
 
@@ -438,6 +449,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             }
             Children.Add(myChart);
         }
+
         #endregion
 
         public void ApplyChanges(bool a, bool b, bool c, int d, string e)
@@ -466,11 +478,12 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                 myChart.Legend.IsVisible = yAxisOn;
                 if (GridLinesOn)
                 {
-                    ((PieSeries)myChart.Series[0]).DataMarkerPosition = CircularSeriesDataMarkerPosition.Inside;
+                    ((PieSeries) myChart.Series[0]).DataMarkerPosition = CircularSeriesDataMarkerPosition.Inside;
                 }
                 else
                 {
-                    ((PieSeries)myChart.Series[0]).DataMarkerPosition = CircularSeriesDataMarkerPosition.OutsideExtended;
+                    ((PieSeries) myChart.Series[0]).DataMarkerPosition =
+                        CircularSeriesDataMarkerPosition.OutsideExtended;
                 }
 
                 //Setting colour
@@ -504,11 +517,10 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                     myChart.Series[0].ColorModel.Palette = ChartColorPalette.TomatoSpectrum;
                     myChart.Series[0].DataMarker.ShowLabel = true;
                 }
-
             }
             else
             {
-            myChart.PrimaryAxis.Title = new ChartAxisTitle() { Text = title };
+                myChart.PrimaryAxis.Title = new ChartAxisTitle() {Text = title};
 
                 //Setting colour
                 if (colourValue == 0)
@@ -532,7 +544,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
             //Setting axis lines
             myChart.PrimaryAxis.IsVisible = xAxisOn;
             myChart.SecondaryAxis.IsVisible = yAxisOn;
-
         }
 
         public void CleanCell()

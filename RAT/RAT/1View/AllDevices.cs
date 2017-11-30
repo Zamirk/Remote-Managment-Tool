@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using ConsoleApplication1;
 using ConsoleApplication1.Folder;
 using IoTHubAmqpService;
-using RAT.Syncfusion;
 using RAT.ZTry;
 using RAT._1View.Desktop.Screens.SubScreens;
 using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
@@ -20,21 +19,21 @@ using Label = Xamarin.Forms.Label;
 
 namespace RAT._1View.Desktop.Manage
 {
-	public class AllDevices : Grid
-	{
+    public class AllDevices : Grid
+    {
         private AllDevicesViewModel viewModel;
-	    private SfDataGrid sDataGrid;
+        private SfDataGrid sDataGrid;
 
         public AllDevices()
         {
             viewModel = new AllDevicesViewModel();
             BindingContext = viewModel;
-           
+
             HorizontalOptions = LayoutOptions.FillAndExpand;
             VerticalOptions = LayoutOptions.FillAndExpand;
 
-            RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            RowDefinitions.Add(new RowDefinition {Height = GridLength.Auto});
+            ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Auto});
 
             sDataGrid = new SfDataGrid();
             sDataGrid.HorizontalOptions = LayoutOptions.FillAndExpand;
@@ -48,14 +47,14 @@ namespace RAT._1View.Desktop.Manage
             sDataGrid.Margin = new Thickness(20, 20, 20, 20);
 
             //Column creation
-            GridTextColumn column_1 = new GridTextColumn { MappingName = "Name", HeaderText = "Name" };
-            GridTextColumn column_2 = new GridTextColumn { MappingName = "Cpu", HeaderText = "Cpu" };
-            GridTextColumn column_3 = new GridTextColumn { MappingName = "Memory", HeaderText = "Memory" };
-            GridTextColumn column_4 = new GridTextColumn { MappingName = "Disk", HeaderText = "Disk" };
-            GridTextColumn column_5 = new GridTextColumn { MappingName = "Wifi", HeaderText = "Wifi" };
-            GridTemplateColumn column_6 = new GridTemplateColumn { MappingName = "UserName", HeaderText = "UserName" };
-            
-            //Template for buttons
+            GridTextColumn column_1 = new GridTextColumn {MappingName = "Name", HeaderText = "Name"};
+            GridTextColumn column_2 = new GridTextColumn {MappingName = "Cpu", HeaderText = "Cpu"};
+            GridTextColumn column_3 = new GridTextColumn {MappingName = "Memory", HeaderText = "Memory"};
+            GridTextColumn column_4 = new GridTextColumn {MappingName = "Disk", HeaderText = "Disk"};
+            GridTextColumn column_5 = new GridTextColumn {MappingName = "Wifi", HeaderText = "Wifi"};
+            GridTemplateColumn column_6 = new GridTemplateColumn {MappingName = "UserName", HeaderText = "UserName"};
+
+            //Data Template for buttons
             DataTemplate template = new DataTemplate(() =>
             {
                 StackLayout stack = new StackLayout()
@@ -81,7 +80,7 @@ namespace RAT._1View.Desktop.Manage
                 Label temp = new Label();
                 temp.SetBinding(Label.TextProperty, "Name");
 
-                myButton.Clicked += delegate (object sender, EventArgs args)
+                myButton.Clicked += delegate(object sender, EventArgs args)
                 {
                     //Setting device id
                     UserData.deviceId = temp.Text;
@@ -102,8 +101,9 @@ namespace RAT._1View.Desktop.Manage
                     }
                     //Sending an asyncranous command
                     Button s = sender as Button;
-                        ParentScreen d = (ParentScreen)s.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent;
-                       d.EnterDevice(temp.Text, deviceNum);
+                    ParentScreen d = (ParentScreen) s.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent
+                        .Parent.Parent;
+                    d.EnterDevice(temp.Text, deviceNum);
                     BindingContext = null;
                     viewModel = null;
                 };
@@ -118,9 +118,6 @@ namespace RAT._1View.Desktop.Manage
             column_6.CellTemplate = template;
 
             //Collumn sizes
-            //column_1.Width = 200;
-            //column_2.Width = 100;
-            //column_3.Width = 100;
             column_6.Width = 40;
 
             sDataGrid.Columns.Add(column_1);
@@ -132,7 +129,6 @@ namespace RAT._1View.Desktop.Manage
 
             //Data binding
             sDataGrid.ItemsSource = viewModel.Data;
-
             Children.Add(sDataGrid, 1, 1);
         }
 

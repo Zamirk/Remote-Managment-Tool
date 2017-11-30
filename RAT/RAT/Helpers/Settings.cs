@@ -1,4 +1,6 @@
 // Helpers/Settings.cs
+// Uses a Xamarin.Forms plugin for saving settings
+
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 using System;
@@ -15,10 +17,7 @@ namespace CoffeeCups.Helpers
     {
         private static ISettings AppSettings
         {
-            get
-            {
-                return CrossSettings.Current;
-            }
+            get { return CrossSettings.Current; }
         }
 
         #region Setting Constants
@@ -43,37 +42,22 @@ namespace CoffeeCups.Helpers
 
         #endregion
 
-       
+
         public static string AuthToken
         {
-            get
-            {
-                return AppSettings.GetValueOrDefault<string>(AuthTokenKey, AuthTokenDefault);
-            }
-            set
-            {
-                AppSettings.AddOrUpdateValue<string>(AuthTokenKey, value);
-            }
+            get { return AppSettings.GetValueOrDefault<string>(AuthTokenKey, AuthTokenDefault); }
+            set { AppSettings.AddOrUpdateValue<string>(AuthTokenKey, value); }
         }
 
         public static string UserId
         {
-            get
-            {
-                return AppSettings.GetValueOrDefault<string>(UserIdKey, UserIdDefault);
-            }
-            set
-            {
-                AppSettings.AddOrUpdateValue<string>(UserIdKey, value);
-            }
+            get { return AppSettings.GetValueOrDefault<string>(UserIdKey, UserIdDefault); }
+            set { AppSettings.AddOrUpdateValue<string>(UserIdKey, value); }
         }
 
         public static bool IsLoggedIn
         {
-            get
-            {
-                return !string.IsNullOrWhiteSpace(UserId);
-            }
+            get { return !string.IsNullOrWhiteSpace(UserId); }
         }
     }
 }

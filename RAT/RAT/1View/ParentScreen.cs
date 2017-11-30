@@ -17,18 +17,35 @@ namespace RAT.ZTry
     public class ParentScreen : ContentPage
     {
         #region Member Variables
+
         private MenuState myMenuState;
         private AllDevices viewDevicesScreen;
         private ToolBar singleDeviceScreen;
+
         private AppScreen appScreen;
+
         //private AppsScreen applicationManagmentScreen;
         private static Dashboard _dashboard;
 
-        private Button signOutButton, notificationsButton, manageButton, dashboardButton,
-            TEMPBUTTON4, backButton, forwardButton, secretGameButton, apphistory;
-        ContentView leftColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235), HorizontalOptions = LayoutOptions.Fill };
-        ContentView rightColour = new ContentView { BackgroundColor = Color.FromRgb(237, 237, 235) };
+        private Button signOutButton,
+            notificationsButton,
+            manageButton,
+            dashboardButton,
+            TEMPBUTTON4,
+            backButton,
+            forwardButton,
+            secretGameButton,
+            apphistory;
+
+        ContentView leftColour = new ContentView
+        {
+            BackgroundColor = Color.FromRgb(237, 237, 235),
+            HorizontalOptions = LayoutOptions.Fill
+        };
+
+        ContentView rightColour = new ContentView {BackgroundColor = Color.FromRgb(237, 237, 235)};
         private Grid midGrid;
+
         #endregion
 
         public ParentScreen()
@@ -41,6 +58,7 @@ namespace RAT.ZTry
             myMenuState = MenuState.MANAGE_ALLDEVICES;
 
             #region Buttons
+
             secretGameButton = new Button();
             secretGameButton.Text = "Play";
             secretGameButton.FontSize = 20;
@@ -139,6 +157,7 @@ namespace RAT.ZTry
             mainStack.Spacing = 0;
 
             #region TopGrid
+
             //Top-grid
             //topGrid.Children.Add(new ContentView() { BackgroundColor = Color.FromRgb(17, 150, 205) });
             if (Device.Idiom == TargetIdiom.Phone)
@@ -147,19 +166,20 @@ namespace RAT.ZTry
             }
             else
             {
-            topGrid.RowDefinitions.Add(new RowDefinition { Height = 60 });
+                topGrid.RowDefinitions.Add(new RowDefinition {Height = 60});
             }
             topGrid.ColumnSpacing = 0;
             topGrid.RowSpacing = 0;
             topGrid.Children.Add(backButton, 0, 0);
             topGrid.Children.Add(forwardButton, 0, 0);
-            ContentView aaaa = new ContentView() { BackgroundColor = Color.Gray };
+            ContentView aaaa = new ContentView() {BackgroundColor = Color.Gray};
             topGrid.Children.Add(aaaa, 0, 0);
             topGrid.Children.Add(signOutButton, 0, 0);
 
             #endregion
 
             #region SideBar Buttons
+
             //Sidebar Button stack
             leftButtonStack.HorizontalOptions = LayoutOptions.Center;
             leftButtonStack.VerticalOptions = LayoutOptions.FillAndExpand;
@@ -195,28 +215,29 @@ namespace RAT.ZTry
             }
 
             //leftButtonStack.Children.Add(secretGameButton);
+
             #endregion
 
             //Mid-grid
             midGrid.VerticalOptions = LayoutOptions.FillAndExpand;
-            midGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
+            midGrid.RowDefinitions.Add(new RowDefinition {Height = GridLength.Star});
             if (Device.Idiom == TargetIdiom.Phone)
             {
-                midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 50 });
+                midGrid.ColumnDefinitions.Add(new ColumnDefinition() {Width = 50});
             }
             else
             {
-                midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 225 });
+                midGrid.ColumnDefinitions.Add(new ColumnDefinition() {Width = 225});
             }
-            midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
+            midGrid.ColumnDefinitions.Add(new ColumnDefinition() {Width = GridLength.Star});
 
             if (Device.Idiom == TargetIdiom.Phone)
             {
-                midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 5 });
+                midGrid.ColumnDefinitions.Add(new ColumnDefinition() {Width = 5});
             }
             else
             {
-                midGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 100 });
+                midGrid.ColumnDefinitions.Add(new ColumnDefinition() {Width = 100});
             }
             midGrid.ColumnSpacing = 0;
             midGrid.RowSpacing = 0;
@@ -240,7 +261,7 @@ namespace RAT.ZTry
             dashboardButton.Clicked += DashboardButton_Clicked;
             notificationsButton.Clicked += NotificationsButtonClicked;
             TEMPBUTTON4.Clicked += Tempbutton4Clicked;
-            secretGameButton.Clicked += Secret_Game;
+            //secretGameButton.Clicked += Secret_Game;
 
             Content = mainStack;
         }
@@ -249,6 +270,8 @@ namespace RAT.ZTry
         #region Screen Changing Click Handlers
 
         // Button Click
+        /*
+         *Unused easter egg
         private async void Secret_Game(object sender, EventArgs e)
         {
             //var page = new MyPopupPage();
@@ -258,6 +281,7 @@ namespace RAT.ZTry
             // or
             //await PopupNavigation.PushAsync(page);
         }
+        */
         public void EnterDevice(string deviceName, int deviceNum)
         {
             RemoveScreen();
@@ -329,10 +353,6 @@ namespace RAT.ZTry
         public void RemoveScreen()
         {
             //Removes screen, sets button off
-            //NOTE
-            //Objects should be collected by Garbage Collector!
-            //If Not, Check the async/Device.Timers/Extra Threads
-
             if (myMenuState == MenuState.MANAGE_ALLDEVICES)
             {
                 manageButton.BackgroundColor = Color.Transparent;
@@ -364,8 +384,7 @@ namespace RAT.ZTry
                 singleDeviceScreen.GC();
             }
         }
+
         #endregion
-
-
     }
 }

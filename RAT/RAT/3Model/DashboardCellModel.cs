@@ -19,6 +19,7 @@ namespace RAT._3Model
 
         //Theme
         public string N { get; set; }
+
         public int O { get; set; }
         public bool X { get; set; }
         public bool Y { get; set; }

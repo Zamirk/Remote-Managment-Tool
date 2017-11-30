@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using ConsoleApplication1;
 using ConsoleApplication1.Folder;
 using RAT.Model;
-using SampleBrowser;
 using Syncfusion.SfChart.XForms;
 using Tools;
 using Xamarin.Forms;
@@ -18,6 +17,7 @@ namespace RAT._2ViewModel
         public bool collectGarbage = false;
         ObservableCollection<Processes> data;
         private int deviceNum = 9;
+
         public ProcessesViewModel(int deviceNum)
         {
             this.deviceNum = deviceNum;
@@ -73,14 +73,15 @@ namespace RAT._2ViewModel
                     {
                         data.Add(new Processes());
                     }
-                } else if (processesCount < data.Count)
+                }
+                else if (processesCount < data.Count)
                 {
                     while (processesCount < data.Count)
                     {
-                        data.RemoveAt(data.Count -1);
+                        data.RemoveAt(data.Count - 1);
                     }
                 }
-                    
+
                 //Updating the grid with data
                 for (int i = 0; i < processesCount; i++)
                 {
@@ -93,6 +94,7 @@ namespace RAT._2ViewModel
                 return true;
             });
         }
+
         public void GC()
         {
             collectGarbage = true;

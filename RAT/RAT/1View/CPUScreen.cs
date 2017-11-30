@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using RAT.Services.IoT;
 using RAT._2ViewModel;
-using SampleBrowser;
-using ServerMonitor;
 using Syncfusion.SfChart.XForms;
 using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
@@ -17,21 +15,22 @@ using SfChart = Syncfusion.SfChart.XForms.SfChart;
 
 namespace RAT._1View.Desktop
 {
-	public class CPUScreen : Grid
-	{
-	    private CpuViewModel myViewModel;
-	    private SfChart myChart;
-	    private string deviceId = "";
+    public class CPUScreen : Grid
+    {
+        private CpuViewModel myViewModel;
+        private SfChart myChart;
+        private string deviceId = "";
+
         public CPUScreen(int deviceNum)
         {
             myViewModel = new CpuViewModel(deviceNum);
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;
-            ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Auto});
 
-            RowDefinitions.Add(new RowDefinition { Height = 200 });
-            RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            RowDefinitions.Add(new RowDefinition {Height = 200});
+            RowDefinitions.Add(new RowDefinition {Height = GridLength.Auto});
 
             //Chart
             myChart = new SfChart();
@@ -198,12 +197,13 @@ namespace RAT._1View.Desktop
             Children.Add(uLive, 0, 1);
             Children.Add(speedLabel, 0, 1);
         }
-	    public void GC()
-	    {
-	        myViewModel.StopUpdate();
+
+        public void GC()
+        {
+            myViewModel.StopUpdate();
             myChart.Series[0].ItemsSource = null;
             myChart = null;
             myViewModel = null;
-	    }
+        }
     }
 }

@@ -1,6 +1,3 @@
-//  
-//  (c) Microsoft Corporation. See LICENSE.TXT file for licensing details 
-//   
 namespace IoTHubAmqp
 {
     using System;
@@ -33,7 +30,7 @@ namespace IoTHubAmqp
             var num2 = 0;
             for (var i = 0; i < count; i++)
             {
-                var ch = (char)bytes[offset + i];
+                var ch = (char) bytes[offset + i];
                 if (ch == ' ')
                 {
                     num++;
@@ -53,7 +50,7 @@ namespace IoTHubAmqp
             for (var j = 0; j < count; j++)
             {
                 var num6 = bytes[offset + j];
-                var ch2 = (char)num6;
+                var ch2 = (char) num6;
                 if (IsSafe(ch2))
                 {
                     buffer[num4++] = num6;
@@ -65,8 +62,8 @@ namespace IoTHubAmqp
                 else
                 {
                     buffer[num4++] = 0x25;
-                    buffer[num4++] = (byte)IntToHex((num6 >> 4) & 15);
-                    buffer[num4++] = (byte)IntToHex(num6 & 15);
+                    buffer[num4++] = (byte) IntToHex((num6 >> 4) & 15);
+                    buffer[num4++] = (byte) IntToHex(num6 & 15);
                 }
             }
             return buffer;
@@ -76,9 +73,9 @@ namespace IoTHubAmqp
         {
             if (n <= 9)
             {
-                return (char)(n + 0x30);
+                return (char) (n + 0x30);
             }
-            return (char)((n - 10) + 0x61);
+            return (char) ((n - 10) + 0x61);
         }
 
         static bool IsSafe(char ch)
@@ -125,12 +122,12 @@ namespace IoTHubAmqp
                 else if ((num4 == 0x25) &&
                          (i < (count - 2)))
                 {
-                    var num5 = HexToInt((char)bytes[index + 1]);
-                    var num6 = HexToInt((char)bytes[index + 2]);
+                    var num5 = HexToInt((char) bytes[index + 1]);
+                    var num6 = HexToInt((char) bytes[index + 2]);
                     if ((num5 >= 0) &&
                         (num6 >= 0))
                     {
-                        num4 = (byte)((num5 << 4) | num6);
+                        num4 = (byte) ((num5 << 4) | num6);
                         i += 2;
                     }
                 }

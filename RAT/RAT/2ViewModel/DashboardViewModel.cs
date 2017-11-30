@@ -510,7 +510,8 @@ namespace RAT._2ViewModel
                     Data.RemoveAt(0);
                     y++;
 
-                    var diskwriteBytes = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteBytes);
+                    var diskwriteBytes =
+                        Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].DiskWriteBytes);
                     Data.Add(new ChartDataPoint(y, diskwriteBytes));
                     if (killThread)
                     {
@@ -639,7 +640,7 @@ namespace RAT._2ViewModel
                     return true;
                 });
             } //Disk time
-              //Network
+            //Network
             else if (dataSelection == 20)
             {
                 //Iterating over the queue of telemetry obects, adding to the chart databound collection
@@ -751,7 +752,8 @@ namespace RAT._2ViewModel
                     Data.RemoveAt(0);
                     y++;
 
-                    var packetsReceived = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].PacketsReceived);
+                    var packetsReceived =
+                        Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].PacketsReceived);
                     Data.Add(new ChartDataPoint(y, packetsReceived));
                     if (killThread)
                     {
@@ -1363,7 +1365,7 @@ namespace RAT._2ViewModel
                     return true;
                 });
             } //Disk time
-              //Network
+            //Network
             else if (dataSelection == 20)
             {
                 //Initial value
@@ -1448,7 +1450,8 @@ namespace RAT._2ViewModel
             else if (dataSelection == 23)
             {
                 //Initial value
-                double packetsReceived = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].PacketsReceived);
+                double packetsReceived =
+                    Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].PacketsReceived);
                 double remaining = 1000 - packetsReceived;
 
                 Data.Add(new ChartDataPoint("Packets Received", packetsReceived));
@@ -1475,7 +1478,8 @@ namespace RAT._2ViewModel
             else if (dataSelection == 24)
             {
                 //Initial value
-                double packetsReceived = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].PacketsReceived);
+                double packetsReceived =
+                    Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNo].PacketsReceived);
                 double remaining = 1000 - packetsReceived;
 
                 Data.Add(new ChartDataPoint("Packets Received", packetsReceived));

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using CoffeeCups.Helpers;
-using SampleBrowser;
 using RAT.Model;
 using ConsoleApplication1.Folder;
 using Xamarin.Forms;
@@ -99,7 +98,8 @@ namespace RAT._1View.Desktop.Screens.SubScreens
                 Settings.AuthToken = string.Empty;
                 Settings.UserId = string.Empty;
             }
-}
+        }
+
         public void GC()
         {
             collectGarbage = true;

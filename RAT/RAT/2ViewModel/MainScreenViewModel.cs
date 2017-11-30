@@ -14,19 +14,19 @@ using PlatInfoSap2;
 
 namespace RAT._2ViewModel
 {
-	public class MainScreenViewModel : ViewModelBase
-	{
-		public MainScreenViewModel ()
-		{
-
+    public class MainScreenViewModel : ViewModelBase
+    {
+        public MainScreenViewModel()
+        {
         }
-         ICommand signOutCommand;
+
+        ICommand signOutCommand;
 
         //Command signs out
         public ICommand SignOutCommand =>
             signOutCommand ?? (signOutCommand = new Command(async () => await SignOut()));
 
-	    private AzureService signingout;
+        private AzureService signingout;
 
         //Clears microsoft auth details, closes app
         async Task SignOut()
@@ -39,9 +39,9 @@ namespace RAT._2ViewModel
             //await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
 
             signingout.Logout();
-            
+
             CloseApplication aaa = new CloseApplication();
-                aaa.closeApplication();
+            aaa.closeApplication();
         }
     }
 }

@@ -10,8 +10,8 @@ namespace PlatInfoSap2
             int a = Android.OS.Process.MyTid();
 
 
-            return String.Format("{0} {1}", Build.Brand, 
-                                            a);
+            return String.Format("{0} {1}", Build.Brand,
+                a);
         }
 
         public string GetVersion()

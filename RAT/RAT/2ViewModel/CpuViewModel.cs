@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using ConsoleApplication1.Folder;
-using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 using Syncfusion.SfChart.XForms;
 using Tools;
 using Xamarin.Forms;
@@ -24,6 +23,7 @@ namespace RAT._2ViewModel
             Data = new ObservableCollection<ChartDataPoint>();
             LoadData();
         }
+
         private static int deviceNo = 0;
 
         private string pom = GetTelemetry.lastTelemetryDatapoints[deviceNo].Percent;
@@ -86,7 +86,7 @@ namespace RAT._2ViewModel
             //Iterating the queue of telemetry objects, adding to the chart collection
             foreach (var telemetry in GetTelemetry.listOfDevices[deviceNum])
             {
-                    data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Cpu)));
+                data.Add(new ChartDataPoint(y, Convert.ToDouble(telemetry.Cpu)));
                 y++;
             }
             await Task.Delay(1000);
@@ -94,7 +94,8 @@ namespace RAT._2ViewModel
             //Updates the information onece a second
             Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
             {
-                y++; System.Diagnostics.Debug.WriteLine("cpu" + y);
+                y++;
+                System.Diagnostics.Debug.WriteLine("cpu" + y);
 
                 double cpuValue = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNum].Cpu);
                 Processes = GetTelemetry.lastTelemetryDatapoints[deviceNum].Processes;

@@ -12,7 +12,6 @@ namespace ConsoleApplication1
     {
         public CommandDatapoint()
         {
-            
         }
 
         public CommandDatapoint(DateTime a, String b, string c, CommandType e)
@@ -25,8 +24,8 @@ namespace ConsoleApplication1
             {
                 throw new ArgumentException("Parameter");
             }
-
         }
+
         public DateTime ExpireTime { get; set; }
         public string Command { get; set; }
         public string ProcessName { get; set; }

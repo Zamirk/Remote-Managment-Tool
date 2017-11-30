@@ -4,8 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using RAT._2ViewModel;
-using SampleBrowser;
-using ServerMonitor;
 using Syncfusion.SfChart.XForms;
 using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
@@ -31,12 +29,12 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;
-            ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            ColumnDefinitions.Add(new ColumnDefinition { Width = 85 });
+            ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Auto});
+            ColumnDefinitions.Add(new ColumnDefinition {Width = 85});
 
-            RowDefinitions.Add(new RowDefinition { Height = 100 });
-            RowDefinitions.Add(new RowDefinition { Height = 100 });
-            RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            RowDefinitions.Add(new RowDefinition {Height = 100});
+            RowDefinitions.Add(new RowDefinition {Height = 100});
+            RowDefinitions.Add(new RowDefinition {Height = GridLength.Auto});
 
             //Chart One
             myChart = new SfChart();
@@ -75,8 +73,8 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             myLabel.HorizontalOptions = LayoutOptions.CenterAndExpand;
 
             FormattedString fs = new FormattedString();
-            fs.Spans.Add(new Span { Text = "11.4", FontSize = 20 });
-            fs.Spans.Add(new Span { Text = " mb/s", FontSize = 16, FontAttributes = FontAttributes.Italic });
+            fs.Spans.Add(new Span {Text = "11.4", FontSize = 20});
+            fs.Spans.Add(new Span {Text = " mb/s", FontSize = 16, FontAttributes = FontAttributes.Italic});
             myLabel.FormattedText = fs;
 
             myLabel2 = new Label();
@@ -85,8 +83,8 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             myLabel2.HorizontalOptions = LayoutOptions.CenterAndExpand;
 
             FormattedString fs2 = new FormattedString();
-            fs2.Spans.Add(new Span { Text = "8.4", FontSize = 20 });
-            fs2.Spans.Add(new Span { Text = " mb/s", FontSize = 16, FontAttributes = FontAttributes.Italic });
+            fs2.Spans.Add(new Span {Text = "8.4", FontSize = 20});
+            fs2.Spans.Add(new Span {Text = " mb/s", FontSize = 16, FontAttributes = FontAttributes.Italic});
             myLabel2.FormattedText = fs2;
 
             myChart.Series[0].AnimationDuration = .5;
@@ -233,6 +231,7 @@ namespace RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens
             myChart.Series[0].ItemsSource = myViewModel.DownloadData;
             myChart2.Series[0].ItemsSource = myViewModel.UploadData;
         }
+
         public void GC()
         {
             myViewModel.StopUpdate();

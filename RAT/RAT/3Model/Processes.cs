@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RAT.Model
 {
-    public class Processes: INotifyPropertyChanged
+    public class Processes : INotifyPropertyChanged
     {
         public Processes()
         {
@@ -19,6 +19,7 @@ namespace RAT.Model
         private string memory;
         private string time;
         private string cpu;
+
         #region private variables
 
         private string _employeeID;
@@ -106,4 +107,3 @@ namespace RAT.Model
         }
     }
 }
-

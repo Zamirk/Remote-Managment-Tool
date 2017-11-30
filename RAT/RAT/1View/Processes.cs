@@ -23,8 +23,8 @@ namespace RAT._1View.Desktop
             HorizontalOptions = LayoutOptions.FillAndExpand;
             VerticalOptions = LayoutOptions.FillAndExpand;
 
-            RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            RowDefinitions.Add(new RowDefinition {Height = GridLength.Auto});
+            ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Auto});
 
             SfDataGrid sDataGrid = new SfDataGrid();
             sDataGrid.HorizontalOptions = LayoutOptions.FillAndExpand;
@@ -45,11 +45,11 @@ namespace RAT._1View.Desktop
             }
 
             //Column creation
-            GridTextColumn column_1 = new GridTextColumn { MappingName = "Name", HeaderText = "Name" };
-            GridTextColumn column_2 = new GridTextColumn { MappingName = "Memory", HeaderText = "Memory" };
-            GridTextColumn column_3 = new GridTextColumn { MappingName = "Cpu", HeaderText = "Cpu" };
-            GridTextColumn column_4 = new GridTextColumn { MappingName = "Time", HeaderText = "Time" };
-            GridTemplateColumn column_5 = new GridTemplateColumn { MappingName = "UserName", HeaderText = "UserName" };
+            GridTextColumn column_1 = new GridTextColumn {MappingName = "Name", HeaderText = "Name"};
+            GridTextColumn column_2 = new GridTextColumn {MappingName = "Memory", HeaderText = "Memory"};
+            GridTextColumn column_3 = new GridTextColumn {MappingName = "Cpu", HeaderText = "Cpu"};
+            GridTextColumn column_4 = new GridTextColumn {MappingName = "Time", HeaderText = "Time"};
+            GridTemplateColumn column_5 = new GridTemplateColumn {MappingName = "UserName", HeaderText = "UserName"};
 
             //Template for buttons
             DataTemplate template = new DataTemplate(() =>
@@ -77,12 +77,13 @@ namespace RAT._1View.Desktop
                 Label temp = new Label();
                 temp.SetBinding(Label.TextProperty, "Name");
 
-                myButton.Clicked += delegate (object sender, EventArgs args)
+                myButton.Clicked += delegate(object sender, EventArgs args)
                 {
                     System.Diagnostics.Debug.WriteLine("[Processes]::Sending command to kill process::" + temp.Text);
 
                     //Sending an asyncranous command
-                    Task t = Task.Factory.StartNew(() => {
+                    Task t = Task.Factory.StartNew(() =>
+                    {
                         SendCommand myCommand = new SendCommand(UserData.deviceId);
                         myCommand.Command = new CommandDatapoint()
                         {
@@ -91,7 +92,6 @@ namespace RAT._1View.Desktop
                             ExpireTime = DateTime.Now
                         };
                         myCommand.SendCommandToDevice();
-
                     });
                 };
                 stack.Children.Add(myButton);

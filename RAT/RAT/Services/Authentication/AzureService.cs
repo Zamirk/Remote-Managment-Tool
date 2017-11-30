@@ -22,10 +22,11 @@ namespace qwerty
 {
     public class AzureService
     {
-        public string replace { get; set; }=
+        public string replace { get; set; } =
             @"{""G"":false,""T"":0,""R"":0,""C"":0,""D"":0,""S"":0,""N"":null,""O"":0,""X"":false,""Y"":false,""L"":false}";
 
-        public string initialDashboard { get; set; }= "[[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬]]";
+        public string initialDashboard { get; set; } =
+            "[[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬],[¬,¬,¬,¬,¬]]";
 
         public string placeHolder { get; set; } = "¬";
 
@@ -113,9 +114,8 @@ namespace qwerty
             dashboardTable = Client.GetTable<Dashboards>();
             System.Diagnostics.Debug.WriteLine("List of dashboards");
 
-            List<Dashboards> listOfDashboards = await dashboardTable.
-                Where(r => r.userId == UserData.userId).
-                ToListAsync();
+            List<Dashboards> listOfDashboards =
+                await dashboardTable.Where(r => r.userId == UserData.userId).ToListAsync();
 
             //Looping trough dashboards
             for (int i = 0; i < listOfDashboards.Count; i++)
@@ -202,4 +202,3 @@ namespace qwerty
         }
     }
 }
-    

@@ -75,6 +75,7 @@ namespace RAT._2ViewModel
         {
             killThread = true;
         }
+
         public ObservableCollection<ChartDataPoint> Data
         {
             set { SetProperty(ref data, value); }
@@ -96,7 +97,7 @@ namespace RAT._2ViewModel
             Device.StartTimer(new TimeSpan(0, 0, 0, 0, 1000), () =>
             {
                 System.Diagnostics.Debug.WriteLine("RAM" + y);
-                   y++;
+                y++;
                 double ramUsage = Convert.ToDouble(GetTelemetry.lastTelemetryDatapoints[deviceNum].RamInUse);
                 PagedPool = GetTelemetry.lastTelemetryDatapoints[deviceNum].PagedPool;
                 NonPagedPool = GetTelemetry.lastTelemetryDatapoints[deviceNum].NonPagedPool;
@@ -115,4 +116,3 @@ namespace RAT._2ViewModel
         }
     }
 }
-

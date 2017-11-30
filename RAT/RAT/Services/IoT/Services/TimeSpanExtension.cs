@@ -44,7 +44,7 @@ namespace IoTHubAmqp
 
         public static TimeSpan FromMilliseconds(double value)
         {
-            return new TimeSpan((long)(value * 1E+04));
+            return new TimeSpan((long) (value * 1E+04));
         }
     }
 }

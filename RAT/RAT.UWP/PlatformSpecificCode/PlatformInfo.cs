@@ -9,8 +9,8 @@ namespace PlatInfoSap2
 
         public string GetModel()
         {
-            return String.Format("{0} {1}", devInfo.SystemManufacturer, 
-                                            devInfo.SystemProductName);
+            return String.Format("{0} {1}", devInfo.SystemManufacturer,
+                devInfo.SystemProductName);
         }
 
         public string GetVersion()

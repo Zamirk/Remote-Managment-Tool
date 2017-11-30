@@ -16,12 +16,10 @@ namespace RAT._2ViewModel
             // configure the TapCommand with a method
             tapCommand = new Command(OnTapped);
         }
+
         public ICommand TapCommand
         {
-            get
-            {
-                return tapCommand;
-            }
+            get { return tapCommand; }
         }
 
         void OnTapped(object s)

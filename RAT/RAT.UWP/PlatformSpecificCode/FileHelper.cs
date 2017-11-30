@@ -12,6 +12,7 @@ namespace FileHelper
 {
     class FileHelper : IFileHelper
     {
+        //Platform specific file IO
         public async Task<bool> ExistsAsync(string filename)
         {
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;

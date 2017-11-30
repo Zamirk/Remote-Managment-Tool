@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using ConsoleApplication1.Folder;
 using RAT.Services;
 using RAT._1View.Desktop.Screens.SubScreens._1Manage;
-using SampleBrowser;
-using ServerMonitor;
 using Syncfusion.SfChart.XForms;
 using Syncfusion.SfDataGrid.XForms;
 using Syncfusion.SfKanban.XForms;

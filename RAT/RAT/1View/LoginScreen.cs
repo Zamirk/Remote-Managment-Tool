@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using ConsoleApplication1.Folder;
 using IoTHubAmqpService;
-using RAT.zTest;
 using RAT._1View;
 using Xamarin.Forms;
 
@@ -12,7 +11,16 @@ namespace RAT.ZTry
     public class LoginScreen : ContentPage
     {
         //Debug visuals
-        private ContentView maroonView, grayView, redView, yellowView, greenView, tealView, aquaView, blackView, blueView;
+        private ContentView maroonView,
+            grayView,
+            redView,
+            yellowView,
+            greenView,
+            tealView,
+            aquaView,
+            blackView,
+            blueView;
+
         private bool debugMode = true;
         private Grid mainGrid;
 
@@ -75,7 +83,6 @@ namespace RAT.ZTry
                 myStack.BackgroundColor = Color.FromHex("0078D7");
                 mainGrid.BackgroundColor = Color.FromHex("0078D7");
                 myStack.Children.Add(myImage);
-
             }
 
             myStack.Children.Add(username);
@@ -153,6 +160,7 @@ namespace RAT.ZTry
 
         public void Debug()
         {
+            //Used in the early development of the GUI for demonstrative purposes
             if (debugMode)
             {
                 debugMode = false;

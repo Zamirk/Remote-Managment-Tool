@@ -49,14 +49,13 @@ namespace ARAT.Droid.PlatformSpecificCode
 
                 for (int i = 0; i < GetTelemetry.devices.Count; i++)
                 {
-                     if (telemetry.Device_id.Equals(GetTelemetry.devices[i]))
+                    if (telemetry.Device_id.Equals(GetTelemetry.devices[i]))
                     {
                         GetTelemetry.listOfDevices[i].Dequeue();
                         GetTelemetry.listOfDevices[i].Enqueue(telemetry);
                         GetTelemetry.lastTelemetryDatapoints[i] = telemetry;
                     }
                 }
-
             }
 
             return context.CheckpointAsync();

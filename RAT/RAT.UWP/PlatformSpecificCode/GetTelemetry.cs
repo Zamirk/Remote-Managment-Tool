@@ -26,29 +26,55 @@ namespace ConsoleApplication1.Folder
         static DateTime startingDateTimeUtc;
 
         //List of devices
-        public static List<string> devices = new List<string>() { "Device_1", "Device_2", "Device_3", "Device_4", "Device_5", "Device_6", "Device_7", "Device_8", "Device_9", "Device_10" };
+        public static List<string> devices = new List<string>()
+        {
+            "Device_1",
+            "Device_2",
+            "Device_3",
+            "Device_4",
+            "Device_5",
+            "Device_6",
+            "Device_7",
+            "Device_8",
+            "Device_9",
+            "Device_10"
+        };
 
         //Last received values
         public static List<TelemetryDatapoint> lastTelemetryDatapoints = new List<TelemetryDatapoint>()
         {
-            new TelemetryDatapoint(""),new TelemetryDatapoint(""),new TelemetryDatapoint(""),new TelemetryDatapoint(""),
-            new TelemetryDatapoint(""),new TelemetryDatapoint(""),new TelemetryDatapoint(""),new TelemetryDatapoint(""),
-            new TelemetryDatapoint(""),new TelemetryDatapoint("")
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint("")
         };
 
         //Storing data of all devices
         public static List<Queue<TelemetryDatapoint>> listOfDevices = new List<Queue<TelemetryDatapoint>>()
         {
-            new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),
-            new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),
-            new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
             new Queue<TelemetryDatapoint>()
         };
 
         //Receive data partition 1
         public static void ReceiveTelemetry2()
         {
-            ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(UserData.connectionString);
+            ServiceBusConnectionStringBuilder
+                builder = new ServiceBusConnectionStringBuilder(UserData.connectionString);
             builder.TransportType = TransportType.Amqp;
 
             MessagingFactory factory = MessagingFactory.CreateFromConnectionString(UserData.connectionString);
@@ -98,13 +124,17 @@ namespace ConsoleApplication1.Folder
             //client.Close();
             //factory.Close();
         }
-        public void EventHubClientTests() { }
+
+        public void EventHubClientTests()
+        {
+        }
 
         //Receive data partition 0
         public static void ReceiveTelemetry()
         {
-            System.Diagnostics.Debug.WriteLine("AAAAAAAAAAAAAAAAAA"+ UserData.connectionString);
-            ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(UserData.connectionString);
+            System.Diagnostics.Debug.WriteLine("AAAAAAAAAAAAAAAAAA" + UserData.connectionString);
+            ServiceBusConnectionStringBuilder
+                builder = new ServiceBusConnectionStringBuilder(UserData.connectionString);
             builder.TransportType = TransportType.Amqp;
 
             MessagingFactory factory = MessagingFactory.CreateFromConnectionString(UserData.connectionString);
@@ -162,7 +192,7 @@ namespace ConsoleApplication1.Folder
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("[GetTelemetry] Error IOT, you should probably check this" +e);
+                System.Diagnostics.Debug.WriteLine("[GetTelemetry] Error IOT, you should probably check this" + e);
             }
 
 

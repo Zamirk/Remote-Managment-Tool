@@ -9,20 +9,19 @@
     <Import_RootNamespace>RAT</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)1View\MenuStates\CommandState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\MenuStates\CommandType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\MenuStates\ToolBar.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\MenuStates\MenuState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\MenuStates\ScreenState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\States\CommandState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\States\CommandType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\States\ToolBar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\States\MenuState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\States\ScreenState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\LoginScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\ParentScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\MenuStates\DashboardButtonState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\UserData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\1DashboardScreen\CellPos.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\1DashboardScreen\ImageCell.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\ConsoleCmd.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\PowerShell.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\ICloseApplication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\States\DashboardButtonState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Tools\UserData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\DashboardSubScreens\CellPos.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\DashboardSubScreens\ImageCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zUnused\Unused\PowerShell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Tools\ICloseApplication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\DashboardCellModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\DashboardModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Authentication\AuthHandler.cs" />
@@ -30,27 +29,24 @@
     <Compile Include="$(MSBuildThisFileDirectory)Authentication\SocialAuthentication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Authentication\AzureService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\Dashboard Backup\DashboardScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\Dashboard Backup\MyPopupPag.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Cell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Dashboard.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\IPopupAnimation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\1DashboardScreen\EditGraph.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\1DashboardScreen\GraphSelection.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\AppHistory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Tools\IPopupAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\DashboardSubScreens\EditGraph.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\DashboardSubScreens\GraphSelection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\StandardCommands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Processes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\Notifications.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\0ToolBars\CommandToolbar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zUnused\Unused\NotificationsScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Tools\CommandToolbar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\CPUScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\DiskScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\EasterEgg\GameButton.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\EasterEgg\GameParent.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\EasterEgg\TheGame.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\OverviewScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zUnused\EasterEgg\GameButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zUnused\EasterEgg\GameParent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zUnused\EasterEgg\TheGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zUnused\Unused\OverviewScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\RamScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\0ToolBars\SystemResourcesToolbar.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\0ToolBars\MainToolBar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Tools\SystemResourcesToolbar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Tools\MainToolBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\AllDevices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\WifiScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CommandViewModel.cs" />
@@ -68,7 +64,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\Login.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\Processes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\Database\AzureLoginService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zUnused\Unused\AzureLoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FileIO\IOTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)3Model\ProcessData.cs" />
@@ -76,20 +72,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\HttpUtility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\SHA.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\TimeSpanExtension.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Singleton.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\DataGenerator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zUnused\Unused\Singleton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\MainScreenViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\Model.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\OverviewScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\Temp.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\ViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\zDiskScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\CPU.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\Datagrid.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\KanbanViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\PanContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zUnused\Unused\ConsoleCmd.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)1View\MenuStates\" />
+    <Folder Include="$(MSBuildThisFileDirectory)1View\States\" />
   </ItemGroup>
 </Project>

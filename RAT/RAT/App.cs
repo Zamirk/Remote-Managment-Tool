@@ -10,8 +10,6 @@ namespace RAT
 	{
 		public App ()
 		{
-            //MainPage = new NavigationPage(new IOTest());
-            //MainPage = new NavigationPage(new DataGrid());c
             if (Device.OS == TargetPlatform.Windows)
             {
                 MainPage = new NavigationPage(new ZTry.LoginScreen());
@@ -19,10 +17,9 @@ namespace RAT
             else if (Device.OS == TargetPlatform.Android)
             {
                 MainPage = new NavigationPage(new ZTry.LoginScreen());
-
+                // Seperate GUI removed for now
                 // MainPage = new NavigationPage(new Mobile.LoginScreen());
             }
-            //MainPage = new NavigationPage(new MainPage());
         }
         public string DisplayLabelText { set; get; }
 

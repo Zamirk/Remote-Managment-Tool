@@ -4,8 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using RAT._2ViewModel;
-using SampleBrowser;
-using ServerMonitor;
 using Syncfusion.SfChart.XForms;
 using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
@@ -16,11 +14,11 @@ using SfChart = Syncfusion.SfChart.XForms.SfChart;
 
 namespace RAT._1View.Desktop
 {
-	public class DiskScreen : Grid
-	{
-	    private DiskViewModel myViewModel;
-	    private SfChart myChart;
-	    private SfChart pieChart;
+    public class DiskScreen : Grid
+    {
+        private DiskViewModel myViewModel;
+        private SfChart myChart;
+        private SfChart pieChart;
         private string deviceId = "";
 
         public DiskScreen(int deviceNum)
@@ -29,11 +27,11 @@ namespace RAT._1View.Desktop
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;
-            ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            ColumnDefinitions.Add(new ColumnDefinition { Width = 150 });
+            ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Auto});
+            ColumnDefinitions.Add(new ColumnDefinition {Width = 150});
 
-            RowDefinitions.Add(new RowDefinition { Height = 200 });
-            RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            RowDefinitions.Add(new RowDefinition {Height = 200});
+            RowDefinitions.Add(new RowDefinition {Height = GridLength.Auto});
 
             //LineChart
             myChart = new SfChart();
@@ -235,6 +233,7 @@ namespace RAT._1View.Desktop
             Children.Add(capacity, 0, 1);
             Children.Add(diskHardware, 0, 1);
         }
+
         public void GC()
         {
             myChart.Series[0].ItemsSource = null;

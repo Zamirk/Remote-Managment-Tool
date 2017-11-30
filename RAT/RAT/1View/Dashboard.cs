@@ -11,6 +11,7 @@ using qwerty;
 using RAT.ZTry;
 using RAT._1View.Desktop.Screens.SubScreens._1Manage.DeviceSubScreens;
 using RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen;
+using RAT._1View;
 using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 using RAT._3Model;
 using Rg.Plugins.Popup.Extensions;
@@ -20,30 +21,41 @@ using Cell = RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen.Cell;
 using Label = Xamarin.Forms.Label;
 
 [assembly: Dependency(typeof(AzureService))]
+
 namespace RAT._1View.Desktop.Manage
 {
     public class Dashboard : ScrollView
     {
         private AzureService updateItem;
         private DashboardButtonState buttonState;
+
         //Popup screens
         private GraphSelection selectGraph = new GraphSelection();
+
         private EditGraph editGraph = new EditGraph();
 
+        //Dashboard buttons
         private Button deleteButton, editing, movingButton, resizing, add;
 
         private Picker dashboardList;
+
         private int currentDashboard = 0;
 
         double width = 109.25;
         double height = 99.6;
 
+        //Grid + grid graph cells
         private Grid superGrid;
+
         private Grid mainGrid;
         private Cell[][] myCells = new Cell[8][];
 
         public bool changed = false;
-        private const string replace = @"{""G"":false,""T"":0,""R"":0,""C"":0,""D"":0,""S"":0,""N"":null,""O"":0,""X"":false,""Y"":false,""L"":false}";
+
+        private const string replace =
+                @"{""G"":false,""T"":0,""R"":0,""C"":0,""D"":0,""S"":0,""N"":null,""O"":0,""X"":false,""Y"":false,""L"":false}"
+            ;
+
         private const string placeHolder = "¬";
 
         #region Eventhandlers
@@ -73,6 +85,7 @@ namespace RAT._1View.Desktop.Manage
 
             Orientation = ScrollOrientation.Both;
             buttonState = buttonState = DashboardButtonState.Neutral;
+
             superGrid = new Grid();
             superGrid.RowDefinitions.Add(new RowDefinition {Height = 35});
             superGrid.RowDefinitions.Add(new RowDefinition {Height = GridLength.Star});
@@ -82,7 +95,7 @@ namespace RAT._1View.Desktop.Manage
             Grid buttonGrid = new Grid();
             //buttonGrid.VerticalOptions = LayoutOptions.FillAndExpand;
             //buttonGrid.HorizontalOptions = LayoutOptions.Start;
-
+            //Cleanup code with loop
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Star});
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Star});
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Star});
@@ -215,7 +228,11 @@ namespace RAT._1View.Desktop.Manage
             int pos = 0;
 
             //Reference for future sorting
-            int[] posArray = new int[40] {000, 001, 002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024,025,026,027,028,029,030,031,032,033,034,035,036,037,038,039};
+            int[] posArray = new int[40]
+            {
+                000, 001, 002, 003, 004, 005, 006, 007, 008, 009, 010, 011, 012, 013, 014, 015, 016, 017, 018, 019, 020,
+                021, 022, 023, 024, 025, 026, 027, 028, 029, 030, 031, 032, 033, 034, 035, 036, 037, 038, 039
+            };
 
             //Addings cells, X and Y grid
             for (int yAxis = 0; yAxis < 5; yAxis++)
@@ -260,6 +277,7 @@ namespace RAT._1View.Desktop.Manage
 
             changed = false;
         }
+
         public void SaveDashboard()
         {
             DashboardCellModel[][] savingDashboard = new DashboardCellModel[8][];
@@ -300,7 +318,8 @@ namespace RAT._1View.Desktop.Manage
             UserData.listOfDashboard[currentDashboard] = savingDashboard;
 
             //Saving dashbard to database
-            if(changed) {
+            if (changed)
+            {
                 var messageString = JsonConvert.SerializeObject(savingDashboard);
                 messageString = messageString.Replace(replace, placeHolder);
 
@@ -468,7 +487,6 @@ namespace RAT._1View.Desktop.Manage
                     c++;
                 }
             }
-
         }
 
         private void DashboardListOnSelectedIndexChanged(object sender, EventArgs eventArgs)
@@ -702,6 +720,7 @@ namespace RAT._1View.Desktop.Manage
 
         public void RemoveEventHandlers()
         {
+            //Removing event handlers
             selectGraph.AreaChart().Clicked -= handler0;
             selectGraph.BarChart().Clicked -= handler1;
             selectGraph.ColumnChart().Clicked -= handler2;
@@ -715,7 +734,7 @@ namespace RAT._1View.Desktop.Manage
             selectGraph.PieChart().Clicked -= handler10;
             selectGraph.DoughnutChart().Clicked -= handler11;
         }
-        
+
         private void AddOnClicked(object sender, EventArgs eventArgs)
         {
             AddOnClickMethod();
@@ -752,6 +771,7 @@ namespace RAT._1View.Desktop.Manage
                 }
             }
         }
+
         private void DeleteButtonOnClicked(object sender, EventArgs eventArgs)
         {
             if (buttonState != DashboardButtonState.Delete)

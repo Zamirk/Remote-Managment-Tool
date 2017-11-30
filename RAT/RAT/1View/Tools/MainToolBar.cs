@@ -23,7 +23,6 @@ namespace RAT._1View.UWP.SubScreens
         //SubScreen
         private SystemResourcesToolbar systemResourcesSc;
         private Processes processesSc;
-        private AppHistory appHistorySc;
         private CommandToolbar commandSc;
         private string deviceId = "";
         private int deviceNum = 9;
@@ -167,7 +166,6 @@ namespace RAT._1View.UWP.SubScreens
             //Centre Buttons
             systemResources.Clicked += SystemResourcesOnClicked;
             processes.Clicked += ProcessesOnClicked;
-            apphistory.Clicked += ApphistoryOnClicked;
             temp.Clicked += TempOnClicked;
         }
 
@@ -194,30 +192,6 @@ namespace RAT._1View.UWP.SubScreens
                 Children.Add(commandSc, 0, 0);
 
                 myScreenState = ToolBarState.TEMP;
-            }
-        }
-
-        private void ApphistoryOnClicked(object sender, EventArgs eventArgs)
-        {
-            if (myScreenState != ToolBarState.APPHISTORY)
-            {
-                if (Device.OS == TargetPlatform.Android)
-                {
-                    apphistory.TextColor = Color.Maroon;
-                    apphistory.FontAttributes = FontAttributes.Bold;
-                }
-                else
-                {
-                    apphistory.BackgroundColor = Color.Gray;
-                }
-                RemoveScreen();
-
-                //Adding Wifi Screen
-                appHistorySc = new AppHistory();
-                appHistorySc.Margin = new Thickness(50, 50, 50, 0);
-                Children.Add(appHistorySc, 0, 0);
-
-                myScreenState = ToolBarState.APPHISTORY;
             }
         }
 

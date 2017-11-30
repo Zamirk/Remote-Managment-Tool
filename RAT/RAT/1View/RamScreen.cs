@@ -4,8 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using RAT._2ViewModel;
-using SampleBrowser;
-using ServerMonitor;
 using Syncfusion.SfChart.XForms;
 using Syncfusion.SfDataGrid.XForms;
 using Xamarin.Forms;
@@ -16,10 +14,10 @@ using SfChart = Syncfusion.SfChart.XForms.SfChart;
 
 namespace RAT._1View.Desktop
 {
-	public class RamScreen : Grid
-	{
-	    private RamViewModel myViewModel;
-	    private SfChart myChart;
+    public class RamScreen : Grid
+    {
+        private RamViewModel myViewModel;
+        private SfChart myChart;
         private string deviceId = "";
 
         public RamScreen(int deviceNum)
@@ -28,10 +26,10 @@ namespace RAT._1View.Desktop
             BindingContext = myViewModel;
 
             VerticalOptions = LayoutOptions.FillAndExpand;
-            ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Auto});
 
-            RowDefinitions.Add(new RowDefinition { Height = 200 });
-            RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            RowDefinitions.Add(new RowDefinition {Height = 200});
+            RowDefinitions.Add(new RowDefinition {Height = GridLength.Auto});
 
             //Chart
             myChart = new SfChart();
@@ -192,6 +190,7 @@ namespace RAT._1View.Desktop
             Children.Add(pagedLabel, 0, 1);
             Children.Add(paLive, 0, 1);
         }
+
         public void GC()
         {
             myViewModel.StopUpdate();
@@ -201,4 +200,3 @@ namespace RAT._1View.Desktop
         }
     }
 }
-

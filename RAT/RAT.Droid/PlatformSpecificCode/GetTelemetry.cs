@@ -18,7 +18,9 @@ namespace ConsoleApplication1.Folder
     {
         //Storage account const
         private const string StorageAccountName = "mystorageaccountscus";
-        private const string StorageAccountKey = "KgcTJAQNEgDMICrdzkwHsp43LoSBUrs1pdKu6uSy2AXz4ohFCZk07eWNiJ1sgUDfddttDXUAjfUvVFDUctIEqA==";
+
+        private const string StorageAccountKey =
+            "KgcTJAQNEgDMICrdzkwHsp43LoSBUrs1pdKu6uSy2AXz4ohFCZk07eWNiJ1sgUDfddttDXUAjfUvVFDUctIEqA==";
 
         public static bool go = true;
 
@@ -29,23 +31,48 @@ namespace ConsoleApplication1.Folder
         static DateTime startingDateTimeUtc;
 
         //List of devices
-        public static List<string> devices = new List<string>() { "Device_1", "Device_2", "Device_3", "Device_4", "Device_5", "Device_6", "Device_7", "Device_8", "Device_9", "Device_10" };
+        public static List<string> devices = new List<string>()
+        {
+            "Device_1",
+            "Device_2",
+            "Device_3",
+            "Device_4",
+            "Device_5",
+            "Device_6",
+            "Device_7",
+            "Device_8",
+            "Device_9",
+            "Device_10"
+        };
 
         //Last received values
         public static List<TelemetryDatapoint> lastTelemetryDatapoints = new List<TelemetryDatapoint>()
         {
-            new TelemetryDatapoint(""),new TelemetryDatapoint(""),new TelemetryDatapoint(""),new TelemetryDatapoint(""),
-            new TelemetryDatapoint(""),new TelemetryDatapoint(""),new TelemetryDatapoint(""),new TelemetryDatapoint(""),
-            new TelemetryDatapoint(""),new TelemetryDatapoint("")
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint(""),
+            new TelemetryDatapoint("")
         };
 
         //Storing data of all devices
         public static List<Queue<TelemetryDatapoint>> listOfDevices = new List<Queue<TelemetryDatapoint>>()
         {
             //TODO TEMP HARDCODING 2 DEVICES
-            new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),
-            new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),
-            new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
+            new Queue<TelemetryDatapoint>(),
             new Queue<TelemetryDatapoint>()
         };
 
@@ -55,7 +82,7 @@ namespace ConsoleApplication1.Folder
         }
 
         //Receive data all partitions
-            public static async void ReceiveTelemetry()
+        public static async void ReceiveTelemetry()
         {
             System.Diagnostics.Debug.WriteLine("AAAAAAAAAAAAAAAAAA" + UserData.connectionString);
 
@@ -88,11 +115,11 @@ namespace ConsoleApplication1.Folder
 
             var eventProcessorHost = new EventProcessorHost(
                 eventProcessorHostName,
-                        EhEntityPath,
-                        PartitionReceiver.DefaultConsumerGroupName,
-                        EhConnectionString,
-                        StorageConnectionString,
-                        leaseName);
+                EhEntityPath,
+                PartitionReceiver.DefaultConsumerGroupName,
+                EhConnectionString,
+                StorageConnectionString,
+                leaseName);
 
             // Registers the Event Processor Host and starts receiving messages
             await eventProcessorHost.RegisterEventProcessorAsync<SimpleEventProcessor>(new EventProcessorOptions()
@@ -110,9 +137,8 @@ namespace ConsoleApplication1.Folder
         private static string EhConnectionString = UserData.connectionString;
         private static string EhEntityPath = UserData.eventHubEntity;
 
-        private static readonly string StorageConnectionString = string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}", StorageAccountName, StorageAccountKey);
-
-
-
+        private static readonly string StorageConnectionString =
+            string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}", StorageAccountName,
+                StorageAccountKey);
     }
 }

@@ -15,7 +15,10 @@ namespace DashboardModel
             Id = id;
         }
 
-        public Dashboards() { }
+        public Dashboards()
+        {
+        }
+
         [Newtonsoft.Json.JsonProperty("Id")]
         public string Id { get; set; }
 

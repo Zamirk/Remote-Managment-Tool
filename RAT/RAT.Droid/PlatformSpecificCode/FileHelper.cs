@@ -23,6 +23,7 @@ namespace FileHelper
 {
     class FileHelper : IFileHelper
     {
+        //Platform specific file IO
         public Task<bool> ExistsAsync(string filename)
         {
             string filepath = GetFilePath(filename);

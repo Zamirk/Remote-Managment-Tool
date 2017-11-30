@@ -12,15 +12,16 @@ using qwerty;
 using RAT._1View.UWP.SubScreens._0Manage._1DashboardScreen;
 
 [assembly: Dependency(typeof(AzureService))]
+
 namespace RAT.ZTry
 {
-    public class LoginViewModel: ViewModelBase
+    public class LoginViewModel : ViewModelBase
     {
-        //AzureLoginService azureService;
         public AzureService azureService;
 
         //Login details
         private string userName = "";
+
         private string password = "";
 
         //Login validation command
@@ -36,20 +37,20 @@ namespace RAT.ZTry
             GetUserCredentials();
         }
 
-         async Task GetUserCredentials()
-         {
-             if (!(await LoginAsync()))
-                 return;
-             try
-             {
-                 await azureService.GetLogin();
-             }
-             catch (Exception ex)
-             {
-                 System.Diagnostics.Debug.WriteLine("GetUserCredentials OH NO!" + ex);
-             }
-         }
-         
+        async Task GetUserCredentials()
+        {
+            if (!(await LoginAsync()))
+                return;
+            try
+            {
+                await azureService.GetLogin();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("GetUserCredentials OH NO!" + ex);
+            }
+        }
+
         public Task<bool> LoginAsync()
         {
             if (Settings.IsLoggedIn)
@@ -78,31 +79,24 @@ namespace RAT.ZTry
         async Task LoginValidate()
         {
             if (UserData.userId != "")
-                {
-                    (Application.Current.MainPage).Navigation.InsertPageBefore(new ParentScreen(),
-                        (Application.Current.MainPage).Navigation.NavigationStack[0]);
-                    GC.Collect();
+            {
+                (Application.Current.MainPage).Navigation.InsertPageBefore(new ParentScreen(),
+                    (Application.Current.MainPage).Navigation.NavigationStack[0]);
+                GC.Collect();
 
-                    //Starts 2 async tasks to get telemetry data
-                    Task t = Task.Factory.StartNew(() => {
-                        GetTelemetry.ReceiveTelemetry();
-                    });
-                    Task tt = Task.Factory.StartNew(() => {
-                        GetTelemetry.ReceiveTelemetry2();
-                    });
+                //Starts 2 async tasks to get telemetry data
+                Task t = Task.Factory.StartNew(() => { GetTelemetry.ReceiveTelemetry(); });
+                Task tt = Task.Factory.StartNew(() => { GetTelemetry.ReceiveTelemetry2(); });
 
-                    await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert("Please login with a valid account",
-                        "Error: Invalid account, or connection problem", "OK");
-                    Settings.AuthToken = string.Empty;
-                    Settings.UserId = string.Empty;
-                }
-
+                await (Application.Current.MainPage).Navigation.PopToRootAsync(false);
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Please login with a valid account",
+                    "Error: Invalid account, or connection problem", "OK");
+                Settings.AuthToken = string.Empty;
+                Settings.UserId = string.Empty;
+            }
         }
     }
 }
-
-

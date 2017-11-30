@@ -37,7 +37,7 @@ namespace IoTHubAmqpService
             if (DEVICE_ID != "")
 
             {
-                System.Diagnostics.Debug.WriteLine("Key"+DEVICE_ID);
+                System.Diagnostics.Debug.WriteLine("Key" + DEVICE_ID);
                 System.Diagnostics.Debug.WriteLine(SHARED_ACCESS_KEY);
                 System.Diagnostics.Debug.WriteLine(HOST);
                 System.Diagnostics.Debug.WriteLine(Command.Command);
@@ -107,7 +107,6 @@ namespace IoTHubAmqpService
 
                     senderLink.Close();
                     System.Diagnostics.Debug.WriteLine("Level 16");
-
                 }
                 System.Diagnostics.Debug.WriteLine("Level 17");
 
@@ -118,11 +117,13 @@ namespace IoTHubAmqpService
                 System.Diagnostics.Debug.WriteLine("Level 19");
             }
         }
+
         public CommandDatapoint Command { get; set; }
+
         #region MyRegion
 
         static private bool PutCbsToken(Connection connection, string host, string shareAccessSignature,
-                string audience)
+            string audience)
         {
             System.Diagnostics.Debug.WriteLine("Level 8A");
 
@@ -166,9 +167,9 @@ namespace IoTHubAmqpService
             }
             else
             {
-                int statusCode = (int)response.ApplicationProperties["status-code"];
-                string statusCodeDescription = (string)response.ApplicationProperties["status-description"];
-                if (statusCode != (int)202 && statusCode != (int)200) // !Accepted && !OK
+                int statusCode = (int) response.ApplicationProperties["status-code"];
+                string statusCodeDescription = (string) response.ApplicationProperties["status-description"];
+                if (statusCode != (int) 202 && statusCode != (int) 200) // !Accepted && !OK
                 {
                     result = false;
                 }
@@ -197,8 +198,7 @@ namespace IoTHubAmqpService
             // the canonical Uri scheme is http because the token is not amqp specific
             // signature is computed from joined encoded request Uri string and expiry string
 
-#if NETMF
-// needed in .Net Micro Framework to use standard RFC4648 Base64 encoding alphabet
+#if NETMF // needed in .Net Micro Framework to use standard RFC4648 Base64 encoding alphabet
             System.Convert.UseRFC4648Encoding = true;
 #endif
             string expiry =
@@ -229,6 +229,7 @@ namespace IoTHubAmqpService
                     HttpUtility.UrlEncode(expiry));
             }
         }
+
         #endregion
     }
 }
