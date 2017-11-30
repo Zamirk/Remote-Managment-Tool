@@ -4,7 +4,6 @@ using System.Linq;
 using Xamarin.Forms;
 using RAT.ZTry;
 
-
 namespace RAT
 {
 	public class App : Application

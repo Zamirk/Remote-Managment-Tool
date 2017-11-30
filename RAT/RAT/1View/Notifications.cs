@@ -13,7 +13,7 @@ namespace RAT._1View.Desktop
 
         public AppScreen()
         {
-            Children.Add(new Label() { Text = "System Performance Screen" });
+            Children.Add(new Label() { Text = "Notification Screen" });
         }
     }
 }
