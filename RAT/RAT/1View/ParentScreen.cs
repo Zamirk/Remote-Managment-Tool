@@ -141,7 +141,6 @@ namespace RAT.ZTry
             #region TopGrid
             //Top-grid
             //topGrid.Children.Add(new ContentView() { BackgroundColor = Color.FromRgb(17, 150, 205) });
-            //TODO REMOVE AND REPLACE WITH MOBILE AND DESTOP SECTIONS 03/03/017
             if (Device.Idiom == TargetIdiom.Phone)
             {
                 topGrid.RowDefinitions.Add(new RowDefinition {Height = 5});
@@ -234,7 +233,6 @@ namespace RAT.ZTry
             //Initial Screen
             viewDevicesScreen = new AllDevices();
             midGrid.Children.Add(viewDevicesScreen, 1, 0);
-            //TODO This is some crazy code remove it
             //viewDevicesScreen.tempa.Command += SendResultCommand("d");
 
             //Left Buttons
@@ -243,11 +241,6 @@ namespace RAT.ZTry
             notificationsButton.Clicked += NotificationsButtonClicked;
             TEMPBUTTON4.Clicked += Tempbutton4Clicked;
             secretGameButton.Clicked += Secret_Game;
-
-            //TODO Temp, Should be removed and added when needed
-            //deviceOverview = new DeviceOverview();
-            //midGrid.Children.Add(deviceOverview, 1, 0);
-            //deviceOverview.IsVisible = false;
 
             Content = mainStack;
         }
@@ -296,12 +289,7 @@ namespace RAT.ZTry
                 RemoveScreen();
                 manageButton.BackgroundColor = Color.Gray;
 
-                //TODO: Remove Clickhandler and replace with ParentScreen Subscreen managment
-                //TODO: Maybe this shouldnt be initialised instantly: 06/12/16
                 viewDevicesScreen = new AllDevices();
-                //TODO Seriously remove it
-                //viewDevicesScreen.aaaa.Clicked += PcOne_Clicked;
-
                 midGrid.Children.Add(viewDevicesScreen, 1, 0);
 
                 myMenuState = MenuState.MANAGE_ALLDEVICES;

@@ -35,7 +35,7 @@ namespace RAT._1View.Desktop.Manage
         private Picker dashboardList;
         private int currentDashboard = 0;
 
-        double width = 109.25; //Todo stop hardcoding values
+        double width = 109.25;
         double height = 99.6;
 
         private Grid superGrid;
@@ -83,7 +83,6 @@ namespace RAT._1View.Desktop.Manage
             //buttonGrid.VerticalOptions = LayoutOptions.FillAndExpand;
             //buttonGrid.HorizontalOptions = LayoutOptions.Start;
 
-            //Todo loops
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Star});
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Star});
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = GridLength.Star});
@@ -1002,7 +1001,6 @@ namespace RAT._1View.Desktop.Manage
             {
                 if (x > 0)
                 {
-                    //TODO
                     //Prevents moving off the screen, when spanning is > 1
                     //Animation
                     //Displacement: Relative distance from its original position + the the cell width its switching with

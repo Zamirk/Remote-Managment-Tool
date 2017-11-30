@@ -30,10 +30,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Authentication\SocialAuthentication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Authentication\AzureService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\Dashboard Backup\DashboardScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\Dashboard Backup\MyPopupPag.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\1DashboardScreen\Cell.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\1DashboardScreen\Dashboard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\Dashboard Backup\DashboardScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\Dashboard Backup\MyPopupPag.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Cell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\Dashboard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\IPopupAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\1DashboardScreen\EditGraph.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\1DashboardScreen\GraphSelection.cs" />
@@ -41,7 +41,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\StandardCommands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Processes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\Notifications.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\0ToolBars\CommandToolbar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\0ToolBars\CommandToolbar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\CPUScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\DiskScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\EasterEgg\GameButton.cs" />
@@ -49,8 +49,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)1View\EasterEgg\TheGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\OverviewScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\RamScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\0ToolBars\SystemResourcesToolbar.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)1View\1Tools\0ToolBars\MainToolBar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\0ToolBars\SystemResourcesToolbar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)1View\0ToolBars\MainToolBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\AllDevices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)1View\WifiScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\CommandViewModel.cs" />
@@ -77,17 +77,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\SHA.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Services\TimeSpanExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IoT\Singleton.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\DataGenerator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\DataGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)2ViewModel\MainScreenViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\Model.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\OverviewScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\Temp.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\ViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\BetaScreens\zDiskScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\CPU.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\Datagrid.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\KanbanViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)zTest\PanContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\Model.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\OverviewScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\Temp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\ViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\zDiskScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\CPU.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\Datagrid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\KanbanViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)zExperimentalCode\PanContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)1View\MenuStates\" />

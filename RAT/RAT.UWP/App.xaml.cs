@@ -50,7 +50,7 @@ namespace RAT.UWP
 
             // Initialization is required due to an error when compiling in release mode.
             // Details: https://developer.xamarin.com/guides/xamarin-forms/platform-features/windows/installation/universal/#Troubleshooting
-            //TODO Popup
+            //Popup
             Xamarin.Forms.Forms.Init(e, Rg.Plugins.Popup.Windows.Popup.GetExtraAssemblies());
 
 

@@ -111,7 +111,6 @@ namespace RAT._1View.Desktop.Screens.SubScreens._4DashboardScreen
                     z++;
                 }
             }
-            //TODO CURRENTLY DOING
             mainGrid.WidthRequest = 700;
             mainGrid.HeightRequest = 500;
             mainGrid.MinimumWidthRequest = 500;
